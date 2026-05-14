@@ -1,989 +1,1879 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poker Mastery Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-        .hide-scroll::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scroll {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* --- コンテンツ保護用のCSS --- */
-        .protect-content {
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE10+/Edge */
-            user-select: none; /* Standard */
-            -webkit-touch-callout: none; /* iOS Safari */
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poker Mastery Roadmap</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--bg-primary:#ffffff;--bg-secondary:#f8f9fa;--bg-card:#ffffff;--bg-sidebar:#f1f5f1;--accent-gold:#c9a84c;--accent-gold-light:#e8c76a;--accent-green:#2d5a27;--text-primary:#1a1a1a;--text-secondary:#555555;--border-gold:#c9a84c40;--spade:#e8e8e8;--heart:#e53e3e;--club:#48bb78;--diamond:#4299e1;--shadow:0 20px 50px rgba(0,0,0,.35)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 30% 0%,#182416 0,#ffffff 42%,#050805 100%);color:var(--text-primary);font-family:-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;line-height:1.75}body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(30deg,rgba(201,168,76,.04) 12%,transparent 12.5%,transparent 87%,rgba(201,168,76,.04) 87.5%,rgba(201,168,76,.04)),linear-gradient(150deg,rgba(201,168,76,.03) 12%,transparent 12.5%,transparent 87%,rgba(201,168,76,.03) 87.5%,rgba(201,168,76,.03));background-size:56px 98px;opacity:.55}.site-header{position:sticky;top:0;z-index:20;padding:22px clamp(16px,3vw,40px);background:linear-gradient(135deg,rgba(13,21,16,.96),rgba(26,35,24,.92)),radial-gradient(circle at 15% 30%,rgba(201,168,76,.22),transparent 34%);border-bottom:1px solid var(--border-gold);box-shadow:var(--shadow)}.header-inner{max-width:1280px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.site-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.55rem,4vw,3.2rem);line-height:1.08;background:linear-gradient(90deg,var(--accent-gold-light),var(--accent-gold),#fff4b8);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px rgba(201,168,76,.18);letter-spacing:0}.admin-lock,.mobile-toggle,.chapter-admin button,.qa-panel button{border:1px solid var(--border-gold);background:#121b12;color:var(--accent-gold-light);border-radius:8px;padding:10px 13px;cursor:pointer;font-weight:700}.mobile-toggle{display:none;width:100%;margin:12px 0 0}.layout{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(230px,1fr) minmax(0,3fr);gap:24px;padding:24px clamp(14px,3vw,32px) 70px}.sidebar{position:sticky;top:116px;align-self:start;background:linear-gradient(180deg,var(--bg-sidebar),#091008);border:1px solid rgba(201,168,76,.22);border-radius:8px;padding:12px;box-shadow:var(--shadow)}.chapter-tab{width:100%;display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:11px 10px;border:1px solid transparent;border-radius:8px;background:rgba(255,255,255,.02);color:var(--text-secondary);text-align:left;cursor:pointer}.chapter-tab.active{border-color:var(--accent-gold);color:var(--accent-gold-light);background:rgba(201,168,76,.1)}.chapter-icon{font-family:Georgia,'Times New Roman',serif;font-size:1.35rem;min-width:34px;text-align:center}.spade{color:var(--spade)}.heart{color:var(--heart)}.club{color:var(--club)}.diamond{color:var(--diamond)}.multi{background:linear-gradient(90deg,var(--spade),var(--heart),var(--diamond),var(--club));-webkit-background-clip:text;background-clip:text;color:transparent}.gold{color:var(--accent-gold-light)}.lock-dot{margin-left:auto;width:8px;height:8px;border-radius:50%;background:transparent}.lock-dot.locked{background:var(--heart);box-shadow:0 0 12px var(--heart)}.chapter-card{position:relative;background:linear-gradient(180deg,rgba(26,35,24,.97),rgba(13,21,16,.98));border:1px solid rgba(201,168,76,.24);border-radius:8px;margin-bottom:28px;padding:clamp(18px,3vw,36px);box-shadow:var(--shadow);overflow:hidden}.content-protected{user-select:none}.chapter-card h1,.chapter-card h2,.chapter-card h3{font-family:Georgia,'Times New Roman',serif;letter-spacing:0;color:var(--text-primary);line-height:1.35}.chapter-card h1{font-size:clamp(1.65rem,3vw,2.55rem);margin:0 0 18px}.chapter-card h2{font-size:clamp(1.35rem,2.2vw,2rem);margin:34px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--accent-gold)}.chapter-card h3{font-size:1.13rem;margin:24px 0 10px;color:var(--accent-gold-light)}p{margin:0 0 14px;color:var(--text-primary)}strong{color:#fff6d8}hr{border:0;border-top:1px solid var(--border-gold);margin:24px 0}blockquote{margin:18px 0;padding:14px 18px;border-left:4px solid var(--accent-gold);background:rgba(201,168,76,.08);color:#fff5d1;border-radius:0 8px 8px 0}ul{padding-left:1.3em;margin:10px 0 18px}li{margin:6px 0}.table-wrap{overflow:auto;margin:18px 0;border:1px solid var(--border-gold);border-radius:8px}table{width:100%;border-collapse:collapse;background:#0f170f;min-width:520px}th,td{border:1px solid rgba(201,168,76,.22);padding:10px 12px;vertical-align:top}th{background:rgba(201,168,76,.14);color:var(--accent-gold-light);font-weight:800}td{color:var(--text-primary)}pre{overflow:auto;background:#081008;color:#7ee787;border:1px solid rgba(72,187,120,.35);border-radius:8px;padding:16px;margin:18px 0;line-height:1.55}code{font-family:'Courier New',monospace}.summary-card{margin:34px 0 0;padding:18px;border:1px solid var(--accent-gold);border-radius:8px;background:linear-gradient(135deg,rgba(201,168,76,.16),rgba(45,90,39,.18));box-shadow:inset 0 0 30px rgba(201,168,76,.06)}.summary-card h2{margin-top:0}.viz-card,.qa-panel{margin:28px 0 0;padding:18px;border:1px solid var(--border-gold);border-radius:8px;background:rgba(10,14,10,.62)}.viz-card canvas{max-height:380px}.narrow-viz{max-width:620px}.ev-tool{display:grid;gap:14px}.slider-row{display:grid;gap:8px}.slider-row label{color:var(--accent-gold-light);font-weight:700}.slider-row input{accent-color:var(--accent-gold)}.ev-result{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(201,168,76,.3);background:#0b120b;border-radius:8px;padding:14px}.ev-result strong{font-family:'Courier New',monospace;color:var(--club);font-size:1.35rem}.qa-panel textarea{width:100%;margin:0 0 10px;background:#091109;color:var(--text-primary);border:1px solid var(--border-gold);border-radius:8px;padding:12px;font:inherit;resize:vertical}.qa-entry{border:1px solid rgba(201,168,76,.24);border-radius:8px;padding:12px;margin-top:12px;background:#0b120b}.qa-entry time{color:var(--text-secondary);font-size:.85rem}.chapter-admin{display:none;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:10px;border:1px dashed var(--border-gold);border-radius:8px;background:rgba(201,168,76,.06)}.chapter-admin.show{display:flex}.chapter-admin input{background:#071007;color:var(--text-primary);border:1px solid var(--border-gold);border-radius:8px;padding:9px}.lock-panel{display:none;position:absolute;inset:0;z-index:10;align-items:center;justify-content:center;text-align:center;padding:24px;background:rgba(5,8,5,.93);backdrop-filter:blur(2px);font-family:Georgia,'Times New Roman',serif;color:var(--accent-gold-light);font-size:clamp(1.2rem,2.5vw,2rem)}.chapter-card.locked .lock-panel{display:flex}.chapter-card.locked .content-protected{filter:blur(5px);pointer-events:none}.chapter-card.locked .chapter-admin{position:relative;z-index:11}.chapter-card.locked.admin-open .chapter-admin{display:flex}.chapter-card.locked.admin-open .lock-panel{pointer-events:none}.content{min-width:0}@media (max-width:767px){.mobile-toggle{display:block}.layout{display:block;padding-top:14px}.sidebar{position:static;display:none;margin-bottom:18px}.sidebar.open{display:block}.chapter-tab{font-size:.95rem}.chapter-card{padding:18px 14px}.site-header{position:relative}.header-inner{align-items:flex-start}.admin-lock{white-space:nowrap}}@media (min-width:1024px){.layout{grid-template-columns:minmax(250px,1fr) minmax(0,3fr)}}
+</style>
 </head>
-<body class="bg-stone-50 text-stone-800 min-h-screen protect-content" oncontextmenu="return false;" ondragstart="return false;" oncopy="return false;" oncut="return false;">
-
-    <header class="bg-white border-b border-stone-200 sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div>
-                <h1 class="text-2xl font-bold text-stone-900 tracking-tight">♠♥ Poker Mastery Roadmap ♦♣</h1>
-                <p class="text-sm text-stone-500 mt-1">初心者から初級者・中級者への8つのステップ</p>
-            </div>
-            <div class="flex items-center gap-3">
-                <span class="hidden md:block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">Interactive Learning Dashboard</span>
-                <!-- 管理者ログインボタン -->
-                <button id="admin-login-btn" class="text-stone-400 hover:text-amber-600 transition-colors bg-stone-100 p-2 rounded-full" title="管理者ログイン">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row gap-8 items-start">
-        
-        <aside class="w-full md:w-1/4 flex-shrink-0 md:sticky top-24 z-20">
-            <!-- モバイル用メニュートグルボタン -->
-            <button id="menu-toggle" class="md:hidden w-full flex justify-between items-center bg-white border border-stone-300 text-stone-800 px-4 py-3 rounded-xl shadow-sm font-bold mb-3 transition-colors hover:bg-stone-50">
-                <span id="menu-toggle-text">目次を開く (章を選ぶ)</span>
-                <svg id="menu-toggle-icon" class="w-5 h-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </button>
-            
-            <nav id="nav-menu" class="hidden md:flex flex-col gap-2 overflow-y-auto hide-scroll max-h-[60vh] md:max-h-[80vh]">
-                <button data-target="qa" data-title="💬 Q&A 質問箱" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-stone-100 text-stone-600">💬 Q&A 質問箱</button>
-                <button data-target="0" data-title="0. 脱初心者" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-stone-100 text-stone-600">0. 脱初心者</button>
-                <button data-target="1" data-title="1. プレイヤー分析とスタッツの把握" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-white shadow-sm border-stone-200 font-bold text-amber-700">1. プレイヤー分析とスタッツの把握</button>
-                <button data-target="2" data-title="2. オッズとアウツの計算" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-stone-100 text-stone-600">2. オッズとアウツの計算</button>
-                <button data-target="3" data-title="3. プリフロップレンジ" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-stone-100 text-stone-600">3. プリフロップレンジ</button>
-                <button data-target="4" data-title="4. アクションの意図　ベット戦略と戦術" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-stone-100 text-stone-600">4. アクションの意図　ベット戦略と戦術</button>
-                <button data-target="5" data-title="5. GTOとEXPLOIT、集合分析とは" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-stone-100 text-stone-600">5. GTOとEXPLOIT、集合分析とは</button>
-                <button data-target="6" data-title="6. ブロッカー" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-stone-100 text-stone-600">6. ブロッカー</button>
-                <button data-target="7" data-title="7. EVとEQ" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-stone-100 text-stone-600">7. EVとEQ</button>
-                <button data-target="8" data-title="8. バリューとブラフとマージナル" class="nav-btn text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-200 bg-stone-100 text-stone-600">8. バリューとブラフとマージナル</button>
-                <!-- 管理者用メニューボタン (初期非表示) -->
-                <button id="admin-nav-btn" data-target="admin" data-title="⚙️ 管理者設定 (ロック制御)" class="nav-btn hidden text-left px-4 py-3 rounded-lg border border-transparent transition-colors duration-200 hover:bg-stone-800 bg-stone-700 text-white font-bold mt-4 shadow">⚙️ 管理者設定 (ロック制御)</button>
-            </nav>
-        </aside>
-
-        <section class="w-full md:w-3/4 bg-white rounded-2xl shadow-sm border border-stone-200 p-6 md:p-8 min-h-[600px]">
-            
-            <!-- Q&A 質問箱 セクション -->
-            <div id="section-qa" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3 flex items-center gap-2">
-                    <span class="text-4xl">💬</span> Q&A 質問箱
-                </h2>
-                <p class="text-stone-600 mb-6 text-sm leading-relaxed">ハンドレビューやポーカーに関する疑問を匿名で質問できます。送信された質問と回答は全員に共有され、皆様の学習の参考になります。</p>
-                
-                <div id="qa-firebase-notice" class="hidden bg-blue-50 border-l-4 border-blue-500 p-3 rounded text-xs text-stone-600 mb-6 shadow-sm">
-                    ※現在デモモードで動作しています。実際の公開環境ではデータベースに接続され、全員と質問がリアルタイムで共有されます。
-                </div>
-
-                <!-- 質問投稿フォーム -->
-                <div class="bg-stone-50 border border-stone-200 p-5 rounded-xl shadow-sm mb-10">
-                    <h4 class="font-bold text-stone-800 text-lg mb-3">匿名で質問する</h4>
-                    <textarea id="qa-input" class="w-full border border-stone-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500 outline-none mb-3 resize-y" rows="4" placeholder="例：AAをアーリーポジションからオープンし、フロップでモノトーンボードになりました。Cベットのサイズはどうすべきでしょうか？"></textarea>
-                    <div class="text-right">
-                        <button onclick="submitQuestion()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-6 rounded-lg transition shadow-sm">質問を送信する</button>
-                    </div>
-                </div>
-
-                <h4 class="font-bold text-stone-800 text-xl mb-4 border-b border-stone-200 pb-2">みんなの質問一覧</h4>
-                <div id="qa-list-container" class="space-y-4">
-                    <!-- JSでレンダリングされます -->
-                </div>
-            </div>
-
-            <!-- 第0章 -->
-            <div id="section-0" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3">0. 脱初心者</h2>
-                <p class="text-stone-600 mb-8 leading-relaxed text-lg">ようこそ！このセクションは、ポーカーの基礎ルールを覚え、これから本格的に強くなりたいと考えている方のための導入部分です。</p>
-
-                <!-- 0-1 この講座の意味 -->
-                <h3 class="text-2xl font-bold text-amber-700 mb-4 flex items-center gap-2"><span class="text-3xl">🔰</span> 0-1 この講座の意味</h3>
-                <div class="bg-stone-50 border border-stone-200 p-5 rounded-xl mb-8">
-                    <p class="text-sm text-stone-700 leading-relaxed mb-4">
-                        ポーカー（テキサスホールデム）のルールを覚え、友達と遊んだりアミューズメントカジノに行ったりして、<strong>「ポーカーって奥が深くて面白い！」「もっと強くなって勝ちたい！」</strong>と思ったことでしょう。しかし、いざ勉強を始めようとすると、次のような壁にぶつかることが多いはずです。
-                    </p>
-                    <ul class="text-sm text-stone-700 list-disc pl-5 space-y-2 mb-4">
-                        <li>専門用語（GTO、VPIP、MDFなど）が多すぎて意味がわからない。</li>
-                        <li>数学的な話や計算が複雑で、どこから手をつければいいか迷ってしまう。</li>
-                        <li>動画や記事が断片的で、全体として何を学べばいいのかの道筋が見えない。</li>
-                    </ul>
-                    <p class="text-sm text-stone-700 leading-relaxed">
-                        この講座（ロードマップ）は、そんな<strong>「脱初心者」を目指す方が、どのような順番で、どのようなステップを踏んで学習していけば、効率よく初級者・中級者へとステップアップできるか</strong>を体系的にまとめたナビゲーションです。<br><br>
-                        また、ポーカーを独学、もしくは特定個人から教えてもらい少し勉強し始めて、ある程度理解が深まったプレイヤーとの意見のすり合わせにも役立つ内容となっています。
-                    </p>
-                </div>
-
-                <div class="bg-stone-800 text-stone-100 p-5 rounded-xl shadow-md border-t-4 border-emerald-500 mb-8">
-                    <h4 class="font-bold text-emerald-400 text-lg mb-2 flex items-center gap-2">🧠 中級者以上の思考：パラダイムシフトの必要性</h4>
-                    <p class="text-sm leading-relaxed">
-                        ポーカーは短期的に見れば「運のゲーム（ギャンブル）」ですが、長期的に見れば「情報の非対称性を利用したスキルゲーム（投資）」です。初心者を脱却するということは、<strong>「自分の手札だけでプレイする状態」から「相手のレンジ（持ちうる手札の集合）とオッズ（数学的期待値）でプレイする状態」へと思考を切り替えること（パラダイムシフト）</strong>を意味します。この切り替えができない限り、どれだけ経験を積んでも中級者にはなれません。
-                    </p>
-                </div>
-
-                <div class="bg-amber-50 border-l-4 border-amber-500 p-5 rounded-xl shadow-sm">
-                    <h4 class="font-bold text-amber-900 text-lg mb-2">💡 学習の進め方と改善ループ</h4>
-                    <p class="text-sm text-stone-700 mb-2">
-                        左側のメニューにある<strong>「1. プレイヤー分析とスタッツの把握」</strong>から順番に読み進めてください。いきなり複雑な理論に飛び込むのではなく、まずは相手を観察する方法から始めます。
-                    </p>
-                    <p class="text-sm text-stone-700">
-                        知識を得た後は、必ず<strong>【実践 ➔ 疑問の抽出 ➔ 理論での確認】という改善ループ</strong>を回してください。「なぜあの時コールされたのか？」「なぜあのブラフは失敗したのか？」という実戦での痛みを伴う疑問こそが、本ロードマップの理論を真に吸収するための最高のスパイスになります。
-                    </p>
-                </div>
-
-                <!-- 注意書き -->
-                <div class="mt-8 bg-stone-100 border border-stone-300 border-l-4 border-l-stone-500 p-4 rounded-lg text-sm text-stone-700 shadow-sm">
-                    <span class="font-bold block mb-1">⚠️ 注意書き</span>
-                    <p class="mb-2">この講座内容はAI geminiと筆者が理解した内容を記載している為、本来の意味と異なる場合がございます。内容を鵜呑みにせず、ご自身で調べることを忘れずにお願いします。</p>
-                    <p class="font-bold text-red-600">※本サイトに掲載されている全てのテキスト、画像、構成等の無断コピーおよび転載を固く禁じます。</p>
-                </div>
-
-                <!-- 章のまとめ -->
-                <div class="mt-12 bg-stone-800 text-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
-                    <h3 class="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                        この章のまとめ
-                    </h3>
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="font-bold text-stone-300 text-sm mb-1 border-b border-stone-600 pb-1">📌 内容のまとめ</h4>
-                            <p class="text-sm text-stone-400">ポーカー上達には、用語や計算、戦略理論を体系的なステップに沿って学ぶことが不可欠です。本ロードマップは、初心者が迷わず効率的に中級者レベルへと到達するための道標となります。</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-emerald-400 text-sm mb-1 border-b border-stone-600 pb-1">🚀 実戦での応用</h4>
-                            <p class="text-sm text-stone-400">一度に全ての理論を詰め込むのではなく、まずは第1章の「プレイヤー観察」など、1つのステップを実際のプレイやツールを使って意識し、確実に自分のスキルとして定着させていくことが重要です。</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-red-400 text-sm mb-1 border-b border-stone-600 pb-1">⚠️ プレイ時の注意点</h4>
-                            <p class="text-sm text-stone-400">本コンテンツの内容は筆者とAIの理解に基づくものであり、ポーカー理論は常に進化しています。情報をただ鵜呑みにするのではなく、常に自身で検証し考える姿勢を忘れないでください。また、無断転載等のルール遵守をお願いします。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第1章 -->
-            <div id="section-1" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3">1. プレイヤー分析とスタッツの把握</h2>
-                <p class="text-stone-600 mb-8 leading-relaxed text-lg">このセクションでは、対戦相手の行動を数値化し、プレイスタイルを分類する方法を学びます。ポーカーは相手の弱点を突くゲームです。スタッツ（統計データ）から相手の傾向を読み解き、最適なエクスプロイト（搾取）戦略を構築することが勝利への第一歩となります。</p>
-                
-                <!-- 1-1 プレイヤー分析 -->
-                <h3 class="text-2xl font-bold text-amber-700 mb-4 flex items-center gap-2"><span class="text-3xl">👥</span> 1-1 プレイヤー分析</h3>
-                <p class="text-stone-600 mb-6">ポーカープレイヤーは、参加ハンドの多さ（ルーズ/タイト）と、アクションの攻撃性（アグレッシブ/パッシブ）によって、主に5つのスタイルに分類されます。</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                    <!-- ①ルーズパッシブ -->
-                    <div class="bg-blue-50 border border-blue-200 p-5 rounded-xl">
-                        <h4 class="font-bold text-blue-800 text-lg mb-2">① ルーズパッシブ (コーリングステーション) 🐟</h4>
-                        <p class="text-sm text-stone-700 mb-3">参加するハンドが非常に多く、自分からベットやレイズをするよりも、相手のベットに「コール」することを好む受け身なスタイルです。オッズに合わないドローでも最後まで引きに行きがちです。</p>
-                        <div class="text-sm text-stone-600 mb-3 pl-3 border-l-2 border-blue-300">
-                            <strong>よくいるプレイヤー例:</strong><br>
-                            ・アミューズメント等で「とりあえずフロップが見たい」と毎回参加する初心者。<br>
-                            ・「相手はブラフかもしれない」と疑心暗鬼になり、ボトムペアやAハイでリバーまでコールし続けてしまう人。
-                        </div>
-                        <p class="text-sm font-bold text-stone-800 bg-white p-2 rounded mb-2">強さ: 最も弱い部類。利益の最大の源泉（バリューターゲット）となります。</p>
-                        <p class="text-sm text-stone-700 border-t border-blue-200 pt-2"><strong>対処法: </strong>絶対にブラフを仕掛けてはいけません。相手はオッズに合わなくてもドローを引きにくるため、自分が強い役を持った時には、ドローを引かせないようポットオーバーなどの特大バリューベットを打ち、最大限に搾取します。</p>
-                    </div>
-
-                    <!-- ②タイトパッシブ -->
-                    <div class="bg-stone-100 border border-stone-300 p-5 rounded-xl">
-                        <h4 class="font-bold text-stone-700 text-lg mb-2">② タイトパッシブ (ロック / ウィークタイト) 🪨</h4>
-                        <p class="text-sm text-stone-700 mb-3">強いハンドが来るまでひたすら待ち続け、いざ参加しても相手から強いプレッシャー（ベットやレイズ）をかけられると、少しでも不安な場合はすぐにフォールドしてしまうスタイルです。</p>
-                        <div class="text-sm text-stone-600 mb-3 pl-3 border-l-2 border-stone-300">
-                            <strong>よくいるプレイヤー例:</strong><br>
-                            ・負けることを極端に恐れ、トップペアでもキッカーが弱いとすぐ降りてしまうプレイヤー。<br>
-                            ・オンラインの低レートで、多面打ちをして「絶対に負けないプレミアハンド」だけを機械的に待っている人。
-                        </div>
-                        <p class="text-sm font-bold text-stone-800 bg-white p-2 rounded mb-2">強さ: 大負けはしませんが、ブラフで簡単に降ろせるため長期的にはジリ貧になります。</p>
-                        <p class="text-sm text-stone-700 border-t border-stone-300 pt-2"><strong>対処法: </strong>参加頻度が低いため、相手のブラインドを積極的にスチール（レイズして奪う）します。相手がレイズやリレイズをしてきた場合はプレミアハンドが確定しているため、自分のマージナルなハンドやワンペアは即座にフォールドし、無駄な出費を避けます。</p>
-                    </div>
-
-                    <!-- ③ルーズアグレッシブ -->
-                    <div class="bg-red-50 border border-red-200 p-5 rounded-xl">
-                        <h4 class="font-bold text-red-800 text-lg mb-2">③ ルーズアグレッシブ (LAG) ⚔️</h4>
-                        <p class="text-sm text-stone-700 mb-3">広いレンジ（多くの種類のハンド）で参加し、ポストフロップでも積極的にベットやブラフを仕掛けてポットを奪いにいく攻撃的なスタイルです。</p>
-                        <div class="text-sm text-stone-600 mb-3 pl-3 border-l-2 border-red-300">
-                            <strong>よくいるプレイヤー例:</strong><br>
-                            ・ポジションの有利さを活かし、後ろのポジションから広いハンドでオープンし、主導権を握り続けるレギュラープレイヤー。<br>
-                            ・相手が弱みを見せると容赦なく特大のブラフを打ち込んでくる、アグレッシブなハイローラー。
-                        </div>
-                        <p class="text-sm font-bold text-stone-800 bg-white p-2 rounded mb-2">強さ: アグレッションの制御ができる「上手いLAG」はテーブルを支配する最強クラスです。制御できない「下手なLAG」はチップの供給源になります。</p>
-                        <p class="text-sm text-stone-700 border-t border-red-200 pt-2"><strong>対処法: </strong>相手のアグレッションに押し負けないメンタルが必要です。相手の広いレンジに対して、こちらも適度に広いレンジでブラフキャッチをするか、プリフロップで強めの3Betを返して相手を降ろします。相手のブラフ頻度が高いため、バリューハンドでのトラップ（チェックコールなど）も非常に有効です。</p>
-                    </div>
-
-                    <!-- ④タイトアグレッシブ -->
-                    <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-xl">
-                        <h4 class="font-bold text-emerald-800 text-lg mb-2">④ タイトアグレッシブ (TAG) 🛡️</h4>
-                        <p class="text-sm text-stone-700 mb-3">参加するハンドを厳選（タイト）し、参加する時はレイズやベットで主導権を握って（アグレッシブ）戦う、ポーカーの最も基本にして王道と言えるスタイルです。</p>
-                        <div class="text-sm text-stone-600 mb-3 pl-3 border-l-2 border-emerald-300">
-                            <strong>よくいるプレイヤー例:</strong><br>
-                            ・GTO（ゲーム理論）のプリフロップレンジ表を忠実に守り、セオリー通りのポーカーを展開するプレイヤー。<br>
-                            ・ルーズなライブテーブルでじっと耐え、AAやKKが入った時に確実にポットを最大化する堅実なプレイヤー。
-                        </div>
-                        <p class="text-sm font-bold text-stone-800 bg-white p-2 rounded mb-2">強さ: 安定して強いですが、プレイが教科書通りすぎると、上位陣には「ハンドが透けやすい」としてエクスプロイトされるリスクがあります。</p>
-                        <p class="text-sm text-stone-700 border-t border-emerald-200 pt-2"><strong>対処法: </strong>セオリー通りにプレイしてくるため、基本的にはGTOベースの堅実なプレイで対抗します。ただし、GTOに忠実すぎるTAGは「このボードでは絶対に打ってこない」「このサイズはバリューだ」などのパターンが読みやすいため、スタッツの偏りを見つけてピンポイントでエクスプロイト（搾取）を狙います。</p>
-                    </div>
-
-                    <!-- ⑤マニアック -->
-                    <div class="bg-purple-50 border border-purple-200 p-5 rounded-xl md:col-span-2">
-                        <h4 class="font-bold text-purple-800 text-lg mb-2">⑤ マニアック 🤪</h4>
-                        <p class="text-sm text-stone-700 mb-3">合理的な理由やオッズの計算なしに、どんなハンドでも過剰なサイズのレイズやオールインを繰り返す、超攻撃的かつギャンブル的なスタイルです。</p>
-                        <div class="text-sm text-stone-600 mb-3 pl-3 border-l-2 border-purple-300">
-                            <strong>よくいるプレイヤー例:</strong><br>
-                            ・大負けした直後などでティルト（感情的になり自暴自棄）に陥り、毎ハンドオールインをしてくるプレイヤー。<br>
-                            ・ポーカーのセオリーを知らず、単なる運試しやブラフで相手を降ろすスリルだけを楽しんでいるプレイヤー。
-                        </div>
-                        <p class="text-sm font-bold text-stone-800 bg-white p-2 rounded mb-2">強さ: 短期的には運で大勝ちしてテーブルを荒らすこともありますが、長期的には確実に破産します。</p>
-                        <p class="text-sm text-stone-700 border-t border-purple-200 pt-2"><strong>対処法: </strong>自分から無断なブラフを仕掛ける必要は全くありません。ナッツ級の強いハンドができるまでじっと耐え、完成したら相手に好きなだけベット（またはオールイン）させて全スタックを奪い取ります。相手のアグレッションが高すぎるため、セカンドペアなどのマージナルハンドでもある程度コール（ブラフキャッチ）する勇気が必要になる場面があります。</p>
-                    </div>
-                </div>
-
-                <div class="bg-stone-800 text-stone-100 p-5 rounded-xl shadow-md border-t-4 border-blue-500 mb-12">
-                    <h4 class="font-bold text-blue-400 text-lg mb-2 flex items-center gap-2">🔍 中級者以上のダメ出し：HUDの盲信は命取り</h4>
-                    <p class="text-sm leading-relaxed">
-                        初心者はツールが表示する「VPIP 30%だからこの人はルーズだ！」という数値を盲信しがちですが、<strong>「サンプル数」の確認を怠るのは致命的なミス（悪手）</strong>です。たった30ハンド程度のデータでは、偶然良いカードが連続して入っただけのTAGが「マニアック」に見えることがあります。スタッツを信頼するには最低でも数千ハンドのサンプルが必要です。ライブポーカー等サンプルが少ない環境では、数値だけでなく「どのポジションからどんなハンドを見せたか（ショーダウンの質）」という主観的情報を優先すべきです。
-                    </p>
-                </div>
-
-                <!-- 1-2 スタッツの把握 -->
-                <h3 class="text-2xl font-bold text-amber-700 mb-4 flex items-center gap-2"><span class="text-3xl">📊</span> 1-2 スタッツの把握</h3>
-                <p class="text-stone-600 mb-4 text-sm"><strong>スタッツ（Stats）とは：</strong> プレイヤーの各種アクションを統計・数値化したものです。オンラインポーカーではHUD（ツール）を使って画面に表示させることが多く、ライブポーカーでも頭の中で相手の頻度を概算することで、主観を排除した客観的な分析が可能になります。</p>
-
-                <div class="space-y-6 mb-12">
-                    <!-- VPIP -->
-                    <div class="border border-stone-200 rounded-lg overflow-hidden">
-                        <div class="bg-stone-100 px-4 py-3 border-b border-stone-200 flex justify-between items-center">
-                            <h4 class="font-bold text-stone-800 text-lg">VPIP <span class="text-sm font-normal text-stone-500 ml-2">(Voluntarily Put in Pot)</span></h4>
-                        </div>
-                        <div class="p-4 text-sm text-stone-700">
-                            <p class="mb-2"><strong>説明：</strong> プリフロップで「自発的に」ポットにチップを入れた（参加した）割合です。BBの強制参加や、ウォーク（誰も参加せずBBを獲得）は除外されます。プレイヤーの「ルーズさ」を測る最重要指標です。</p>
-                            <div class="flex gap-4 mb-3 bg-white p-2 rounded border border-stone-100">
-                                <span class="text-blue-600 font-bold">オンライン適正値: 22% ～ 26%</span>
-                                <span class="text-amber-600 font-bold">ライブ適正値: 20% ～ 30%</span>
-                            </div>
-                            <p><strong>適正値外の弱点とエクスプロイト：</strong><br>
-                            <span class="text-red-600 font-bold">高すぎる(40%+)：</span> 弱いハンド（ゴミハンド）で参加しすぎです。彼らのレンジには弱いハンドが多いため、ブラフは一切行わず、自分がトップペアなどの強いハンドを作った時にバリューベットのサイズを通常より大きくして厚くチップを奪い取ります。<br>
-                            <span class="text-blue-600 font-bold">低すぎる(15%-)：</span> タイトすぎ（ロック）です。彼らがブラインド（SB/BB）にいる時は、積極的にレイズ（スチール）してブラインドを奪います。逆に彼らがレイズや3Betで反撃してきた場合は、ナッツ級のハンドを持っている可能性が極めて高いため、即座にフォールドして被害を最小限に抑えます。</p>
-                        </div>
-                    </div>
-
-                    <!-- PFR -->
-                    <div class="border border-stone-200 rounded-lg overflow-hidden">
-                        <div class="bg-stone-100 px-4 py-3 border-b border-stone-200 flex justify-between items-center">
-                            <h4 class="font-bold text-stone-800 text-lg">PFR <span class="text-sm font-normal text-stone-500 ml-2">(Preflop Raise)</span></h4>
-                        </div>
-                        <div class="p-4 text-sm text-stone-700">
-                            <p class="mb-2"><strong>説明：</strong> プリフロップで「レイズ（またはリレイズ）」して参加した割合です。プレイヤーの「アグレッシブさ」を測る指標です。</p>
-                            <div class="flex gap-4 mb-3 bg-white p-2 rounded border border-stone-100">
-                                <span class="text-blue-600 font-bold">オンライン適正値: 18% ～ 22%</span>
-                                <span class="text-amber-600 font-bold">ライブ適正値: 15% ～ 25%</span>
-                            </div>
-                            <p class="text-xs text-stone-500 mb-2">※VPIPとPFRの差は5%以内（オンライン）が理想とされます。差が大きいほど「コールで参加する（リンプする）ことが多いパッシブなプレイヤー」を意味します。</p>
-                            <p><strong>適正値外の弱点とエクスプロイト：</strong><br>
-                            <span class="text-red-600 font-bold">VPIPが高くPFRが極端に低い(例 V40/P5)：</span> コールばかりする典型的な「コーリングステーション（フィッシュ）」です。自分からレイズして主導権を握り、フロップ以降も主導権を維持します。彼らが突然レイズしてきたら「信じられないほど強い役」が完成したサインなので、迷わずフォールドします。<br>
-                            <span class="text-blue-600 font-bold">PFRが極端に高い：</span> アグレッシブすぎます（LAGやマニアック）。相手の広いレイズレンジに対し、少し強いハンド（ATsやKJなど）で3Betを返してプレッシャーをかけるか、ポジションがあるならコールしてフロップ以降に相手の無謀なCベットをブラフキャッチして搾取します。</p>
-                        </div>
-                    </div>
-
-                    <!-- RFI -->
-                    <div class="border border-stone-200 rounded-lg overflow-hidden">
-                        <div class="bg-stone-100 px-4 py-3 border-b border-stone-200 flex justify-between items-center">
-                            <h4 class="font-bold text-stone-800 text-lg">RFI <span class="text-sm font-normal text-stone-500 ml-2">(Raise First In)</span></h4>
-                        </div>
-                        <div class="p-4 text-sm text-stone-700">
-                            <p class="mb-2"><strong>説明：</strong> 誰もポットに参加していない（全員フォールドで自分まで回ってきた）状態で、自分が「最初にレイズして」参加した割合です。プレイヤーが各ポジションからどれくらい広いハンドでオープンしているかを正確に測る指標です。</p>
-                            <div class="flex gap-4 mb-3 bg-white p-2 rounded border border-stone-100">
-                                <span class="text-stone-600 font-bold">適正値: ポジションごとに異なります（例: UTG約17%、BTN約43%）</span>
-                            </div>
-                            <div class="bg-stone-50 border-l-4 border-stone-300 pl-3 py-2 mb-3 text-xs text-stone-600">
-                                <strong>💡 比較思考：PFRとRFIの違い</strong><br>
-                                PFRは「前にリンパー（コール参加者）がいる状況でのレイズ」や「相手のレイズに対する3Bet」も含めた、プリフロップのレイズ全般の割合です。一方、RFIは「ピュアなオープンレイズ」のみを指します。相手の本来のオープンレンジの広さを知るためにはPFRよりもRFIをポジション別に見るのが正確です。
-                            </div>
-                            <p><strong>適正値外の弱点とエクスプロイト：</strong><br>
-                            <span class="text-red-600 font-bold">高すぎる(BTNで60%+)：</span> ブラインドスチールを狙いすぎ（広すぎ）です。こちらはブラインドポジションから3Betの頻度を大きく上げて対抗（リスチール）し、相手を降ろします。<br>
-                            <span class="text-blue-600 font-bold">低すぎる(BTNで20%-)：</span> 後ろのポジションでも強いハンドしか参加していません。彼らのオープンには非常にタイトにディフェンスし、無駄なチップの流出を防ぎます。</p>
-                        </div>
-                    </div>
-
-                    <!-- 3Bet -->
-                    <div class="border border-stone-200 rounded-lg overflow-hidden">
-                        <div class="bg-stone-100 px-4 py-3 border-b border-stone-200 flex justify-between items-center">
-                            <h4 class="font-bold text-stone-800 text-lg">3Bet% <span class="text-sm font-normal text-stone-500 ml-2">(3-Bet Percentage)</span></h4>
-                        </div>
-                        <div class="p-4 text-sm text-stone-700">
-                            <p class="mb-2"><strong>説明：</strong> 相手のオープンレイズに対して、プリフロップでさらに「リレイズ（3ベット）」を返した割合です。</p>
-                            <div class="flex gap-4 mb-3 bg-white p-2 rounded border border-stone-100">
-                                <span class="text-blue-600 font-bold">オンライン適正値: 8% ～ 11%</span>
-                                <span class="text-amber-600 font-bold">ライブ適正値: 5% ～ 9%</span>
-                            </div>
-                            <p><strong>適正値外の弱点とエクスプロイト：</strong><br>
-                            <span class="text-blue-600 font-bold">低すぎる(3%未満)：</span> QQ, KK, AA, AKなどの超プレミアハンドしか3Betしていません。彼らの3Betには、こちらもよほど強いハンドでない限り素直にフォールド（オーバーフォールド）するのが正解です。<br>
-                            <span class="text-red-600 font-bold">高すぎる(15%+)：</span> 弱いハンド（ライト3Bet/ブラフ）を多く混ぜて攻撃してきています。これに対して毎回降りていると搾取されるため、こちらも4Betのレンジを広げてブラフを咎めるか、インポジションから広めにコールしてフロップ以降のスキルで戦います。</p>
-                        </div>
-                    </div>
-
-                    <!-- 3Bet Fold -->
-                    <div class="border border-stone-200 rounded-lg overflow-hidden">
-                        <div class="bg-stone-100 px-4 py-3 border-b border-stone-200 flex justify-between items-center">
-                            <h4 class="font-bold text-stone-800 text-lg">3Bet Fold% <span class="text-sm font-normal text-stone-500 ml-2">(Fold to Preflop 3Bet)</span></h4>
-                        </div>
-                        <div class="p-4 text-sm text-stone-700">
-                            <p class="mb-2"><strong>説明：</strong> 自分がレイズして参加した後、後ろのプレイヤーから3Betを打たれ、それに「フォールドしてしまった」割合です。</p>
-                            <div class="flex gap-4 mb-3 bg-white p-2 rounded border border-stone-100">
-                                <span class="text-blue-600 font-bold">オンライン適正値: 45% ～ 55%</span>
-                                <span class="text-amber-600 font-bold">ライブ適正値: 40% ～ 60%</span>
-                            </div>
-                            <p><strong>適正値外の弱点とエクスプロイト：</strong><br>
-                            <span class="text-red-600 font-bold">高すぎる(70%+)：</span> 3Betに対して弱すぎ（降りすぎ）ます。相手がオープンしたら、こちらは少し広めのレンジで（本来ならフォールドするようなA5sなどのブラフを含めて）積極的に3Betを打ち、相手を降ろしてプリフロップで利益を確定させます。<br>
-                            <span class="text-blue-600 font-bold">低すぎる(30%-)：</span> 3Betされても絶対に降りないコーリングステーションです。ブラフでの3Betは厳禁となります。強いハンド（AQ, AK, JJ+など）を持った時だけ、通常より大きなサイズ（4倍〜5倍など）の3Betを打ち、プリフロップからポットを限界まで膨らませます。</p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- WTSD -->
-                        <div class="border border-stone-200 rounded-lg p-4">
-                            <h4 class="font-bold text-stone-800 text-lg mb-1">WTSD <span class="text-sm font-normal text-stone-500">(Went to Showdown)</span></h4>
-                            <p class="text-xs text-stone-700 mb-2">フロップを見た後、ショーダウン（リバー後のハンド公開）まで行った割合。</p>
-                            <p class="text-sm text-blue-600 font-bold mb-2">適正値: 28% ～ 32%</p>
-                            <p class="text-xs text-stone-600">
-                                <span class="font-bold">高すぎる(40%+)：</span> 相手はどんなに弱くてもショーダウンまでコールし続ける人です。ブラフを極力減らし、薄いバリュー（セカンドペアなど）でも最後まで打ち切って搾取します。<br>
-                                <span class="font-bold">低すぎる(20%-)：</span> 相手は少しでもボードに絡まないとすぐ降りる人です。フロップやターンで高頻度でブラフ（スチール）を打ち、ポットを容易に奪います。
-                            </p>
-                        </div>
-                        <!-- W$SD -->
-                        <div class="border border-stone-200 rounded-lg p-4">
-                            <h4 class="font-bold text-stone-800 text-lg mb-1">W$SD <span class="text-sm font-normal text-stone-500">(Won Money at Showdown)</span></h4>
-                            <p class="text-xs text-stone-700 mb-2">ショーダウンに行った際に、ポットを獲得した（勝った）割合。</p>
-                            <p class="text-sm text-blue-600 font-bold mb-2">適正値: 50% ～ 54%</p>
-                            <p class="text-xs text-stone-600">
-                                <span class="font-bold">WTSDが高くW$SDが低い：</span> 非常に弱い手で無理にコールしすぎる絶好のターゲット（カモ）です。バリューを厚く、大きく打ちます。<br>
-                                <span class="font-bold">WTSDが低くW$SDが高い：</span> ナッツ級の強い手が完成した時しか勝負しないロックです。ブラフで降ろしやすい反面、彼らがコールし続けてきたら絶対に勝てないため素直に降ります。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 1-3 まとめ -->
-                <h3 class="text-2xl font-bold text-amber-700 mb-4 flex items-center gap-2"><span class="text-3xl">🎯</span> 1-3 各種スタッツの把握と戦略まとめ</h3>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-8">
-                    <div class="chart-container">
-                        <canvas id="chart-stats"></canvas>
-                        <p class="text-center text-xs text-stone-500 mt-2">プレイヤータイプ別のスタッツ傾向（レーダーチャート）</p>
-                    </div>
-                    
-                    <div class="bg-stone-800 text-white rounded-xl p-5 shadow-md">
-                        <h4 class="text-lg font-bold text-amber-400 mb-4 border-b border-stone-600 pb-2">エクスプロイト戦略 早見表</h4>
-                        <ul class="space-y-4 text-sm">
-                            <li>
-                                <div class="font-bold text-blue-300 flex items-center gap-2"><span>🐟</span> 対 ルーズパッシブ</div>
-                                <div class="text-stone-300 pl-6">ブラフは厳禁。相手は降りないので、自分が強い役を持った時に大きなバリューベットを打ち続ける。</div>
-                            </li>
-                            <li>
-                                <div class="font-bold text-stone-300 flex items-center gap-2"><span>🪨</span> 対 タイトパッシブ</div>
-                                <div class="text-stone-300 pl-6">積極的にスチール（ブラフ）を仕掛ける。相手が反撃（レイズ）してきた時は、ナッツ級を持っているので素直に降りる。</div>
-                            </li>
-                            <li>
-                                <div class="font-bold text-purple-300 flex items-center gap-2"><span>🤪</span> 対 マニアック</div>
-                                <div class="text-stone-300 pl-6">強いハンドができるまでじっと待つ。完成したら相手にベットさせ（トラップ）、向こうからチップを全額献上させる。</div>
-                            </li>
-                            <li>
-                                <div class="font-bold text-emerald-300 flex items-center gap-2"><span>🛡️</span> 対 TAG / LAG</div>
-                                <div class="text-stone-300 pl-6">基本的にはGTOベースのプレイングで対抗する。「3Bet Foldが高すぎる」など、スタッツの偏りを見つけた場合のみピンポイントで搾取する。</div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- 1-4 bb単位の考え方 -->
-                <h3 class="text-2xl font-bold text-amber-700 mt-10 mb-4 flex items-center gap-2"><span class="text-3xl">🪙</span> 1-4 bb単位の考え方</h3>
-                <div class="bg-stone-50 border border-stone-200 p-5 rounded-xl mb-10">
-                    <h4 class="font-bold text-stone-800 text-lg mb-2">スタック（Stack）とは</h4>
-                    <p class="text-sm text-stone-700 mb-4">プレイヤーが現在テーブルに持ち込んでいる（目の前にある）チップの総量のことです。ポーカーでは、自分のスタック以上のチップを賭けることはできません（テーブルステークス・ルール）。</p>
-                    
-                    <h4 class="font-bold text-stone-800 text-lg mb-2">bb（ビッグブラインド）単位の考え方</h4>
-                    <p class="text-sm text-stone-700 mb-4">上級者は、チップを「実際の金額（ドルや円）」や「チップの額面」で考えることはありません。常に<strong>「現在のビッグブラインド（bb）の何倍あるか」</strong>という相対的な単位（bb単位）で思考します。<br>
-                    例えば、ブラインドが $1 / $2 のキャッシュゲームで、目の前に $200 のチップがあるとします。この時、「200ドルある」と考えるのではなく、<strong>「$200 ÷ $2 = 100bb ある」</strong>と考えます。ベット額も同様に「$10ベットした」ではなく「5bbベットした」と計算します。</p>
-
-                    <div class="bg-white border-l-4 border-amber-500 p-4 rounded text-sm text-stone-700 shadow-sm">
-                        <span class="font-bold text-amber-800 block mb-1">💡 深掘り：なぜbb単位で考えるのか？（3段階の理由）</span>
-                        <ul class="list-decimal pl-5 space-y-2">
-                            <li><strong>計算の標準化：</strong> レートが変わっても「ポットの50%を打つならこのサイズ」というロジックをそのまま流用できるため。</li>
-                            <li><strong>マネープレッシャーの排除：</strong> 「ここで負けたら5万円失う」という恐怖心を排除し、「EVが+10bbのコールだから受ける」という純粋な数学的判断を下すため。</li>
-                            <li><strong>スタックデプスの把握：</strong> 「自分は残り何bb持っているか」を常に把握することで、適切なSPR（スタック対ポット比）を逆算し、フロップ以降のコミットラインを決定するため。</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- 1-5 補足：参加率やアグレッションが高い相手への対処 -->
-                <h3 class="text-2xl font-bold text-amber-700 mt-10 mb-4 flex items-center gap-2"><span class="text-3xl">💡</span> 1-5 補足：参加率やアグレッションが高い相手への対処</h3>
-                <div class="bg-amber-50 border border-amber-200 border-l-4 border-l-amber-500 p-5 rounded-xl shadow-sm">
-                    <p class="text-sm text-stone-700 mb-3">
-                        ポーカーを独学、または少し勉強し始めてある程度理解が深まってきたプレイヤーが実戦でよく直面する壁が、<strong>参加率（VPIP）が高いプレイヤーや、アグレッション（攻撃性）が異常に高いプレイヤーへの苦手意識</strong>です。彼らはポットを理不尽に膨らませ、プレッシャーをかけてくるため、正しい対処法を知らないと精神的に削られてチップを失ってしまいます。
-                    </p>
-                    <div class="space-y-3 mb-4">
-                        <div class="bg-white p-3 rounded shadow-sm border border-amber-100">
-                            <span class="font-bold text-blue-800 block mb-1">🐟 参加率が高い（ルーズな）相手への対処法</span>
-                            <p class="text-sm text-stone-600">相手のレンジには多くの「ゴミハンド」が含まれています。そのため、自分が強い役を持った時には、普段より大きなサイズでバリューベットを打ち、確実に利益を最大化することが重要です。逆に、相手が降りないため無闇にブラフを仕掛けるのは自滅行為です。</p>
-                        </div>
-                        <div class="bg-white p-3 rounded shadow-sm border border-amber-100">
-                            <span class="font-bold text-red-800 block mb-1">⚔️ アグレッションが高い（攻撃的な）相手への対処法</span>
-                            <p class="text-sm text-stone-600">相手のベットレンジには「ブラフ」が過剰に含まれています。したがって、相手のベットに対しては「ブラフキャッチ（マージナルな強さのハンドでコールし続ける）」の頻度を上げる必要があります。相手の強気なアクションに恐れをなして、本来守るべきハンドを降りてしまう（オーバーフォールド）ことを防がなければなりません。</p>
-                        </div>
-                    </div>
-                    <p class="text-sm text-stone-700">
-                        相手がセオリー外のハンド（想定外のハンド）をショーダウンで見せてきた時は、イライラするのではなく<strong>「大きなチャンスを見つけた（利益の源泉）」</strong>と捉えましょう。ポーカーは相手のミスから利益を得るゲームです。これらの対処法を正しく理解し、冷静にエクスプロイトを実行することが勝利への近道となります。
-                    </p>
-                </div>
-
-                <!-- 章のまとめ -->
-                <div class="mt-12 bg-stone-800 text-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
-                    <h3 class="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                        この章のまとめ
-                    </h3>
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="font-bold text-stone-300 text-sm mb-1 border-b border-stone-600 pb-1">📌 内容のまとめ</h4>
-                            <p class="text-sm text-stone-400">プレイヤーはVPIPやPFRといったスタッツによってスタイルに分類でき、チップは常に「bb」で計算します。RFIなどの詳細なスタッツを理解することで、より精密な相手のレンジ分析が可能になります。</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-emerald-400 text-sm mb-1 border-b border-stone-600 pb-1">🚀 実戦での応用</h4>
-                            <p class="text-sm text-stone-400">ルーズな相手にはバリューを厚く、アグレッシブな相手にはブラフキャッチを増やすなど、相手のスタッツの偏りを見抜いて「自分の基本戦略（GTO）」を意図的に崩すこと（エクスプロイト）が、利益を最大化する鍵です。</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-red-400 text-sm mb-1 border-b border-stone-600 pb-1">⚠️ プレイ時の注意点</h4>
-                            <p class="text-sm text-stone-400">HUDの少ないサンプル数を盲信しないでください。また、ルーズやアグレッシブな相手に対して感情的（ティルト）になるのではなく、数学的な対処法を用いて冷静に搾取するメンタルコントロールが必要です。</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- 第2章 -->
-            <div id="section-2" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3">2. オッズとアウツの計算</h2>
-                <p class="text-stone-600 mb-8 leading-relaxed text-lg">直感や「当たる気がする」といった感情ではなく、数学に基づいた意思決定を行うための必須スキルです。ポーカーを単なるギャンブルから、期待値に基づく「投資」へと昇華させるための土台となります。</p>
-
-                <h3 class="text-2xl font-bold text-amber-700 mb-4 flex items-center gap-2"><span class="text-3xl">⚖️</span> 2-1 オッズとは</h3>
-                <div class="bg-stone-50 border border-stone-200 p-5 rounded-xl mb-10">
-                    <h4 class="font-bold text-stone-800 text-lg mb-2">オッズ（Odds）の説明</h4>
-                    <p class="text-sm text-stone-700 mb-4">オッズとは、ギャンブルや投資において「リスク（支払う額）」に対する「リターン（得られる見込み額）」の比率を示す言葉です。ポーカーにおいては、相手のベットに対して自分がコール（支払い）した際に、どれだけの見返り（現在のポット）があるかを示す<strong>「ポットオッズ」</strong>が最も重要になります。</p>
-                    
-                    <h4 class="font-bold text-stone-800 text-lg mb-2">オッズの重要性</h4>
-                    <p class="text-sm text-stone-700">ポーカーで長期的に勝つためには、<strong>「支払うリスクに対して、見返りが十分に大きく、かつ勝てる確率が見合っている勝負（+EV：プラス期待値）」</strong>だけを選び続ける必要があります。オッズを理解していないと、割に合わない無謀な勝負を続けてしまい、長期的には確実にチップを失います。</p>
-                </div>
-
-                <h3 class="text-2xl font-bold text-amber-700 mb-4 flex items-center gap-2"><span class="text-3xl">🃏</span> 2-2 アウツ (Outs) の説明</h3>
-                <p class="text-stone-600 mb-4 text-sm">現状のハンドでは負けている可能性が高いが、<strong>「特定のカードを引けば逆転して強い役が完成する」</strong>という状況（ドロー）において、その「特定のカードの残り枚数」のことをアウツと呼びます。</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                    <div class="bg-white border border-blue-200 p-4 rounded-lg shadow-sm">
-                        <div class="flex justify-between items-center mb-2">
-                            <h4 class="font-bold text-blue-800">フラッシュドロー</h4>
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold">アウツ 9枚</span>
-                        </div>
-                        <p class="text-xs text-stone-600">同じスートが自分の手札に2枚、ボードに2枚ある状態。1つのスートは全13枚なので、残り引けるカードは 13 - 4 = 9枚。</p>
-                    </div>
-                    <div class="bg-white border border-emerald-200 p-4 rounded-lg shadow-sm">
-                        <div class="flex justify-between items-center mb-2">
-                            <h4 class="font-bold text-emerald-800">オープンエンド (OESD)</h4>
-                            <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-bold">アウツ 8枚</span>
-                        </div>
-                        <p class="text-xs text-stone-600">両面待ちのストレートドロー。例えば「5,6,7,8」と並んでおり、4か9のどちらかが来れば完成する状態。各ランクは4枚ずつあるので、4枚 × 2種類 = 8枚。</p>
-                    </div>
-                    <div class="bg-white border border-stone-300 p-4 rounded-lg shadow-sm">
-                        <div class="flex justify-between items-center mb-2">
-                            <h4 class="font-bold text-stone-700">ガットショット</h4>
-                            <span class="bg-stone-200 text-stone-800 px-3 py-1 rounded-full text-sm font-bold">アウツ 4枚</span>
-                        </div>
-                        <p class="text-xs text-stone-600">カンチャン待ちのストレートドロー。「5,6,8,9」のように間の1枚（7）が来れば完成する状態。特定のランク1種類のみなので4枚。</p>
-                    </div>
-                    <div class="bg-white border border-amber-200 p-4 rounded-lg shadow-sm">
-                        <div class="flex justify-between items-center mb-2">
-                            <h4 class="font-bold text-amber-800">ツーオーバー</h4>
-                            <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-bold">アウツ 6枚</span>
-                        </div>
-                        <p class="text-xs text-stone-600">自分がAKを持ち、ボードが2-5-8などで、相手がローペアを持っていそうな時。AかKが落ちればトップペアになり逆転できる状態。各3枚ずつ残っているので計6枚。</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- 第3章 -->
-            <div id="section-3" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3">3. プリフロップレンジ</h2>
-                <p class="text-stone-600 mb-8 leading-relaxed text-lg">ポーカーにおけるすべてのアクションの出発点です。プリフロップ（最初のベッティングラウンド）での戦略を定型化することは、その後の複雑なポストフロップのプレイを単純化し、長期的な利益を確保するための最も重要なステップです。</p>
-            </div>
-
-            <!-- 第4章 -->
-            <div id="section-4" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3">4. アクションの意図と戦術</h2>
-                <p class="text-stone-600 mb-8 leading-relaxed text-lg">ポーカーにおけるあなたのアクション（チェック、ベット、コール、レイズ、フォールド）には、すべて明確な「意図」が必要です。なんとなくのプレイを排除し、それぞれの戦術的な意味を理解しましょう。</p>
-            </div>
-
-            <!-- 第5章 -->
-            <div id="section-5" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3">5. GTOとEXPLOIT、集合分析とは</h2>
-                <p class="text-stone-600 mb-8 leading-relaxed text-lg">現代ポーカー理論の根幹となる「GTO（均衡戦略）」と「EXPLOIT（搾取戦略）」、そしてそれらのマクロな傾向を解析する「集合分析」。これらを統合して理解することで、状況に応じた最適なプレイを導き出すことができます。</p>
-            </div>
-
-            <!-- 第6章 -->
-            <div id="section-6" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3">6. ブロッカー</h2>
-                <p class="text-stone-600 mb-8 leading-relaxed text-lg">ポーカーにおけるブロッカー（Blockers）は、中級者から上級者へステップアップするための重要な概念です。自分が持つカードが相手のハンドの可能性をどのように制限するかを理解することで、ブラフやコールの精度が劇的に向上します。</p>
-            </div>
-
-            <!-- 第7章 -->
-            <div id="section-7" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3">7. EVとEQ</h2>
-                <p class="text-stone-600 mb-8 leading-relaxed text-lg">ポーカーは「不完全情報ゲーム」であり、目の前の1回の勝敗は運（カードの落ち方）に左右されます。しかし、その運を乗り越えて長期的な勝利を掴むための絶対的な羅針盤となるのが、EV（期待値）とEQ（エクイティ）という2つの概念です。</p>
-            </div>
-
-            <!-- 第8章 -->
-            <div id="section-8" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3">8. バリューとブラフとマージナル</h2>
-                <p class="text-stone-600 mb-8 leading-relaxed text-lg">ポーカーにおける自発的なベットは、原則として「バリュー（利益）」か「ブラフ（騙し）」のどちらかの目的を持たなければなりません。そのどちらの目的も達成できない中途半端な手（マージナル）はチェックするのが基本です。この章では、利益を最大化するベットの構築方法を学びます。</p>
-            </div>
-
-            <!-- 管理者ダッシュボードセクション -->
-            <div id="section-admin" class="content-section hidden">
-                <h2 class="text-3xl font-bold text-stone-900 mb-6 border-b pb-3 flex items-center gap-2">
-                    <svg class="w-8 h-8 text-stone-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    管理者設定 (コンテンツロック制御)
-                </h2>
-                <p class="text-stone-600 mb-6 text-sm">各章に対する閲覧制限（ロック）を設定します。時限ロックを設定した場合、指定した日時を過ぎると自動的に閲覧可能になります。</p>
-                
-                <div class="bg-stone-100 border border-stone-300 p-4 rounded text-sm text-stone-700 shadow-sm mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <div>
-                        <span class="font-bold text-stone-800 block mb-1">🛡️ コンテンツ保護（コピー防止）</span>
-                        右クリック禁止、テキスト選択禁止機能は現在 <strong class="text-emerald-600">有効</strong> になっています。
-                    </div>
-                    <p class="text-xs text-stone-500 text-right md:text-left">※ブラウザの仕様上、スクリーンショットを100%防ぐことは不可能です。</p>
-                </div>
-
-                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded text-sm text-stone-700 shadow-sm mb-8">
-                    <span class="font-bold text-amber-800 block mb-1">💡 ロック仕様について</span>
-                    ・<strong>永続ロック：</strong> 管理者が解除するまで閲覧不可になります。<br>
-                    ・<strong>時限ロック：</strong> 設定した日時までは閲覧不可ですが、その時刻を過ぎると自動的にアンロックされます。
-                </div>
-
-                <div id="admin-locks-container" class="space-y-4">
-                    <!-- JSで動的にレンダリングされます -->
-                </div>
-            </div>
-
-        </section>
-    </main>
-
-    <script>
-        // --- QAフォーム用デモ関数 ---
-        function submitQuestion() {
-            const input = document.getElementById('qa-input');
-            const text = input.value.trim();
-            if (!text) {
-                alert('質問内容を入力してください。');
-                return;
-            }
-            
-            const container = document.getElementById('qa-list-container');
-            const div = document.createElement('div');
-            div.className = "bg-white border border-stone-200 p-4 rounded-lg shadow-sm";
-            const date = new Date().toLocaleString();
-            div.innerHTML = `
-                <div class="flex justify-between items-start mb-2 pb-2 border-b border-stone-100">
-                    <span class="font-bold text-stone-700 text-sm">Q. 匿名ユーザー</span>
-                    <span class="text-xs text-stone-400">${date}</span>
-                </div>
-                <p class="text-sm text-stone-700 mb-3">${text.replace(/\n/g, '<br>')}</p>
-                <div class="bg-stone-50 p-3 rounded text-sm text-stone-600 border-l-4 border-stone-300">
-                    <span class="font-bold text-stone-500 block mb-1">A. 管理者からの回答待ち...</span>
-                </div>
-            `;
-            container.prepend(div);
-            input.value = '';
-            alert('質問を送信しました。\n※現在はデモモードのため、この画面を閉じるとデータは消去されます。');
-        }
-        
-        // --- コンテンツ保護 (コピー防止) スクリプト ---
-        
-        // キーボードショートカットの無効化 (Ctrl+C, Cmd+Cなど)
-        document.addEventListener('keydown', function(e) {
-            // Ctrl+C / Cmd+C / Ctrl+X / Ctrl+S / Ctrl+U
-            if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C' || e.key === 'x' || e.key === 'X' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U' || e.key === 'p' || e.key === 'P')) {
-                e.preventDefault();
-            }
-            // F12 (開発者ツール)
-            if (e.key === 'F12' || e.keyCode === 123) {
-                e.preventDefault();
-            }
-        });
-
-        // タッチデバイス等での長押し保存禁止
-        document.addEventListener('touchstart', function(e) {
-            if (e.target.nodeName === 'IMG' || e.target.nodeName === 'A') {
-                e.preventDefault();
-            }
-        }, {passive: false});
-        // ----------------------------------------------------
-
-        // ロック状態の初期化とローカルストレージ連携
-        const defaultLocks = {};
-        for(let i=0; i<=8; i++) {
-            defaultLocks[i] = { type: 'none', unlockAt: '' }; // type: 'none' | 'permanent' | 'timed'
-        }
-
-        const appState = {
-            currentTab: 0,
-            isAdmin: false,
-            locks: JSON.parse(localStorage.getItem('pokerLocks')) || defaultLocks
-        };
-
-        // ロック判定ロジック
-        function isLocked(tabId) {
-            const lock = appState.locks[tabId];
-            if (!lock || lock.type === 'none') return false;
-            if (lock.type === 'permanent') return true;
-            if (lock.type === 'timed') {
-                if (!lock.unlockAt) return true; // 日時未設定はロック扱い
-                const unlockTime = new Date(lock.unlockAt).getTime();
-                const now = new Date().getTime();
-                return now < unlockTime;
-            }
-            return false;
-        }
-
-        // ナビゲーションUIの更新（ロックアイコンの付与）
-        function updateNavUI() {
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                const target = btn.getAttribute('data-target');
-                if(target === 'admin' || target === 'qa') return;
-                
-                const tabId = parseInt(target);
-                const originalTitle = btn.getAttribute('data-title');
-                
-                if (!appState.isAdmin && isLocked(tabId)) {
-                    const lock = appState.locks[tabId];
-                    if (lock.type === 'permanent') {
-                        btn.innerHTML = originalTitle + ' 🔒';
-                    } else if (lock.type === 'timed') {
-                        if (lock.unlockAt) {
-                            const d = new Date(lock.unlockAt);
-                            const m = d.getMonth() + 1;
-                            const day = d.getDate();
-                            const h = d.getHours();
-                            const min = String(d.getMinutes()).padStart(2, '0');
-                            btn.innerHTML = `<span class="block">${originalTitle}</span><span class="block text-[11px] text-stone-400 font-normal mt-1 leading-tight">${m}月${day}日 ${h}時${min}分から閲覧可能</span>`;
-                        } else {
-                            btn.innerHTML = originalTitle + ' ⏳';
-                        }
-                    }
-                } else {
-                    btn.innerHTML = originalTitle;
-                }
-            });
-        }
-
-        let charts = {};
-
-        const palette = {
-            stone800: '#292524',
-            stone500: '#78716c',
-            stone200: '#e7e5e4',
-            amber600: '#d97706',
-            emerald500: '#10b981',
-            blue500: '#3b82f6',
-            red500: '#ef4444'
-        };
-
-        function switchTab(tabId) {
-            // 管理者以外はロック確認を行う
-            if (tabId !== 'admin' && tabId !== 'qa' && !appState.isAdmin && isLocked(tabId)) {
-                const lock = appState.locks[tabId];
-                let msg = "この章はロックされています。閲覧できません。";
-                if (lock.type === 'timed' && lock.unlockAt) {
-                    const d = new Date(lock.unlockAt);
-                    msg = `この章はロックされています。\n【 ${d.toLocaleString()} 】以降に自動でアンロックされます。`;
-                }
-                alert(msg);
-                return; // タブ切り替えをキャンセル
-            }
-
-            document.querySelectorAll('.content-section').forEach(el => el.classList.add('hidden'));
-            
-            const targetSection = document.getElementById(`section-${tabId}`);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-            }
-
-            document.querySelectorAll('.nav-btn').forEach(el => {
-                el.classList.remove('bg-stone-200', 'font-bold', 'text-amber-700', 'bg-stone-800');
-                if (el.getAttribute('data-target') !== 'admin') {
-                    el.classList.add('bg-stone-100', 'text-stone-600');
-                } else {
-                    el.classList.add('bg-stone-700', 'text-white');
-                }
-            });
-
-            const activeBtn = document.querySelector(`.nav-btn[data-target="${tabId}"]`);
-            if (activeBtn) {
-                if (tabId !== 'admin') {
-                    activeBtn.classList.remove('bg-stone-100', 'text-stone-600');
-                    activeBtn.classList.add('bg-stone-200', 'font-bold', 'text-amber-700');
-                } else {
-                    activeBtn.classList.remove('bg-stone-700');
-                    activeBtn.classList.add('bg-stone-800');
-                    renderAdminPanel(); // 管理者パネルを開くたびに再描画
-                }
-            }
-
-            if (tabId !== 'admin' && tabId !== 'qa') {
-                renderChartForTab(tabId);
-            }
-            
-            // モバイル用メニューが開いている場合は閉じる
-            const navMenu = document.getElementById('nav-menu');
-            if (window.innerWidth < 768 && !navMenu.classList.contains('hidden')) {
-                navMenu.classList.add('hidden');
-                navMenu.classList.remove('flex');
-                document.getElementById('menu-toggle-text').textContent = '目次を開く (章を選ぶ)';
-                document.getElementById('menu-toggle-icon').style.transform = 'rotate(0deg)';
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // 管理者パネルの描画
-        function renderAdminPanel() {
-            const container = document.getElementById('admin-locks-container');
-            container.innerHTML = '';
-            
-            const chapterTitles = [
-                "0. 脱初心者", "1. プレイヤー分析とスタッツの把握", "2. オッズとアウツの計算",
-                "3. プリフロップレンジ", "4. アクションの意図と戦術",
-                "5. GTOとEXPLOIT、集合分析", "6. ブロッカー", "7. EVとEQ", "8. バリューとブラフとマージナル"
-            ];
-
-            chapterTitles.forEach((title, index) => {
-                const lock = appState.locks[index] || { type: 'none', unlockAt: '' };
-                const div = document.createElement('div');
-                div.className = "bg-stone-50 p-4 rounded-lg border border-stone-200 shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-4";
-                
-                div.innerHTML = `
-                    <div class="font-bold text-stone-800 xl:w-1/3 flex items-center gap-2">
-                        <span class="bg-stone-200 text-stone-600 px-2 py-1 rounded text-xs">第${index}章</span>
-                        ${title.split('. ')[1]}
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-3 xl:w-2/3 items-start sm:items-center">
-                        <select id="lock-type-${index}" class="border border-stone-300 rounded p-2 text-sm bg-white flex-shrink-0" onchange="toggleDateInput(${index})">
-                            <option value="none" ${lock.type === 'none' ? 'selected' : ''}>🟢 ロックなし (公開)</option>
-                            <option value="permanent" ${lock.type === 'permanent' ? 'selected' : ''}>🔴 永続ロック</option>
-                            <option value="timed" ${lock.type === 'timed' ? 'selected' : ''}>⏳ 時限ロック (日時指定)</option>
-                        </select>
-                        <input type="datetime-local" id="lock-date-${index}" class="border border-stone-300 rounded p-2 text-sm bg-white w-full sm:w-auto ${lock.type !== 'timed' ? 'hidden' : ''}" value="${lock.unlockAt || ''}">
-                        <button onclick="saveChapterLock(${index})" class="bg-stone-800 text-white px-4 py-2 rounded text-sm font-bold hover:bg-stone-900 transition ml-auto sm:ml-0 flex-shrink-0">保存</button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // 時限ロック選択時の日付入力欄の表示/非表示切り替え (グローバルに露出)
-        window.toggleDateInput = function(index) {
-            const select = document.getElementById(`lock-type-${index}`);
-            const dateInput = document.getElementById(`lock-date-${index}`);
-            if (select.value === 'timed') {
-                dateInput.classList.remove('hidden');
-            } else {
-                dateInput.classList.add('hidden');
-            }
-        };
-
-        // 各章のロック設定保存処理 (グローバルに露出)
-        window.saveChapterLock = function(index) {
-            const type = document.getElementById(`lock-type-${index}`).value;
-            const unlockAt = document.getElementById(`lock-date-${index}`).value;
-            
-            if (type === 'timed' && !unlockAt) {
-                alert('時限ロックを選択した場合は、アンロックされる日時を指定してください。');
-                return;
-            }
-
-            appState.locks[index] = { type, unlockAt };
-            localStorage.setItem('pokerLocks', JSON.stringify(appState.locks));
-            
-            // 保存完了の視覚フィードバック
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = "保存完了!";
-            btn.classList.add('bg-emerald-600');
-            btn.classList.remove('bg-stone-800');
-            
-            updateNavUI();
-
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.classList.remove('bg-emerald-600');
-                btn.classList.add('bg-stone-800');
-            }, 1500);
-        };
-
-        function renderChartForTab(tabId) {
-            Chart.defaults.color = palette.stone500;
-            Chart.defaults.font.family = '-apple-system, sans-serif';
-
-            if (tabId === 1) {
-                if(charts[1]) charts[1].destroy();
-                const canvas = document.getElementById('chart-stats');
-                if (!canvas) return;
-                const ctx = canvas.getContext('2d');
-                charts[1] = new Chart(ctx, {
-                    type: 'radar',
-                    data: {
-                        labels: ['VPIP', 'PFR', '3Bet', 'WTSD', 'W$SD'],
-                        datasets: [
-                            {
-                                label: 'TAG (タイトアグレッシブ)',
-                                data: [24, 20, 9, 30, 52],
-                                backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                                borderColor: palette.emerald500,
-                                pointBackgroundColor: palette.emerald500,
-                                borderWidth: 2
-                            },
-                            {
-                                label: 'LAG (ルーズアグレッシブ)',
-                                data: [35, 30, 14, 28, 48],
-                                backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                                borderColor: palette.blue500,
-                                pointBackgroundColor: palette.blue500,
-                                borderWidth: 2
-                            },
-                            {
-                                label: 'ルーズパッシブ',
-                                data: [50, 5, 2, 40, 40],
-                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                                borderColor: '#93c5fd', // lighter blue
-                                pointBackgroundColor: '#93c5fd',
-                                borderWidth: 2,
-                                borderDash: [5, 5]
-                            },
-                            {
-                                label: 'タイトパッシブ',
-                                data: [15, 8, 3, 20, 60],
-                                backgroundColor: 'rgba(120, 113, 108, 0.1)',
-                                borderColor: palette.stone500,
-                                pointBackgroundColor: palette.stone500,
-                                borderWidth: 2,
-                                borderDash: [5, 5]
-                            },
-                            {
-                                label: 'マニアック',
-                                data: [65, 55, 25, 45, 35],
-                                backgroundColor: 'rgba(168, 85, 247, 0.2)', // purple
-                                borderColor: '#a855f7',
-                                pointBackgroundColor: '#a855f7',
-                                borderWidth: 2
-                            }
-                        ]
-                    },
-                    options: {
-                        maintainAspectRatio: false,
-                        scales: {
-                            r: {
-                                min: 0,
-                                max: 70,
-                                ticks: { stepSize: 15 }
-                            }
-                        },
-                        plugins: {
-                            legend: { 
-                                position: 'bottom',
-                                labels: { boxWidth: 12 }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // 管理者ログイン処理
-            document.getElementById('admin-login-btn').addEventListener('click', () => {
-                if(appState.isAdmin) {
-                    // ログアウト処理
-                    appState.isAdmin = false;
-                    alert('管理者モードを終了しました。\n一般ユーザーのビューに戻ります。');
-                    document.getElementById('admin-nav-btn').classList.add('hidden');
-                    updateNavUI();
-                    switchTab(0);
-                    return;
-                }
-                
-                const pwd = prompt('管理者パスワードを入力してください:');
-                if (pwd === '8944') {
-                    appState.isAdmin = true;
-                    alert('管理者としてログインしました。\nサイドバー下部に「管理者設定」が表示されます。');
-                    document.getElementById('admin-nav-btn').classList.remove('hidden');
-                    updateNavUI(); // ロックアイコンを隠す
-                    switchTab('admin');
-                } else if (pwd !== null) {
-                    alert('パスワードが間違っています。');
-                }
-            });
-
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const target = e.currentTarget.getAttribute('data-target');
-                    if (target === 'admin' || target === 'qa') {
-                        switchTab(target);
-                    } else {
-                        switchTab(parseInt(target));
-                    }
-                });
-            });
-            
-            // モバイルメニューのトグルイベント
-            const menuToggle = document.getElementById('menu-toggle');
-            const navMenu = document.getElementById('nav-menu');
-            const menuToggleText = document.getElementById('menu-toggle-text');
-            const menuToggleIcon = document.getElementById('menu-toggle-icon');
-
-            menuToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('hidden');
-                navMenu.classList.toggle('flex');
-                if (navMenu.classList.contains('hidden')) {
-                    menuToggleText.textContent = '目次を開く (章を選ぶ)';
-                    menuToggleIcon.style.transform = 'rotate(0deg)';
-                } else {
-                    menuToggleText.textContent = '目次を閉じる';
-                    menuToggleIcon.style.transform = 'rotate(180deg)';
-                }
-            });
-
-            updateNavUI(); // 初期表示時にロックアイコンを付ける
-            switchTab(0);
-        });
-    </script>
+<body>
+<header class="site-header"><div class="header-inner"><h1 class="site-title">♠♥ Poker Mastery Roadmap ♦♣</h1><button id="adminLock" class="admin-lock">🔒 Admin</button></div><button id="mobileToggle" class="mobile-toggle">章一覧を開く</button></header>
+<div class="layout"><aside id="sidebar" class="sidebar"><button class="chapter-tab" data-target="qa"><span class="chapter-icon gold">💬</span><span>Q&amp;A質問箱</span><span class="lock-dot" data-lock-dot="qa"></span></button>
+<button class="chapter-tab" data-target="ch0"><span class="chapter-icon spade">♠</span><span>0-脱初心者</span><span class="lock-dot" data-lock-dot="ch0"></span></button>
+<button class="chapter-tab" data-target="ch1"><span class="chapter-icon club">♣</span><span>1-プレイヤー分析</span><span class="lock-dot" data-lock-dot="ch1"></span></button>
+<button class="chapter-tab" data-target="ch2"><span class="chapter-icon diamond">♦</span><span>2-オッズ計算</span><span class="lock-dot" data-lock-dot="ch2"></span></button>
+<button class="chapter-tab" data-target="ch3"><span class="chapter-icon heart">♥</span><span>3-プリフロップ</span><span class="lock-dot" data-lock-dot="ch3"></span></button>
+<button class="chapter-tab" data-target="ch4"><span class="chapter-icon spade">♠</span><span>4-ベット戦略</span><span class="lock-dot" data-lock-dot="ch4"></span></button>
+<button class="chapter-tab" data-target="ch5"><span class="chapter-icon club">♣</span><span>5-GTO/EXPLOIT</span><span class="lock-dot" data-lock-dot="ch5"></span></button>
+<button class="chapter-tab" data-target="ch6"><span class="chapter-icon diamond">♦</span><span>6-ブロッカー</span><span class="lock-dot" data-lock-dot="ch6"></span></button>
+<button class="chapter-tab" data-target="ch7"><span class="chapter-icon heart">♥</span><span>7-EV/EQ</span><span class="lock-dot" data-lock-dot="ch7"></span></button>
+<button class="chapter-tab" data-target="ch8"><span class="chapter-icon multi">♠♥♦♣</span><span>8-バリュー/ブラフ</span><span class="lock-dot" data-lock-dot="ch8"></span></button></aside><main class="content"><article class="chapter-card" id="qa" data-chapter="qa"><div class="lock-panel" data-lock-panel="qa"></div><div class="chapter-admin" data-admin-controls="qa"><button data-lock="qa">ロック</button><button data-unlock="qa">解除</button><input type="datetime-local" data-time="qa"><button data-timed="qa">時間ロック</button></div><div class="content-protected"><h1>💬 Q&amp;A 質問箱</h1>
+<p>ポーカーに関する質問・ハンドレビューを記載するページです。</p>
+<blockquote>⚠️ この講座内容はAI geminiと筆者が理解した内容を記載している為、本来の意味と異なる場合がございます。内容を鵜呑みにせず、ご自身で調べることを忘れずにお願いします。コピー・転載不可。</blockquote>
+<hr>
+<h2>質問を投稿する</h2>
+<p>ハンドレビューやポーカーに関する疑問を自由に記載してください。</p>
+<hr>
+<h2>Q&amp;A 一覧</h2>
+<h3>Q: </h3>
+<p><strong>A:</strong> </p>
+<hr>
+<h3>Q: </h3>
+<p><strong>A:</strong> </p>
+<hr>
+<h2>よくある質問</h2>
+<h3>Q: GTOとエクスプロイトはどちらを優先すべきですか？</h3>
+<p><strong>A:</strong> 相手のレベルによります。相手が明らかなミスを犯しているならエクスプロイト優先、相手が強い場合はGTOベースのプレイを心がけてください。詳しくは第5章「GTOとEXPLOIT、集合分析とは」を参照。</p>
+<h3>Q: プリフロップでどのハンドをプレイすればいいですか？</h3>
+<p><strong>A:</strong> ポジションに応じたオープンレンジを学ぶことが重要です。第3章「プリフロップレンジ」を参照してください。</p>
+<h3>Q: ブラフはどのくらいの頻度でするべきですか？</h3>
+<p><strong>A:</strong> ベットサイズに応じたバランスが重要です。第8章「バリューとブラフとマージナル」を参照してください。</p>
+<div class="qa-panel"><h2>質問投稿フォーム</h2><textarea id="questionText" rows="4" placeholder="質問やハンドレビューを入力"></textarea><textarea id="answerText" rows="3" placeholder="回答メモ（任意）"></textarea><button id="saveQa">保存</button><div id="qaList" class="qa-list"></div></div></div></article>
+<article class="chapter-card" id="ch0" data-chapter="ch0"><div class="lock-panel" data-lock-panel="ch0"></div><div class="chapter-admin" data-admin-controls="ch0"><button data-lock="ch0">ロック</button><button data-unlock="ch0">解除</button><input type="datetime-local" data-time="ch0"><button data-timed="ch0">時間ロック</button></div><div class="content-protected"><h1>0: 脱初心者</h1>
+<blockquote>⚠️ この講座内容はAI geminiと筆者が理解した内容を記載している為、本来の意味と異なる場合がございます。内容を鵜呑みにせず、ご自身で調べることを忘れずにお願いします。コピー・転載不可。</blockquote>
+<hr>
+<h2>0-1 この講座の意味</h2>
+<h3>この講座は誰のためのものか</h3>
+<p>ポーカーというゲームに触れ、「面白い」「強くなりたい」と思った方が<strong>何を勉強すればいいかをステップごとに学べる</strong>ロードマップです。</p>
+<p>対象は以下のいずれかに当てはまる方です：</p>
+<ul>
+<li>ポーカーのルールは知っているが、何を勉強すればいいか分からない</li>
+<li>独学で勉強し始めたが、体系的に整理したい</li>
+<li>特定の個人から教えてもらい、ある程度理解が深まってきたプレイヤーとの<strong>意見のすり合わせ</strong>をしたい</li>
+</ul>
+<blockquote>💡 ポーカーを独学、もしくは特定個人から教えてもらい少し勉強し始めてある程度理解が深まったプレイヤーとの意見のすり合わせとして活用することを想定しています。</blockquote>
+<h3>講座の進め方</h3>
+<pre><code>第0章（脱初心者）
+    ↓
+第1章（プレイヤー分析・スタッツ）
+    ↓
+第2章（オッズ・アウツの計算）
+    ↓
+第3章（プリフロップレンジ）
+    ↓
+第4章（アクションの意図・ベット戦略）
+    ↓
+第5章（GTOとEXPLOIT・集合分析）
+    ↓
+第6章（ブロッカー）
+    ↓
+第7章（EVとEQ）
+    ↓
+第8章（バリューとブラフとマージナル）</code></pre>
+<p>前半（第1〜3章）の<strong>基礎</strong>を徹底するだけでも一定の成果が出ます。後半（第4章以降）は「ボードの分類」「GTOの概念」「プライズプールの影響」などを深く掘り下げることで長期的なエッジ（優位性）を生み出せます。</p>
+<h3>ポーカーとはどんなゲームか</h3>
+<p>ポーカー（テキサスホールデム）は<strong>確率・期待値・心理</strong>が絡み合う高度な思考ゲームです。</p>
+<ul>
+<li>短期的には運（バリアンス）が大きく影響する</li>
+<li>しかし長期的には<strong>技術（エッジ）</strong>が結果に必ず反映される</li>
+<li>「正しいプレイを続ける」ことが最重要</li>
+</ul>
+<h3>学習の心構え</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>よくある誤解</th>
+<th>正しい考え方</th>
+</tr></thead><tbody>
+<tr>
+<td>強い手が来れば勝てる</td>
+<td>弱い手でも正しく勝つことが重要</td>
+</tr>
+<tr>
+<td>ブラフで勝つのが上手い</td>
+<td>バリューとブラフのバランスが重要</td>
+</tr>
+<tr>
+<td>運が悪いから負けた</td>
+<td>-EVなプレイをしていないか確認</td>
+</tr>
+<tr>
+<td>相手を読むことが全て</td>
+<td>まずレンジとオッズで考える</td>
+</tr>
+</tbody></table></div>
+<hr>
+<div class="summary-card">
+<h2>この章のまとめ</h2>
+<p><strong>内容の要約</strong></p>
+<ul>
+<li>この講座は初心者〜中級者が体系的にポーカーを学ぶためのロードマップ</li>
+<li>第1〜3章の基礎を固め、第4章以降で高度な理論へ進む</li>
+<li>短期の結果に振り回されず、長期的な正しいプレイを習慣づけることが重要</li>
+</ul>
+<p><strong>応用</strong></p>
+<ul>
+<li>各章を学んだ後、実際のハンドに当てはめてみる</li>
+<li>Q&amp;A質問箱を活用して疑問を解消する</li>
+</ul>
+<p><strong>注意点</strong></p>
+<ul>
+<li>一度読んで終わりにせず、実戦と照らし合わせながら繰り返し学習する</li>
+<li>内容は一つの考え方であり、鵜呑みにせず自分で調べる習慣を持つ</li>
+</ul>
+</div>
+</div></article>
+<article class="chapter-card" id="ch1" data-chapter="ch1"><div class="lock-panel" data-lock-panel="ch1"></div><div class="chapter-admin" data-admin-controls="ch1"><button data-lock="ch1">ロック</button><button data-unlock="ch1">解除</button><input type="datetime-local" data-time="ch1"><button data-timed="ch1">時間ロック</button></div><div class="content-protected"><h1>1: プレイヤー分析とスタッツの把握</h1>
+<hr>
+<h2>1-1 プレイヤー分析</h2>
+<p>相手のプレイスタイルを正確に分類し、その弱点を突くことがエクスプロイト戦略の出発点です。</p>
+<h3>① ルーズパッシブ（Calling Station）</h3>
+<p><strong>特徴:</strong> 多くのハンドでコールし、自分からベット・レイズをほとんどしない。</p>
+<p><strong>こんなプレイヤーが多い例:</strong></p>
+<ul>
+<li>「せっかく来たから」とほぼ全ハンドを見ようとするカジュアルなプレイヤー</li>
+<li>「フロップを見てから決める」と言って毎回コールするプレイヤー</li>
+</ul>
+<p><strong>プレイヤーの強さ:</strong> 弱い。ただし「下りない相手」なのでブラフが通らず注意が必要。</p>
+<p><strong>エクスプロイト:</strong></p>
+<ul>
+<li>ブラフを極力減らす（ブラフ厳禁）</li>
+<li>強いハンドで大きくバリューベットを打ち続ける</li>
+<li>薄いバリューでも積極的にベット</li>
+</ul>
+<hr>
+<h3>② タイトパッシブ（Rock / Nit）</h3>
+<p><strong>特徴:</strong> 非常に少ないハンドしかプレイせず、入ってきてもコール中心でアクションが弱い。</p>
+<p><strong>こんなプレイヤーが多い例:</strong></p>
+<ul>
+<li>「AKかAAのみ」というような極端な絞り込みをするプレイヤー</li>
+<li>リスクを嫌う慎重派で、強い手でも小さくしか打てないプレイヤー</li>
+</ul>
+<p><strong>プレイヤーの強さ:</strong> レンジが読みやすく対処しやすい。</p>
+<p><strong>エクスプロイト:</strong></p>
+<ul>
+<li>参加してきたらレンジが強いと判断してリスペクト</li>
+<li>ブラフに対しては積極的にフォールド</li>
+<li>3ベットに対しては特に注意（強いハンドのみ）</li>
+</ul>
+<hr>
+<h3>③ ルーズアグレッシブ（LAG）</h3>
+<p><strong>特徴:</strong> 広いレンジでプレイし、積極的にベット・レイズをしかけてくる。</p>
+<p><strong>こんなプレイヤーが多い例:</strong></p>
+<ul>
+<li>常に攻撃的で「プレッシャーをかける」プレイスタイルを好むプレイヤー</li>
+<li>少し勉強してGTOを学びかけたが、バランスが崩れているプレイヤー</li>
+</ul>
+<p><strong>プレイヤーの強さ:</strong> バランスが取れていれば強い。崩れていれば搾取可能。</p>
+<p><strong>エクスプロイト:</strong></p>
+<ul>
+<li>3ベット頻度を上げる</li>
+<li>ブラフ過多なら軽いハンドでもコールやチェックレイズ</li>
+<li>強いハンドでスロープレイしてトラップする</li>
+</ul>
+<hr>
+<h3>④ タイトアグレッシブ（TAG）</h3>
+<p><strong>特徴:</strong> 厳選したハンドのみをプレイし、入ってきたら積極的にアグレッションをかける。</p>
+<p><strong>こんなプレイヤーが多い例:</strong></p>
+<ul>
+<li>勉強しているポーカープレイヤーの多くがこのスタイルを目指す</li>
+<li>GTO教材や書籍で学んだ中級者に多いスタイル</li>
+</ul>
+<p><strong>プレイヤーの強さ:</strong> 強い。ただしレンジが読みやすい部分もある。</p>
+<p><strong>エクスプロイト:</strong></p>
+<ul>
+<li>レンジが強いと判断して無駄なコールを減らす</li>
+<li>3ベットへのフォールドが多ければスチールを増やす</li>
+</ul>
+<hr>
+<h3>⑤ マニアック</h3>
+<p><strong>特徴:</strong> 極めて広いレンジで常に最大のアグレッションをかけてくる。GTO的なバランスは無視。</p>
+<p><strong>こんなプレイヤーが多い例:</strong></p>
+<ul>
+<li>ギャンブル的な思考が強く「どうせ運だ」と考えているプレイヤー</li>
+<li>短期的に大きく勝ちたいプレイヤー</li>
+</ul>
+<p><strong>プレイヤーの強さ:</strong> 短期的には脅威。長期的には−EVなプレイが多く搾取可能。</p>
+<p><strong>エクスプロイト:</strong></p>
+<ul>
+<li>強いハンドで大きくコール・レイズ</li>
+<li>バリューレンジを広げてコールする</li>
+<li>ブラフを減らし、バリューに集中する</li>
+</ul>
+<blockquote>💡 <strong>補足:</strong> 参加率が高いプレイヤーやアグレッションが高いプレイヤーを苦手とするプレイヤーは多いですが、それは「対処法を知らない」からです。各タイプへの正しい対処法を理解することで、むしろ有利な状況になります。</blockquote>
+<hr>
+<h2>1-2 スタッツの把握</h2>
+<h3>① スタッツとは</h3>
+<p><strong>スタッツ（Stats）</strong>とは、プレイヤーの行動パターンを数値化したものです。主にHUD（Heads-Up Display）ツールで取得し、オンラインポーカーで活用します。ライブポーカーでは実際の観察から推測します。</p>
+<hr>
+<h3>VPIP（Voluntarily Put money In Pot）</h3>
+<p><strong>正式名称:</strong> 自発的ポット投資率</p>
+<p><strong>説明:</strong> BBとSBのポストを除き、自分からチップを投入した割合。参加率とも呼ばれる。</p>
+<div class="table-wrap"><table><thead><tr>
+<th></th>
+<th>オンライン適正値</th>
+<th>ライブ適正値</th>
+</tr></thead><tbody>
+<tr>
+<td>6MAX</td>
+<td>20〜28%</td>
+<td>25〜35%</td>
+</tr>
+<tr>
+<td>フルリング</td>
+<td>14〜20%</td>
+<td>18〜25%</td>
+</tr>
+</tbody></table></div>
+<p><strong>適正値外のエクスプロイト:</strong></p>
+<ul>
+<li><strong>高すぎる（35%+）:</strong> コールしすぎ → バリューベットを厚くする、ブラフ減らす</li>
+<li><strong>低すぎる（10%以下）:</strong> ニット → 参加時はレンジが強い。レイズ・スチールを増やす</li>
+</ul>
+<hr>
+<h3>PFR（Pre-Flop Raise）</h3>
+<p><strong>正式名称:</strong> プリフロップレイズ率</p>
+<p><strong>説明:</strong> プリフロップでレイズした割合。VPIPとセットで見ることが重要。</p>
+<div class="table-wrap"><table><thead><tr>
+<th></th>
+<th>オンライン適正値</th>
+<th>ライブ適正値</th>
+</tr></thead><tbody>
+<tr>
+<td>6MAX</td>
+<td>15〜22%</td>
+<td>12〜20%</td>
+</tr>
+<tr>
+<td>フルリング</td>
+<td>10〜16%</td>
+<td>8〜15%</td>
+</tr>
+</tbody></table></div>
+<p><strong>適正値外のエクスプロイト:</strong></p>
+<ul>
+<li><strong>PFR/VPIPの比率が低い（PFR &lt;&lt; VPIP）:</strong> パッシブプレイヤー → レイズに強い手を想定</li>
+<li><strong>PFR ≈ VPIP:</strong> アグレッシブ → コールレンジを広げてトラップ</li>
+</ul>
+<blockquote>💡 <strong>RFIとPFRの違い:</strong> RFI（Raise First In）はリンプやオープン前に誰もレイズしていない状況でのレイズ率。PFRは3ベットなども含む全レイズ率。ファーストアクションの純粋な積極性を見るにはRFIが有用。</blockquote>
+<hr>
+<h3>3Bet%</h3>
+<p><strong>正式名称:</strong> 3ベット頻度</p>
+<p><strong>説明:</strong> 相手のオープンレイズに対して3ベット（リレイズ）した割合。</p>
+<div class="table-wrap"><table><thead><tr>
+<th></th>
+<th>オンライン適正値</th>
+<th>ライブ適正値</th>
+</tr></thead><tbody>
+<tr>
+<td>6MAX</td>
+<td>7〜10%</td>
+<td>4〜7%</td>
+</tr>
+<tr>
+<td>フルリング</td>
+<td>5〜8%</td>
+<td>3〜6%</td>
+</tr>
+</tbody></table></div>
+<p><strong>適正値外のエクスプロイト:</strong></p>
+<ul>
+<li><strong>低すぎる（2%以下）:</strong> 3ベットに弱い → オープンレイズをスチール気味に増やす</li>
+<li><strong>高すぎる（15%+）:</strong> 3ベットブラフが多い → 4ベットやコールで対応</li>
+</ul>
+<hr>
+<h3>3Bet Fold%（3Bet Fold to 4Bet）</h3>
+<p><strong>正式名称:</strong> 3ベット後の4ベットに対するフォールド率</p>
+<p><strong>説明:</strong> 自分が3ベットした後、相手から4ベットされた時にフォールドする頻度。</p>
+<div class="table-wrap"><table><thead><tr>
+<th></th>
+<th>オンライン適正値</th>
+<th>ライブ適正値</th>
+</tr></thead><tbody>
+<tr>
+<td>適正</td>
+<td>50〜65%</td>
+<td>55〜70%</td>
+</tr>
+</tbody></table></div>
+<p><strong>適正値外のエクスプロイト:</strong></p>
+<ul>
+<li><strong>高すぎる（75%+）:</strong> 3ベット後の4ベットに弱い → 4ベットブラフを増やす</li>
+<li><strong>低すぎる（35%以下）:</strong> 4ベットをコール/5ベットしてくる → 4ベットはバリューのみ</li>
+</ul>
+<hr>
+<h3>WTSD（Went To ShowDown）</h3>
+<p><strong>正式名称:</strong> ショーダウン到達率</p>
+<p><strong>説明:</strong> フロップ後にショーダウンまで進んだ頻度。コール傾向の指標。</p>
+<div class="table-wrap"><table><thead><tr>
+<th></th>
+<th>オンライン適正値</th>
+<th>ライブ適正値</th>
+</tr></thead><tbody>
+<tr>
+<td>適正</td>
+<td>23〜28%</td>
+<td>25〜32%</td>
+</tr>
+</tbody></table></div>
+<p><strong>適正値外のエクスプロイト:</strong></p>
+<ul>
+<li><strong>高すぎる（35%+）:</strong> コールしすぎ → バリューで大きく打ち続ける</li>
+<li><strong>低すぎる（18%以下）:</strong> 降りすぎ → ブラフ頻度を上げる</li>
+</ul>
+<hr>
+<h3>W$SD（Won money at ShowDown）</h3>
+<p><strong>正式名称:</strong> ショーダウン勝利率</p>
+<p><strong>説明:</strong> ショーダウンに持ち込んだ際の勝利率。ハンドセレクションの質を示す。</p>
+<div class="table-wrap"><table><thead><tr>
+<th></th>
+<th>オンライン適正値</th>
+<th>ライブ適正値</th>
+</tr></thead><tbody>
+<tr>
+<td>適正</td>
+<td>50〜57%</td>
+<td>48〜55%</td>
+</tr>
+</tbody></table></div>
+<p><strong>適正値外のエクスプロイト:</strong></p>
+<ul>
+<li><strong>低すぎる（42%以下）:</strong> 弱いハンドでのショーダウンが多い → コール時のハンドが弱い証拠。ブラフやセミブラフが有効</li>
+<li><strong>高すぎる（62%+）:</strong> 強い手しかコールしない → ブラフ有効</li>
+</ul>
+<hr>
+<h2>1-3 各種スタッツの把握（図解）</h2>
+<h3>スタッツの相関関係</h3>
+<pre><code>VPIP高 + PFR低 = ルーズパッシブ（コーリングステーション）
+VPIP高 + PFR高 = ルーズアグレッシブ（LAG）
+VPIP低 + PFR低 = タイトパッシブ（ニット）
+VPIP低 + PFR高 = タイトアグレッシブ（TAG）★理想</code></pre>
+<h3>エクスプロイト戦略まとめ</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>プレイヤータイプ</th>
+<th>主な弱点</th>
+<th>エクスプロイト方法</th>
+</tr></thead><tbody>
+<tr>
+<td>ルーズパッシブ</td>
+<td>降りない</td>
+<td>バリューベット増量、ブラフ禁止</td>
+</tr>
+<tr>
+<td>タイトパッシブ</td>
+<td>ブラフに弱い</td>
+<td>スチール・Cベット増量</td>
+</tr>
+<tr>
+<td>ルーズアグレッシブ</td>
+<td>バランス崩れ</td>
+<td>強いハンドでトラップ、3ベット増量</td>
+</tr>
+<tr>
+<td>タイトアグレッシブ</td>
+<td>レンジが読みやすい</td>
+<td>広めの3ベット、慎重なコール</td>
+</tr>
+<tr>
+<td>マニアック</td>
+<td>-EVプレイ多</td>
+<td>コールレンジ広げ、バリュー集中</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>1-4 bb単位の考え方</h2>
+<h3>スタックの説明</h3>
+<p>ポーカーのスタック（持ちチップ）は常に<strong>bb（ビッグブラインド）単位</strong>で考えます。</p>
+<p>例：</p>
+<ul>
+<li>100BBスタック = 100ビッグブラインド分のチップ</li>
+<li>1/2のテーブルで20,000円 = 10,000bb（実際は10,000円が100BB）</li>
+</ul>
+<h3>bb単位の考え方</h3>
+<p>現金額でなくbb単位で考えることで：</p>
+<ul>
+<li>テーブルによってレートが変わっても同じ思考基準で判断できる</li>
+<li>「2BBオープン」「20BBスタック」など共通言語で話せる</li>
+<li>EV計算がシンプルになる</li>
+</ul>
+<h3>マネープレッシャーの払拭</h3>
+<p>「2万円のコール」と考えると感情が揺れますが、「10BB」と考えることでより合理的な判断ができます。</p>
+<blockquote>💡 ポーカーテーブルではお金ではなくポイント（BB）として考える癖をつけることで、感情ではなく数字に基づいた判断ができるようになります。</blockquote>
+<hr>
+<h2>1-5 補足</h2>
+<h3>苦手なプレイヤーへの対処</h3>
+<p>参加率が高い（ルーズな）プレイヤーやアグレッションが高いプレイヤーに苦手意識を持つプレイヤーは多くいます。しかしこれは<strong>対処法を知らないから</strong>です。</p>
+<p><strong>ルーズなプレイヤーへの対処:</strong></p>
+<ul>
+<li>焦らずバリューハンドを待つ</li>
+<li>強いハンドで大きくベット</li>
+<li>ブラフを打たない</li>
+</ul>
+<p><strong>アグレッシブなプレイヤーへの対処:</strong></p>
+<ul>
+<li>強いハンドでコール・チェックレイズを活用</li>
+<li>相手のブラフ頻度を見極める</li>
+<li>感情的にならず、数字で判断する</li>
+</ul>
+<blockquote>💡 <strong>補足（想定外のハンドをショーされた時）:</strong> 相手がレンジ外の弱いハンドでプレイしていたことが分かったとき、それは<strong>チャンス</strong>です。相手が−EVなプレイをしているということは、長期的にあなたの利益が向上することを意味します。相手の「ミス」に動揺せず、正しいプレイを続けましょう。</blockquote>
+<hr>
+<div class="summary-card">
+<h2>この章のまとめ</h2>
+<p><strong>内容の要約</strong></p>
+<ul>
+<li>プレイヤーは5つのタイプ（LP、TP、LAG、TAG、マニアック）に分類できる</li>
+<li>各タイプに応じたエクスプロイト戦略がある</li>
+<li>スタッツ（VPIP、PFR、3Bet%など）で相手の傾向を数値化できる</li>
+</ul>
+<p><strong>応用</strong></p>
+<ul>
+<li>ライブではHUDが使えないため、行動パターンや口癖・テーブルでの態度から推測する</li>
+<li>1〜2回の観察でタイプを決めつけず、常に情報を更新する</li>
+</ul>
+<p><strong>注意点</strong></p>
+<ul>
+<li>同じプレイヤーでも状況やスタックによってプレイスタイルが変わる</li>
+<li>スタッツはサンプル数が少ないと信頼性が低い（最低100ハンド以上）</li>
+</ul>
+</div>
+<div class="viz-card"><h2>プレイヤータイプ別 VPIP / PFR</h2><canvas id="statsRadar"></canvas></div></div></article>
+<article class="chapter-card" id="ch2" data-chapter="ch2"><div class="lock-panel" data-lock-panel="ch2"></div><div class="chapter-admin" data-admin-controls="ch2"><button data-lock="ch2">ロック</button><button data-unlock="ch2">解除</button><input type="datetime-local" data-time="ch2"><button data-timed="ch2">時間ロック</button></div><div class="content-protected"><h1>2: オッズとアウツの計算</h1>
+<hr>
+<h2>2-1 オッズとは</h2>
+<h3>オッズの説明</h3>
+<p><strong>オッズ</strong>とは、ある事象が起こる「比率」を表す指標です。ポーカーでは主に<strong>ポットオッズ</strong>として使用されます。</p>
+<ul>
+<li><strong>ポットオッズ:</strong> コールに必要な額と、ポットの比率</li>
+<li>これを勝率（エクイティ）と比較することで、コールが得かどうかを判断できます</li>
+</ul>
+<h3>オッズの重要性</h3>
+<p>ポーカーは<strong>長期的な期待値（EV）のゲーム</strong>です。</p>
+<ul>
+<li>1回1回の結果ではなく、同じ状況を1000回繰り返したときの平均利益を考える</li>
+<li>ポットオッズより勝率が高ければコールは長期的にプラス</li>
+<li>ポットオッズより勝率が低ければコールは長期的にマイナス</li>
+</ul>
+<blockquote>💡 「今回勝てるか」ではなく「長期的に得か」で判断するのがポーカーの本質です。</blockquote>
+<hr>
+<h2>2-2 アウツの説明</h2>
+<h3>アウツとは</h3>
+<p><strong>アウツ（Outs）</strong>とは、次のカードが来ることで自分のハンドが改善して勝てるようになる<strong>残りデッキのカード枚数</strong>です。</p>
+<h3>アウツの例</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>ドローの種類</th>
+<th>アウツ数</th>
+<th>説明</th>
+</tr></thead><tbody>
+<tr>
+<td>フラッシュドロー（スーテッドコネクター）</td>
+<td>9枚</td>
+<td>同スートのカード13枚 − 手札2枚 − ボード2枚 = 9枚</td>
+</tr>
+<tr>
+<td>両端ストレートドロー（OESD）</td>
+<td>8枚</td>
+<td>両方向&#215;4枚 = 8枚</td>
+</tr>
+<tr>
+<td>ガットショットストレートドロー</td>
+<td>4枚</td>
+<td>中間1枚&#215;4 = 4枚</td>
+</tr>
+<tr>
+<td>オーバーカード（2枚）</td>
+<td>6枚</td>
+<td>各3枚&#215;2 = 6枚</td>
+</tr>
+<tr>
+<td>セットからフルハウス</td>
+<td>7枚</td>
+<td>同ランク2枚 + ボードペアのカード5枚</td>
+</tr>
+</tbody></table></div>
+<p><strong>フラッシュ + ストレートドロー（コンボドロー）:</strong> 最大15アウツ</p>
+<h3>2・4ルール（アウツから勝率の概算）</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>状況</th>
+<th>計算方法</th>
+</tr></thead><tbody>
+<tr>
+<td>フロップ時点（カード2枚残り）</td>
+<td>アウツ &#215; 4 ≈ 勝率(%)</td>
+</tr>
+<tr>
+<td>ターン時点（カード1枚残り）</td>
+<td>アウツ &#215; 2 ≈ 勝率(%)</td>
+</tr>
+</tbody></table></div>
+<p><strong>例:</strong></p>
+<ul>
+<li>フラッシュドロー（9アウツ）のフロップ時点 → 9 &#215; 4 = <strong>約36%</strong></li>
+<li>ガットショット（4アウツ）のターン時点 → 4 &#215; 2 = <strong>約8%</strong></li>
+</ul>
+<hr>
+<h2>2-3 ポットオッズの計算式</h2>
+<h3>計算式</h3>
+<pre><code>ポットオッズ(%) = コール額 &#247; (現在のポット + コール額) &#215; 100</code></pre>
+<p>これを自分のエクイティ（勝率）と比較します：</p>
+<ul>
+<li><strong>エクイティ &gt; ポットオッズ</strong> → コール有利（+EV）</li>
+<li><strong>エクイティ &lt; ポットオッズ</strong> → フォールド有利（−EV）</li>
+</ul>
+<h3>例題①</h3>
+<p><strong>状況:</strong> ポット = 100BB、相手がポットの50%（50BB）をベット</p>
+<pre><code>ポットオッズ = 50 &#247; (100 + 50) &#215; 100 = 50 &#247; 150 &#215; 100 ≈ 33%</code></pre>
+<p>→ 自分の勝率（エクイティ）が <strong>33%以上</strong> なら コールが有利</p>
+<p>例：フラッシュドロー（約36%）→ コール有利 ✅</p>
+<p>例：ガットショット（フロップ：約16%）→ コール不利 ❌</p>
+<hr>
+<h3>例題②</h3>
+<p><strong>状況:</strong> ポット = 60BB、相手がポット全額（60BB）のポットベット</p>
+<pre><code>ポットオッズ = 60 &#247; (60 + 60) &#215; 100 = 60 &#247; 120 &#215; 100 = 50%</code></pre>
+<p>→ 自分の勝率が <strong>50%以上</strong> でないとコールは不利</p>
+<p>例：コンボドロー（15アウツ、フロップ：約60%）→ コール有利 ✅</p>
+<p>例：フラッシュドロー単独（約36%）→ コール不利 ❌（ただしインプライドオッズ考慮要）</p>
+<hr>
+<h2>2-4 インプライドオッズ</h2>
+<h3>インプライドオッズとは</h3>
+<p><strong>インプライドオッズ（Implied Odds）</strong>とは、今の手札が改善した場合に<strong>将来得られるであろう追加の利益</strong>を考慮したオッズです。</p>
+<p>現在のポットオッズだけでは採算が合わない場合でも、ドローが完成した際に相手からさらにチップを取れる見込みがあれば、コールが正当化される場合があります。</p>
+<h3>インプライドオッズの計算</h3>
+<pre><code>実質勝率 = コール額 &#247; (現在のポット + コール額 + 将来の期待利益) &#215; 100</code></pre>
+<h3>インプライドオッズが高い状況</h3>
+<ul>
+<li>相手がルーズパッシブ（コーリングステーション）でドロー完成後も多く払ってくれる</li>
+<li>スタックが深い（ディープスタック）</li>
+<li>相手が気づきにくいナッツドロー（ナッツフラッシュドロー等）</li>
+</ul>
+<h3>インプライドオッズが低い状況</h3>
+<ul>
+<li>相手がタイトで完成後にすぐフォールドする</li>
+<li>ドローが完成してもナッツでない（負けるリスクがある）</li>
+<li>スタックが浅い（ショートスタック）</li>
+</ul>
+<blockquote>💡 <strong>補足:</strong> インプライドオッズはあくまで「期待値の見込み」です。過大評価は禁物。相手のプレイタイプを考慮した現実的な見積もりを心がけましょう。</blockquote>
+<hr>
+<div class="summary-card">
+<h2>この章のまとめ</h2>
+<p><strong>内容の要約</strong></p>
+<ul>
+<li>アウツ：自分を改善するカードの枚数</li>
+<li>2・4ルールでアウツから勝率を概算できる</li>
+<li>ポットオッズと勝率を比較してコール/フォールドを判断</li>
+<li>インプライドオッズで将来の利益も考慮する</li>
+</ul>
+<p><strong>応用</strong></p>
+<ul>
+<li>実戦でフロップを見た瞬間にアウツを数える練習をする</li>
+<li>相手のベットサイズからポットオッズを瞬時に計算できるよう習慣化する</li>
+</ul>
+<p><strong>注意点</strong></p>
+<ul>
+<li>アウツが全てクリーン（純粋に勝てる）とは限らない（逆に相手の役が強くなるカードと重複する場合あり）</li>
+<li>インプライドオッズを楽観的に見積もりすぎない</li>
+</ul>
+</div>
+<div class="viz-card"><h2>アウツ数別エクイティ</h2><canvas id="outsBar"></canvas></div></div></article>
+<article class="chapter-card" id="ch3" data-chapter="ch3"><div class="lock-panel" data-lock-panel="ch3"></div><div class="chapter-admin" data-admin-controls="ch3"><button data-lock="ch3">ロック</button><button data-unlock="ch3">解除</button><input type="datetime-local" data-time="ch3"><button data-timed="ch3">時間ロック</button></div><div class="content-protected"><h1>3: プリフロップレンジ</h1>
+<hr>
+<h2>3-1 プリフロップレンジとは</h2>
+<h3>レンジで考えることの重要性</h3>
+<p>ポーカーでは「相手の手は何か」ではなく「相手のハンドはどんな<strong>グループ（レンジ）</strong>か」を考えます。</p>
+<p>プリフロップのアクションによって、相手のレンジが決まります：</p>
+<ul>
+<li>オープンレイズ → 相手のレンジを絞れる</li>
+<li>コール → ある程度広いレンジ</li>
+<li>3ベット → 強いバリューかブラフ</li>
+</ul>
+<p><strong>プリフロップで正しいレンジ選択をすることで、フロップ以降の判断精度が上がります。</strong></p>
+<h3>レイズ額を一定に保つ重要性</h3>
+<p>プリフロップのレイズ額は<strong>一定にすること</strong>が重要です。</p>
+<ul>
+<li>✅ 強い手でも弱い手でも同じサイズでオープン</li>
+<li>❌ AAだから大きくレイズ → 相手に読まれる</li>
+</ul>
+<p>一定サイズにすることで、相手は手の強さを推測しにくくなります（バランス）。</p>
+<p><strong>標準的なオープンサイズ:</strong></p>
+<div class="table-wrap"><table><thead><tr>
+<th>ポジション</th>
+<th>推奨サイズ</th>
+</tr></thead><tbody>
+<tr>
+<td>BTN, CO</td>
+<td>2〜2.5BB</td>
+</tr>
+<tr>
+<td>MP, UTG</td>
+<td>2.5〜3BB</td>
+</tr>
+<tr>
+<td>vs リンパー</td>
+<td>リンプ額 + 3BB程度</td>
+</tr>
+</tbody></table></div>
+<h3>IP（インポジション）の有利性</h3>
+<p><strong>IP（In Position）</strong>= 自分が後から行動できる状況</p>
+<ul>
+<li>相手の行動を見てから決断できる → 情報有利</li>
+<li>ポストフロップで主導権を握りやすい</li>
+<li>BTN（ボタン）が最も有利なポジション</li>
+</ul>
+<h3>IP・OOPの3Betサイズ</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>状況</th>
+<th>推奨3Betサイズ</th>
+</tr></thead><tbody>
+<tr>
+<td>IP（BTNから等）</td>
+<td>相手のレイズ額の約2.5〜3倍</td>
+</tr>
+<tr>
+<td>OOP（BB、SBから等）</td>
+<td>相手のレイズ額の約3〜4倍</td>
+</tr>
+</tbody></table></div>
+<p>OOPでは大きめにサイズアップすることで、IPアドバンテージを部分的に補います。</p>
+<hr>
+<h2>3-2 代表的なオープンレンジ</h2>
+<h3>UTG オープンレンジ（6MAX、約13%）</h3>
+<pre><code>プレミアム: AA KK QQ JJ AKs AKo
+強いハンド: TT 99 AQs AJs AQo KQs
+中程度:    88 77 ATs KJs QJs JTs
+           AJo KQo
+スーテッド: A9s A8s KTs QTs J9s T9s 98s</code></pre>
+<p><strong>特徴:</strong></p>
+<ul>
+<li>最もアーリーポジション。全員が後から行動できる</li>
+<li>タイトにプレイすることが基本</li>
+<li>コールドコールが多く来るボードでは特に注意</li>
+</ul>
+<hr>
+<h3>BTN オープンレンジ（6MAX、約40%）</h3>
+<pre><code>プレミアム: AA〜22, AKo〜A2s
+強いハンド: KJo以上, QTo以上
+中程度:    J9o, T9o, 98o（スーテッドも含む）
+スーテッド: ほぼ全スーテッドコネクター
+投機的:    K5s〜K2s, Q7s〜Q2s, J7s以上</code></pre>
+<p><strong>特徴:</strong></p>
+<ul>
+<li>最も広いオープンレンジ</li>
+<li>SBとBBのみを相手にすればよい</li>
+<li>バリューとブラフのバランスを取りながら積極的に</li>
+</ul>
+<hr>
+<h3>BB ディフェンスレンジ（vs UTG オープン）</h3>
+<pre><code>3ベット:  AA, KK, QQ, JJ, AKs（バリュー）
+          A5s, A4s（ブラフ3ベット）
+コール:   TT〜22, AQo, AJs, KQs, QJs,
+          JTs, T9s, 98s 等
+フォールド: 弱いオフスートハンド</code></pre>
+<p><strong>BBのディフェンス原則:</strong></p>
+<ul>
+<li>すでに1BB投資済みのためポットオッズが有利</li>
+<li>広めにディフェンスすることでスチールを防ぐ</li>
+<li>UTGのレンジは強いので3ベットはタイトに</li>
+</ul>
+<hr>
+<h2>3-3 ポジション毎のナッツアドバンテージ</h2>
+<h3>ナッツアドバンテージとは</h3>
+<p><strong>ナッツアドバンテージ</strong>とは、特定のボードでどちらのレンジに<strong>ナッツ（最強手）が多く含まれるか</strong>の差です。</p>
+<p>ナッツアドバンテージがある側：</p>
+<ul>
+<li>大きなサイズでポラライズしたベットができる</li>
+<li>相手はコールしにくい</li>
+</ul>
+<h3>代表的なボード別のアドバンテージ</h3>
+<p>#### ① Aハイ・ブロードウェイボード（例: A♠ K♥ 2♦）</p>
+<p><strong>UTGにナッツアドバンテージ</strong></p>
+<ul>
+<li>UTGのレンジ：AA, KK, AK が豊富に含まれる</li>
+<li>BBのレンジ：3ベットしていないため、AA, KK, AK がほぼない（キャップされている）</li>
+<li><strong>BBのレンジはキャップされている（後述）</strong></li>
+</ul>
+<p>→ UTGはスモールサイズの高頻度Cベットが有効</p>
+<hr>
+<p>#### ② ミドル・コネクテッドボード（例: 8♣ 7♦ 5♥）</p>
+<p><strong>BBにナッツアドバンテージ</strong></p>
+<ul>
+<li>BBのコールレンジ：スーテッドコネクター、ミドルペアが豊富</li>
+<li>UTGのレンジ：このようなボードに絡む強いコンボが少ない</li>
+</ul>
+<p>→ BBはチェックレイズやドンクベットが有効</p>
+<hr>
+<p>#### ③ ローボード（例: 5♠ 4♥ 2♦）</p>
+<p><strong>BBにナッツアドバンテージ</strong></p>
+<ul>
+<li>BBのディフェンスレンジには低いコネクターが多い</li>
+<li>UTGは低いカードをほぼオープンしない</li>
+</ul>
+<p>→ UTGはCベット頻度を下げ、チェックを多用する</p>
+<hr>
+<h3>レンジ表からわかること</h3>
+<ul>
+<li>レンジが強い側（アドバンテージ側）は大きなサイズでアグレッシブに打てる</li>
+<li>レンジが弱い側（キャップされている側）は強いベットに対して降りやすくなる</li>
+<li>ポジションとレンジの組み合わせでボード毎の戦略が決まる</li>
+</ul>
+<blockquote>💡 <strong>補足（キャップ/Capped）:</strong> 「キャップされている」とは、相手のレンジに<strong>最強クラスのハンドがほぼ含まれない</strong>状態を指します。例えば、プリフロップでコールのみしたBBのレンジには、通常AAやAKが含まれません（3ベットするため）。このため、高いボードではBBは「キャップ」されており、UTGやオープンレイザーが有利になります。</blockquote>
+<blockquote>💡 <strong>補足（想定外のハンドをショーされた時）:</strong> 相手がレンジ外のハンド（例：BBからコールした相手がAAを持っていた）を見せてくれた場合、それは次回以降のエクスプロイトのヒントです。相手のレンジ認識を更新し、次の機会に活かしましょう。相手のミスプレイは長期的にあなたの利益になります。</blockquote>
+<hr>
+<div class="summary-card">
+<h2>この章のまとめ</h2>
+<p><strong>内容の要約</strong></p>
+<ul>
+<li>プリフロップレンジはポジションに応じて調整する</li>
+<li>BTNが最も広く、UTGが最も狭い</li>
+<li>オープンサイズは一定に保ち、手の強さを隠す</li>
+<li>ナッツアドバンテージで有利なレンジ側が積極的に打てる</li>
+</ul>
+<p><strong>応用</strong></p>
+<ul>
+<li>GTO Wizardで各ポジションのレンジを確認・暗記する</li>
+<li>ライブでは大まかなカテゴリ（プレミアム/強い/投機的）で判断する</li>
+</ul>
+<p><strong>注意点</strong></p>
+<ul>
+<li>レンジはGTOの理想値。実際のプレイヤーに応じてエクスプロイト調整が必要</li>
+<li>ポジションがない（OOP）場合、特に慎重なレンジ選択が重要</li>
+</ul>
+</div>
+</div></article>
+<article class="chapter-card" id="ch4" data-chapter="ch4"><div class="lock-panel" data-lock-panel="ch4"></div><div class="chapter-admin" data-admin-controls="ch4"><button data-lock="ch4">ロック</button><button data-unlock="ch4">解除</button><input type="datetime-local" data-time="ch4"><button data-timed="ch4">時間ロック</button></div><div class="content-protected"><h1>4: アクションの意図 ベット戦略と戦術</h1>
+<hr>
+<h2>4-1 ベット戦略</h2>
+<h3>ベット戦略でアグレッションを確保する</h3>
+<p>ベットすることには明確な目的があります：</p>
+<ul>
+<li><strong>フォールドエクイティを得る</strong> → ブラフが通る可能性</li>
+<li><strong>ポットを大きくする</strong> → バリューハンドで利益最大化</li>
+<li><strong>主導権を握る</strong> → 情報を得ながら相手に選択を強いる</li>
+</ul>
+<p>アグレッション（積極性）はポーカーで利益を上げる核心です。</p>
+<h3>ベット過多への注意点</h3>
+<p>一方で、ベットしすぎることには大きなリスクがあります：</p>
+<ul>
+<li>弱いハンドでのベット → 相手の強いハンドにコールされる</li>
+<li>バランスが崩れる → 相手にレンジが読まれる</li>
+<li>チップを無駄に失う</li>
+</ul>
+<h3>チェックとコールの重要性</h3>
+<ul>
+<li><strong>チェック:</strong> 相手に安く後から情報を得させず、自分のレンジを守る</li>
+<li><strong>コール:</strong> 相手のブラフを捕まえる。弱いハンドでのコールはショーダウンバリューを活かす</li>
+</ul>
+<blockquote>💡 <strong>フォールドすることの勇気:</strong> ポーカーで「降りる」ことは弱さではなく、<strong>チップを守る賢い選択</strong>です。降りない相手に対してブラフを打つのは厳禁（ブラフが通らない）。強い相手のベットに不明確なハンドでコールするよりも、フォールドしてチップを温存し、次のチャンスに備えることが長期的に正しいプレイです。</blockquote>
+<hr>
+<h2>4-2 アクション語句・意味</h2>
+<h3>Cベット（コンティニュエーションベット）</h3>
+<p><strong>意味:</strong> プリフロップでアグレッサー（レイザー）がフロップでもベットすること</p>
+<p>「継続ベット」とも呼ばれ、主導権を維持するための基本的なアクション。</p>
+<hr>
+<h3>ドンクベット</h3>
+<p><strong>意味:</strong> プリフロップで相手がアグレッサーの場合、OOP側（先に行動する側）がリードしてベットすること</p>
+<p>通常、Cベットを待たずに打つため「ドンク（愚かな）ベット」と呼ばれるが、実際は高度な戦術。</p>
+<hr>
+<h3>チェックレイズ</h3>
+<p><strong>意味:</strong> 一度チェックした後、相手のベットに対してレイズすること</p>
+<p>OOPのプレイヤーにとって有力な武器。</p>
+<hr>
+<h3>スクイーズ</h3>
+<p><strong>意味:</strong> 1人のレイザーと1人以上のコーラーがいる状況で3ベットすること</p>
+<p>コーラーが間に挟まれているため、コールしにくい状況を作れる。</p>
+<hr>
+<h3>アイソレート（Iso-Raise）</h3>
+<p><strong>意味:</strong> リンパーがいる状況でレイズし、ヘッズアップ（1対1）の状況を作ること</p>
+<p>弱いハンドでリンプしているプレイヤーを相手に有利な状況でプレイする。</p>
+<hr>
+<h3>プローブベット</h3>
+<p><strong>意味:</strong> ターン以降で、前のストリートでCベットを打たなかった相手（チェックした相手）に対して先にベットすること</p>
+<p>相手が弱さを示している（チェック）ため、その隙を突くベット。</p>
+<hr>
+<h3>ディレイCベット（Delayed C-Bet）</h3>
+<p><strong>意味:</strong> フロップでチェックし、ターンでベットすること</p>
+<p>フロップでの選択を意図的に遅らせることで：</p>
+<ul>
+<li>レンジを守る（強いハンドもチェックすることで読まれにくくなる）</li>
+<li>ターンカードによって有利になった場合に大きくベット</li>
+</ul>
+<hr>
+<h2>4-3 各種ベット戦略の意図と考え方</h2>
+<h3>Cベット</h3>
+<p><strong>意図:</strong> 主導権の維持、ブラフの通過、バリューの獲得</p>
+<p><strong>考え方:</strong></p>
+<ul>
+<li>ドライボード（ドローが少ない）→ スモールサイズ（25〜33%）で高頻度</li>
+<li>ウェットボード（ドローが多い）→ ラージサイズ（67〜100%）で低頻度</li>
+<li>相手がCベットに弱い（フォールドが多い）→ 頻度を上げる</li>
+</ul>
+<hr>
+<h3>ドンクベット</h3>
+<p><strong>意図:</strong> 相手のCベットを封じ、自分のレンジを守る、バリューを取る</p>
+<p><strong>考え方:</strong></p>
+<blockquote>⚠️ ドンクベットは正しく理解して使う<strong>高度な戦術</strong>です</blockquote>
+<ul>
+<li>GTOではドンクベットは基本的に少ない</li>
+<li>ナッツアドバンテージがOOP側にある特定のボードで有効</li>
+<li>使いどころを誤ると単純にチップを失う</li>
+</ul>
+<p><strong>適切な場面:</strong></p>
+<ul>
+<li>BBがCBETを打つ相手（BTN等）に対して、低いボードでナッツを持っている場合</li>
+<li>相手がポストフロップで弱い（Cベットが少ない）場合に搾取的に使う</li>
+</ul>
+<hr>
+<h3>チェックレイズ</h3>
+<p><strong>意図:</strong> ポットを大きくする（バリュー）、相手のブラフを咎める、主導権を取り戻す</p>
+<p><strong>適正値・バランス:</strong></p>
+<ul>
+<li>フロップでのチェックレイズ頻度：約10〜20%（ボードによる）</li>
+<li>バリュー：チェックレイズの約60〜70%</li>
+<li>ブラフ：チェックレイズの約30〜40%（ドロー等）</li>
+</ul>
+<blockquote>💡 チェックレイズはレンジを保護する効果もある。強いハンドのみでチェックレイズするとバランスが崩れ、エクスプロイトされる。</blockquote>
+<hr>
+<h3>スクイーズ・アイソレート</h3>
+<p><strong>意図:</strong> コーラーをレンジ外に追い出す、有利なポジションでのヘッズアップを狙う</p>
+<p><strong>考え方:</strong></p>
+<ul>
+<li>スクイーズは1人以上のコーラーがいる際のみ有効</li>
+<li>アイソレートはリンパーの弱さを搾取するアクション</li>
+<li>両者ともサイズは大きめ（ポット比で50〜80%程度）</li>
+</ul>
+<hr>
+<h3>プローブベット</h3>
+<p><strong>意図:</strong> 相手がチェックで弱さを示した後に利益を取る</p>
+<p><strong>考え方:</strong></p>
+<ul>
+<li>ターンで相手がチェックした → レンジが弱い</li>
+<li>ここでのプローブベットはフォールドエクイティが高い</li>
+<li>サイズは小〜中程度（33〜50%）でフォールドを誘う</li>
+</ul>
+<hr>
+<h2>4-4 ベットサイズの分類と考え方</h2>
+<h3>サイズ分類</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>分類</th>
+<th>ポット比</th>
+<th>使いどころ</th>
+</tr></thead><tbody>
+<tr>
+<td>小サイズ</td>
+<td>25〜33%</td>
+<td>ドライボード、薄いバリュー、レンジCBET</td>
+</tr>
+<tr>
+<td>中サイズ</td>
+<td>50〜67%</td>
+<td>標準的なバリュー・ブラフ</td>
+</tr>
+<tr>
+<td>大サイズ</td>
+<td>75〜100%</td>
+<td>ウェットボード、ポラライズベット</td>
+</tr>
+<tr>
+<td>極大サイズ（オーバーベット）</td>
+<td>120%+</td>
+<td>ナッツかエアのポラライズ。ターン・リバーで使用</td>
+</tr>
+</tbody></table></div>
+<h3>ブラフベットとバリューベットのサイズの均一化</h3>
+<p><strong>重要な原則:</strong> 同じスポットではブラフとバリューで<strong>同じサイズ</strong>を使う</p>
+<ul>
+<li>✅ 100BBのポットに対して、バリューもブラフも50BBのベット</li>
+<li>❌ バリューは大きく、ブラフは小さくベット → サイズで読まれる</li>
+</ul>
+<p>同じサイズを使うことで相手は手の強さをサイズから判断できなくなります（バランス）。</p>
+<blockquote>💡 ベットサイズは戦略であり、手の強さを隠すツールです。常にバランスを意識しましょう。</blockquote>
+<hr>
+<div class="summary-card">
+<h2>この章のまとめ</h2>
+<p><strong>内容の要約</strong></p>
+<ul>
+<li>ベットには常に明確な意図（バリュー・ブラフ・プロテクション等）が必要</li>
+<li>各アクション（Cベット、ドンクベット、チェックレイズ等）には固有の意図がある</li>
+<li>フォールドする勇気もポーカーの重要なスキル</li>
+<li>ブラフとバリューで同じサイズを使うことでバランスを保つ</li>
+</ul>
+<p><strong>応用</strong></p>
+<ul>
+<li>実戦でアクション前に「このベットの目的は何か」を必ず確認する</li>
+<li>相手の傾向に合わせてサイズを調整する（エクスプロイト）</li>
+</ul>
+<p><strong>注意点</strong></p>
+<ul>
+<li>ドンクベットは高度な戦術のため、基礎が固まるまで控える</li>
+<li>ベット過多にならないよう、チェックの選択肢を常に意識する</li>
+</ul>
+</div>
+</div></article>
+<article class="chapter-card" id="ch5" data-chapter="ch5"><div class="lock-panel" data-lock-panel="ch5"></div><div class="chapter-admin" data-admin-controls="ch5"><button data-lock="ch5">ロック</button><button data-unlock="ch5">解除</button><input type="datetime-local" data-time="ch5"><button data-timed="ch5">時間ロック</button></div><div class="content-protected"><h1>5: GTOとEXPLOIT、集合分析とは</h1>
+<hr>
+<h2>4-1 GTOとは（Game Theory Optimal）</h2>
+<h3>GTOの説明</h3>
+<p><strong>GTO（ゲーム理論上の最適解）</strong>とは、「相手がどんな戦略をとっても、自分が長期的に損失を出さない（搾取されない）完璧な防御戦略」です。</p>
+<h3>均衡戦略の説明</h3>
+<p><strong>均衡戦略（ナッシュ均衡）</strong>とは、双方がGTOプレイをした場合、どちらも一方的に戦略を変えても得しない状態のことです。</p>
+<p><strong>じゃんけんの均衡解の例:</strong></p>
+<div class="table-wrap"><table><thead><tr>
+<th>自分の戦略</th>
+<th>相手の最適反応</th>
+</tr></thead><tbody>
+<tr>
+<td>グーを多く出す</td>
+<td>チョキを減らしてパーを増やす</td>
+</tr>
+<tr>
+<td>パーを多く出す</td>
+<td>グーを減らしてチョキを増やす</td>
+</tr>
+<tr>
+<td>1/3ずつランダム</td>
+<td>どれを出しても勝率50%（均衡）</td>
+</tr>
+</tbody></table></div>
+<p>→ グー・チョキ・パーを<strong>1/3ずつランダムに出し続ける</strong>ことが均衡戦略（GTO）</p>
+<p>ポーカーでも同様に、バリューとブラフを<strong>最適な比率でランダムに混ぜる</strong>ことがGTOです。</p>
+<hr>
+<h2>4-2 AKQゲームの説明</h2>
+<h3>AKQゲームとは</h3>
+<p>ポーカーの本質を理解するためのシンプルな簡略化ゲームです。</p>
+<p><strong>ルール:</strong></p>
+<ul>
+<li>カードはA（最強）、K（中間）、Q（最弱）の3枚のみ</li>
+<li>各プレイヤー1枚ずつ配り、ベットかチェックを選ぶ</li>
+<li>ショーダウンでは数字が大きい方が勝つ</li>
+</ul>
+<p><strong>プレイヤー1の最適戦略:</strong></p>
+<ul>
+<li>A（強いハンド）→ バリューベット</li>
+<li>Q（弱いハンド）→ ブラフベット</li>
+<li>K（中間ハンド）→ チェック（マージナル）</li>
+</ul>
+<p><strong>重要な洞察:</strong></p>
+<ul>
+<li>プレイヤー1がAのみでベットすると → プレイヤー2はいつでもフォールドして+EV</li>
+<li>プレイヤー1がQでもベットすると（ブラフ）→ プレイヤー2はコールが必要になる</li>
+<li><strong>バリューとブラフを混ぜることで相手を均衡させる（どちらも同じEVにする）</strong></li>
+</ul>
+<h3>AKQ64ゲームへの発展</h3>
+<p>AKQゲームをより現実的にしたモデル。ブラフの割合、コールすべき頻度の計算など、実際のポーカーのポット比計算と連動します。</p>
+<p>例：ポットベット（100%）の場合：</p>
+<ul>
+<li>ブラフの割合 = 1/3（バリュー2：ブラフ1）</li>
+<li>コール頻度 = 1/2（コールされたとき収支ゼロになる閾値）</li>
+</ul>
+<hr>
+<h2>4-3 Exploitとは</h2>
+<h3>Exploit戦略の説明</h3>
+<p><strong>Exploit（搾取）戦略</strong>とは、GTOから意図的に逸脱し、相手のミスや傾向を最大限に活用する戦略です。</p>
+<h3>Exploit戦略の例</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>相手の傾向</th>
+<th>Exploit戦略</th>
+</tr></thead><tbody>
+<tr>
+<td>フォールドしすぎ（Fold%高）</td>
+<td>ブラフ頻度を上げる</td>
+</tr>
+<tr>
+<td>コールしすぎ（Calling Station）</td>
+<td>ブラフを減らし、バリューを厚くする</td>
+</tr>
+<tr>
+<td>3ベットしすぎ</td>
+<td>4ベットかワイドコールで対応</td>
+</tr>
+<tr>
+<td>3ベット後フォールドしすぎ</td>
+<td>ライトな4ベットブラフ</td>
+</tr>
+</tbody></table></div>
+<h3>Exploit戦略のメリット・デメリット</h3>
+<div class="table-wrap"><table><thead><tr>
+<th></th>
+<th>メリット</th>
+<th>デメリット</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Exploit</strong></td>
+<td>利益最大化が可能</td>
+<td>逆にExploitされるリスク</td>
+</tr>
+<tr>
+<td><strong>GTO</strong></td>
+<td>搾取されない安定性</td>
+<td>相手が正しくプレイする前提</td>
+</tr>
+</tbody></table></div>
+<blockquote>💡 <strong>使い分け:</strong> 相手が明らかにミスをしているならExploit。相手が強い場合はGTOベースにする。実際には「GTO + 一部Exploit調整」が現実的。</blockquote>
+<hr>
+<h2>4-4 Exploit戦略（ノード編）</h2>
+<h3>ノード戦略の説明</h3>
+<p><strong>ノード（Node）</strong>とは、ゲームツリーにおける意思決定の分岐点です。</p>
+<p>PioSolverやGTO Wizardなどのソルバーでは、通常「お互いがGTOでプレイする」前提で計算しますが、<strong>ノードロック（NodeLock）</strong>機能を使うと特定の分岐での相手の行動を固定（ロック）できます。</p>
+<h3>ノード機能を使ったGTO上の理解</h3>
+<p><strong>例:</strong> 「このターンで相手は絶対フォールドしない（コール率100%）」とノードロックして計算</p>
+<p>→ ソルバーは「その条件での最大Exploit戦略」を導き出す</p>
+<p><strong>使い方のプロセス:</strong></p>
+<p>1. GTOの均衡戦略を理解する</p>
+<p>2. 実際のプレイヤーの傾向（偏り）を観察する</p>
+<p>3. その傾向をノードロックで設定して最大Exploitを調べる</p>
+<p>4. 実戦に適用する</p>
+<blockquote>💡 GTOを基準として理解することで、「どこからExploitするか」が明確になります。GTOを知らないExploitは根拠のない勘に過ぎません。</blockquote>
+<hr>
+<h2>5-1 集合分析とは</h2>
+<h3>集合分析の説明</h3>
+<p><strong>集合分析（Aggregated Analysis）</strong>とは、特定の1つのボード（フロップ）を分析するのではなく、<strong>あり得る全てのフロップ（1,755種類）を統計的にまとめて傾向を把握する手法</strong>です。</p>
+<h3>3つのアドバンテージ指標</h3>
+<p>#### エクイティアドバンテージ</p>
+<p>レンジ全体の平均勝率（エクイティ）が高い側が有利。</p>
+<p>#### ナッツアドバンテージ</p>
+<p>ナッツ（最強手のコンボ）を多く持つ側が有利。ナッツが多いほど、大きなベットが正当化される。</p>
+<p>#### レンジアドバンテージ</p>
+<p>エクイティアドバンテージとナッツアドバンテージを総合した概念。</p>
+<h3>集合分析の使い方</h3>
+<p>1. ポジションマッチアップを決める（例：BTN vs BB）</p>
+<p>2. そのマッチアップで統計的に有利なボードテクスチャを把握する</p>
+<p>3. 特定のフロップをそのカテゴリに当てはめて戦略を決める</p>
+<h3>集合分析を理解することでのExploit・ノード</h3>
+<ul>
+<li>レンジアドバンテージがある側 → 高頻度・スモールサイズCBET</li>
+<li>レンジアドバンテージがない側 → 低頻度・ポラライズサイズCBET</li>
+<li>相手がこのルールを理解していないなら、有利側でより積極的にExploit可能</li>
+</ul>
+<hr>
+<h2>5-2 代表的集合分析スポット</h2>
+<h3>UTG vs BTN（SRP: シングルレイズドポット）</h3>
+<p><strong>状況:</strong> UTGオープン → BTNコール</p>
+<p>#### ① Aハイ・ブロードウェイボード（例: A♠ K♦ 7♣）</p>
+<p><strong>UTGに有利</strong></p>
+<ul>
+<li>理由：UTGのレンジにはAA, KK, AK等が豊富。BTNのコールレンジにはこれらが少ない</li>
+<li>UTGの戦略：スモールサイズ（25〜33%）の高頻度Cベット</li>
+</ul>
+<p>#### ② ミドル・コネクテッドボード（例: 9♣ 8♦ 6♥）</p>
+<p><strong>BTNに有利</strong></p>
+<ul>
+<li>理由：BTNのコールレンジにスーテッドコネクターが多く含まれる</li>
+<li>UTGの戦略：Cベット頻度を下げ、打つ場合は大きなサイズ（67%+）</li>
+</ul>
+<p>#### ③ ローボード（例: 4♠ 3♦ 2♣）</p>
+<p><strong>BTNにやや有利</strong></p>
+<ul>
+<li>理由：UTGはこのようなボードに絡むハンドが少ない</li>
+<li>UTGの戦略：チェック多用、バリューは大きくベット</li>
+</ul>
+<hr>
+<h3>UTG vs BB（SRP）</h3>
+<p><strong>状況:</strong> UTGオープン → BBコール</p>
+<p>#### ① Kハイ・ペアボード（例: K♠ K♦ 5♥）</p>
+<p><strong>UTGに有利</strong></p>
+<ul>
+<li>理由：UTGのレンジにKKが含まれる。BBは3ベットしていないためほぼKKなし</li>
+<li>UTGの戦略：高頻度スモールCBET</li>
+</ul>
+<p>#### ② ローウェットボード（例: 7♣ 6♦ 5♥）</p>
+<p><strong>BBに有利</strong></p>
+<ul>
+<li>理由：BBのディフェンスレンジには低いコネクターが豊富</li>
+<li>UTGの戦略：チェックを多く使い、強いハンドのみポラライズベット</li>
+</ul>
+<p>#### ③ フラッシュドローボード（例: A♥ J♥ 5♥）</p>
+<p><strong>UTGに有利（ナッツフラッシュアドバンテージ）</strong></p>
+<ul>
+<li>理由：UTGのレンジにはナッツフラッシュに絡むA♥ハンドが多い</li>
+<li>UTGの戦略：ラージサイズでポラライズ</li>
+</ul>
+<hr>
+<h3>BTN vs BB（SRP）</h3>
+<p><strong>状況:</strong> BTNオープン → BBコール</p>
+<p>#### ① Aハイ・ドライボード（例: A♣ 7♦ 2♠）</p>
+<p><strong>BTNに有利</strong></p>
+<ul>
+<li>理由：BTNのオープンレンジにはAが豊富。BBのレンジはAAなしのキャップ状態</li>
+<li>BTNの戦略：スモールサイズ高頻度Cベット（ほぼレンジCBET）</li>
+</ul>
+<p>#### ② ミドルペアボード（例: 8♣ 7♠ 6♦）</p>
+<p><strong>BBにやや有利</strong></p>
+<ul>
+<li>理由：BBのコールレンジにミドルコネクターが多く、このボードに絡む</li>
+<li>BTNの戦略：低〜中頻度のCベット、ポラライズしたサイズで打つ</li>
+</ul>
+<p>#### ③ ハイカードドライボード（例: K♠ Q♦ 3♣）</p>
+<p><strong>BTNに有利</strong></p>
+<ul>
+<li>理由：BTNのレンジにKQ等のブロードウェイが豊富</li>
+<li>BTNの戦略：スモールサイズ高頻度Cベット</li>
+</ul>
+<hr>
+<h2>5-3 レンジ全体での把握とハンド単体でのアクションの考え</h2>
+<h3>マクロ（レンジ全体）からミクロ（ハンド単体）へ</h3>
+<p>集合分析はレンジ全体の傾向を示しますが、実際のプレイはハンド単体での判断です。</p>
+<p><strong>プロセス:</strong></p>
+<pre><code>① 集合分析でレンジ全体の有利・不利を把握（マクロ）
+    ↓
+② 自分の具体的なハンドがそのレンジのどの位置にあるか確認
+    ↓
+③ バリュー・ブラフ・マージナルに分類
+    ↓
+④ アクションを決定（ベット/チェック/コール等）</code></pre>
+<p><strong>例：BTN vs BB、A♣ 7♦ 2♠ ボード</strong></p>
+<ul>
+<li>レンジ全体：BTNに有利 → 高頻度スモールCBET</li>
+<li>自分のハンドがAJ（トップペア）→ バリューとしてCBET</li>
+<li>自分のハンドが9♣ 8♣ → ドロー。Cベットかチェックか判断</li>
+<li>自分のハンドがK♦ Q♦ → オーバーカード。低頻度でブラフCBET or チェック</li>
+</ul>
+<hr>
+<div class="summary-card">
+<h2>この章のまとめ</h2>
+<p><strong>内容の要約</strong></p>
+<ul>
+<li>GTOは搾取されない均衡戦略（じゃんけんの1/3ずつが例）</li>
+<li>AKQゲームでバリューとブラフのバランスの重要性を理解できる</li>
+<li>Exploitは相手のミスを最大化する戦略（メリット・デメリットあり）</li>
+<li>集合分析はレンジ全体の傾向を把握するマクロ分析</li>
+</ul>
+<p><strong>応用</strong></p>
+<ul>
+<li>GTO Wizardで各スポットのレンジアドバンテージを確認する習慣をつける</li>
+<li>実戦でポジションとボードテクスチャから「どちらが有利か」を即座に判断できるように練習する</li>
+</ul>
+<p><strong>注意点</strong></p>
+<ul>
+<li>GTOはゴールではなくベースライン。相手に応じてExploitに移行する</li>
+<li>集合分析の傾向は統計的なもの。特定のハンドでは逆になる場合がある</li>
+</ul>
+</div>
+<div class="viz-card narrow-viz"><h2>GTO / Exploit バランス</h2><canvas id="gtoDoughnut"></canvas></div></div></article>
+<article class="chapter-card" id="ch6" data-chapter="ch6"><div class="lock-panel" data-lock-panel="ch6"></div><div class="chapter-admin" data-admin-controls="ch6"><button data-lock="ch6">ロック</button><button data-unlock="ch6">解除</button><input type="datetime-local" data-time="ch6"><button data-timed="ch6">時間ロック</button></div><div class="content-protected"><h1>6: ブロッカー</h1>
+<hr>
+<h2>6-1 ブロッカーとは</h2>
+<h3>ブロッカーの概念と説明</h3>
+<p><strong>ブロッカー</strong>とは、自分の手札にあるカードが相手のハンドの可能性を制限する効果のことです。</p>
+<p>自分がそのカードを持っている = 相手がそのカードを持てない</p>
+<p><strong>代表的なブロッカーの例:</strong></p>
+<div class="table-wrap"><table><thead><tr>
+<th>持っているカード</th>
+<th>ブロックされるハンド</th>
+</tr></thead><tbody>
+<tr>
+<td>A</td>
+<td>相手のAA、AK、A♥ フラッシュ</td>
+</tr>
+<tr>
+<td>K</td>
+<td>相手のKK、KQs</td>
+</tr>
+<tr>
+<td>ナッツフラッシュカード（例：A♥）</td>
+<td>相手のナッツフラッシュ</td>
+</tr>
+<tr>
+<td>ストレートの構成カード</td>
+<td>相手のナッツストレート</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h3>補足：コンボ数の計算方法</h3>
+<p><strong>コンボ（Combo）</strong>とは、特定のハンドが構成される組み合わせの数です。</p>
+<div class="table-wrap"><table><thead><tr>
+<th>ハンドタイプ</th>
+<th>コンボ数</th>
+<th>計算方法</th>
+</tr></thead><tbody>
+<tr>
+<td>ポケットペア（例：AA）</td>
+<td>6コンボ</td>
+<td>C(4,2) = 4&#215;3&#247;2 = 6</td>
+</tr>
+<tr>
+<td>スーテッドハンド（例：AKs）</td>
+<td>4コンボ</td>
+<td>同じスートの組み合わせ4通り</td>
+</tr>
+<tr>
+<td>オフスートハンド（例：AKo）</td>
+<td>12コンボ</td>
+<td>4&#215;4 - 4（スーテッド分）= 12</td>
+</tr>
+</tbody></table></div>
+<p><strong>ブロッカー効果:</strong></p>
+<ul>
+<li>自分がAを1枚持っている場合、相手のAAは <strong>6→3コンボ</strong> に半減</li>
+<li>自分がA♥を持っている場合、相手のナッツフラッシュ（A♥X♥）は <strong>0コンボ</strong></li>
+</ul>
+<p>コンボ数を意識することで、相手のレンジの強さをより正確に把握できます。</p>
+<hr>
+<h2>6-2 ブロッカーの重要性と非重要性</h2>
+<h3>ブロッカーが重要な状況</h3>
+<p>1. <strong>ブラフ選択時</strong></p>
+<ul>
+<li>ナッツブロッカーを持つハンドでブラフ → 相手のナッツが少ない → フォールドを誘いやすい</li>
+<li>例：A♥ を持つ手でナッツフラッシュボードにブラフ</li>
+</ul>
+<p>2. <strong>コール判断時</strong></p>
+<ul>
+<li>相手のバリューをブロックしているハンド → 相手がバリューを持っている確率が下がる → コールしやすい</li>
+</ul>
+<p>3. <strong>タイトなスポット（ショートスタック・バブル等）</strong></p>
+<ul>
+<li>コンボ数が少ない状況ではブロッカー効果が際立つ</li>
+</ul>
+<h3>ブロッカーが重要でない（過大評価に注意）状況</h3>
+<p>1. <strong>相手のレンジが広すぎる場合</strong></p>
+<ul>
+<li>レンジが広いと、ブロックしても残りのコンボが多く効果が薄い</li>
+</ul>
+<p>2. <strong>エクイティが圧倒的に低い場合</strong></p>
+<ul>
+<li>ブロッカーがあっても自分のハンドが弱すぎれば意味がない</li>
+</ul>
+<p>3. <strong>ボードとの相性が悪い場合</strong></p>
+<ul>
+<li>ブロッカーはあるがエクイティがなければブラフは成立しない</li>
+</ul>
+<hr>
+<h2>6-3 ブラフキャッチをする上でのブロッカーの使用方法</h2>
+<h3>ブラフキャッチとブロッカー</h3>
+<p>相手のベットがバリューかブラフか判断する際にブロッカーを活用します。</p>
+<p><strong>コールしやすいハンドの条件:</strong></p>
+<p>1. 相手のバリューハンドをブロックしている（バリューが少ない）</p>
+<p>2. 相手のブラフハンドをアンブロック（ブラフが多い）</p>
+<p><strong>例：リバーでAハイボードに相手がポットベット</strong></p>
+<ul>
+<li>自分がA♠ を持っている → 相手のAA、AK をブロック → 相手のバリューが減る → コール有利</li>
+</ul>
+<p><strong>コールしにくいハンドの条件:</strong></p>
+<ul>
+<li>相手のバリューをアンブロックしている</li>
+<li>相手のブラフをブロックしている</li>
+</ul>
+<hr>
+<h2>6-4 ブロッカーの考え方</h2>
+<h3>ブラフするハンドの選定にブロッカーを使う</h3>
+<p><strong>良いブラフハンドの条件:</strong></p>
+<p>1. ナッツをブロックしている（相手がコールしにくい）</p>
+<p>2. 自分のブラフハンドが相手のフォールドレンジをアンブロックしている</p>
+<p>3. ショーダウンバリューが低い（ベットしても失うものが少ない）</p>
+<p><strong>悪いブラフハンドの選定:</strong></p>
+<ul>
+<li>ナッツをアンブロックしている（相手がコールしやすい）</li>
+<li>自分がレンジをブロックしてしまっている</li>
+</ul>
+<blockquote>💡 ブロッカーは「相手のレンジ構成を変える道具」です。単純に「Aを持っているからブラフ」ではなく、ボードとの関係を考えて判断しましょう。</blockquote>
+<hr>
+<h2>6-5 ブロッカー機能例（例題）</h2>
+<h3>例題①：ブラフキャッチハンドとしてブロッカーが機能する場面</h3>
+<p><strong>状況:</strong></p>
+<ul>
+<li>ボード：A♥ K♥ 9♦ / 7♠ / 2♣（リバー）</li>
+<li>相手がポットベット（100%ポット）</li>
+<li>自分のハンド：A♠ 6♣</li>
+</ul>
+<p><strong>分析:</strong></p>
+<ul>
+<li>A♠ を持つことで、相手のAA（6→3コンボ）、AK（16→8コンボ）を半減させる</li>
+<li>相手のバリューレンジが薄くなっている</li>
+<li>相手のブラフレンジ（ハートのフラッシュドロー等）はアンブロック</li>
+</ul>
+<p>→ <strong>コール有利</strong> と判断できる</p>
+<hr>
+<h3>例題②：悪手のブロッカーの考え方</h3>
+<p><strong>状況:</strong></p>
+<ul>
+<li>ボード：K♥ Q♠ J♦ / T♣ / 3♠（リバー）</li>
+<li>相手がオーバーベット</li>
+<li>自分のハンド：A♣ K♦ でブラフしようとしている</li>
+</ul>
+<p><strong>分析:</strong></p>
+<ul>
+<li>A♣ を持つことでナッツストレート（A-K-Q-J-T）をアンブロックしている</li>
+<li>K♦ でKKをブロックするが、ボードはすでにKが2枚使用されているため影響小</li>
+<li>このボードでは相手は多くのナッツを持てる</li>
+</ul>
+<p>→ <strong>ブラフは悪手</strong>。相手はナッツをコール/レイズしてくる確率が高い</p>
+<hr>
+<h2>6-6 MDF（最小防衛頻度）</h2>
+<h3>MDFとは</h3>
+<p><strong>MDF（Minimum Defense Frequency）</strong>とは、相手のベットに対してどれだけ「降りずに守る（コール or レイズ）」べきかの<strong>最小頻度</strong>です。</p>
+<p>MDFを下回る頻度でしか守らないと、相手は自動的にブラフで利益を得られます。</p>
+<h3>MDFの計算式</h3>
+<pre><code>MDF = ポット &#247; (ポット + ベット額) &#215; 100</code></pre>
+<div class="table-wrap"><table><thead><tr>
+<th>ベットサイズ（ポット比）</th>
+<th>MDF</th>
+</tr></thead><tbody>
+<tr>
+<td>25%（1/4ポット）</td>
+<td>80%</td>
+</tr>
+<tr>
+<td>33%（1/3ポット）</td>
+<td>75%</td>
+</tr>
+<tr>
+<td>50%（1/2ポット）</td>
+<td>67%</td>
+</tr>
+<tr>
+<td>75%（3/4ポット）</td>
+<td>57%</td>
+</tr>
+<tr>
+<td>100%（ポットベット）</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>200%（オーバーベット&#215;2）</td>
+<td>33%</td>
+</tr>
+</tbody></table></div>
+<h3>MDFの例</h3>
+<p><strong>状況:</strong> ポット = 100BB、相手が50BB（50%ポット）をベット</p>
+<pre><code>MDF = 100 &#247; (100 + 50) &#215; 100 = 66.7%</code></pre>
+<p>→ このベットに対して少なくとも <strong>67%</strong> の頻度でコールorレイズしないと、相手のブラフが自動的に利益を得る。</p>
+<h3>MDFの考え方</h3>
+<ul>
+<li>MDFは「コールの下限」を示す理論値</li>
+<li>実際にはハンドレンジで計算するため、すべてのハンドで67%コールするわけではない</li>
+<li>レンジ全体でMDF以上を守ることが重要</li>
+</ul>
+<h3>MDFとブロッカーの関係</h3>
+<p>ブロッカーを持つハンドは相手のバリューをブロックするため、コールした際の勝率が上がる = MDFを満たすのに貢献できる良いコールハンドになります。</p>
+<hr>
+<div class="summary-card">
+<h2>この章のまとめ</h2>
+<p><strong>内容の要約</strong></p>
+<ul>
+<li>ブロッカーは相手のレンジのコンボ数を減らす効果</li>
+<li>コンボ数を理解することでブロッカー効果の大きさを定量的に把握できる</li>
+<li>ブラフするハンドの選択にブロッカーを活用（ナッツをブロック）</li>
+<li>MDFは相手のブラフに対して守るべき最小頻度</li>
+</ul>
+<p><strong>応用</strong></p>
+<ul>
+<li>リバーでのブラフ選択時に「相手のナッツをブロックしているか」を確認する習慣をつける</li>
+<li>MDFを知ることで、相手のベットに対するコール頻度の基準を持つ</li>
+</ul>
+<p><strong>注意点</strong></p>
+<ul>
+<li>ブロッカーは一つの要素であり、エクイティなしのブラフは成立しない</li>
+<li>MDFは理論上の値。実際には相手のエクスプロイト調整が必要</li>
+</ul>
+</div>
+</div></article>
+<article class="chapter-card" id="ch7" data-chapter="ch7"><div class="lock-panel" data-lock-panel="ch7"></div><div class="chapter-admin" data-admin-controls="ch7"><button data-lock="ch7">ロック</button><button data-unlock="ch7">解除</button><input type="datetime-local" data-time="ch7"><button data-timed="ch7">時間ロック</button></div><div class="content-protected"><h1>7: EVとEQ</h1>
+<hr>
+<h2>7-1 EV（期待値）</h2>
+<h3>EVとは何か</h3>
+<p><strong>EV（Expected Value / 期待値）</strong>とは、あるアクションを繰り返した場合の<strong>長期的な平均利益（または損失）</strong>です。</p>
+<p>ポーカーの全ての判断はEVで評価されます。</p>
+<h3>EVの考え方</h3>
+<pre><code>EV = (勝つ確率 &#215; 勝利額) - (負ける確率 &#215; 損失額)</code></pre>
+<p><strong>例：コインフリップで100円を賭ける</strong></p>
+<ul>
+<li>表が出る確率：50%、もらえる金額：200円</li>
+<li>裏が出る確率：50%、失う金額：100円</li>
+</ul>
+<pre><code>EV = (0.5 &#215; 200) - (0.5 &#215; 100) = 100 - 50 = +50円</code></pre>
+<p>→ このゲームは1回平均+50円の利益 = +EV（プラスEV）</p>
+<h3>ポーカーでのEV計算例</h3>
+<p><strong>状況：</strong> ポット = 100BB、相手のリバーベット = 50BB、自分の勝率 = 40%</p>
+<pre><code>EV(コール) = (0.4 &#215; 150) - (0.6 &#215; 50)
+           = 60 - 30
+           = +30BB</code></pre>
+<p>→ コールのEVは+30BB → コール有利</p>
+<hr>
+<h2>7-2 EQ（エクイティ）</h2>
+<h3>EQとは何か</h3>
+<p><strong>EQ（Equity / エクイティ）</strong>とは、<strong>ショーダウンになった場合の期待勝率（期待収益割合）</strong>です。</p>
+<ul>
+<li>EQはフォールドを考慮しない純粋な勝率</li>
+<li>すべてのカードが開かれた状態でのシェアを表す</li>
+</ul>
+<h3>EQの考え方</h3>
+<pre><code>EQ = 期待勝利額 &#247; ポット額</code></pre>
+<p>EquilabやGTO Wizardなどのツールで計算できます。</p>
+<h3>ハンド単体のEQ例</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>状況</th>
+<th>ハンド</th>
+<th>EQ（概算）</th>
+</tr></thead><tbody>
+<tr>
+<td>AA vs KK（プリフロップ）</td>
+<td>AA</td>
+<td>約81%</td>
+</tr>
+<tr>
+<td>フラッシュドロー vs トップペア（フロップ）</td>
+<td>フラッシュドロー</td>
+<td>約35%</td>
+</tr>
+<tr>
+<td>ストレートドロー vs フラッシュドロー</td>
+<td>OESD</td>
+<td>約40%</td>
+</tr>
+<tr>
+<td>オーバーペア vs セット（フロップ）</td>
+<td>オーバーペア</td>
+<td>約18%</td>
+</tr>
+<tr>
+<td>トップツーペア vs フラッシュドロー+ガット</td>
+<td>トップツーペア</td>
+<td>約55%</td>
+</tr>
+</tbody></table></div>
+<h3>フォールドエクイティ（補足）</h3>
+<p><strong>フォールドエクイティ（Fold Equity）</strong>とは、<strong>ベットすることで相手がフォールドする可能性から得られる期待利益</strong>です。</p>
+<ul>
+<li>EQはショーダウンのみを考慮</li>
+<li><strong>EV = EQ &#215; ポット + フォールドエクイティ</strong>（簡略化）</li>
+</ul>
+<p><strong>例：</strong></p>
+<ul>
+<li>自分のハンドのEQ = 30%（弱い）</li>
+<li>しかし相手がフォールドする確率 = 50%</li>
+<li>フォールドエクイティを含めると実質的なEVは大幅改善</li>
+</ul>
+<p>→ フォールドエクイティがあるため、EQが低いハンドでもベット（ブラフ）が有効になる場合がある</p>
+<hr>
+<h2>7-3 EVとEQの密接な関係性</h2>
+<h3>違いの整理</h3>
+<div class="table-wrap"><table><thead><tr>
+<th></th>
+<th>EV</th>
+<th>EQ</th>
+</tr></thead><tbody>
+<tr>
+<td>意味</td>
+<td>アクションの期待利益</td>
+<td>ショーダウン時の勝率</td>
+</tr>
+<tr>
+<td>フォールドを含む</td>
+<td>含む</td>
+<td>含まない</td>
+</tr>
+<tr>
+<td>単位</td>
+<td>BB（金額）</td>
+<td>%（割合）</td>
+</tr>
+<tr>
+<td>使いどころ</td>
+<td>コール/フォールドの判断</td>
+<td>ドローの評価、ポットオッズとの比較</td>
+</tr>
+</tbody></table></div>
+<h3>関係性</h3>
+<ul>
+<li>EQはEV計算の入力値として使う</li>
+<li>EQが高くてもフォールドエクイティがなければベットのEVが低い場合がある</li>
+<li>EQが低くてもフォールドエクイティがあればベット（ブラフ）のEVがプラスになる</li>
+</ul>
+<hr>
+<h2>7-4 +EVを目指す</h2>
+<h3>+EV、−EV、EV&#177;0とは</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>種類</th>
+<th>意味</th>
+<th>判断</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>+EV</strong></td>
+<td>長期的に利益が出るアクション</td>
+<td>積極的に行う</td>
+</tr>
+<tr>
+<td><strong>−EV</strong></td>
+<td>長期的に損失になるアクション</td>
+<td>避ける</td>
+</tr>
+<tr>
+<td><strong>EV&#177;0</strong></td>
+<td>長期的に収支ゼロのアクション</td>
+<td>どちらでも同じ（均衡状態）</td>
+</tr>
+</tbody></table></div>
+<h3>−EVアクションをしないことを考える</h3>
+<p>ポーカーで最も重要なことの一つは、<strong>−EVなアクションを繰り返さないこと</strong>です。</p>
+<p><strong>よくある−EVアクション:</strong></p>
+<ul>
+<li>EQもフォールドエクイティも低い状況でのブラフ</li>
+<li>明らかに後ろにいる（負けている）ハンドでの大きなコール</li>
+<li>ポットオッズが合わないドローのコール</li>
+<li>感情的なティルトプレイ</li>
+</ul>
+<blockquote>💡 1回のミスは小さくても、同じ−EVアクションを1,000回繰り返すと大きな損失になります。常に「これは+EVか？」を問いかける習慣が重要です。</blockquote>
+<hr>
+<h2>7-5 ベット・コール・フォールドアクションのEVを考える</h2>
+<h3>ベットのEV</h3>
+<pre><code>EV(ベット) = (フォールド頻度 &#215; ポット)
+           + (コール頻度 &#215; (EQ &#215; (ポット + ベット額) - (1 - EQ) &#215; ベット額))</code></pre>
+<p><strong>ポイント:</strong> ベットはフォールドエクイティとショーダウン時のEQの両方を考慮する</p>
+<hr>
+<h3>コールのEV</h3>
+<pre><code>EV(コール) = EQ &#215; (ポット + コール額) - (1 - EQ) &#215; コール額</code></pre>
+<p><strong>シンプルな判断基準:</strong></p>
+<ul>
+<li>EQ &gt; ポットオッズ → コール +EV</li>
+<li>EQ &lt; ポットオッズ → フォールド -EV</li>
+</ul>
+<hr>
+<h3>フォールドのEV</h3>
+<pre><code>EV(フォールド) = 0（ポットへの権利を放棄する）</code></pre>
+<p>フォールドのEVは常に0です。コールや3ベットのEVと比較して判断します。</p>
+<p><strong>フォールドが正しい状況:</strong></p>
+<ul>
+<li>コールのEVがマイナス</li>
+<li>3ベットのEVもマイナス</li>
+<li>= フォールドが最善</li>
+</ul>
+<blockquote>💡 <strong>プロの思考プロセス:</strong> 「フォールドはチップを失わない選択」と考える。守りのフォールドが長期利益を守ります。</blockquote>
+<hr>
+<div class="summary-card">
+<h2>この章のまとめ</h2>
+<p><strong>内容の要約</strong></p>
+<ul>
+<li>EV：アクションの長期的な期待利益（フォールドエクイティ込み）</li>
+<li>EQ：ショーダウン時の純粋な勝率</li>
+<li>+EVなアクションを選び続けることがポーカーの本質</li>
+<li>各アクション（ベット・コール・フォールド）のEVを比較して最大EVを選ぶ</li>
+</ul>
+<p><strong>応用</strong></p>
+<ul>
+<li>実戦でコールする前に「このコールは+EVか？」と確認する習慣をつける</li>
+<li>フォールドを「負け」と思わず「最善のEV選択」として受け入れる</li>
+</ul>
+<p><strong>注意点</strong></p>
+<ul>
+<li>EQ計算ツールに頼りすぎず、大まかな計算を頭の中でできるようにする</li>
+<li>フォールドエクイティは相手のプレイタイプを考慮して現実的に見積もる</li>
+</ul>
+</div>
+<div class="viz-card ev-tool"><h2>Interactive EV Calculator</h2><div class="slider-row"><label>ポット <output id="potOut">100</output>BB</label><input id="potSlider" type="range" min="10" max="500" value="100"></div><div class="slider-row"><label>コール額 <output id="callOut">50</output>BB</label><input id="callSlider" type="range" min="1" max="300" value="50"></div><div class="slider-row"><label>エクイティ <output id="eqOut">40</output>%</label><input id="eqSlider" type="range" min="0" max="100" value="40"></div><div class="ev-result"><span>EV(コール)</span><strong id="evResult">+10.00BB</strong></div></div></div></article>
+<article class="chapter-card" id="ch8" data-chapter="ch8"><div class="lock-panel" data-lock-panel="ch8"></div><div class="chapter-admin" data-admin-controls="ch8"><button data-lock="ch8">ロック</button><button data-unlock="ch8">解除</button><input type="datetime-local" data-time="ch8"><button data-timed="ch8">時間ロック</button></div><div class="content-protected"><h1>8: バリューとブラフとマージナル</h1>
+<hr>
+<h2>8-1 バリューベット</h2>
+<h3>バリューベットの説明</h3>
+<p><strong>バリューベット</strong>とは、自分が相手よりも強いハンドを持っていると判断し、相手の弱いハンドにコールさせることで利益を得るためのベットです。</p>
+<p>「強いハンドで相手に払わせる」のがバリューベットの本質。</p>
+<h3>バリューベットの考え方</h3>
+<p><strong>バリューベットが成立する条件:</strong></p>
+<ul>
+<li>相手が弱いハンドでコールしてくれる確率が高い</li>
+<li>自分が相手のコールレンジに対して勝率が高い</li>
+</ul>
+<p><strong>バリューの厚さを判断する:</strong></p>
+<div class="table-wrap"><table><thead><tr>
+<th>ハンドの強さ</th>
+<th>バリューとしての扱い</th>
+</tr></thead><tbody>
+<tr>
+<td>ナッツ（最強手）</td>
+<td>確実なバリュー。大きくベット</td>
+</tr>
+<tr>
+<td>ストロングハンド（セット、フラッシュ等）</td>
+<td>バリュー。サイズを考えて積極的に</td>
+</tr>
+<tr>
+<td>トップペア・トップキッカー</td>
+<td>バリュー。ただしボード次第</td>
+</tr>
+<tr>
+<td>ミドルペア以下</td>
+<td>状況次第。マージナルの可能性</td>
+</tr>
+</tbody></table></div>
+<blockquote>💡 <strong>プロの思考:</strong> 「このベットに弱いハンドでコールしてくれる相手が何人いるか」を想像してバリューを決断します。</blockquote>
+<hr>
+<h2>8-2 バリューベットのサイジング</h2>
+<h3>バリューベットのサイズを考える</h3>
+<p>バリューベットのサイズは「相手にコールさせながら最大の利益を取る」サイズを選びます。</p>
+<div class="table-wrap"><table><thead><tr>
+<th>状況</th>
+<th>推奨サイズ</th>
+<th>理由</th>
+</tr></thead><tbody>
+<tr>
+<td>ナッツ、ボードが決着</td>
+<td>75〜100%以上</td>
+<td>最大バリューを取る</td>
+</tr>
+<tr>
+<td>ストロングハンド</td>
+<td>50〜75%</td>
+<td>コールを誘いながらバリュー</td>
+</tr>
+<tr>
+<td>薄いバリュー（Thinバリュー）</td>
+<td>25〜50%</td>
+<td>小さくしてコールを引き出す</td>
+</tr>
+<tr>
+<td>ウェットボード（ドロー多い）</td>
+<td>大きめ（75%+）</td>
+<td>ドローに高いオッズを与えない</td>
+</tr>
+</tbody></table></div>
+<h3>エクスプロイトをしたバリューベット</h3>
+<p><strong>vs タイトプレイヤー（フォールドが多い）:</strong></p>
+<ul>
+<li>小さめのサイズでバリュー → フォールドを防ぎコールを引き出す</li>
+<li>ナッツは逆にスローダウンして相手のブラフを誘う</li>
+</ul>
+<p><strong>vs ルーズプレイヤー（コールが多い）:</strong></p>
+<ul>
+<li>大きめのサイズでバリュー → 弱いハンドでも払ってくれる</li>
+<li>ブラフは打たない → コールしてくる相手にブラフは無意味</li>
+</ul>
+<hr>
+<h2>8-3 ブラフベット</h2>
+<h3>ブラフベットの説明</h3>
+<p><strong>ブラフベット</strong>とは、自分が弱いハンド（エア）または負けているハンドで、相手にフォールドさせることで利益を得るためのベットです。</p>
+<p>ブラフはフォールドエクイティが核心。相手がフォールドしてくれなければ利益はゼロ（またはマイナス）。</p>
+<h3>ブラフベットの考え方</h3>
+<p><strong>ブラフが成立する条件:</strong></p>
+<p>1. 相手がフォールドする可能性（フォールドエクイティ）が十分ある</p>
+<p>2. 相手がコールした場合でもアウツ（改善の余地）がある（セミブラフ）</p>
+<p>3. ブラフのEVがフォールドのEV（0）より高い</p>
+<p><strong>純粋ブラフ vs セミブラフ:</strong></p>
+<div class="table-wrap"><table><thead><tr>
+<th>種類</th>
+<th>説明</th>
+<th>リスク</th>
+</tr></thead><tbody>
+<tr>
+<td>純粋ブラフ</td>
+<td>勝てる可能性がほぼない</td>
+<td>高い（コールされたら負け）</td>
+</tr>
+<tr>
+<td>セミブラフ</td>
+<td>ドローや改善の余地がある</td>
+<td>低い（コールされても逆転可能性あり）</td>
+</tr>
+</tbody></table></div>
+<p>→ セミブラフの方が推奨されます</p>
+<hr>
+<h2>8-4 ブラフベットのサイジング</h2>
+<h3>ブラフベットのサイズを考える</h3>
+<p>ブラフのサイズは「相手をフォールドさせるのに必要な最小サイズ」または「バリューと同じサイズ」が基本。</p>
+<div class="table-wrap"><table><thead><tr>
+<th>ブラフの状況</th>
+<th>推奨サイズ</th>
+</tr></thead><tbody>
+<tr>
+<td>相手がフォールドしやすい（タイト）</td>
+<td>小〜中サイズ（33〜50%）</td>
+</tr>
+<tr>
+<td>相手がコールしやすい（ルーズ）</td>
+<td>ブラフ自体を控える</td>
+</tr>
+<tr>
+<td>ポラライズしたリバーブラフ</td>
+<td>大サイズ（75〜100%以上）</td>
+</tr>
+<tr>
+<td>セミブラフ（ドロー）</td>
+<td>バリューと同じサイズ</td>
+</tr>
+</tbody></table></div>
+<h3>エクスプロイトをしたブラフ</h3>
+<ul>
+<li><strong>相手のFold to CBet%が高い（70%+）</strong> → Cベットブラフを増やす</li>
+<li><strong>相手がリバーでフォールドしすぎ</strong> → リバーブラフを増やす</li>
+<li><strong>相手がブラフキャッチしすぎ</strong> → ブラフを大幅に減らす</li>
+</ul>
+<hr>
+<h2>8-5 ブラフハンドの選定</h2>
+<h3>ブラフハンドの説明</h3>
+<p>全てのハンドでブラフできるわけではありません。適切なブラフハンドを選ぶことが重要です。</p>
+<h3>良いブラフハンドの条件</h3>
+<p>1. ナッツブロッカーを持つ（相手のバリューをブロック）</p>
+<p>2. ショーダウンバリューが低い（見せても弱い）</p>
+<p>3. ドロー（アウツ）がある（セミブラフとして機能）</p>
+<h3>代表的なボード毎のブラフハンド</h3>
+<p>#### フラッシュドロー（FD）がブラフになる例</p>
+<p><strong>ボード：A♥ K♣ 7♥ / 2♦（ターン）</strong></p>
+<p>良いブラフハンド：</p>
+<ul>
+<li>Q♥ J♥（フラッシュドロー + ストレートドロー）</li>
+<li>T♥ 9♥（フラッシュドロー）</li>
+</ul>
+<p>理由：完成すれば勝てる可能性があり、ナッツフラッシュも一部ブロック</p>
+<hr>
+<p>#### ストレートドロー（SD）がブラフになる例</p>
+<p><strong>ボード：J♣ T♦ 5♥ / 2♠（ターン）</strong></p>
+<p>良いブラフハンド：</p>
+<ul>
+<li>K♠ Q♦（ナッツストレートドロー）</li>
+<li>9♠ 8♦（両端ストレートドロー）</li>
+</ul>
+<p>理由：ストレートが完成すれば強く、現状の弱さをベットで隠す</p>
+<hr>
+<p>#### フルハウスコンボドロー</p>
+<p><strong>ボード：8♣ 8♦ 7♥ / K♠（ターン）</strong></p>
+<p>良いブラフハンド：</p>
+<ul>
+<li>7♣ 6♣（セカンドペア+ストレートドロー）</li>
+<li>K♦ Q♦（トップペアだがツーペアボードに弱い）</li>
+</ul>
+<hr>
+<h3>ブロッカーを考慮したブラフハンド</h3>
+<p><strong>リバーでのブラフ選択:</strong></p>
+<ul>
+<li>ナッツストレートのカードを持つ（例：Aをブロック）</li>
+<li>ナッツフラッシュのカードを持つ</li>
+</ul>
+<p><strong>例：ボード A♥ K♥ Q♥ / J♦ / 5♣（リバー）</strong></p>
+<ul>
+<li>自分がA♣ X でブラフ → A♥ A♣ のナッツを一部ブロック → 相手のバリューが減る</li>
+</ul>
+<hr>
+<h3>ブラフを諦めるべきスポット</h3>
+<p>以下の状況ではブラフを打たない：</p>
+<p>1. <strong>相手がコーリングステーション（フォールドしない）</strong> → ブラフのEVが常にマイナス</p>
+<p>2. <strong>マルチウェイ（3人以上）</strong> → 1人が降りても別の誰かがコール</p>
+<p>3. <strong>スタックが浅い（ショートスタック）</strong> → 相手がコールしやすい</p>
+<p>4. <strong>自分のレンジが弱い</strong> → 相手がコールしやすい状況</p>
+<p>5. <strong>ボードが自分のレンジに合わない</strong> → ブラフのクレジビリティ（信頼性）がない</p>
+<hr>
+<h2>8-6 ブラフ過多・ブラフ過小なボードの代表例3選</h2>
+<h3>① ブラフ過多になりやすいボード（対策：ブラフを絞る）</h3>
+<p><strong>K♠ K♥ 2♦ のようなペアボード</strong></p>
+<ul>
+<li>ブラフに使えるエアが多い</li>
+<li>しかし相手がKを持っている可能性があり、ナッツに当たりやすい</li>
+<li><strong>対策：Kブロッカーを持つハンドのみブラフ。それ以外は控える</strong></li>
+</ul>
+<hr>
+<h3>② ブラフ過小になりやすいボード（対策：ブラフを増やす）</h3>
+<p><strong>A♠ 2♦ 7♣ のようなドライAハイボード</strong></p>
+<ul>
+<li>ブラフを打ちにくいと感じやすいボード</li>
+<li>しかし相手もAを持ちにくく（Aブロッカーを持っていれば特に）、Cベットブラフが通りやすい</li>
+<li><strong>対策：適切な頻度でブラフCベットを混ぜる</strong></li>
+</ul>
+<hr>
+<h3>③ 判断が難しいウェットボード</h3>
+<p><strong>9♥ 8♥ 6♠ のようなウェットボード</strong></p>
+<ul>
+<li>ドロー豊富でブラフのアウツが多い → ブラフしたくなる</li>
+<li>しかし相手のコールレンジも広くなる</li>
+<li><strong>対策：アウツがある（セミブラフ）場合のみブラフ。純粋ブラフは控える</strong></li>
+</ul>
+<hr>
+<h2>8-7 マージナルハンドの扱い方</h2>
+<h3>マージナルハンドの説明</h3>
+<p><strong>マージナルハンド</strong>とは、バリューとも言い切れず、ブラフとも言えない中間のハンドです。</p>
+<p>例：</p>
+<ul>
+<li>ミドルペア（ボードの中間の数字でペア）</li>
+<li>弱いトップペア（キッカーが弱い）</li>
+<li>ペアなし・ハイカードのみ</li>
+</ul>
+<h3>マージナルハンドの扱い方</h3>
+<p><strong>基本原則：多くの場合、チェックでショーダウンを目指す</strong></p>
+<ul>
+<li>ベットしても強いハンドにコールされて負ける</li>
+<li>ブラフとしては相手に降りてもらえない</li>
+<li>チェックしてショーダウンに持ち込むことで、相手のブラフを捕まえる</li>
+</ul>
+<p><strong>マージナルの判断フロー:</strong></p>
+<pre><code>このハンドでベットしたら → 相手はより強いハンドでコールしてくる？
+    ↓ YES
+    → チェック（マージナル）
+    ↓ NO（弱いハンドにコールしてもらえる）
+    → バリューベット</code></pre>
+<h3>ショーダウンバリュー（SDV）の説明</h3>
+<p><strong>SDV（Showdown Value）</strong>とは、ショーダウンに持ち込んだ際に勝てる価値のことです。</p>
+<ul>
+<li>SDVが高い = チェックしてショーダウンを目指す価値がある</li>
+<li>SDVが低い = ブラフするか、降りるかの判断</li>
+</ul>
+<h3>マージナルハンドとSDVの関係性</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>ハンド</th>
+<th>SDV</th>
+<th>推奨アクション</th>
+</tr></thead><tbody>
+<tr>
+<td>ミドルペア</td>
+<td>中程度</td>
+<td>チェック→ショーダウン</td>
+</tr>
+<tr>
+<td>弱いトップペア</td>
+<td>中程度</td>
+<td>チェックorスモールベット</td>
+</tr>
+<tr>
+<td>エア（ノーペア・ノードロー）</td>
+<td>低い</td>
+<td>ブラフ or フォールド</td>
+</tr>
+<tr>
+<td>ストロングハンド</td>
+<td>高い</td>
+<td>バリューベット</td>
+</tr>
+</tbody></table></div>
+<blockquote>💡 マージナルハンドを無理にベットしてチップを失うことは多くのプレイヤーが犯すミスです。「チェックしてショーダウン」という選択肢を常に意識しましょう。</blockquote>
+<hr>
+<div class="summary-card">
+<h2>この章のまとめ</h2>
+<p><strong>内容の要約</strong></p>
+<ul>
+<li>バリューベット：強いハンドで相手の弱いコールから利益を得る</li>
+<li>ブラフベット：相手をフォールドさせることで利益を得る</li>
+<li>マージナル：チェックでショーダウンを目指すのが基本</li>
+<li>ブラフはセミブラフ（ドロー付き）を優先し、ナッツブロッカーを考慮して選定する</li>
+</ul>
+<p><strong>応用</strong></p>
+<ul>
+<li>ハンドをバリュー/マージナル/ブラフの3カテゴリに分類する習慣をつける</li>
+<li>ベットサイズはバリューとブラフで統一することでレンジをバランスさせる</li>
+</ul>
+<p><strong>注意点</strong></p>
+<ul>
+<li>コーリングステーションにはブラフ厳禁</li>
+<li>マルチウェイではブラフ頻度を大幅に下げる</li>
+<li>SDVを過小評価してブラフに走らない</li>
+</ul>
+</div>
+<div class="viz-card"><h2>ベットサイズ別 ブラフ比率</h2><canvas id="bluffBar"></canvas></div></div></article></main></div>
+<script>
+(function(){
+'use strict';
+const ADMIN_PASSWORD='8944',lockKey='pokerRoadmapLocks',adminKey='pokerRoadmapAdmin',qaKey='pokerRoadmapQa';
+const yenFmt=new Intl.DateTimeFormat('ja-JP',{month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit',hour12:false});
+let admin=sessionStorage.getItem(adminKey)==='1';
+const locks=()=>JSON.parse(localStorage.getItem(lockKey)||'{}'),saveLocks=v=>localStorage.setItem(lockKey,JSON.stringify(v));
+function formatUnlock(value){const parts=yenFmt.formatToParts(new Date(value)).reduce((a,p)=>(a[p.type]=p.value,a),{});return `${parts.month}月${parts.day}日${parts.hour}時${parts.minute}分から閲覧可能`;}
+function refreshLocks(){const data=locks();document.querySelectorAll('[data-chapter]').forEach(card=>{const id=card.dataset.chapter,state=data[id];let locked=false,msg='この章はロックされています';if(state){if(state.unlockAt){const t=new Date(state.unlockAt).getTime();if(Date.now()<t){locked=true;msg=formatUnlock(state.unlockAt)}else{delete data[id];saveLocks(data)}}else if(state.locked){locked=true}}card.classList.toggle('locked',locked&&!admin);card.classList.toggle('admin-open',admin);const panel=card.querySelector('[data-lock-panel]');if(panel)panel.textContent=msg;const dot=document.querySelector(`[data-lock-dot="${id}"]`);if(dot)dot.classList.toggle('locked',locked);});document.querySelectorAll('[data-admin-controls]').forEach(el=>el.classList.toggle('show',admin));document.getElementById('adminLock').textContent=admin?'🔓 Admin':'🔒 Admin';}
+document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['c','a'].includes(e.key.toLowerCase()))e.preventDefault();});
+document.getElementById('adminLock').addEventListener('click',()=>{if(admin){admin=false;sessionStorage.removeItem(adminKey);refreshLocks();return}const p=prompt('Admin password');if(p===ADMIN_PASSWORD){admin=true;sessionStorage.setItem(adminKey,'1');refreshLocks();}});
+document.addEventListener('click',e=>{const btn=e.target.closest('.chapter-tab');if(btn){document.querySelector(`#${btn.dataset.target}`).scrollIntoView({behavior:'smooth',block:'start'});if(innerWidth<768)document.getElementById('sidebar').classList.remove('open')}const l=e.target.closest('[data-lock]');if(l&&admin){const d=locks();d[l.dataset.lock]={locked:true};saveLocks(d);refreshLocks()}const u=e.target.closest('[data-unlock]');if(u&&admin){const d=locks();delete d[u.dataset.unlock];saveLocks(d);refreshLocks()}const t=e.target.closest('[data-timed]');if(t&&admin){const input=document.querySelector(`[data-time="${t.dataset.timed}"]`);if(input&&input.value){const d=locks();d[t.dataset.timed]={unlockAt:new Date(input.value).toISOString()};saveLocks(d);refreshLocks()}}});
+document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){document.querySelectorAll('.chapter-tab').forEach(b=>b.classList.toggle('active',b.dataset.target===entry.target.id));}})},{rootMargin:'-35% 0px -55% 0px',threshold:0});document.querySelectorAll('.chapter-card').forEach(c=>observer.observe(c));
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function loadQa(){const list=document.getElementById('qaList');if(!list)return;const items=JSON.parse(localStorage.getItem(qaKey)||'[]');list.innerHTML=items.map((x,i)=>`<div class="qa-entry"><time>${new Date(x.at).toLocaleString('ja-JP')}</time><p><strong>Q:</strong> ${escapeHtml(x.q)}</p>${x.a?`<p><strong>A:</strong> ${escapeHtml(x.a)}</p>`:''}<button data-delqa="${i}">削除</button></div>`).join('');}
+const saveQa=document.getElementById('saveQa');if(saveQa){saveQa.addEventListener('click',()=>{const q=document.getElementById('questionText'),a=document.getElementById('answerText');if(!q.value.trim())return;const items=JSON.parse(localStorage.getItem(qaKey)||'[]');items.unshift({q:q.value.trim(),a:a.value.trim(),at:new Date().toISOString()});localStorage.setItem(qaKey,JSON.stringify(items));q.value='';a.value='';loadQa();});document.addEventListener('click',e=>{const d=e.target.closest('[data-delqa]');if(d){const items=JSON.parse(localStorage.getItem(qaKey)||'[]');items.splice(Number(d.dataset.delqa),1);localStorage.setItem(qaKey,JSON.stringify(items));loadQa();}});loadQa();}
+function chartDefaults(){Chart.defaults.color='#1a1a1a';Chart.defaults.borderColor='rgba(201,168,76,.22)';Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif";}
+function makeCharts(){if(!window.Chart)return;chartDefaults();const radar=document.getElementById('statsRadar');if(radar)new Chart(radar,{type:'radar',data:{labels:['VPIP','PFR','3Bet','WTSD','Aggression'],datasets:[{label:'ルーズパッシブ',data:[45,8,2,38,18],borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,.16)'},{label:'タイトパッシブ',data:[14,6,2,21,16],borderColor:'#e8c76a',backgroundColor:'rgba(232,199,106,.12)'},{label:'LAG',data:[34,28,12,29,72],borderColor:'#e53e3e',backgroundColor:'rgba(229,62,62,.12)'},{label:'TAG',data:[23,19,8,25,55],borderColor:'#48bb78',backgroundColor:'rgba(72,187,120,.12)'},{label:'マニアック',data:[62,44,20,42,90],borderColor:'#4299e1',backgroundColor:'rgba(66,153,225,.12)'}]},options:{responsive:true,scales:{r:{grid:{color:'rgba(201,168,76,.18)'},angleLines:{color:'rgba(201,168,76,.2)'},pointLabels:{color:'#e8c76a'},ticks:{display:false,max:100}}}}});const outs=document.getElementById('outsBar');if(outs)new Chart(outs,{type:'bar',data:{labels:['4 outs','6 outs','8 outs','9 outs','15 outs'],datasets:[{label:'フロップ 約%',data:[16,24,32,36,60],backgroundColor:'#c9a84c'},{label:'ターン 約%',data:[8,12,16,18,30],backgroundColor:'#4299e1'}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:70,ticks:{callback:v=>v+'%'}}}}});const gto=document.getElementById('gtoDoughnut');if(gto)new Chart(gto,{type:'doughnut',data:{labels:['GTOベース','Exploit調整','観察・更新'],datasets:[{data:[55,30,15],backgroundColor:['#c9a84c','#2d5a27','#e53e3e'],borderColor:'#f8f9fa'}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});const bluff=document.getElementById('bluffBar');if(bluff)new Chart(bluff,{type:'bar',data:{labels:['25% pot','33% pot','50% pot','75% pot','100% pot','200% pot'],datasets:[{label:'理論上のブラフ比率',data:[20,25,33,43,50,67],backgroundColor:['#e8c76a','#c9a84c','#a07830','#48bb78','#4299e1','#e53e3e']} ]},options:{responsive:true,scales:{y:{beginAtZero:true,max:75,ticks:{callback:v=>v+'%'}}}}});}
+function evCalc(){const p=document.getElementById('potSlider');if(!p)return;const c=document.getElementById('callSlider'),eq=document.getElementById('eqSlider'),res=document.getElementById('evResult');function upd(){potOut.textContent=p.value;callOut.textContent=c.value;eqOut.textContent=eq.value;const pot=+p.value,call=+c.value,e=+eq.value/100;const ev=e*(pot+call)-(1-e)*call;res.textContent=(ev>=0?'+':'')+ev.toFixed(2)+'BB';res.style.color=ev>=0?'#48bb78':'#e53e3e';}['input','change'].forEach(evt=>[p,c,eq].forEach(x=>x.addEventListener(evt,upd)));upd();}
+refreshLocks();setInterval(refreshLocks,30000);makeCharts();evCalc();
+})();
+</script>
 </body>
 </html>
