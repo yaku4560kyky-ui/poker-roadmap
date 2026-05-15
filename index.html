@@ -82,6 +82,70 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 .qa-entry{background:#fdf8ee !important;border-color:rgba(201,168,76,.3) !important}
 .chapter-admin{background:rgba(201,168,76,.05) !important}
 .chapter-admin input{background:#ffffff !important;color:#1a1a1a !important;border-color:rgba(201,168,76,.4) !important}
+/* ===== 第1章: プレイヤータイプカード ===== */
+.player-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+@media(max-width:640px){.player-type-grid{grid-template-columns:1fr}.pt-full{grid-column:span 1 !important}}
+.player-type-card{border-radius:12px;border:2px solid #e2e8f0;overflow:hidden}
+.pt-header{padding:13px 18px;display:flex;align-items:center;gap:10px;font-weight:800;font-size:.97rem}
+.pt-suit{font-size:1.3rem;line-height:1}
+.pt-body{padding:12px 18px}
+.pt-body>p{font-size:.88rem;margin:0 0 6px 0;color:#555 !important}
+.pt-body ul{margin:4px 0 8px 0;padding-left:18px}
+.pt-body li{font-size:.9rem;color:#333 !important;margin-bottom:3px}
+.pt-counter{border-top:1px solid rgba(0,0,0,.07);padding:10px 18px}
+.pt-counter-title{font-weight:700;font-size:.85rem;margin-bottom:6px}
+.pt-counter ul{margin:0;padding-left:18px}
+.pt-counter li{font-size:.87rem;margin-bottom:3px;color:#1e3a5f !important}
+.pt-badge{display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:20px;font-weight:700;margin-left:8px;vertical-align:middle}
+.pt-badge-ideal{background:#dbeafe;color:#1d4ed8}
+.pt-badge-warn{background:#fee2e2;color:#be123c}
+.pt-card-lp{border-color:#86efac}.pt-card-lp .pt-header{background:#f0fdf4;color:#15803d !important}
+.pt-card-lp .pt-counter{background:#f0fdf4}.pt-card-lp .pt-counter-title{color:#15803d}
+.pt-card-tp{border-color:#94a3b8}.pt-card-tp .pt-header{background:#f1f5f9;color:#374151 !important}
+.pt-card-tp .pt-counter{background:#f1f5f9}.pt-card-tp .pt-counter-title{color:#374151}
+.pt-card-lag{border-color:#fca5a5}.pt-card-lag .pt-header{background:#fff1f2;color:#be123c !important}
+.pt-card-lag .pt-counter{background:#fff1f2}.pt-card-lag .pt-counter-title{color:#be123c}
+.pt-card-tag{border-color:#3b82f6}.pt-card-tag .pt-header{background:#eff6ff;color:#1d4ed8 !important}
+.pt-card-tag .pt-counter{background:#eff6ff}.pt-card-tag .pt-counter-title{color:#1d4ed8}
+.pt-card-maniac{border-color:#c084fc}.pt-card-maniac .pt-header{background:#faf5ff;color:#7e22ce !important}
+.pt-card-maniac .pt-counter{background:#faf5ff}.pt-card-maniac .pt-counter-title{color:#7e22ce}
+/* ===== 第1章: スタッツカード ===== */
+.stats-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+@media(max-width:640px){.stats-card-grid{grid-template-columns:1fr}}
+.stats-card{border:2px solid rgba(201,168,76,.4);border-radius:12px;overflow:hidden}
+.stats-card-header{background:rgba(201,168,76,.12);padding:10px 15px;border-bottom:1px solid rgba(201,168,76,.2)}
+.stats-card-name{font-weight:800;font-size:1rem;color:#7a5200 !important}
+.stats-card-fullname{font-size:.78rem;color:#888 !important;margin-top:1px}
+.stats-card-body{padding:12px 15px}
+.stats-card-body>p{font-size:.88rem;margin:0 0 8px 0}
+.stats-range{display:flex;gap:5px;margin:8px 0;flex-wrap:wrap}
+.stats-range-badge{font-size:.76rem;padding:3px 9px;border-radius:20px;font-weight:700}
+.stats-low{background:#fee2e2;color:#991b1b !important}
+.stats-ok{background:#dcfce7;color:#166534 !important}
+.stats-high{background:#dbeafe;color:#1e40af !important}
+.stats-insight{font-size:.83rem;color:#555 !important;background:#fafaf8;border-left:3px solid #c9a84c;padding:7px 11px;border-radius:0 6px 6px 0;margin-top:8px}
+/* ===== 第1章: フローチャート ===== */
+.flowchart{margin:16px 0;font-size:.88rem;line-height:1.6}
+.fc-decision{display:inline-block;background:#fffbeb;border:2px solid #f59e0b;border-radius:50px;padding:7px 18px;font-weight:700;color:#92400e !important}
+.fc-result-lp{display:inline-block;background:#f0fdf4;border:2px solid #86efac;border-radius:8px;padding:7px 14px;font-weight:700;color:#15803d !important}
+.fc-result-lag{display:inline-block;background:#fff1f2;border:2px solid #fca5a5;border-radius:8px;padding:7px 14px;font-weight:700;color:#be123c !important}
+.fc-result-tp{display:inline-block;background:#f1f5f9;border:2px solid #94a3b8;border-radius:8px;padding:7px 14px;font-weight:700;color:#374151 !important}
+.fc-result-tag{display:inline-block;background:#eff6ff;border:2px solid #3b82f6;border-radius:8px;padding:7px 14px;font-weight:700;color:#1d4ed8 !important}
+.fc-row{display:flex;align-items:center;gap:8px;margin:4px 0;flex-wrap:wrap}
+.fc-arrow{color:#c9a84c;font-size:1rem;font-weight:800}
+.fc-label{font-size:.8rem;color:#888 !important;font-weight:700}
+.fc-tree{padding-left:22px;border-left:2px dashed #e2e8f0;margin-left:10px;margin-top:4px}
+/* ===== 第1章: パターンカード ===== */
+.pattern-card{border:2px solid #e2e8f0;border-radius:12px;margin-bottom:14px;overflow:hidden}
+.pattern-card-header{padding:11px 18px;font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:8px}
+.pattern-card-body{padding:12px 18px}
+.pattern-a .pattern-card-header{background:#f1f5f9;color:#374151 !important}
+.pattern-b .pattern-card-header{background:#fff1f2;color:#be123c !important}
+.pattern-c .pattern-card-header{background:#fff7ed;color:#c2410c !important}
+.stats-badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.76rem;font-weight:700;margin:2px}
+.sb-low{background:#fee2e2;color:#991b1b !important}
+.sb-mid{background:#fef3c7;color:#92400e !important}
+.sb-high{background:#dcfce7;color:#166534 !important}
 </style>
 </head>
 <body>
@@ -149,7 +213,7 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 <div class="step-row"><span class="step-badge step-3">STEP 3</span><div><strong>第6〜8章：応用・深化</strong><br><span class="step-desc">ブロッカー / EV・EQ / バリュー・ブラフ</span></div></div>
 </div>
 </div>
-<p>前半（第1〜3章）の<strong>基礎</strong>を徹底するだけでも一定の成果が出ます。後半（第4章以降）は「ボードの分類」「GTOの概念」「プライズプールの影響」などを深く掘り下げることで長期的なエッジ（優位性）を生み出せます。</p>
+<p>前半（第1〜3章）の<strong>基礎</strong>を徹底するだけでも一定の成果が出ます。後半（第4章以降）は「ボードの分類」「GTOの概念」などを深く掘り下げることで長期的なエッジ（優位性）を生み出せます。</p>
 <h3>ポーカーとはどんなゲームか</h3>
 <p>ポーカー（テキサスホールデム）は<strong>確率・期待値・心理</strong>が絡み合う高度な思考ゲームです。</p>
 <ul>
@@ -202,269 +266,314 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 </div></article>
 <article class="chapter-card" id="ch1" data-chapter="ch1"><div class="lock-panel" data-lock-panel="ch1"></div><div class="chapter-admin" data-admin-controls="ch1"><button data-lock="ch1">ロック</button><button data-unlock="ch1">解除</button><input type="datetime-local" data-time="ch1"><button data-timed="ch1">時間ロック</button></div><div class="content-protected"><h1>1: プレイヤー分析とスタッツの把握</h1>
 <hr>
-<h2>1-1 プレイヤー分析</h2>
-<p>相手のプレイスタイルを正確に分類し、その弱点を突くことがエクスプロイト戦略の出発点です。</p>
-<h3>① ルーズパッシブ（Calling Station）</h3>
-<p><strong>特徴:</strong> 多くのハンドでコールし、自分からベット・レイズをほとんどしない。</p>
-<p><strong>こんなプレイヤーが多い例:</strong></p>
+<h2>1-1 プレイヤーの分類</h2>
+<h3>なぜプレイヤーを見分けるのか？</h3>
+<p>ポーカーは相手のクセや傾向をつかむことで、大きなアドバンテージを得られます。<br>相手がどのタイプかを見極め、それに合った<strong>対処法</strong>を取ることが勝利への近道です。</p>
+<div class="player-type-grid">
+<div class="player-type-card pt-card-lp">
+<div class="pt-header"><span class="pt-suit">♣</span>ルーズパッシブ（Calling Station）</div>
+<div class="pt-body">
+<p>多くのハンドに参加するが、自分から攻めない受け身型</p>
 <ul>
-<li>「せっかく来たから」とほぼ全ハンドを見ようとするカジュアルなプレイヤー</li>
-<li>「フロップを見てから決める」と言って毎回コールするプレイヤー</li>
+<li>ほぼ全ハンドを見ようとするカジュアルなプレイヤー</li>
+<li>「フロップを見てから決める」が口癖</li>
+<li>強さ：弱い。ただしブラフが通らないので要注意</li>
 </ul>
-<p><strong>プレイヤーの強さ:</strong> 弱い。ただし「下りない相手」なのでブラフが通らず注意が必要。</p>
-<p><strong>エクスプロイト:</strong></p>
+<div class="pt-counter">
+<div class="pt-counter-title">✅ 対処法</div>
 <ul>
-<li>ブラフを極力減らす（ブラフ厳禁）</li>
-<li>強いハンドで大きくバリューベットを打ち続ける</li>
+<li>ブラフは<strong>厳禁</strong>（フォールドしない）</li>
+<li>強いハンドで大きくバリューベット</li>
 <li>薄いバリューでも積極的にベット</li>
+<li>大きいサイズで弱いハンドにコールさせる</li>
 </ul>
-<hr>
-<h3>② タイトパッシブ（Rock / Nit）</h3>
-<p><strong>特徴:</strong> 非常に少ないハンドしかプレイせず、入ってきてもコール中心でアクションが弱い。</p>
-<p><strong>こんなプレイヤーが多い例:</strong></p>
+</div>
+</div>
+</div>
+<div class="player-type-card pt-card-tp">
+<div class="pt-header"><span class="pt-suit">♠</span>タイトパッシブ（Rock / Nit）</div>
+<div class="pt-body">
+<p>ハンドを厳選するが、入ってきてもコール中心で攻めない</p>
 <ul>
-<li>「AKかAAのみ」というような極端な絞り込みをするプレイヤー</li>
-<li>リスクを嫌う慎重派で、強い手でも小さくしか打てないプレイヤー</li>
+<li>「AKかAAのみ」という極端な絞り込みをするプレイヤー</li>
+<li>リスクを嫌う慎重派、強い手でも小さくしか打てない</li>
+<li>強さ：レンジが読みやすく対処しやすい</li>
 </ul>
-<p><strong>プレイヤーの強さ:</strong> レンジが読みやすく対処しやすい。</p>
-<p><strong>エクスプロイト:</strong></p>
+<div class="pt-counter">
+<div class="pt-counter-title">✅ 対処法</div>
 <ul>
-<li>参加してきたらレンジが強いと判断してリスペクト</li>
-<li>ブラフに対しては積極的にフォールド</li>
-<li>3ベットに対しては特に注意（強いハンドのみ）</li>
+<li>参加してきたら<strong>レンジが強い</strong>と判断してリスペクト</li>
+<li>ブラフ・スチールが有効（フォールドしやすい）</li>
+<li>ベットしてきたらナッツに近いと判断してフォールド検討</li>
+<li>ナッツ系は逆にスローダウンしてブラフを誘う</li>
 </ul>
-<hr>
-<h3>③ ルーズアグレッシブ（LAG）</h3>
-<p><strong>特徴:</strong> 広いレンジでプレイし、積極的にベット・レイズをしかけてくる。</p>
-<p><strong>こんなプレイヤーが多い例:</strong></p>
+</div>
+</div>
+</div>
+<div class="player-type-card pt-card-lag">
+<div class="pt-header"><span class="pt-suit">♥</span>ルーズアグレッシブ（LAG）</div>
+<div class="pt-body">
+<p>広いレンジで参加し、積極的にベット・レイズをしかける攻撃型</p>
 <ul>
-<li>常に攻撃的で「プレッシャーをかける」プレイスタイルを好むプレイヤー</li>
-<li>少し勉強してGTOを学びかけたが、バランスが崩れているプレイヤー</li>
+<li>常に攻撃的でプレッシャーをかけるスタイル</li>
+<li>GTO学びかけてバランスが崩れているプレイヤーに多い</li>
+<li>強さ：バランスが取れていれば強い。崩れていれば搾取可能</li>
 </ul>
-<p><strong>プレイヤーの強さ:</strong> バランスが取れていれば強い。崩れていれば搾取可能。</p>
-<p><strong>エクスプロイト:</strong></p>
+<div class="pt-counter">
+<div class="pt-counter-title">✅ 対処法</div>
 <ul>
+<li>ブラフが多いため<strong>コール範囲を広げて</strong>ブラフキャッチ</li>
+<li>強いハンドでトラップ（チェックコール）も有効</li>
 <li>3ベット頻度を上げる</li>
-<li>ブラフ過多なら軽いハンドでもコールやチェックレイズ</li>
-<li>強いハンドでスロープレイしてトラップする</li>
+<li>4ベットには注意（相手も4ベットしてくる可能性あり）</li>
 </ul>
-<hr>
-<h3>④ タイトアグレッシブ（TAG）</h3>
-<p><strong>特徴:</strong> 厳選したハンドのみをプレイし、入ってきたら積極的にアグレッションをかける。</p>
-<p><strong>こんなプレイヤーが多い例:</strong></p>
+</div>
+</div>
+</div>
+<div class="player-type-card pt-card-tag">
+<div class="pt-header"><span class="pt-suit">♦</span>タイトアグレッシブ（TAG）<span class="pt-badge pt-badge-ideal">★ 理想型</span></div>
+<div class="pt-body">
+<p>厳選したハンドのみ参加し、入ってきたら積極的にアグレッション</p>
 <ul>
-<li>勉強しているポーカープレイヤーの多くがこのスタイルを目指す</li>
-<li>GTO教材や書籍で学んだ中級者に多いスタイル</li>
+<li>勉強しているプレイヤーが目指すスタイル</li>
+<li>GTO教材・書籍で学んだ中級者に多い</li>
+<li>強さ：強い。ただしレンジが読みやすい部分もある</li>
 </ul>
-<p><strong>プレイヤーの強さ:</strong> 強い。ただしレンジが読みやすい部分もある。</p>
-<p><strong>エクスプロイト:</strong></p>
+<div class="pt-counter">
+<div class="pt-counter-title">✅ 対処法</div>
 <ul>
-<li>レンジが強いと判断して無駄なコールを減らす</li>
+<li>最も対処が難しいタイプ。<strong>GTOプレイで対応</strong>が基本</li>
+<li>ポジションを活かして戦う。ポジションがないときは慎重に</li>
+<li>ブラフキャッチは控えめ。バリューベットには素直にフォールド検討</li>
 <li>3ベットへのフォールドが多ければスチールを増やす</li>
 </ul>
-<hr>
-<h3>⑤ マニアック</h3>
-<p><strong>特徴:</strong> 極めて広いレンジで常に最大のアグレッションをかけてくる。GTO的なバランスは無視。</p>
-<p><strong>こんなプレイヤーが多い例:</strong></p>
+</div>
+</div>
+</div>
+<div class="player-type-card pt-card-maniac" style="grid-column:span 2">
+<div class="pt-header"><span class="pt-suit">♠♥</span>マニアック<span class="pt-badge pt-badge-warn">⚠ 要注意</span></div>
+<div class="pt-body">
+<p>極めて広いレンジで常に最大のアグレッションをかけてくる。GTO的バランスは無視</p>
 <ul>
-<li>ギャンブル的な思考が強く「どうせ運だ」と考えているプレイヤー</li>
+<li>ギャンブル的思考「どうせ運だ」のプレイヤーに多い</li>
 <li>短期的に大きく勝ちたいプレイヤー</li>
+<li>強さ：短期的には脅威。長期的には−EVなプレイが多く搾取可能</li>
 </ul>
-<p><strong>プレイヤーの強さ:</strong> 短期的には脅威。長期的には−EVなプレイが多く搾取可能。</p>
-<p><strong>エクスプロイト:</strong></p>
+<div class="pt-counter">
+<div class="pt-counter-title">✅ 対処法</div>
 <ul>
-<li>強いハンドで大きくコール・レイズ</li>
-<li>バリューレンジを広げてコールする</li>
+<li>強いハンドで大きくコール・レイズ（バリューレンジを広げる）</li>
 <li>ブラフを減らし、バリューに集中する</li>
+<li>強いハンドでスロープレイしてトラップ</li>
+<li>感情的にならず、数字（EV）で判断し続けることが重要</li>
 </ul>
-<blockquote>💡 <strong>補足:</strong> 参加率が高いプレイヤーやアグレッションが高いプレイヤーを苦手とするプレイヤーは多いですが、それは「対処法を知らない」からです。各タイプへの正しい対処法を理解することで、むしろ有利な状況になります。</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-success">
+<strong>💡 補足：TAGが理想とされる理由</strong><br>
+「強いハンドで積極的にベット、弱いハンドは無駄に追わない」という原則がポーカーの最も基本的な勝ち方です。TAGスタイルはこの原則を体現しており、初心者が最初に目指すべき姿です。
+</div>
+<div class="callout">
+<strong>💡 苦手なプレイヤーへの向き合い方</strong><br>
+参加率が高いプレイヤーやアグレッションが高いプレイヤーに苦手意識を持つことは多いですが、それは<strong>対処法を知らないから</strong>です。各タイプへの対処法を理解することで、むしろ有利な状況に変えられます。相手の「ミス」に動揺せず、正しいプレイを続けましょう。
+</div>
 <hr>
 <h2>1-2 スタッツの把握</h2>
-<h3>① スタッツとは</h3>
-<p><strong>スタッツ（Stats）</strong>とは、プレイヤーの行動パターンを数値化したものです。主にHUD（Heads-Up Display）ツールで取得し、オンラインポーカーで活用します。ライブポーカーでは実際の観察から推測します。</p>
+<p><strong>スタッツ（Stats）</strong>とは、プレイヤーの行動パターンを数値化したものです。HUD（Heads-Up Display）ツールでオンラインポーカーに活用し、ライブでは実際の観察から推測します。</p>
+<div class="stats-card-grid">
+<div class="stats-card">
+<div class="stats-card-header">
+<div class="stats-card-name">VPIP</div>
+<div class="stats-card-fullname">Voluntarily Put money In Pot（自発的ポット投資率）</div>
+</div>
+<div class="stats-card-body">
+<p>BBとSBのポストを除き、自分からチップを投入した割合。<strong>参加率</strong>とも呼ばれる。</p>
+<div class="stats-range">
+<span class="stats-range-badge stats-low">低（10%以下）：ニット</span>
+<span class="stats-range-badge stats-ok">適正（20〜28%）：6MAX</span>
+<span class="stats-range-badge stats-high">高（35%+）：ルーズ</span>
+</div>
+<div class="stats-insight">高すぎる → バリューベット増・ブラフ減 ／ 低すぎる → 参加時はレンジ強、スチール有効</div>
+</div>
+</div>
+<div class="stats-card">
+<div class="stats-card-header">
+<div class="stats-card-name">PFR</div>
+<div class="stats-card-fullname">Pre-Flop Raise（プリフロップレイズ率）</div>
+</div>
+<div class="stats-card-body">
+<p>プリフロップでレイズした割合。<strong>VPIPとセットで見る</strong>ことが重要。</p>
+<div class="stats-range">
+<span class="stats-range-badge stats-low">低（PFR≪VPIP）：パッシブ</span>
+<span class="stats-range-badge stats-ok">適正（15〜22%）：6MAX</span>
+<span class="stats-range-badge stats-high">高（PFR≈VPIP）：アグレ</span>
+</div>
+<div class="stats-insight">PFR/VPIP比率が低い → レイズに強い手を想定 ／ PFR≈VPIP → コール範囲広げてトラップ</div>
+</div>
+</div>
+<div class="stats-card">
+<div class="stats-card-header">
+<div class="stats-card-name">3Bet%</div>
+<div class="stats-card-fullname">3-Bet Frequency（3ベット頻度）</div>
+</div>
+<div class="stats-card-body">
+<p>相手のオープンレイズに対して3ベット（リレイズ）した割合。</p>
+<div class="stats-range">
+<span class="stats-range-badge stats-low">低（2%以下）：3ベット弱</span>
+<span class="stats-range-badge stats-ok">適正（7〜10%）：6MAX</span>
+<span class="stats-range-badge stats-high">高（15%+）：ブラフ多</span>
+</div>
+<div class="stats-insight">低すぎる → オープンレイズ・スチール増 ／ 高すぎる → 4ベットやコールで対応</div>
+</div>
+</div>
+<div class="stats-card">
+<div class="stats-card-header">
+<div class="stats-card-name">3Bet Fold%</div>
+<div class="stats-card-fullname">Fold to 4-Bet after 3-Bet（3ベット後4ベットへのフォールド率）</div>
+</div>
+<div class="stats-card-body">
+<p>自分が3ベットした後、相手から4ベットされた時にフォールドする頻度。</p>
+<div class="stats-range">
+<span class="stats-range-badge stats-low">低（35%以下）：4ベット強</span>
+<span class="stats-range-badge stats-ok">適正（50〜65%）：標準</span>
+<span class="stats-range-badge stats-high">高（75%+）：4ベットに弱</span>
+</div>
+<div class="stats-insight">高すぎる → 4ベットブラフを増やす ／ 低すぎる → 4ベットはバリューのみ</div>
+</div>
+</div>
+<div class="stats-card">
+<div class="stats-card-header">
+<div class="stats-card-name">WTSD</div>
+<div class="stats-card-fullname">Went To ShowDown（ショーダウン到達率）</div>
+</div>
+<div class="stats-card-body">
+<p>フロップ後にショーダウンまで進んだ頻度。<strong>コール傾向</strong>の指標。</p>
+<div class="stats-range">
+<span class="stats-range-badge stats-low">低（18%以下）：降りすぎ</span>
+<span class="stats-range-badge stats-ok">適正（23〜28%）：標準</span>
+<span class="stats-range-badge stats-high">高（35%+）：コールしすぎ</span>
+</div>
+<div class="stats-insight">高すぎる → バリューで大きく打ち続ける ／ 低すぎる → ブラフ頻度を上げる</div>
+</div>
+</div>
+<div class="stats-card">
+<div class="stats-card-header">
+<div class="stats-card-name">W$SD</div>
+<div class="stats-card-fullname">Won money at ShowDown（ショーダウン勝利率）</div>
+</div>
+<div class="stats-card-body">
+<p>ショーダウンに持ち込んだ際の勝利率。<strong>ハンドセレクションの質</strong>を示す。</p>
+<div class="stats-range">
+<span class="stats-range-badge stats-low">低（42%以下）：弱ハンドで追う</span>
+<span class="stats-range-badge stats-ok">適正（50〜57%）：標準</span>
+<span class="stats-range-badge stats-high">高（62%+）：強手のみコール</span>
+</div>
+<div class="stats-insight">低すぎる → ブラフ・セミブラフが有効 ／ 高すぎる → ブラフ有効</div>
+</div>
+</div>
+</div>
+<div class="callout">
+<strong>💡 RFIとPFRの違い</strong><br>
+RFI（Raise First In）はリンプやオープン前に誰もレイズしていない状況でのレイズ率。PFRは3ベットなども含む全レイズ率。ファーストアクションの純粋な積極性を見るにはRFIが有用。
+</div>
 <hr>
-<h3>VPIP（Voluntarily Put money In Pot）</h3>
-<p><strong>正式名称:</strong> 自発的ポット投資率</p>
-<p><strong>説明:</strong> BBとSBのポストを除き、自分からチップを投入した割合。参加率とも呼ばれる。</p>
-<div class="table-wrap"><table><thead><tr>
-<th></th>
-<th>オンライン適正値</th>
-<th>ライブ適正値</th>
-</tr></thead><tbody>
-<tr>
-<td>6MAX</td>
-<td>20〜28%</td>
-<td>25〜35%</td>
-</tr>
-<tr>
-<td>フルリング</td>
-<td>14〜20%</td>
-<td>18〜25%</td>
-</tr>
-</tbody></table></div>
-<p><strong>適正値外のエクスプロイト:</strong></p>
-<ul>
-<li><strong>高すぎる（35%+）:</strong> コールしすぎ → バリューベットを厚くする、ブラフ減らす</li>
-<li><strong>低すぎる（10%以下）:</strong> ニット → 参加時はレンジが強い。レイズ・スチールを増やす</li>
+<h2>1-3 スタッツ読み取りパターン</h2>
+<h3>VPIP × PFR フローチャート</h3>
+<p>2つのスタッツを組み合わせることでプレイヤータイプを特定できます。</p>
+<div class="flowchart">
+<div class="fc-row"><span class="fc-decision">VPIPが高い？（25%以上）</span></div>
+<div class="fc-tree">
+<div class="fc-row"><span class="fc-arrow">↓</span><span class="fc-label">YES</span></div>
+<div class="fc-row"><span class="fc-decision">PFRも高い？（VPIP比0.7+）</span></div>
+<div class="fc-tree">
+<div class="fc-row"><span class="fc-arrow">↓ YES</span></div>
+<div class="fc-row"><span class="fc-result-lag">♥ ルーズアグレッシブ（LAG / マニアック）<br><small>→ 強いハンドでコール・トラップ、ブラフ減少</small></span></div>
+<div class="fc-row" style="margin-top:8px"><span class="fc-arrow">↓ NO（PFR低）</span></div>
+<div class="fc-row"><span class="fc-result-lp">♣ ルーズパッシブ（コーリングステーション）<br><small>→ バリューベット増、ブラフ厳禁</small></span></div>
+</div>
+<div class="fc-row" style="margin-top:10px"><span class="fc-arrow">↓</span><span class="fc-label">NO（VPIP低）</span></div>
+<div class="fc-row"><span class="fc-decision">PFRが高い？（VPIP−PFR差が小さい）</span></div>
+<div class="fc-tree">
+<div class="fc-row"><span class="fc-arrow">↓ YES</span></div>
+<div class="fc-row"><span class="fc-result-tag">♦ タイトアグレッシブ（TAG）★理想<br><small>→ GTOベースで対応、ポジション重視</small></span></div>
+<div class="fc-row" style="margin-top:8px"><span class="fc-arrow">↓ NO</span></div>
+<div class="fc-row"><span class="fc-result-tp">♠ タイトパッシブ（Rock / Nit）<br><small>→ スチール・ブラフ有効、参加時はレンジ強</small></span></div>
+</div>
+</div>
+</div>
+<h3>スタッツ読み取りパターン例</h3>
+<div class="pattern-card pattern-a">
+<div class="pattern-card-header">🧊 パターンA：タイト過ぎる相手（ニット）</div>
+<div class="pattern-card-body">
+<div style="margin-bottom:8px">
+<span class="stats-badge sb-low">VPIP: 10%以下</span>
+<span class="stats-badge sb-low">PFR: 低</span>
+<span class="stats-badge sb-mid">3Bet: ほぼなし</span>
+</div>
+<p style="font-size:.9rem;margin:0 0 6px 0"><strong>特徴：</strong>参加するハンドが極めて絞られている。参加してきたら強い手</p>
+<p style="font-size:.9rem;margin:0"><strong>対処法：</strong></p>
+<ul style="font-size:.9rem;margin:6px 0 0 0;padding-left:18px">
+<li>ポジションを活かしてスチールを増やす</li>
+<li>ベット・レイズしてきたらリスペクトしてフォールド</li>
+<li>Cベットブラフが通りやすい</li>
 </ul>
-<hr>
-<h3>PFR（Pre-Flop Raise）</h3>
-<p><strong>正式名称:</strong> プリフロップレイズ率</p>
-<p><strong>説明:</strong> プリフロップでレイズした割合。VPIPとセットで見ることが重要。</p>
-<div class="table-wrap"><table><thead><tr>
-<th></th>
-<th>オンライン適正値</th>
-<th>ライブ適正値</th>
-</tr></thead><tbody>
-<tr>
-<td>6MAX</td>
-<td>15〜22%</td>
-<td>12〜20%</td>
-</tr>
-<tr>
-<td>フルリング</td>
-<td>10〜16%</td>
-<td>8〜15%</td>
-</tr>
-</tbody></table></div>
-<p><strong>適正値外のエクスプロイト:</strong></p>
-<ul>
-<li><strong>PFR/VPIPの比率が低い（PFR &lt;&lt; VPIP）:</strong> パッシブプレイヤー → レイズに強い手を想定</li>
-<li><strong>PFR ≈ VPIP:</strong> アグレッシブ → コールレンジを広げてトラップ</li>
+</div>
+</div>
+<div class="pattern-card pattern-b">
+<div class="pattern-card-header">🔥 パターンB：ルーズ過ぎる相手（コーリングステーション）</div>
+<div class="pattern-card-body">
+<div style="margin-bottom:8px">
+<span class="stats-badge sb-high">VPIP: 40%+</span>
+<span class="stats-badge sb-low">PFR: 低</span>
+<span class="stats-badge sb-high">WTSD: 高</span>
+</div>
+<p style="font-size:.9rem;margin:0 0 6px 0"><strong>特徴：</strong>広い参加率。降りないのでブラフが通らない</p>
+<p style="font-size:.9rem;margin:0"><strong>対処法：</strong></p>
+<ul style="font-size:.9rem;margin:6px 0 0 0;padding-left:18px">
+<li>ブラフは厳禁。バリューベットに集中</li>
+<li>薄いバリュー（2ndペア等）でも積極的にベット</li>
+<li>大きいサイズでコールさせて利益を最大化</li>
 </ul>
-<blockquote>💡 <strong>RFIとPFRの違い:</strong> RFI（Raise First In）はリンプやオープン前に誰もレイズしていない状況でのレイズ率。PFRは3ベットなども含む全レイズ率。ファーストアクションの純粋な積極性を見るにはRFIが有用。</blockquote>
-<hr>
-<h3>3Bet%</h3>
-<p><strong>正式名称:</strong> 3ベット頻度</p>
-<p><strong>説明:</strong> 相手のオープンレイズに対して3ベット（リレイズ）した割合。</p>
-<div class="table-wrap"><table><thead><tr>
-<th></th>
-<th>オンライン適正値</th>
-<th>ライブ適正値</th>
-</tr></thead><tbody>
-<tr>
-<td>6MAX</td>
-<td>7〜10%</td>
-<td>4〜7%</td>
-</tr>
-<tr>
-<td>フルリング</td>
-<td>5〜8%</td>
-<td>3〜6%</td>
-</tr>
-</tbody></table></div>
-<p><strong>適正値外のエクスプロイト:</strong></p>
-<ul>
-<li><strong>低すぎる（2%以下）:</strong> 3ベットに弱い → オープンレイズをスチール気味に増やす</li>
-<li><strong>高すぎる（15%+）:</strong> 3ベットブラフが多い → 4ベットやコールで対応</li>
+</div>
+</div>
+<div class="pattern-card pattern-c">
+<div class="pattern-card-header">⚡ パターンC：アグレッシブ過ぎる相手（マニアック系）</div>
+<div class="pattern-card-body">
+<div style="margin-bottom:8px">
+<span class="stats-badge sb-high">VPIP: 高</span>
+<span class="stats-badge sb-high">PFR: 高</span>
+<span class="stats-badge sb-high">3Bet: 15%+</span>
+</div>
+<p style="font-size:.9rem;margin:0 0 6px 0"><strong>特徴：</strong>何でもベット・レイズ。ブラフが多い</p>
+<p style="font-size:.9rem;margin:0"><strong>対処法：</strong></p>
+<ul style="font-size:.9rem;margin:6px 0 0 0;padding-left:18px">
+<li>コール範囲を広げてブラフキャッチ</li>
+<li>強いハンドでトラップ（チェックコール）</li>
+<li>感情的にならず、毎回EV判断を維持する</li>
 </ul>
-<hr>
-<h3>3Bet Fold%（3Bet Fold to 4Bet）</h3>
-<p><strong>正式名称:</strong> 3ベット後の4ベットに対するフォールド率</p>
-<p><strong>説明:</strong> 自分が3ベットした後、相手から4ベットされた時にフォールドする頻度。</p>
-<div class="table-wrap"><table><thead><tr>
-<th></th>
-<th>オンライン適正値</th>
-<th>ライブ適正値</th>
-</tr></thead><tbody>
-<tr>
-<td>適正</td>
-<td>50〜65%</td>
-<td>55〜70%</td>
-</tr>
-</tbody></table></div>
-<p><strong>適正値外のエクスプロイト:</strong></p>
-<ul>
-<li><strong>高すぎる（75%+）:</strong> 3ベット後の4ベットに弱い → 4ベットブラフを増やす</li>
-<li><strong>低すぎる（35%以下）:</strong> 4ベットをコール/5ベットしてくる → 4ベットはバリューのみ</li>
-</ul>
-<hr>
-<h3>WTSD（Went To ShowDown）</h3>
-<p><strong>正式名称:</strong> ショーダウン到達率</p>
-<p><strong>説明:</strong> フロップ後にショーダウンまで進んだ頻度。コール傾向の指標。</p>
-<div class="table-wrap"><table><thead><tr>
-<th></th>
-<th>オンライン適正値</th>
-<th>ライブ適正値</th>
-</tr></thead><tbody>
-<tr>
-<td>適正</td>
-<td>23〜28%</td>
-<td>25〜32%</td>
-</tr>
-</tbody></table></div>
-<p><strong>適正値外のエクスプロイト:</strong></p>
-<ul>
-<li><strong>高すぎる（35%+）:</strong> コールしすぎ → バリューで大きく打ち続ける</li>
-<li><strong>低すぎる（18%以下）:</strong> 降りすぎ → ブラフ頻度を上げる</li>
-</ul>
-<hr>
-<h3>W$SD（Won money at ShowDown）</h3>
-<p><strong>正式名称:</strong> ショーダウン勝利率</p>
-<p><strong>説明:</strong> ショーダウンに持ち込んだ際の勝利率。ハンドセレクションの質を示す。</p>
-<div class="table-wrap"><table><thead><tr>
-<th></th>
-<th>オンライン適正値</th>
-<th>ライブ適正値</th>
-</tr></thead><tbody>
-<tr>
-<td>適正</td>
-<td>50〜57%</td>
-<td>48〜55%</td>
-</tr>
-</tbody></table></div>
-<p><strong>適正値外のエクスプロイト:</strong></p>
-<ul>
-<li><strong>低すぎる（42%以下）:</strong> 弱いハンドでのショーダウンが多い → コール時のハンドが弱い証拠。ブラフやセミブラフが有効</li>
-<li><strong>高すぎる（62%+）:</strong> 強い手しかコールしない → ブラフ有効</li>
-</ul>
-<hr>
-<h2>1-3 各種スタッツの把握（図解）</h2>
-<h3>スタッツの相関関係</h3>
-<pre><code>VPIP高 + PFR低 = ルーズパッシブ（コーリングステーション）
-VPIP高 + PFR高 = ルーズアグレッシブ（LAG）
-VPIP低 + PFR低 = タイトパッシブ（ニット）
-VPIP低 + PFR高 = タイトアグレッシブ（TAG）★理想</code></pre>
-<h3>エクスプロイト戦略まとめ</h3>
+</div>
+</div>
+<h3>対処法まとめ表</h3>
 <div class="table-wrap"><table><thead><tr>
 <th>プレイヤータイプ</th>
 <th>主な弱点</th>
-<th>エクスプロイト方法</th>
+<th>対処法</th>
 </tr></thead><tbody>
-<tr>
-<td>ルーズパッシブ</td>
-<td>降りない</td>
-<td>バリューベット増量、ブラフ禁止</td>
-</tr>
-<tr>
-<td>タイトパッシブ</td>
-<td>ブラフに弱い</td>
-<td>スチール・Cベット増量</td>
-</tr>
-<tr>
-<td>ルーズアグレッシブ</td>
-<td>バランス崩れ</td>
-<td>強いハンドでトラップ、3ベット増量</td>
-</tr>
-<tr>
-<td>タイトアグレッシブ</td>
-<td>レンジが読みやすい</td>
-<td>広めの3ベット、慎重なコール</td>
-</tr>
-<tr>
-<td>マニアック</td>
-<td>-EVプレイ多</td>
-<td>コールレンジ広げ、バリュー集中</td>
-</tr>
+<tr><td>♣ ルーズパッシブ</td><td>降りない</td><td>バリューベット増量、ブラフ禁止</td></tr>
+<tr><td>♠ タイトパッシブ</td><td>ブラフに弱い</td><td>スチール・Cベット増量</td></tr>
+<tr><td>♥ ルーズアグレッシブ</td><td>バランス崩れ</td><td>強いハンドでトラップ、3ベット増量</td></tr>
+<tr><td>♦ タイトアグレッシブ</td><td>レンジが読みやすい</td><td>GTOベース対応、ポジション重視</td></tr>
+<tr><td>♠♥ マニアック</td><td>-EVプレイ多</td><td>コールレンジ広げ、バリュー集中</td></tr>
 </tbody></table></div>
 <hr>
 <h2>1-4 bb単位の考え方</h2>
 <h3>スタックの説明</h3>
 <p>ポーカーのスタック（持ちチップ）は常に<strong>bb（ビッグブラインド）単位</strong>で考えます。</p>
-<p>例：</p>
 <ul>
 <li>100BBスタック = 100ビッグブラインド分のチップ</li>
-<li>1/2のテーブルで20,000円 = 10,000bb（実際は10,000円が100BB）</li>
+<li>1/2のテーブルで20,000円 = 10,000円が100BB</li>
 </ul>
 <h3>bb単位の考え方</h3>
 <p>現金額でなくbb単位で考えることで：</p>
@@ -473,33 +582,14 @@ VPIP低 + PFR高 = タイトアグレッシブ（TAG）★理想</code></pre>
 <li>「2BBオープン」「20BBスタック」など共通言語で話せる</li>
 <li>EV計算がシンプルになる</li>
 </ul>
-<h3>マネープレッシャーの払拭</h3>
-<p>「2万円のコール」と考えると感情が揺れますが、「10BB」と考えることでより合理的な判断ができます。</p>
-<blockquote>💡 ポーカーテーブルではお金ではなくポイント（BB）として考える癖をつけることで、感情ではなく数字に基づいた判断ができるようになります。</blockquote>
-<hr>
-<h2>1-5 補足</h2>
-<h3>苦手なプレイヤーへの対処</h3>
-<p>参加率が高い（ルーズな）プレイヤーやアグレッションが高いプレイヤーに苦手意識を持つプレイヤーは多くいます。しかしこれは<strong>対処法を知らないから</strong>です。</p>
-<p><strong>ルーズなプレイヤーへの対処:</strong></p>
-<ul>
-<li>焦らずバリューハンドを待つ</li>
-<li>強いハンドで大きくベット</li>
-<li>ブラフを打たない</li>
-</ul>
-<p><strong>アグレッシブなプレイヤーへの対処:</strong></p>
-<ul>
-<li>強いハンドでコール・チェックレイズを活用</li>
-<li>相手のブラフ頻度を見極める</li>
-<li>感情的にならず、数字で判断する</li>
-</ul>
-<blockquote>💡 <strong>補足（想定外のハンドをショーされた時）:</strong> 相手がレンジ外の弱いハンドでプレイしていたことが分かったとき、それは<strong>チャンス</strong>です。相手が−EVなプレイをしているということは、長期的にあなたの利益が向上することを意味します。相手の「ミス」に動揺せず、正しいプレイを続けましょう。</blockquote>
+<blockquote>💡 ポーカーテーブルではお金ではなくポイント（BB）として考える癖をつけることで、感情ではなく数字に基づいた判断ができるようになります。「2万円のコール」ではなく「10BBのコール」と考える。</blockquote>
 <hr>
 <div class="summary-card">
 <h2>この章のまとめ</h2>
 <p><strong>内容の要約</strong></p>
 <ul>
 <li>プレイヤーは5つのタイプ（LP、TP、LAG、TAG、マニアック）に分類できる</li>
-<li>各タイプに応じたエクスプロイト戦略がある</li>
+<li>各タイプに応じた対処法がある</li>
 <li>スタッツ（VPIP、PFR、3Bet%など）で相手の傾向を数値化できる</li>
 </ul>
 <p><strong>応用</strong></p>
