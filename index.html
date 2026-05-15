@@ -32,6 +32,27 @@ body,.chapter-card h1,.chapter-card h2,.chapter-card h3,.site-title,
 .btn-timed{background:#fffbe6;color:#d4900a;border-color:#f0c040}
 .admin-time-input{border:1px solid #c9a84c;border-radius:7px;padding:6px 9px;font-size:.85rem;color:#333}
 #adminPanelClose{margin-top:20px;padding:9px 24px;background:#7a5200;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:1rem}
+/* ===== 初心者向けUIコンポーネント ===== */
+.info-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+@media(max-width:600px){.info-card-grid{grid-template-columns:1fr}}
+.info-card{border-radius:12px;padding:18px 20px;border:2px solid}
+.info-card-green{background:#f0fdf4;border-color:#86efac}
+.info-card-gold{background:#fffbeb;border-color:#fcd34d}
+.info-card-title{font-weight:800;font-size:1.05rem;margin-bottom:12px;color:#1a1a1a}
+.info-card-list{list-style:none;padding:0;margin:0}
+.info-card-list li{padding:4px 0;color:#333;font-size:.95rem}
+.step-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.step-badge{display:inline-block;min-width:60px;text-align:center;padding:4px 8px;border-radius:20px;font-size:.78rem;font-weight:800;white-space:nowrap}
+.step-1{background:#dbeafe;color:#1d4ed8}
+.step-2{background:#fef3c7;color:#92400e}
+.step-3{background:#f3e8ff;color:#7e22ce}
+.step-desc{font-size:.88rem;color:#555}
+/* テーブルストライプ */
+tbody tr:nth-child(even) td{background:#fafaf8}
+/* コールアウト強調 */
+.callout{border-left:4px solid #c9a84c;background:#fffbeb;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.callout-danger{border-left-color:#e53e3e;background:#fff5f5}
+.callout-success{border-left-color:#48bb78;background:#f0fff4}
 /* ===== ライトテーマ完全上書き ===== */
 body{background:#f5f5f0 !important}
 body::before{display:none !important}
@@ -76,7 +97,7 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 <button class="chapter-tab" data-target="ch7"><span class="chapter-icon heart">♥</span><span>7-EV/EQ</span><span class="lock-dot" data-lock-dot="ch7"></span></button>
 <button class="chapter-tab" data-target="ch8"><span class="chapter-icon multi">♠♥♦♣</span><span>8-バリュー/ブラフ</span><span class="lock-dot" data-lock-dot="ch8"></span></button></aside><main class="content"><article class="chapter-card" id="qa" data-chapter="qa"><div class="lock-panel" data-lock-panel="qa"></div><div class="chapter-admin" data-admin-controls="qa"><button data-lock="qa">ロック</button><button data-unlock="qa">解除</button><input type="datetime-local" data-time="qa"><button data-timed="qa">時間ロック</button></div><div class="content-protected"><h1>💬 Q&amp;A 質問箱</h1>
 <p>ポーカーに関する質問・ハンドレビューを記載するページです。</p>
-<blockquote>⚠️ この講座内容はAI geminiと筆者が理解した内容を記載している為、本来の意味と異なる場合がございます。内容を鵜呑みにせず、ご自身で調べることを忘れずにお願いします。コピー・転載不可。</blockquote>
+<blockquote>⚠️ この講座内容はAIと筆者が理解した内容を記載している為、本来の意味と異なる場合がございます。内容を鵜呑みにせず、ご自身で調べることを忘れずにお願いします。コピー・転載不可。</blockquote>
 <hr>
 <h2>質問を投稿する</h2>
 <p>ハンドレビューやポーカーに関する疑問を自由に記載してください。</p>
@@ -97,7 +118,7 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 <p><strong>A:</strong> ベットサイズに応じたバランスが重要です。第8章「バリューとブラフとマージナル」を参照してください。</p>
 <div class="qa-panel"><h2>質問投稿フォーム</h2><textarea id="questionText" rows="4" placeholder="質問やハンドレビューを入力"></textarea><textarea id="answerText" rows="3" placeholder="回答メモ（任意）"></textarea><button id="saveQa">保存</button><div id="qaList" class="qa-list"></div></div></div></article>
 <article class="chapter-card" id="ch0" data-chapter="ch0"><div class="lock-panel" data-lock-panel="ch0"></div><div class="chapter-admin" data-admin-controls="ch0"><button data-lock="ch0">ロック</button><button data-unlock="ch0">解除</button><input type="datetime-local" data-time="ch0"><button data-timed="ch0">時間ロック</button></div><div class="content-protected"><h1>0: 脱初心者</h1>
-<blockquote>⚠️ この講座内容はAI geminiと筆者が理解した内容を記載している為、本来の意味と異なる場合がございます。内容を鵜呑みにせず、ご自身で調べることを忘れずにお願いします。コピー・転載不可。</blockquote>
+<blockquote>⚠️ この講座内容はAIと筆者が理解した内容を記載している為、本来の意味と異なる場合がございます。内容を鵜呑みにせず、ご自身で調べることを忘れずにお願いします。コピー・転載不可。</blockquote>
 <hr>
 <h2>0-1 この講座の意味</h2>
 <h3>この講座は誰のためのものか</h3>
@@ -109,6 +130,26 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 <li>特定の個人から教えてもらい、ある程度理解が深まってきたプレイヤーとの<strong>意見のすり合わせ</strong>をしたい</li>
 </ul>
 <blockquote>💡 ポーカーを独学、もしくは特定個人から教えてもらい少し勉強し始めてある程度理解が深まったプレイヤーとの意見のすり合わせとして活用することを想定しています。</blockquote>
+<div class="info-card-grid">
+<div class="info-card info-card-green">
+<div class="info-card-title">🎯 この講座で学べること</div>
+<ul class="info-card-list">
+<li>✅ プレイヤーのタイプを見分ける方法</li>
+<li>✅ 確率・オッズの正確な計算</li>
+<li>✅ プリフロップで正しいハンドを選ぶ基準</li>
+<li>✅ ベット戦略の意図と使い分け</li>
+<li>✅ GTOとエクスプロイトの考え方</li>
+<li>✅ ブロッカーとEV/EQの実践的活用</li>
+<li>✅ バリュー・ブラフ・マージナルの判断基準</li>
+</ul>
+</div>
+<div class="info-card info-card-gold">
+<div class="info-card-title">📈 学習ステップ</div>
+<div class="step-row"><span class="step-badge step-1">STEP 1</span><div><strong>第1〜3章：基礎固め</strong><br><span class="step-desc">プレイヤー分析 / オッズ計算 / プリフロップレンジ</span></div></div>
+<div class="step-row"><span class="step-badge step-2">STEP 2</span><div><strong>第4〜5章：戦略理解</strong><br><span class="step-desc">ベット戦略 / GTO・集合分析</span></div></div>
+<div class="step-row"><span class="step-badge step-3">STEP 3</span><div><strong>第6〜8章：応用・深化</strong><br><span class="step-desc">ブロッカー / EV・EQ / バリュー・ブラフ</span></div></div>
+</div>
+</div>
 <h3>講座の進め方</h3>
 <pre><code>第0章（脱初心者）
     ↓
