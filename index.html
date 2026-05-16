@@ -83,6 +83,10 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 .ev-result strong{color:#1a7a1a !important}
 .qa-panel textarea{background:#ffffff !important;color:#1a1a1a !important;border-color:rgba(201,168,76,.4) !important}
 .qa-entry{background:#fdf8ee !important;border-color:rgba(201,168,76,.3) !important}
+.qa-status{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:#dcfce7;color:#166534;font-size:.75rem;font-weight:800}
+.qa-answer-card{border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:12px;margin:12px 0;background:#fffdf7}
+.qa-answer-card textarea{width:100%;min-height:82px;margin-top:8px;border:1px solid rgba(201,168,76,.45);border-radius:8px;padding:10px;resize:vertical}
+.qa-answer-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .chapter-admin{background:rgba(201,168,76,.05) !important}
 .chapter-admin input{background:#ffffff !important;color:#1a1a1a !important;border-color:rgba(201,168,76,.4) !important}
 /* ===== 第1章: プレイヤータイプカード ===== */
@@ -154,6 +158,7 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 <body>
 <header class="site-header"><div class="header-inner"><h1 class="site-title">♠♥ Poker Mastery Roadmap ♦♣</h1><button id="adminLock" class="admin-lock">🔒 Admin</button></div><button id="mobileToggle" class="mobile-toggle">章一覧を開く</button></header>
 <div class="layout"><aside id="sidebar" class="sidebar"><button class="chapter-tab" data-target="qa"><span class="chapter-icon gold">💬</span><span>Q&amp;A質問箱</span><span class="lock-dot" data-lock-dot="qa"></span></button>
+<button class="chapter-tab" data-target="qa-list"><span class="chapter-icon gold">📋</span><span>Q&amp;A一覧</span><span class="lock-dot" data-lock-dot="qa-list"></span></button>
 <button class="chapter-tab" data-target="ch0"><span class="chapter-icon spade">♠</span><span>0-脱初心者</span><span class="lock-dot" data-lock-dot="ch0"></span></button>
 <button class="chapter-tab" data-target="ch1"><span class="chapter-icon club">♣</span><span>1-プレイヤー分析</span><span class="lock-dot" data-lock-dot="ch1"></span></button>
 <button class="chapter-tab" data-target="ch2"><span class="chapter-icon diamond">♦</span><span>2-オッズ計算</span><span class="lock-dot" data-lock-dot="ch2"></span></button>
@@ -168,13 +173,11 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 <hr>
 <h2>質問を投稿する</h2>
 <p>ハンドレビューやポーカーに関する疑問を自由に記載してください。</p>
-<hr>
+<div class="qa-panel"><h2>質問投稿フォーム</h2><textarea id="questionText" rows="4" placeholder="質問やハンドレビューを入力"></textarea><button id="saveQa">送信</button></div></div></article>
+<article class="chapter-card" id="qa-list" data-chapter="qa-list"><div class="lock-panel" data-lock-panel="qa-list"></div><div class="chapter-admin" data-admin-controls="qa-list"><button data-lock="qa-list">ロック</button><button data-unlock="qa-list">解除</button><input type="datetime-local" data-time="qa-list"><button data-timed="qa-list">時間ロック</button></div><div class="content-protected"><h1>📋 Q&amp;A 一覧</h1>
+<p>投稿された質問と回答の一覧です。回答済みの質問には「回答済」と表示されます。</p>
 <h2>Q&amp;A 一覧</h2>
-<h3>Q: </h3>
-<p><strong>A:</strong> </p>
-<hr>
-<h3>Q: </h3>
-<p><strong>A:</strong> </p>
+<div id="qaList" class="qa-list"></div>
 <hr>
 <h2>よくある質問</h2>
 <h3>Q: GTOとエクスプロイトはどちらを優先すべきですか？</h3>
@@ -183,7 +186,7 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 <p><strong>A:</strong> ポジションに応じたオープンレンジを学ぶことが重要です。第3章「プリフロップレンジ」を参照してください。</p>
 <h3>Q: ブラフはどのくらいの頻度でするべきですか？</h3>
 <p><strong>A:</strong> ベットサイズに応じたバランスが重要です。第8章「バリューとブラフとマージナル」を参照してください。</p>
-<div class="qa-panel"><h2>質問投稿フォーム</h2><textarea id="questionText" rows="4" placeholder="質問やハンドレビューを入力"></textarea><textarea id="answerText" rows="3" placeholder="回答メモ（任意）"></textarea><button id="saveQa">保存</button><div id="qaList" class="qa-list"></div></div></div></article>
+</div></article>
 <article class="chapter-card" id="ch0" data-chapter="ch0"><div class="lock-panel" data-lock-panel="ch0"></div><div class="chapter-admin" data-admin-controls="ch0"><button data-lock="ch0">ロック</button><button data-unlock="ch0">解除</button><input type="datetime-local" data-time="ch0"><button data-timed="ch0">時間ロック</button></div><div class="content-protected"><h1>0: 脱初心者</h1>
 <blockquote>⚠️ この講座内容はAIと筆者が理解した内容を記載している為、本来の意味と異なる場合がございます。内容を鵜呑みにせず、ご自身で調べることを忘れずにお願いします。コピー・転載不可。</blockquote>
 <hr>
@@ -2024,6 +2027,7 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <div id="adminPanelBox">
 <h2>⚙️ 管理者設定 — 章ロック制御</h2>
 <div class="admin-row"><span>💬 Q&amp;A 質問箱</span><button class="admin-btn btn-lock" data-lock="qa">ロック</button><button class="admin-btn btn-unlock" data-unlock="qa">解除</button><input class="admin-time-input" type="datetime-local" data-time="qa"><button class="admin-btn btn-timed" data-timed="qa">時間ロック</button></div>
+<div class="admin-row"><span>📋 Q&amp;A 一覧</span><button class="admin-btn btn-lock" data-lock="qa-list">ロック</button><button class="admin-btn btn-unlock" data-unlock="qa-list">解除</button><input class="admin-time-input" type="datetime-local" data-time="qa-list"><button class="admin-btn btn-timed" data-timed="qa-list">時間ロック</button></div>
 <div class="admin-row"><span>♠ 0: 脱初心者</span><button class="admin-btn btn-lock" data-lock="ch0">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch0">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch0"><button class="admin-btn btn-timed" data-timed="ch0">時間ロック</button></div>
 <div class="admin-row"><span>♣ 1: プレイヤー分析</span><button class="admin-btn btn-lock" data-lock="ch1">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch1">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch1"><button class="admin-btn btn-timed" data-timed="ch1">時間ロック</button></div>
 <div class="admin-row"><span>♦ 2: オッズ計算</span><button class="admin-btn btn-lock" data-lock="ch2">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch2">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch2"><button class="admin-btn btn-timed" data-timed="ch2">時間ロック</button></div>
@@ -2033,6 +2037,8 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <div class="admin-row"><span>♦ 6: ブロッカー</span><button class="admin-btn btn-lock" data-lock="ch6">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch6">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch6"><button class="admin-btn btn-timed" data-timed="ch6">時間ロック</button></div>
 <div class="admin-row"><span>♥ 7: EV/EQ</span><button class="admin-btn btn-lock" data-lock="ch7">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch7">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch7"><button class="admin-btn btn-timed" data-timed="ch7">時間ロック</button></div>
 <div class="admin-row"><span>♠♥♦♣ 8: バリュー/ブラフ</span><button class="admin-btn btn-lock" data-lock="ch8">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch8">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch8"><button class="admin-btn btn-timed" data-timed="ch8">時間ロック</button></div>
+<h2>Q&amp;A回答用</h2>
+<div id="qaAnswerList"></div>
 <button id="adminPanelClose">✕ 閉じる</button>
 </div>
 </div>
@@ -2047,7 +2053,7 @@ function formatUnlock(value){const parts=yenFmt.formatToParts(new Date(value)).r
 function refreshLocks(){const data=locks();document.querySelectorAll('[data-chapter]').forEach(card=>{const id=card.dataset.chapter,state=data[id];let locked=false,msg='閲覧可能日時は未設定です',navMsg='';if(state){if(state.unlockAt){const t=new Date(state.unlockAt).getTime();if(Date.now()<t){locked=true;msg=formatUnlock(state.unlockAt);navMsg=msg}else{delete data[id];saveLocks(data)}}else if(state.locked){locked=true}}card.classList.toggle('locked',locked&&!admin);card.classList.toggle('admin-open',admin);const panel=card.querySelector('[data-lock-panel]');if(panel)panel.textContent=msg;const dot=document.querySelector(`[data-lock-dot="${id}"]`);if(dot){dot.classList.toggle('locked',locked);const tab=dot.closest('.chapter-tab'),title=tab?.querySelector('span:nth-child(2)');let label=tab?.querySelector('.chapter-unlock-label');if(navMsg){if(!label&&title){label=document.createElement('span');label.className='chapter-unlock-label';title.appendChild(label)}if(label)label.textContent=navMsg}else if(label){label.remove()}}});document.querySelectorAll('[data-admin-controls]').forEach(el=>el.classList.toggle('show',admin));document.getElementById('adminLock').textContent=admin?'🔓 Admin':'🔒 Admin';}
 document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['c','a'].includes(e.key.toLowerCase()))e.preventDefault();});
 /* タブ切り替え */
-const ALL_TABS=['qa','ch0','ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8'];
+const ALL_TABS=['qa','qa-list','ch0','ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8'];
 function showChapter(id){
   ALL_TABS.forEach(t=>{
     const el=document.getElementById(t);
@@ -2099,8 +2105,12 @@ document.addEventListener('click',e=>{
 });
 document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-function loadQa(){const list=document.getElementById('qaList');if(!list)return;const items=JSON.parse(localStorage.getItem(qaKey)||'[]');list.innerHTML=items.map((x,i)=>`<div class="qa-entry"><time>${new Date(x.at).toLocaleString('ja-JP')}</time><p><strong>Q:</strong> ${escapeHtml(x.q)}</p>${x.a?`<p><strong>A:</strong> ${escapeHtml(x.a)}</p>`:''}<button data-delqa="${i}">削除</button></div>`).join('');}
-const saveQa=document.getElementById('saveQa');if(saveQa){saveQa.addEventListener('click',()=>{const q=document.getElementById('questionText'),a=document.getElementById('answerText');if(!q.value.trim())return;const items=JSON.parse(localStorage.getItem(qaKey)||'[]');items.unshift({q:q.value.trim(),a:a.value.trim(),at:new Date().toISOString()});localStorage.setItem(qaKey,JSON.stringify(items));q.value='';a.value='';loadQa();});document.addEventListener('click',e=>{const d=e.target.closest('[data-delqa]');if(d){const items=JSON.parse(localStorage.getItem(qaKey)||'[]');items.splice(Number(d.dataset.delqa),1);localStorage.setItem(qaKey,JSON.stringify(items));loadQa();}});loadQa();}
+function normalizeQaItem(x){return {q:x.q||x.question||'',a:x.a||x.answer||'',at:x.at||x.createdAt||new Date().toISOString()};}
+function readQa(){return JSON.parse(localStorage.getItem(qaKey)||'[]').map(normalizeQaItem);}
+function writeQa(items){localStorage.setItem(qaKey,JSON.stringify(items));}
+function loadQa(){const list=document.getElementById('qaList');if(!list)return;const items=readQa();list.innerHTML=items.length?items.map((x)=>`<div class="qa-entry"><time>${new Date(x.at).toLocaleString('ja-JP')}</time><p><strong>Q:</strong> ${escapeHtml(x.q)}${x.a?'<span class="qa-status">回答済</span>':''}</p>${x.a?`<p><strong>A:</strong> ${escapeHtml(x.a)}</p>`:'<p><strong>A:</strong> 回答待ち</p>'}</div>`).join(''):'<p>投稿された質問はまだありません。</p>';}
+function loadQaAdmin(){const list=document.getElementById('qaAnswerList');if(!list)return;const items=readQa();list.innerHTML=items.length?items.map((x,i)=>`<div class="qa-answer-card"><time>${new Date(x.at).toLocaleString('ja-JP')}</time><p><strong>Q:</strong> ${escapeHtml(x.q)}${x.a?'<span class="qa-status">回答済</span>':''}</p><textarea data-answer-index="${i}" placeholder="回答を入力">${escapeHtml(x.a)}</textarea><div class="qa-answer-actions"><button class="admin-btn btn-timed" data-save-answer="${i}">回答を保存</button><button class="admin-btn btn-unlock" data-clear-answer="${i}">回答を空にする</button><button class="admin-btn btn-lock" data-delqa="${i}">削除</button></div></div>`).join(''):'<p>回答待ちの質問はありません。</p>';}
+const saveQa=document.getElementById('saveQa');if(saveQa){saveQa.addEventListener('click',()=>{const q=document.getElementById('questionText');if(!q.value.trim())return;const items=readQa();items.unshift({q:q.value.trim(),a:'',at:new Date().toISOString()});writeQa(items);q.value='';loadQa();loadQaAdmin();showChapter('qa-list');});document.addEventListener('click',e=>{const save=e.target.closest('[data-save-answer]');if(save&&admin){const items=readQa(),i=Number(save.dataset.saveAnswer),field=document.querySelector(`[data-answer-index="${i}"]`);if(items[i]&&field){items[i].a=field.value.trim();writeQa(items);loadQa();loadQaAdmin();}}const clear=e.target.closest('[data-clear-answer]');if(clear&&admin){const items=readQa(),i=Number(clear.dataset.clearAnswer);if(items[i]){items[i].a='';writeQa(items);loadQa();loadQaAdmin();}}const d=e.target.closest('[data-delqa]');if(d&&admin){const items=readQa();items.splice(Number(d.dataset.delqa),1);writeQa(items);loadQa();loadQaAdmin();}});loadQa();loadQaAdmin();}
 function chartDefaults(){Chart.defaults.color='#1a1a1a';Chart.defaults.borderColor='rgba(201,168,76,.22)';Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif";}
 function makeCharts(){if(!window.Chart)return;chartDefaults();const radar=document.getElementById('statsRadar');if(radar)new Chart(radar,{type:'radar',data:{labels:['VPIP','PFR','3Bet','WTSD','Aggression'],datasets:[{label:'ルーズパッシブ',data:[45,8,2,38,18],borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,.16)'},{label:'タイトパッシブ',data:[14,6,2,21,16],borderColor:'#e8c76a',backgroundColor:'rgba(232,199,106,.12)'},{label:'LAG',data:[34,28,12,29,72],borderColor:'#e53e3e',backgroundColor:'rgba(229,62,62,.12)'},{label:'TAG',data:[23,19,8,25,55],borderColor:'#48bb78',backgroundColor:'rgba(72,187,120,.12)'},{label:'マニアック',data:[62,44,20,42,90],borderColor:'#4299e1',backgroundColor:'rgba(66,153,225,.12)'}]},options:{responsive:true,scales:{r:{grid:{color:'rgba(201,168,76,.18)'},angleLines:{color:'rgba(201,168,76,.2)'},pointLabels:{color:'#e8c76a'},ticks:{display:false,max:100}}}}});const outs=document.getElementById('outsBar');if(outs)new Chart(outs,{type:'bar',data:{labels:['4 outs','6 outs','8 outs','9 outs','15 outs'],datasets:[{label:'フロップ 約%',data:[16,24,32,36,60],backgroundColor:'#c9a84c'},{label:'ターン 約%',data:[8,12,16,18,30],backgroundColor:'#4299e1'}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:70,ticks:{callback:v=>v+'%'}}}}});const gto=document.getElementById('gtoDoughnut');if(gto)new Chart(gto,{type:'doughnut',data:{labels:['GTOベース','Exploit調整','観察・更新'],datasets:[{data:[55,30,15],backgroundColor:['#c9a84c','#2d5a27','#e53e3e'],borderColor:'#f8f9fa'}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});const bluff=document.getElementById('bluffBar');if(bluff)new Chart(bluff,{type:'bar',data:{labels:['25% pot','33% pot','50% pot','75% pot','100% pot','200% pot'],datasets:[{label:'理論上のブラフ比率',data:[20,25,33,43,50,67],backgroundColor:['#e8c76a','#c9a84c','#a07830','#48bb78','#4299e1','#e53e3e']} ]},options:{responsive:true,scales:{y:{beginAtZero:true,max:75,ticks:{callback:v=>v+'%'}}}}});}
 function evCalc(){const p=document.getElementById('potSlider');if(!p)return;const c=document.getElementById('callSlider'),eq=document.getElementById('eqSlider'),res=document.getElementById('evResult');function upd(){potOut.textContent=p.value;callOut.textContent=c.value;eqOut.textContent=eq.value;const pot=+p.value,call=+c.value,e=+eq.value/100;const ev=e*(pot+call)-(1-e)*call;res.textContent=(ev>=0?'+':'')+ev.toFixed(2)+'BB';res.style.color=ev>=0?'#48bb78':'#e53e3e';}['input','change'].forEach(evt=>[p,c,eq].forEach(x=>x.addEventListener(evt,upd)));upd();}
