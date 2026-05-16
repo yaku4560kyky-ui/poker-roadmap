@@ -2046,11 +2046,12 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 (function(){
 'use strict';
 const ADMIN_PASSWORD='8944',lockKey='pokerRoadmapLocks',adminKey='pokerRoadmapAdmin',qaKey='pokerRoadmapQa';
+const FORCED_LOCKED=new Set(['ch2','ch3','ch4','ch5','ch6','ch7','ch8']);
 const yenFmt=new Intl.DateTimeFormat('ja-JP',{month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit',hour12:false});
 let admin=sessionStorage.getItem(adminKey)==='1';
 const locks=()=>JSON.parse(localStorage.getItem(lockKey)||'{}'),saveLocks=v=>localStorage.setItem(lockKey,JSON.stringify(v));
 function formatUnlock(value){const parts=yenFmt.formatToParts(new Date(value)).reduce((a,p)=>(a[p.type]=p.value,a),{});const minute=parts.minute==='00'?'':`${parts.minute}分`;return `[${parts.month}月${parts.day}日${parts.hour}時${minute}から閲覧可能]`;}
-function refreshLocks(){const data=locks();document.querySelectorAll('[data-chapter]').forEach(card=>{const id=card.dataset.chapter,state=data[id];let locked=false,msg='閲覧可能日時は未設定です',navMsg='';if(state){if(state.unlockAt){const t=new Date(state.unlockAt).getTime();if(Date.now()<t){locked=true;msg=formatUnlock(state.unlockAt);navMsg=msg}else{delete data[id];saveLocks(data)}}else if(state.locked){locked=true}}card.classList.toggle('locked',locked&&!admin);card.classList.toggle('admin-open',admin);const panel=card.querySelector('[data-lock-panel]');if(panel)panel.textContent=msg;const dot=document.querySelector(`[data-lock-dot="${id}"]`);if(dot){dot.classList.toggle('locked',locked);const tab=dot.closest('.chapter-tab'),title=tab?.querySelector('span:nth-child(2)');let label=tab?.querySelector('.chapter-unlock-label');if(navMsg){if(!label&&title){label=document.createElement('span');label.className='chapter-unlock-label';title.appendChild(label)}if(label)label.textContent=navMsg}else if(label){label.remove()}}});document.querySelectorAll('[data-admin-controls]').forEach(el=>el.classList.toggle('show',admin));document.getElementById('adminLock').textContent=admin?'🔓 Admin':'🔒 Admin';}
+function refreshLocks(){const data=locks();document.querySelectorAll('[data-chapter]').forEach(card=>{const id=card.dataset.chapter,state=data[id];let locked=false,msg='閲覧可能日時は未設定です',navMsg='';if(FORCED_LOCKED.has(id)){locked=true;msg='[第2章以降は閲覧不可]';navMsg=msg}else if(state){if(state.unlockAt){const t=new Date(state.unlockAt).getTime();if(Date.now()<t){locked=true;msg=formatUnlock(state.unlockAt);navMsg=msg}else{delete data[id];saveLocks(data)}}else if(state.locked){locked=true}}card.classList.toggle('locked',locked);card.classList.toggle('admin-open',admin);const panel=card.querySelector('[data-lock-panel]');if(panel)panel.textContent=msg;const dot=document.querySelector(`[data-lock-dot="${id}"]`);if(dot){dot.classList.toggle('locked',locked);const tab=dot.closest('.chapter-tab'),title=tab?.querySelector('span:nth-child(2)');let label=tab?.querySelector('.chapter-unlock-label');if(navMsg){if(!label&&title){label=document.createElement('span');label.className='chapter-unlock-label';title.appendChild(label)}if(label)label.textContent=navMsg}else if(label){label.remove()}}});document.querySelectorAll('[data-admin-controls]').forEach(el=>el.classList.toggle('show',admin));document.getElementById('adminLock').textContent=admin?'🔓 Admin':'🔒 Admin';}
 document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['c','a'].includes(e.key.toLowerCase()))e.preventDefault();});
 /* タブ切り替え */
 const ALL_TABS=['qa','qa-list','ch0','ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8'];
@@ -2094,13 +2095,13 @@ document.addEventListener('click',e=>{
   const btn=e.target.closest('.chapter-tab');
   if(btn){showChapter(btn.dataset.target);return;}
   const l=e.target.closest('[data-lock]');
-  if(l&&admin){const d=locks();d[l.dataset.lock]={locked:true};saveLocks(d);refreshLocks();}
+  if(l&&admin&&!FORCED_LOCKED.has(l.dataset.lock)){const d=locks();d[l.dataset.lock]={locked:true};saveLocks(d);refreshLocks();}
   const u=e.target.closest('[data-unlock]');
-  if(u&&admin){const d=locks();delete d[u.dataset.unlock];saveLocks(d);refreshLocks();}
+  if(u&&admin&&!FORCED_LOCKED.has(u.dataset.unlock)){const d=locks();delete d[u.dataset.unlock];saveLocks(d);refreshLocks();}
   const t=e.target.closest('[data-timed]');
   if(t&&admin){
     const input=document.querySelector(`#adminPanel [data-time="${t.dataset.timed}"]`);
-    if(input&&input.value){const d=locks();d[t.dataset.timed]={unlockAt:new Date(input.value).toISOString()};saveLocks(d);refreshLocks();}
+    if(input&&input.value&&!FORCED_LOCKED.has(t.dataset.timed)){const d=locks();d[t.dataset.timed]={unlockAt:new Date(input.value).toISOString()};saveLocks(d);refreshLocks();}
   }
 });
 document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
