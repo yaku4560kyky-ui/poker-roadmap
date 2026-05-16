@@ -32,6 +32,9 @@ body,.chapter-card h1,.chapter-card h2,.chapter-card h3,.site-title,
 .btn-timed{background:#fffbe6;color:#d4900a;border-color:#f0c040}
 .admin-time-input{border:1px solid #c9a84c;border-radius:7px;padding:6px 9px;font-size:.85rem;color:#333}
 #adminPanelClose{margin-top:20px;padding:9px 24px;background:#7a5200;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:1rem}
+.click-feedback{position:fixed;z-index:10000;left:0;top:0;width:72px;height:72px;border:2px solid #e8c76a;border-radius:999px;display:flex;align-items:center;justify-content:center;pointer-events:none;background:rgba(201,168,76,.16);color:#7a5200;font-size:.7rem;font-weight:900;letter-spacing:.12em;box-shadow:0 0 28px rgba(232,199,106,.55);transform:translate(-50%,-50%) scale(.35);animation:clickBurst .7s ease-out forwards}
+.click-feedback span{background:rgba(255,255,255,.88);border-radius:999px;padding:3px 7px}
+@keyframes clickBurst{0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}18%{opacity:1;transform:translate(-50%,-50%) scale(.86)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.65)}}
 /* ===== 初心者向けUIコンポーネント ===== */
 .info-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
 @media(max-width:600px){.info-card-grid{grid-template-columns:1fr}}
@@ -2040,8 +2043,8 @@ const ADMIN_PASSWORD='8944',lockKey='pokerRoadmapLocks',adminKey='pokerRoadmapAd
 const yenFmt=new Intl.DateTimeFormat('ja-JP',{month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit',hour12:false});
 let admin=sessionStorage.getItem(adminKey)==='1';
 const locks=()=>JSON.parse(localStorage.getItem(lockKey)||'{}'),saveLocks=v=>localStorage.setItem(lockKey,JSON.stringify(v));
-function formatUnlock(value){const parts=yenFmt.formatToParts(new Date(value)).reduce((a,p)=>(a[p.type]=p.value,a),{});return `${parts.month}月${parts.day}日${parts.hour}時${parts.minute}分から閲覧可能`;}
-function refreshLocks(){const data=locks();document.querySelectorAll('[data-chapter]').forEach(card=>{const id=card.dataset.chapter,state=data[id];let locked=false,msg='この章はロックされています';if(state){if(state.unlockAt){const t=new Date(state.unlockAt).getTime();if(Date.now()<t){locked=true;msg=formatUnlock(state.unlockAt)}else{delete data[id];saveLocks(data)}}else if(state.locked){locked=true}}card.classList.toggle('locked',locked&&!admin);card.classList.toggle('admin-open',admin);const panel=card.querySelector('[data-lock-panel]');if(panel)panel.textContent=msg;const dot=document.querySelector(`[data-lock-dot="${id}"]`);if(dot)dot.classList.toggle('locked',locked);});document.querySelectorAll('[data-admin-controls]').forEach(el=>el.classList.toggle('show',admin));document.getElementById('adminLock').textContent=admin?'🔓 Admin':'🔒 Admin';}
+function formatUnlock(value){const parts=yenFmt.formatToParts(new Date(value)).reduce((a,p)=>(a[p.type]=p.value,a),{});const minute=parts.minute==='00'?'':`${parts.minute}分`;return `[${parts.month}月${parts.day}日${parts.hour}時${minute}から閲覧可能]`;}
+function refreshLocks(){const data=locks();document.querySelectorAll('[data-chapter]').forEach(card=>{const id=card.dataset.chapter,state=data[id];let locked=false,msg='閲覧可能日時は未設定です';if(state){if(state.unlockAt){const t=new Date(state.unlockAt).getTime();if(Date.now()<t){locked=true;msg=formatUnlock(state.unlockAt)}else{delete data[id];saveLocks(data)}}else if(state.locked){locked=true}}card.classList.toggle('locked',locked&&!admin);card.classList.toggle('admin-open',admin);const panel=card.querySelector('[data-lock-panel]');if(panel)panel.textContent=msg;const dot=document.querySelector(`[data-lock-dot="${id}"]`);if(dot)dot.classList.toggle('locked',locked);});document.querySelectorAll('[data-admin-controls]').forEach(el=>el.classList.toggle('show',admin));document.getElementById('adminLock').textContent=admin?'🔓 Admin':'🔒 Admin';}
 document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['c','a'].includes(e.key.toLowerCase()))e.preventDefault();});
 /* タブ切り替え */
 const ALL_TABS=['qa','ch0','ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8'];
@@ -2070,7 +2073,18 @@ document.getElementById('adminLock').addEventListener('click',()=>{
 document.getElementById('adminPanelClose').addEventListener('click',()=>adminPanel.classList.remove('open'));
 adminPanel.addEventListener('click',e=>{if(e.target===adminPanel)adminPanel.classList.remove('open');});
 /* クリックイベント */
+function showClickFeedback(e){
+  if(!e.target.closest('button,a,input[type="range"]'))return;
+  const fx=document.createElement('span');
+  fx.className='click-feedback';
+  fx.style.left=e.clientX+'px';
+  fx.style.top=e.clientY+'px';
+  fx.innerHTML='<span>CLICK</span>';
+  document.body.appendChild(fx);
+  fx.addEventListener('animationend',()=>fx.remove(),{once:true});
+}
 document.addEventListener('click',e=>{
+  showClickFeedback(e);
   const btn=e.target.closest('.chapter-tab');
   if(btn){showChapter(btn.dataset.target);return;}
   const l=e.target.closest('[data-lock]');
