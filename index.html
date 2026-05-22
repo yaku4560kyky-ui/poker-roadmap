@@ -87,6 +87,14 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 .qa-answer-card{border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:12px;margin:12px 0;background:#fffdf7}
 .qa-answer-card textarea{width:100%;min-height:82px;margin-top:8px;border:1px solid rgba(201,168,76,.45);border-radius:8px;padding:10px;resize:vertical}
 .qa-answer-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.formula-box{border-left:5px solid #f59e0b;background:linear-gradient(135deg,#fffbeb,#fff);border-radius:8px;padding:13px 15px;margin:14px 0;box-shadow:0 10px 24px rgba(120,53,15,.08);font-weight:800;color:#7a5200}
+.formula-box small{display:block;color:#92400e;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.answer-box{border:1px solid rgba(72,187,120,.35);border-radius:8px;background:#f0fff4;margin:12px 0;overflow:hidden}
+.answer-box summary{cursor:pointer;list-style:none;padding:11px 14px;background:#dcfce7;color:#166534;font-weight:800}
+.answer-box summary::-webkit-details-marker{display:none}
+.answer-box summary:after{content:"＋";float:right}
+.answer-box[open] summary:after{content:"－"}
+.answer-body{padding:13px 14px;color:#333;background:#fff}
 .chapter-admin{background:rgba(201,168,76,.05) !important}
 .chapter-admin input{background:#ffffff !important;color:#1a1a1a !important;border-color:rgba(201,168,76,.4) !important}
 /* ===== 第1章: プレイヤータイプカード ===== */
@@ -378,7 +386,7 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 </div>
 </div>
 <div class="callout callout-success">
-<strong>💡 補足：TAGが理想とされる理由</strong><br>
+<strong>💡 中級者以上のアドバイス：TAGが理想とされる理由</strong><br>
 「強いハンドで積極的にベット、弱いハンドは無駄に追わない」という原則がポーカーの最も基本的な勝ち方です。TAGスタイルはこの原則を体現しており、初心者が最初に目指すべき姿です。
 </div>
 <div class="callout">
@@ -436,17 +444,17 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 </div>
 <div class="stats-card">
 <div class="stats-card-header">
-<div class="stats-card-name">3Bet Fold%</div>
-<div class="stats-card-fullname">Fold to 4-Bet after 3-Bet（3ベット後4ベットへのフォールド率）</div>
+<div class="stats-card-name">Fold to 3Bet%</div>
+<div class="stats-card-fullname">Fold to Preflop 3Bet（3ベットへのフォールド率）</div>
 </div>
 <div class="stats-card-body">
-<p>自分が3ベットした後、相手から4ベットされた時にフォールドする頻度。</p>
+<p>3ベットを受けた時にフォールドする頻度。</p>
 <div class="stats-range">
-<span class="stats-range-badge stats-low">低（35%以下）：4ベット強</span>
-<span class="stats-range-badge stats-ok">適正（50〜65%）：標準</span>
-<span class="stats-range-badge stats-high">高（75%+）：4ベットに弱</span>
+<span class="stats-range-badge stats-low">低（35%以下）：抵抗しすぎ</span>
+<span class="stats-range-badge stats-ok">適正（50〜60%）：標準</span>
+<span class="stats-range-badge stats-high">高（70%+）：3ベットに弱</span>
 </div>
-<div class="stats-insight">高すぎる → 4ベットブラフを増やす ／ 低すぎる → 4ベットはバリューのみ</div>
+<div class="stats-insight">高すぎる → ライト3ベットを増やす ／ 低すぎる → 3ベットはバリュー中心</div>
 </div>
 </div>
 <div class="stats-card">
@@ -477,6 +485,9 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 <span class="stats-range-badge stats-high">高（62%+）：強手のみコール</span>
 </div>
 <div class="stats-insight">低すぎる → ブラフ・セミブラフが有効 ／ 高すぎる → ブラフ有効</div>
+<div class="callout">
+<strong>💡 中級者以上のアドバイス:</strong> W$SDは自分のリバーのベットサイズがバリューベットの時に大きいサイズを使う場合は標準より数値が下がり、小さいサイズを使う場合は標準より上がるので、一概に数値通りのプレイヤーにはならないことを念頭においてください。
+</div>
 </div>
 </div>
 </div>
@@ -612,7 +623,7 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <div class="viz-card"><h2>プレイヤータイプ別 VPIP / PFR</h2><canvas id="statsRadar"></canvas></div></div></article>
 <article class="chapter-card" id="ch2" data-chapter="ch2"><div class="lock-panel" data-lock-panel="ch2"></div><div class="chapter-admin" data-admin-controls="ch2"><button data-lock="ch2">ロック</button><button data-unlock="ch2">解除</button><input type="datetime-local" data-time="ch2"><button data-timed="ch2">時間ロック</button></div><div class="content-protected"><h1>2: オッズとアウツの計算</h1>
 <hr>
-<h2>2-1 オッズとは</h2>
+<h2>2-1 オッズとアウツの例題</h2>
 <h3>オッズの説明</h3>
 <p><strong>オッズ</strong>とは、ある事象が起こる「比率」を表す指標です。ポーカーでは主に<strong>ポットオッズ</strong>として使用されます。</p>
 <ul>
@@ -627,11 +638,17 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <li>ポットオッズより勝率が低ければコールは長期的にマイナス</li>
 </ul>
 <blockquote>💡 「今回勝てるか」ではなく「長期的に得か」で判断するのがポーカーの本質です。</blockquote>
-<hr>
-<h2>2-2 アウツの説明</h2>
 <h3>アウツとは</h3>
 <p><strong>アウツ（Outs）</strong>とは、次のカードが来ることで自分のハンドが改善して勝てるようになる<strong>残りデッキのカード枚数</strong>です。</p>
-<h3>アウツの例</h3>
+<h3>例題① フラッシュドローのアウツ</h3>
+<p>自分が同じスートを4枚持っている状態では、残りの同じスートは13枚中9枚です。</p>
+<div class="formula-box"><small>fx 計算式</small>13枚 - 見えている同スート4枚 = 9アウツ</div>
+<h3>例題② ストレートドローのアウツ</h3>
+<p>両端ストレートドローは、上下どちらかのカードが来ればストレートが完成します。</p>
+<div class="formula-box"><small>fx 計算式</small>4枚 + 4枚 = 8アウツ</div>
+<p>ガットショットは真ん中の1種類だけが必要です。</p>
+<div class="formula-box"><small>fx 計算式</small>4枚 = 4アウツ</div>
+<h3>アウツ早見表</h3>
 <div class="table-wrap"><table><thead><tr>
 <th>ドローの種類</th>
 <th>アウツ数</th>
@@ -664,7 +681,23 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 </tr>
 </tbody></table></div>
 <p><strong>フラッシュ + ストレートドロー（コンボドロー）:</strong> 最大15アウツ</p>
-<h3>2・4ルール（アウツから勝率の概算）</h3>
+<blockquote>⚠️ <strong>中級者以上からの注意:</strong> 自分のアウツが相手の役をさらに強くしてしまうカード（デッドアウツ）ではないかを確認しましょう。例えば、自分がストレートのアウツを持っていても、それがボードに3枚あるスートと同じなら、相手にフラッシュを完成させてしまう可能性があります。</blockquote>
+<hr>
+<h2>2-2 勝率計算の基本</h2>
+<h3>正確な勝率計算方法</h3>
+<p>まずは概算ではなく、しっかりと計算する方法を確認します。フロップやターンでドローを持っている場合、次のストリートで役が完成する確率は以下のように計算できます。</p>
+<div class="formula-box"><small>fx 公式</small>勝率(%) = アウツ ÷ 残りデッキ枚数 × 100</div>
+<ul>
+<li><strong>フロップ時点:</strong> 残りカードは47枚（52枚 - 手札2枚 - フロップ3枚）</li>
+<li><strong>ターン時点:</strong> 残りカードは46枚（52枚 - 手札2枚 - フロップ3枚 - ターン1枚）</li>
+</ul>
+<h3>正確に計算する例</h3>
+<ul>
+<li>フロップでフラッシュドロー（9アウツ）: 9 ÷ 47 × 100 = <strong>約19.1%</strong>（ターン1枚だけで完成する確率）</li>
+<li>ターンで両端ストレートドロー（8アウツ）: 8 ÷ 46 × 100 = <strong>約17.4%</strong>（リバー1枚で完成する確率）</li>
+</ul>
+<p>フロップからリバーまで2枚見られる場合は、ターンで外してもリバーで引ける可能性があるため、勝率は1枚だけ見る時より高くなります。</p>
+<h3>2倍4倍のルール（アウツから勝率の概算）</h3>
 <div class="table-wrap"><table><thead><tr>
 <th>状況</th>
 <th>計算方法</th>
@@ -683,28 +716,35 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <li>フラッシュドロー（9アウツ）のフロップ時点 → 9 &#215; 4 = <strong>約36%</strong></li>
 <li>ガットショット（4アウツ）のターン時点 → 4 &#215; 2 = <strong>約8%</strong></li>
 </ul>
+<blockquote>⚠️ <strong>中級者以上からの注意:</strong> 2倍4倍のルールはあくまで概算です。特にアウツが多いコンボドローでは実際の勝率とズレが出やすいため、大きなポットでは正確な計算やレンジ同士のエクイティも意識しましょう。</blockquote>
 <hr>
-<h2>2-3 ポットオッズの計算式</h2>
+<h2>2-3 ポットオッズの計算式と例題</h2>
 <h3>計算式</h3>
-<pre><code>ポットオッズ(%) = コール額 &#247; (現在のポット + コール額) &#215; 100</code></pre>
+<div class="formula-box"><small>fx 公式</small>ポットオッズ(%) = コール額 ÷ (現在のポット + 相手のベット額 + コール額) × 100</div>
 <p>これを自分のエクイティ（勝率）と比較します：</p>
 <ul>
 <li><strong>エクイティ &gt; ポットオッズ</strong> → コール有利（+EV）</li>
 <li><strong>エクイティ &lt; ポットオッズ</strong> → フォールド有利（−EV）</li>
 </ul>
-<h3>例題①</h3>
-<p><strong>状況:</strong> ポット = 100BB、相手がポットの50%（50BB）をベット</p>
-<pre><code>ポットオッズ = 50 &#247; (100 + 50) &#215; 100 = 50 &#247; 150 &#215; 100 ≈ 33%</code></pre>
-<p>→ 自分の勝率（エクイティ）が <strong>33%以上</strong> なら コールが有利</p>
-<p>例：フラッシュドロー（約36%）→ コール有利 ✅</p>
-<p>例：ガットショット（フロップ：約16%）→ コール不利 ❌</p>
-<hr>
-<h3>例題②</h3>
-<p><strong>状況:</strong> ポット = 60BB、相手がポット全額（60BB）のポットベット</p>
-<pre><code>ポットオッズ = 60 &#247; (60 + 60) &#215; 100 = 60 &#247; 120 &#215; 100 = 50%</code></pre>
-<p>→ 自分の勝率が <strong>50%以上</strong> でないとコールは不利</p>
-<p>例：コンボドロー（15アウツ、フロップ：約60%）→ コール有利 ✅</p>
-<p>例：フラッシュドロー単独（約36%）→ コール不利 ❌（ただしインプライドオッズ考慮要）</p>
+<h3>例題① フラッシュドローでコールできるか</h3>
+<p>ポット100BB、相手が50BBをベットしました。あなたはフロップでフラッシュドロー（9アウツ）を持っています。</p>
+<div class="formula-box"><small>fx 計算式</small>ポットオッズ = 50 ÷ (100 + 50 + 50) × 100 = 25%</div>
+<p>フロップからリバーまでの勝率は、2倍4倍のルールで 9 × 4 = <strong>約36%</strong>です。36% &gt; 25% なので、基本的には<strong>コール有利</strong>です。</p>
+<h3>例題② ターンのストレートドローでコールできるか</h3>
+<p>ポット100BB、相手が100BB（ポットベット）をしました。あなたはターンで両端ストレートドロー（8アウツ）を持っています。</p>
+<div class="formula-box"><small>fx 計算式</small>ポットオッズ = 100 ÷ (100 + 100 + 100) × 100 = 33.3%</div>
+<p>ターンからリバーまでの勝率は、2倍4倍のルールで 8 × 2 = <strong>約16%</strong>です。16% &lt; 33.3% なので、インプライドオッズを考慮しないなら<strong>フォールド有利</strong>です。</p>
+<h3>練習問題</h3>
+<p>段階を踏むごとに難しくなっています。実際に紙に書くか頭の中で計算してから回答を確認してください。</p>
+<h3>練習問題①（基本）</h3>
+<p>ポット60BB、相手が20BBをベットしました。あなたはターンでガットショット（4アウツ）を持っています。コールすべきでしょうか？</p>
+<details class="answer-box"><summary>回答を表示</summary><div class="answer-body">フォールドが基本です。ポットオッズ = 20 ÷ (60 + 20 + 20) × 100 = 20%。ターンのガットショットは 4 × 2 = 約8%。8% &lt; 20% なので、追加利益が見込めないならフォールドです。</div></details>
+<h3>練習問題②（応用）</h3>
+<p>ポット80BB、相手が40BBをベットしました。あなたはフロップで両端ストレートドロー（8アウツ）を持っています。コールすべきでしょうか？</p>
+<details class="answer-box"><summary>回答を表示</summary><div class="answer-body">コール寄りです。ポットオッズ = 40 ÷ (80 + 40 + 40) × 100 = 25%。フロップの両端ストレートドローは 8 × 4 = 約32%。32% &gt; 25% なので、基本的にはコールできます。ただし、完成カードが相手のフラッシュを完成させる可能性がある場合は注意が必要です。</div></details>
+<h3>練習問題③（実践）</h3>
+<p>ポット120BB、相手が90BBをベットしました。あなたはフロップでフラッシュドロー（9アウツ）に加えて、Aのオーバーカードが1枚あります。Aも勝ちにつながる可能性があると考えた場合、コール判断はどう変わりますか？</p>
+<details class="answer-box"><summary>回答を表示</summary><div class="answer-body">アウツの見積もり次第でコールに近づきます。まずフラッシュドローだけなら 9 × 4 = 約36%。ポットオッズ = 90 ÷ (120 + 90 + 90) × 100 = 30%。この時点で 36% &gt; 30% なのでコール可能です。さらにAが有効なアウツとして数えられるなら、実質アウツは増えます。ただし、Aが相手のツーペアや強いトップペアに負ける場合もあるため、オーバーカードを常に丸ごと3アウツとして数えないことが重要です。</div></details>
 <hr>
 <h2>2-4 インプライドオッズ</h2>
 <h3>インプライドオッズとは</h3>
@@ -724,14 +764,14 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <li>ドローが完成してもナッツでない（負けるリスクがある）</li>
 <li>スタックが浅い（ショートスタック）</li>
 </ul>
-<blockquote>💡 <strong>補足:</strong> インプライドオッズはあくまで「期待値の見込み」です。過大評価は禁物。相手のプレイタイプを考慮した現実的な見積もりを心がけましょう。</blockquote>
+<blockquote>💡 <strong>中級者以上のアドバイス:</strong> インプライドオッズはあくまで「期待値の見込み」です。過大評価は禁物。相手のプレイタイプを考慮した現実的な見積もりを心がけましょう。</blockquote>
 <hr>
 <div class="summary-card">
 <h2>この章のまとめ</h2>
 <p><strong>内容の要約</strong></p>
 <ul>
 <li>アウツ：自分を改善するカードの枚数</li>
-<li>2・4ルールでアウツから勝率を概算できる</li>
+<li>2倍4倍のルールでアウツから勝率を概算できる</li>
 <li>ポットオッズと勝率を比較してコール/フォールドを判断</li>
 <li>インプライドオッズで将来の利益も考慮する</li>
 </ul>
@@ -887,8 +927,8 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <li>レンジが弱い側（キャップされている側）は強いベットに対して降りやすくなる</li>
 <li>ポジションとレンジの組み合わせでボード毎の戦略が決まる</li>
 </ul>
-<blockquote>💡 <strong>補足（キャップ/Capped）:</strong> 「キャップされている」とは、相手のレンジに<strong>最強クラスのハンドがほぼ含まれない</strong>状態を指します。例えば、プリフロップでコールのみしたBBのレンジには、通常AAやAKが含まれません（3ベットするため）。このため、高いボードではBBは「キャップ」されており、UTGやオープンレイザーが有利になります。</blockquote>
-<blockquote>💡 <strong>補足（想定外のハンドをショーされた時）:</strong> 相手がレンジ外のハンド（例：BBからコールした相手がAAを持っていた）を見せてくれた場合、それは次回以降のエクスプロイトのヒントです。相手のレンジ認識を更新し、次の機会に活かしましょう。相手のミスプレイは長期的にあなたの利益になります。</blockquote>
+<blockquote>💡 <strong>中級者以上のアドバイス（キャップ/Capped）:</strong> 「キャップされている」とは、相手のレンジに<strong>最強クラスのハンドがほぼ含まれない</strong>状態を指します。例えば、プリフロップでコールのみしたBBのレンジには、通常AAやAKが含まれません（3ベットするため）。このため、高いボードではBBは「キャップ」されており、UTGやオープンレイザーが有利になります。</blockquote>
+<blockquote>💡 <strong>中級者以上のアドバイス（想定外のハンドをショーされた時）:</strong> 相手がレンジ外のハンド（例：BBからコールした相手がAAを持っていた）を見せてくれた場合、それは次回以降のエクスプロイトのヒントです。相手のレンジ認識を更新し、次の機会に活かしましょう。相手のミスプレイは長期的にあなたの利益になります。</blockquote>
 <hr>
 <div class="summary-card">
 <h2>この章のまとめ</h2>
@@ -1349,7 +1389,7 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 </tr>
 </tbody></table></div>
 <hr>
-<h3>補足：コンボ数の計算方法</h3>
+<h3>中級者以上のアドバイス：コンボ数の計算方法</h3>
 <p><strong>コンボ（Combo）</strong>とは、特定のハンドが構成される組み合わせの数です。</p>
 <div class="table-wrap"><table><thead><tr>
 <th>ハンドタイプ</th>
@@ -1601,7 +1641,7 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <td>約55%</td>
 </tr>
 </tbody></table></div>
-<h3>フォールドエクイティ（補足）</h3>
+<h3>フォールドエクイティ（中級者以上のアドバイス）</h3>
 <p><strong>フォールドエクイティ（Fold Equity）</strong>とは、<strong>ベットすることで相手がフォールドする可能性から得られる期待利益</strong>です。</p>
 <ul>
 <li>EQはショーダウンのみを考慮</li>
