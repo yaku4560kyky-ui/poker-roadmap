@@ -91,6 +91,20 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 .formula-box small{display:block;color:#92400e;font-size:.74rem;letter-spacing:.06em;margin-bottom:4px}
 .spot-box{border:1px solid rgba(201,168,76,.32);border-radius:8px;background:#fffdf7;padding:12px 14px;margin:12px 0;color:#333}
 .spot-box strong{color:#7a5200 !important}
+.advice-panel{border:1px solid rgba(66,153,225,.28);border-left:5px solid #4299e1;border-radius:10px;background:#eff6ff;padding:16px 18px;margin:18px 0;color:#1e3a5f}
+.advice-panel h3,.advice-panel h4{margin-top:0 !important;color:#1d4ed8 !important}
+.advice-grid,.multiway-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.concept-card,.hand-card{border:1px solid rgba(201,168,76,.28);border-radius:10px;background:#fff;padding:15px;box-shadow:0 8px 18px rgba(120,53,15,.06)}
+.concept-card.good,.hand-card.good{border-color:rgba(72,187,120,.42);background:#f0fff4}
+.concept-card.bad,.hand-card.bad{border-color:rgba(229,62,62,.35);background:#fff5f5}
+.concept-card h4,.hand-card h4{margin:0 0 8px !important;font-size:1rem !important;color:#7a5200 !important}
+.section-lead{font-size:1.02rem;font-weight:700;color:#3f2d00 !important;background:#fffbeb;border:1px solid rgba(201,168,76,.32);border-radius:10px;padding:14px 16px}
+.decision-strip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.decision-strip div{border-radius:10px;padding:14px 16px;font-weight:800}
+.decision-call{background:#ecfdf5;border:1px solid #86efac;color:#166534}
+.decision-fold{background:#fff1f2;border:1px solid #fda4af;color:#9f1239}
+.note-pill{display:inline-block;border-radius:999px;padding:3px 9px;background:#fef3c7;color:#92400e;font-size:.78rem;font-weight:800;margin-right:5px}
+@media(max-width:640px){.advice-grid,.multiway-grid,.decision-strip{grid-template-columns:1fr}.formula-box,.spot-box,.advice-panel,.concept-card,.hand-card{padding:12px}.chapter-card h2{font-size:1.28rem}.chapter-card h3{font-size:1.05rem}.section-lead{font-size:.95rem}}
 .answer-box{border:1px solid rgba(72,187,120,.35);border-radius:8px;background:#f0fff4;margin:12px 0;overflow:hidden}
 .answer-box summary{cursor:pointer;list-style:none;padding:11px 14px;background:#dcfce7;color:#166534;font-weight:800}
 .answer-box summary::-webkit-details-marker{display:none}
@@ -772,6 +786,78 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <li>スタックが浅い（ショートスタック）</li>
 </ul>
 <blockquote>💡 <strong>中級者以上のアドバイス:</strong> インプライドオッズはあくまで「期待値の見込み」です。過大評価は禁物。相手のプレイタイプを考慮した現実的な見積もりを心がけましょう。</blockquote>
+<div class="advice-panel">
+<h3>💡 実戦で使えるちょっとした補足</h3>
+<p>この計算式は完璧ですが、実際のプレイ、特にディープスタックのキャッシュゲームなどでは、計算された数字に加えて以下の2つの要素（ハンプライズド・エクイティ）を考慮すると、さらに判断の精度が上がります。</p>
+<div class="advice-grid">
+<div class="concept-card good">
+<h4>インプライドオッズ（潜在的な利益）</h4>
+<p>もしコールした後のポストフロップ（フロップ以降）で、自分が強い役を完成させたときに「相手からさらに追加でチップを奪えそう」なら、必要な勝率に少し届かなくてもコールして良い場合があります。</p>
+<p><span class="note-pill">例</span>ポケットペアでセットを狙う場合など。</p>
+</div>
+<div class="concept-card bad">
+<h4>リバースインプライドオッズ（潜在的な失点）</h4>
+<p>コールしてヒットしたものの、相手がより強いキッカーや上の役を持っていて、ポストフロップでさらに大きく失うリスクがある場合です。</p>
+<p><span class="note-pill">注意</span>弱いA-xやK-xなど、ドミネイトされやすいハンドは必要勝率があってもフォールド寄りになることがあります。</p>
+</div>
+</div>
+</div>
+<hr>
+<h2>2-5 マルチウェイの選出ハンド</h2>
+<p class="section-lead">BB（ビッグブラインド）はすでに1bbを支払っているため、他のポジションに比べて「追加で支払う額」に対するポットオッズが非常に良くなる特権があります。ただし、オッズが合うから何でもコールしていいわけではありません。</p>
+<h3>1. コールオッズ（オッズが合う）の算出方法</h3>
+<p>オッズが合うかどうかは、<strong>ポットオッズ</strong>と<strong>ハンドの勝率（エクイティ）</strong>を比較して判断します。</p>
+<div class="spot-box"><strong>状況:</strong> 200点（2bb）のレイズが入り、1人がコール。残りはフォールドし、自分のBBに回ってきた。<br><strong>自分のBB:</strong> すでに100点支払い済み<br><strong>追加で必要なコール額:</strong> 100点（1bb）</div>
+<div class="table-wrap"><table><thead><tr><th>内訳</th><th>点数</th></tr></thead><tbody>
+<tr><td>SB（スモールブラインド）</td><td>50点</td></tr>
+<tr><td>オープンレイザー</td><td>200点</td></tr>
+<tr><td>コーラー</td><td>200点</td></tr>
+<tr><td>自分のBB（提出済）</td><td>100点</td></tr>
+<tr><td><strong>コール前の小計</strong></td><td><strong>550点</strong></td></tr>
+<tr><td>自分の追加コール額</td><td>100点</td></tr>
+<tr><td><strong>コール後の総ポット</strong></td><td><strong>650点</strong></td></tr>
+</tbody></table></div>
+<div class="formula-box"><small>計算式</small>必要勝率 = 追加のコール額 ÷ コールした後の総ポット額 × 100<br>必要勝率 = 100 ÷ 650 × 100 ≒ 15.4%</div>
+<p><strong>結論:</strong> この状況では、自分のハンドが相手2人のレンジに対して15.4%以上の勝率があれば、数学的にはコールオッズが合います。3人以上のマルチウェイでも、15.4%の勝率をクリアすること自体は高いハードルではありません。</p>
+<h3>2. オッズが成り立つハンド</h3>
+<p>プリフロップのマルチウェイでは、フロップが開いたときに<strong>明確に強い役（ナッツ級）を作りやすいハンド</strong>のオッズが成立します。これはインプライドオッズが良いハンドとも呼べます。</p>
+<div class="multiway-grid">
+<div class="hand-card good">
+<h4>① スーテッドコネクター / スーテッドギャッパー</h4>
+<p><strong>例:</strong> 9♦8♦、8♣7♣、J♥9♥</p>
+<p>フラッシュドロー、ストレートドロー、完成ハンドになりやすいタイプです。マルチウェイでは中途半端なワンペアより、まくれば強く勝てるドローに変わるハンドが強力です。</p>
+</div>
+<div class="hand-card good">
+<h4>② ポケットペア（ロー〜ミドルペア）</h4>
+<p><strong>例:</strong> 2♠2♥ 〜 8♦8♣</p>
+<p>フロップでセットが刺さる確率は約11.8%（約8.5回に1回）。セットにならなければ簡単にフォールドでき、刺さった時は大きなバリューを狙えます。</p>
+</div>
+<div class="hand-card good">
+<h4>③ スーテッドA</h4>
+<p><strong>例:</strong> A♠2♠ 〜 A♥5♥</p>
+<p>ナッツフラッシュを作る可能性があり、マルチウェイで相手の低いフラッシュを大きく上回れるポテンシャルがあります。</p>
+</div>
+</div>
+<h3>3. オッズが成り立たないハンド</h3>
+<p>数学的な勝率だけを見れば一見コールできそうでも、ポーカーには<strong>実現勝率（エクイティ・リアライゼーション / EQR）</strong>があります。BBはポストフロップでポジションが悪いため、ヒットしても戦いにくいハンドは勝率を実現できず、オッズが成り立たなくなります。</p>
+<div class="multiway-grid">
+<div class="hand-card bad">
+<h4>① オフスートのミドル〜ローカード</h4>
+<p><strong>例:</strong> J♠5♥、9♦4♣、7♥2♠</p>
+<p>純粋な勝率が低く、フラッシュやストレートのような強力な役を作る可能性も低いです。安く見えてもコールしない方が安全です。</p>
+</div>
+<div class="hand-card bad">
+<h4>② オフスートのブロードウェイ</h4>
+<p><strong>例:</strong> K♠J♥、Q♦J♣、A♥9♠</p>
+<p>初心者が最も罠に落ちやすいハンドです。トップペアを作っても相手に強いキッカー、ツーペア、セットがある可能性が高く、リバースインプライドオッズで大きく負けやすくなります。</p>
+</div>
+</div>
+<h3>まとめ：BBでの判断基準</h3>
+<div class="decision-strip">
+<div class="decision-call">追加投資が安い + ナッツ級に化ける手<br>→ コール（オッズが合う）</div>
+<div class="decision-fold">追加投資が安い + ヒットしても泥沼になりやすい手<br>→ フォールド（実現勝率が低い）</div>
+</div>
+<p>BBはポストフロップで常に最初にアクションしやすい、最悪のポジションです。計算上のポットオッズだけでなく、<strong>フロップ以降で迷わず簡単にプレイできるか</strong>もセットで判断しましょう。</p>
 <hr>
 <div class="summary-card">
 <h2>この章のまとめ</h2>
@@ -781,16 +867,19 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <li>2倍4倍のルールでアウツから勝率を概算できる</li>
 <li>ポットオッズと勝率を比較してコール/フォールドを判断</li>
 <li>インプライドオッズで将来の利益も考慮する</li>
+<li>マルチウェイではポットオッズだけでなく、実現勝率とリバースインプライドオッズも考える</li>
 </ul>
 <p><strong>応用</strong></p>
 <ul>
 <li>実戦でフロップを見た瞬間にアウツを数える練習をする</li>
 <li>相手のベットサイズからポットオッズを瞬時に計算できるよう習慣化する</li>
+<li>BBでは「安いからコール」ではなく、ナッツ級に化けるハンドかを確認する</li>
 </ul>
 <p><strong>注意点</strong></p>
 <ul>
 <li>アウツが全てクリーン（純粋に勝てる）とは限らない（逆に相手の役が強くなるカードと重複する場合あり）</li>
 <li>インプライドオッズを楽観的に見積もりすぎない</li>
+<li>オフスートのKJo、QJo、A9oなどはトップペアを作っても大きく負けることがある</li>
 </ul>
 </div>
 <div class="viz-card"><h2>アウツ数別エクイティ</h2><canvas id="outsBar"></canvas></div></div></article>
