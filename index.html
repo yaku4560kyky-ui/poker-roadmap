@@ -177,6 +177,40 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 .sb-low{background:#fee2e2;color:#991b1b !important}
 .sb-mid{background:#fef3c7;color:#92400e !important}
 .sb-high{background:#dcfce7;color:#166534 !important}
+/* ===== 第3章: プリフロップ完全攻略 追加セクション ===== */
+.pf-hero{border:1px solid rgba(16,185,129,.32);border-radius:12px;background:linear-gradient(135deg,#ecfdf5,#ffffff);padding:18px 20px;margin:18px 0}
+.pf-hero h3{margin-top:0 !important;color:#047857 !important}
+.pf-kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+.pf-kpi{border:1px solid rgba(201,168,76,.28);border-radius:10px;background:#fff;padding:14px}
+.pf-kpi strong{display:block;color:#047857 !important;margin-bottom:5px}
+.pf-position-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.pf-position-card{border:1px solid #e2e8f0;border-radius:10px;background:#fff;padding:13px}
+.pf-position-card strong{display:block;margin-bottom:4px}
+.pf-pos-ep{border-color:#fca5a5;background:#fff1f2}.pf-pos-ep strong{color:#be123c !important}
+.pf-pos-mp{border-color:#fcd34d;background:#fffbeb}.pf-pos-mp strong{color:#92400e !important}
+.pf-pos-lp{border-color:#86efac;background:#f0fdf4}.pf-pos-lp strong{color:#15803d !important}
+.pf-pos-blind{border-color:#93c5fd;background:#eff6ff}.pf-pos-blind strong{color:#1d4ed8 !important}
+.pf-action-list{display:grid;gap:12px;margin:16px 0}
+.pf-action{border-left:5px solid #10b981;background:#fff;border-radius:8px;padding:12px 15px;box-shadow:0 8px 18px rgba(15,23,42,.05)}
+.pf-action h4{margin:0 0 6px;color:#1a1a1a !important}
+.pf-action.danger{border-left-color:#e53e3e;background:#fff5f5}.pf-action.warn{border-left-color:#f59e0b;background:#fffbeb}.pf-action.info{border-left-color:#3b82f6;background:#eff6ff}
+.pf-range-tool{border:1px solid rgba(16,185,129,.3);border-radius:12px;background:#f8fffb;padding:16px;margin:18px 0}
+.pf-tool-layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:16px;align-items:start}
+.pf-position-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pf-position-buttons button,.pf-quiz-options button{border:1px solid rgba(201,168,76,.38);border-radius:8px;background:#fffdf7;color:#333;padding:9px 10px;font-weight:800;cursor:pointer}
+.pf-position-buttons button.active{background:#10b981;color:#052e1f;border-color:#059669}
+.pf-stat-box{border:1px solid rgba(201,168,76,.25);border-radius:10px;background:#fff;padding:12px;margin-top:12px;font-size:.9rem}
+.pf-stat-row{display:flex;justify-content:space-between;border-bottom:1px solid #f1ead4;padding:5px 0}.pf-stat-row:last-child{border-bottom:0}
+.pf-matrix-wrap{background:#0f172a;border-radius:12px;padding:12px;overflow:auto}
+.pf-matrix{display:grid;grid-template-columns:repeat(13,minmax(30px,1fr));gap:4px;min-width:520px}
+.pf-matrix-cell{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border-radius:5px;font-size:.72rem;font-weight:900}
+.pf-matrix-cell.in{background:#10b981;color:#052e1f}.pf-matrix-cell.out{background:#1f2937;color:#94a3b8}
+.pf-matrix-note{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.78rem;color:#666;margin-top:8px}
+.pf-quiz-card{border:1px solid rgba(201,168,76,.28);border-radius:10px;background:#fff;padding:15px;margin:13px 0}
+.pf-quiz-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.pf-quiz-answer{display:none;margin-top:11px;border-radius:8px;padding:11px 13px;font-size:.9rem}
+.pf-quiz-answer.show{display:block}.pf-quiz-answer.good{background:#ecfdf5;border:1px solid #86efac;color:#166534}.pf-quiz-answer.bad{background:#fff1f2;border:1px solid #fda4af;color:#9f1239}.pf-quiz-answer.warn{background:#fffbeb;border:1px solid #fcd34d;color:#92400e}
+@media(max-width:820px){.pf-kpi-grid,.pf-position-grid,.pf-tool-layout,.pf-quiz-options{grid-template-columns:1fr}.pf-matrix{min-width:460px}.pf-kpi,.pf-position-card,.pf-action,.pf-range-tool,.pf-quiz-card{padding:12px}}
 </style>
 </head>
 <body>
@@ -1064,6 +1098,141 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <p>相手が固定的でこちらの戦略に反応してこないなら、個別ハンド単位の判断でも大きく損しない場面があります。しかし、相手がこちらの偏りに気づいて調整してくる場合、レンジ全体のバランスが崩れていると搾取されます。</p>
 <p>逆に、相手が「ハンド vs レンジ」止まりで考えていると読めるなら、その思考の偏りがリークになります。GTO的なレンジ構成を理解したうえで、相手が過剰に降りる・過剰にコールする・特定のハンドを守りすぎる場面を積極的に突きましょう。</p>
 <hr>
+<h2>3-5 プリフロップ完全攻略：重要性・ポジション・アクション</h2>
+<div class="pf-hero">
+<h3>プリフロップは、毎ハンド必ず発生する最重要ストリート</h3>
+<p>フロップ以降の派手なブラフやコールダウンに目が行きがちですが、長期収支を最も安定させる土台はプリフロップです。ここで弱いハンドを持ち込むと、ポストフロップで「トップペアなのにキッカー負け」「ドローが薄いのに降りられない」といった難しい状況を自分で作ってしまいます。</p>
+</div>
+<div class="pf-kpi-grid">
+<div class="pf-kpi"><strong>01 頻度が最大</strong><p>全ハンドで発生するため、小さなミスでも長期的には大きなEVロスになります。</p></div>
+<div class="pf-kpi"><strong>02 エラーが連鎖する</strong><p>参加すべきでないハンドは、フロップ以降でさらに大きな判断ミスを誘発します。</p></div>
+<div class="pf-kpi"><strong>03 レンジ優位を作る</strong><p>正しい参加レンジは、以降のストリートで主導権と情報優位を生みます。</p></div>
+</div>
+<blockquote>💡 <strong>重要:</strong> ポストフロップで難しい状況に入った原因は、フロップの判断ではなく「プリフロップで参加したこと」そのものにある場合が多いです。</blockquote>
+<h3>ポジション別の基本戦略</h3>
+<p>ポーカーは情報のゲームです。後から行動できるほど、相手のチェック・ベット・サイズを見てから決断できるため、プレイできるハンドを広げられます。</p>
+<div class="pf-position-grid">
+<div class="pf-position-card pf-pos-ep"><strong>EP: UTG / UTG+1</strong><p>最も不利。後ろに多くのプレイヤーが残るため、かなりタイトに参加します。</p></div>
+<div class="pf-position-card pf-pos-mp"><strong>MP: LJ / HJ</strong><p>EPより少し広げられますが、まだ慎重なレンジ選択が必要です。</p></div>
+<div class="pf-position-card pf-pos-lp"><strong>LP: CO / BTN</strong><p>特にBTNは最強のポジション。ブラインドスチールも含めて広く攻めます。</p></div>
+<div class="pf-position-card pf-pos-blind"><strong>Blinds: SB / BB</strong><p>ポストフロップでOOPになりやすく、レンジ選択とサイズ管理が重要です。</p></div>
+</div>
+<h3>主要アクションと意思決定</h3>
+<div class="pf-action-list">
+<div class="pf-action">
+<h4>① オープンレイズ: 主導権を握る</h4>
+<p>誰も参加していない状態で最初にレイズするアクションです。基本は「参加するならレイズ」。ブラインドへプレッシャーをかけ、フォールドエクイティを作ります。</p>
+</div>
+<div class="pf-action danger">
+<h4>② オープンリンプ: 原則避ける</h4>
+<p>BBと同額だけをコールして入る行為は、弱さを示しやすく、後ろのプレイヤーからアイソレートされる原因になります。例外を除き、初心者ほどリンプを減らしましょう。</p>
+</div>
+<div class="pf-action warn">
+<h4>③ コールドコールとギャップコンセプト</h4>
+<p>オープンに対してコールするには、オープンに必要なハンドより強い根拠が必要です。後ろからスクイーズされるリスク、ドミネイトされるリスクを必ず考えます。</p>
+</div>
+<div class="pf-action info">
+<h4>④ 3ベット: バリューとブラフを混ぜる</h4>
+<p>AA・KK・QQ・AKのようなバリューだけでなく、A5sやKJsのようなプレイアビリティのあるハンドを一部ブラフ3ベットに回すことで、レンジの圧力を高めます。</p>
+</div>
+</div>
+<hr>
+<h2>3-6 レンジ構築・調整・実戦チェック</h2>
+<h3>レンジを決める2大要素: Equity と Playability</h3>
+<p><strong>Equity</strong> はショーダウンまで行った場合の純粋な勝率、<strong>Playability</strong> はフロップ以降で強い役や強いドローを作り、ベットを続けやすい性質です。レンジは単なる強い順ランキングではなく、この2つのバランスで決まります。</p>
+<div class="table-wrap"><table><thead><tr>
+<th>ハンド種別</th>
+<th>代表例</th>
+<th>特徴</th>
+<th>役割</th>
+</tr></thead><tbody>
+<tr>
+<td>プレミアムペア</td>
+<td>AA, KK, QQ, JJ</td>
+<td>勝率が高く、オーバーペアになりやすい</td>
+<td>主なバリュー源。3ベット/4ベットに適する</td>
+</tr>
+<tr>
+<td>スーテッドブロードウェイ</td>
+<td>AKs, AQs, KQs, QJs</td>
+<td>高い勝率とナッツ級ドローを両立</td>
+<td>レンジの骨格。複数ストリートで戦いやすい</td>
+</tr>
+<tr>
+<td>スーテッドコネクター</td>
+<td>JTs, T9s, 98s, 87s</td>
+<td>単体勝率は低めだが、強いドローを作りやすい</td>
+<td>インプライドオッズ狙い、コールやブラフ3ベット</td>
+</tr>
+<tr>
+<td>オフスートブロードウェイ</td>
+<td>AQo, AJo, KQo</td>
+<td>勝率はあるが、ドミネイトとリバースインプライドオッズに注意</td>
+<td>ポジションと相手レンジ次第。EPでは絞る</td>
+</tr>
+</tbody></table></div>
+<h3>インタラクティブ・レンジビューア</h3>
+<p class="section-lead">9-Maxの標準的なRFIレンジを簡易表示します。ポジションを切り替えて、UTGからBTNに近づくほどレンジが広がる感覚を確認しましょう。</p>
+<div class="pf-range-tool" id="pfRangeTool">
+<div class="pf-tool-layout">
+<div>
+<div class="pf-position-buttons" id="pfPositionButtons">
+<button type="button" data-pf-pos="UTG" class="active">UTG</button>
+<button type="button" data-pf-pos="HJ">HJ</button>
+<button type="button" data-pf-pos="CO">CO</button>
+<button type="button" data-pf-pos="BTN">BTN</button>
+<button type="button" data-pf-pos="SB">SB</button>
+</div>
+<div class="pf-stat-box">
+<div class="pf-stat-row"><span>ポジション</span><strong id="pfStatPos">UTG</strong></div>
+<div class="pf-stat-row"><span>RFI頻度</span><strong id="pfStatPct">約 12.5%</strong></div>
+<div class="pf-stat-row"><span>ハンド数</span><strong id="pfStatCombos">166 / 1326</strong></div>
+<p id="pfPosDescription">UTGは最初にアクションするため、後ろの全員に強いハンドが潜むリスクを考えて、かなりタイトなレンジで参加します。</p>
+</div>
+</div>
+<div>
+<div class="pf-matrix-wrap"><div class="pf-matrix" id="pfPokerMatrix"></div></div>
+<div class="pf-matrix-note"><span>右上: スーテッド</span><span>対角線: ペア</span><span>左下: オフスート</span></div>
+</div>
+</div>
+</div>
+<h3>実戦におけるレンジ調整</h3>
+<div class="advice-grid">
+<div class="concept-card bad">
+<h4>相手がタイトすぎる場合</h4>
+<p>ブラインドを積極的にスチールします。一方で、相手がオープンしてきた時は、こちらのコール/3ベットレンジをかなり絞ります。</p>
+</div>
+<div class="concept-card good">
+<h4>相手がルースすぎる場合</h4>
+<p>ブラフ3ベットを減らし、バリュー3ベットを広げます。相手がコールし続けるなら、良いハンドでサイズを大きくして利益を取ります。</p>
+</div>
+</div>
+<h3>3ベットされた時の防衛レンジ</h3>
+<ul>
+<li><strong>フォールド:</strong> オープンしたハンドの半分以上は、3ベットに対して降りる候補になります。</li>
+<li><strong>コール:</strong> スーテッドコネクター、ミドルペア、AQs/AJsなど、ポストフロップで戦いやすいハンドを残します。</li>
+<li><strong>4ベット:</strong> AA, KK, QQ, AKsのバリューに加え、A5s/A4sのような一部ブラフを混ぜます。</li>
+</ul>
+<h3>プリフロップ実践クイズ</h3>
+<div class="pf-quiz-card">
+<strong>第1問: 9-MaxのUTGで Q♦J♦。まだ誰も参加していません。どうしますか？</strong>
+<div class="pf-quiz-options">
+<button type="button" data-pf-quiz="1" data-pf-choice="A">A. フォールド</button>
+<button type="button" data-pf-quiz="1" data-pf-choice="B">B. リンプ</button>
+<button type="button" data-pf-quiz="1" data-pf-choice="C">C. オープンレイズ</button>
+</div>
+<div id="pfAns1" class="pf-quiz-answer"></div>
+</div>
+<div class="pf-quiz-card">
+<strong>第2問: タイトなMPが2.5BBオープン。BTNで A♦T♠。どうしますか？</strong>
+<div class="pf-quiz-options">
+<button type="button" data-pf-quiz="2" data-pf-choice="A">A. コール</button>
+<button type="button" data-pf-quiz="2" data-pf-choice="B">B. 3ベット</button>
+<button type="button" data-pf-quiz="2" data-pf-choice="C">C. フォールド</button>
+</div>
+<div id="pfAns2" class="pf-quiz-answer"></div>
+</div>
+<hr>
 <div class="summary-card">
 <h2>この章のまとめ</h2>
 <p><strong>内容の要約</strong></p>
@@ -1073,6 +1242,7 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <li>オープンサイズは一定に保ち、手の強さを隠す</li>
 <li>ナッツアドバンテージで有利なレンジ側が積極的に打てる</li>
 <li>レンジ vs レンジでは、自分のレンジ全体のバランスから戦略を作る</li>
+<li>EquityとPlayabilityを分けて考えると、プリフロップレンジの理由が理解しやすい</li>
 </ul>
 <p><strong>応用</strong></p>
 <ul>
@@ -2318,7 +2488,84 @@ const saveQa=document.getElementById('saveQa');if(saveQa){saveQa.addEventListene
 function chartDefaults(){Chart.defaults.color='#1a1a1a';Chart.defaults.borderColor='rgba(201,168,76,.22)';Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif";}
 function makeCharts(){if(!window.Chart)return;chartDefaults();const radar=document.getElementById('statsRadar');if(radar)new Chart(radar,{type:'radar',data:{labels:['VPIP','PFR','3Bet','WTSD','Aggression'],datasets:[{label:'ルーズパッシブ',data:[45,8,2,38,18],borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,.16)'},{label:'タイトパッシブ',data:[14,6,2,21,16],borderColor:'#e8c76a',backgroundColor:'rgba(232,199,106,.12)'},{label:'LAG',data:[34,28,12,29,72],borderColor:'#e53e3e',backgroundColor:'rgba(229,62,62,.12)'},{label:'TAG',data:[23,19,8,25,55],borderColor:'#48bb78',backgroundColor:'rgba(72,187,120,.12)'},{label:'マニアック',data:[62,44,20,42,90],borderColor:'#4299e1',backgroundColor:'rgba(66,153,225,.12)'}]},options:{responsive:true,scales:{r:{grid:{color:'rgba(201,168,76,.18)'},angleLines:{color:'rgba(201,168,76,.2)'},pointLabels:{color:'#e8c76a'},ticks:{display:false,max:100}}}}});const outs=document.getElementById('outsBar');if(outs)new Chart(outs,{type:'bar',data:{labels:['4 outs','6 outs','8 outs','9 outs','15 outs'],datasets:[{label:'フロップ 約%',data:[16,24,32,36,60],backgroundColor:'#c9a84c'},{label:'ターン 約%',data:[8,12,16,18,30],backgroundColor:'#4299e1'}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:70,ticks:{callback:v=>v+'%'}}}}});const gto=document.getElementById('gtoDoughnut');if(gto)new Chart(gto,{type:'doughnut',data:{labels:['GTOベース','Exploit調整','観察・更新'],datasets:[{data:[55,30,15],backgroundColor:['#c9a84c','#2d5a27','#e53e3e'],borderColor:'#f8f9fa'}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});const bluff=document.getElementById('bluffBar');if(bluff)new Chart(bluff,{type:'bar',data:{labels:['25% pot','33% pot','50% pot','75% pot','100% pot','200% pot'],datasets:[{label:'理論上のブラフ比率',data:[20,25,33,43,50,67],backgroundColor:['#e8c76a','#c9a84c','#a07830','#48bb78','#4299e1','#e53e3e']} ]},options:{responsive:true,scales:{y:{beginAtZero:true,max:75,ticks:{callback:v=>v+'%'}}}}});}
 function evCalc(){const p=document.getElementById('potSlider');if(!p)return;const c=document.getElementById('callSlider'),eq=document.getElementById('eqSlider'),res=document.getElementById('evResult');function upd(){potOut.textContent=p.value;callOut.textContent=c.value;eqOut.textContent=eq.value;const pot=+p.value,call=+c.value,e=+eq.value/100;const ev=e*(pot+call)-(1-e)*call;res.textContent=(ev>=0?'+':'')+ev.toFixed(2)+'BB';res.style.color=ev>=0?'#48bb78':'#e53e3e';}['input','change'].forEach(evt=>[p,c,eq].forEach(x=>x.addEventListener(evt,upd)));upd();}
-fetchAndApplyServerLocks();setInterval(fetchAndApplyServerLocks,30000);makeCharts();evCalc();
+function initPreflopRangeTool(){
+  const matrix=document.getElementById('pfPokerMatrix');
+  if(!matrix)return;
+  const ranks=['A','K','Q','J','T','9','8','7','6','5','4','3','2'];
+  const rangeMeta={
+    UTG:{pct:'約 12.5%',combos:'166 / 1326',desc:'UTGは最初にアクションするため、後ろの全員に強いハンドが潜むリスクを考えて、かなりタイトなレンジで参加します。'},
+    HJ:{pct:'約 18.2%',combos:'242 / 1326',desc:'HJはUTGより後ろの人数が減るため、ミドルペアや一部のスーテッドコネクターを加えて少し広げます。'},
+    CO:{pct:'約 26.5%',combos:'352 / 1326',desc:'COはレイトポジションの入口です。ブラインドスチールも視野に入れ、スーテッドエースや広めのブロードウェイを使います。'},
+    BTN:{pct:'約 45.3%',combos:'600 / 1326',desc:'BTNは最も有利なポジションです。SBとBBだけを相手にできるため、広いレンジでオープンして圧力をかけます。'},
+    SB:{pct:'約 40.5%',combos:'538 / 1326',desc:'SBは後ろにBBしかいないため広く攻められますが、ポストフロップではOOPになるのでハンド選択に注意します。'}
+  };
+  function inRfi(pos,r1,r2,type){
+    const h1=ranks[r1];
+    if(type==='pair'){
+      if(pos==='UTG')return r1<=8;
+      if(pos==='HJ')return r1<=9;
+      if(pos==='CO')return r1<=11;
+      if(pos==='BTN')return r1<=12;
+      if(pos==='SB')return r1<=11;
+    }
+    if(type==='suited'){
+      if(pos==='UTG')return (h1==='A'&&r2<=8)||(h1==='K'&&r2<=4)||(h1==='Q'&&r2<=4)||(h1==='J'&&r2<=4)||(h1==='T'&&r2<=5);
+      if(pos==='HJ')return (h1==='A'&&r2<=11)||(h1==='K'&&r2<=5)||(h1==='Q'&&r2<=5)||(h1==='J'&&r2<=5)||(h1==='T'&&r2<=5)||(h1==='9'&&r2<=6)||(h1==='8'&&r2<=7);
+      if(pos==='CO')return h1==='A'||(h1==='K'&&r2<=8)||(h1==='Q'&&r2<=7)||(h1==='J'&&r2<=7)||(h1==='T'&&r2<=7)||(h1==='9'&&r2<=7)||(h1==='8'&&r2<=8)||(h1==='7'&&r2<=9);
+      if(pos==='BTN')return h1==='A'||h1==='K'||(h1==='Q'&&r2<=10)||(h1==='J'&&r2<=9)||(h1==='T'&&r2<=8)||(h1==='9'&&r2<=8)||(h1==='8'&&r2<=8)||(h1==='7'&&r2<=9)||(h1==='6'&&r2<=9)||(h1==='5'&&r2<=10);
+      if(pos==='SB')return h1==='A'||(h1==='K'&&r2<=8)||(h1==='Q'&&r2<=7)||(h1==='J'&&r2<=7)||(h1==='T'&&r2<=7)||(h1==='9'&&r2<=7)||(h1==='8'&&r2<=8);
+    }
+    if(type==='offsuit'){
+      if(pos==='UTG')return h1==='A'&&r2<=2;
+      if(pos==='HJ')return (h1==='A'&&r2<=3)||(h1==='K'&&r2<=2);
+      if(pos==='CO')return (h1==='A'&&r2<=4)||(h1==='K'&&r2<=3)||(h1==='Q'&&r2<=3);
+      if(pos==='BTN')return (h1==='A'&&r2<=9)||(h1==='K'&&r2<=6)||(h1==='Q'&&r2<=5)||(h1==='J'&&r2<=5)||(h1==='T'&&r2<=5)||(h1==='9'&&r2<=6);
+      if(pos==='SB')return (h1==='A'&&r2<=5)||(h1==='K'&&r2<=4)||(h1==='Q'&&r2<=3)||(h1==='J'&&r2<=4);
+    }
+    return false;
+  }
+  function render(pos){
+    const meta=rangeMeta[pos];
+    document.getElementById('pfStatPos').textContent=pos;
+    document.getElementById('pfStatPct').textContent=meta.pct;
+    document.getElementById('pfStatCombos').textContent=meta.combos;
+    document.getElementById('pfPosDescription').textContent=meta.desc;
+    document.querySelectorAll('[data-pf-pos]').forEach(btn=>btn.classList.toggle('active',btn.dataset.pfPos===pos));
+    matrix.innerHTML='';
+    for(let r1=0;r1<13;r1++){
+      for(let r2=0;r2<13;r2++){
+        let name,type;
+        if(r1===r2){name=ranks[r1]+ranks[r2];type='pair';}
+        else if(r1<r2){name=ranks[r1]+ranks[r2]+'s';type='suited';}
+        else{name=ranks[r2]+ranks[r1]+'o';type='offsuit';}
+        const active=inRfi(pos,Math.min(r1,r2),Math.max(r1,r2),type);
+        const cell=document.createElement('div');
+        cell.className='pf-matrix-cell '+(active?'in':'out');
+        cell.textContent=name;
+        cell.title=name+' : '+(active?'オープン':'フォールド');
+        matrix.appendChild(cell);
+      }
+    }
+  }
+  document.querySelectorAll('[data-pf-pos]').forEach(btn=>btn.addEventListener('click',()=>render(btn.dataset.pfPos)));
+  render('UTG');
+}
+function initPreflopQuiz(){
+  document.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-pf-quiz]');
+    if(!btn)return;
+    const q=btn.dataset.pfQuiz,choice=btn.dataset.pfChoice,ans=document.getElementById('pfAns'+q);
+    if(!ans)return;
+    ans.className='pf-quiz-answer show';
+    if(q==='1'&&choice==='A'){ans.classList.add('good');ans.innerHTML='<strong>正解:</strong> UTGのQJsは見た目はきれいですが、9-Maxの最初の位置では少し足りません。フォールドできることが大切です。';}
+    else if(q==='1'&&choice==='B'){ans.classList.add('bad');ans.innerHTML='<strong>不正解:</strong> オープンリンプは弱さを示しやすく、アイソレートされる原因になります。';}
+    else if(q==='1'){ans.classList.add('warn');ans.innerHTML='<strong>惜しい:</strong> 参加するならレイズの考え方は良いですが、UTGのQJsはレンジ外です。HJ以降なら検討できます。';}
+    if(q==='2'&&choice==='C'){ans.classList.add('good');ans.innerHTML='<strong>正解:</strong> タイトなMPのレンジに対してAToはドミネイトされやすく、BTNでもフォールドが自然です。';}
+    else if(q==='2'&&choice==='A'){ans.classList.add('bad');ans.innerHTML='<strong>不正解:</strong> AToのコールドコールはキッカー負けしやすく、リバースインプライドオッズが大きいです。';}
+    else if(q==='2'){ans.classList.add('warn');ans.innerHTML='<strong>不適切:</strong> タイトな相手は3ベットに簡単に降りにくく、ブラフ3ベットの期待値が低くなります。';}
+  });
+}
+fetchAndApplyServerLocks();setInterval(fetchAndApplyServerLocks,30000);makeCharts();evCalc();initPreflopRangeTool();initPreflopQuiz();
 })();
 </script>
 </body>
