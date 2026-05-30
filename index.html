@@ -918,346 +918,110 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 </ul>
 </div>
 <div class="viz-card"><h2>アウツ数別エクイティ</h2><canvas id="outsBar"></canvas></div></div></article>
-<article class="chapter-card" id="ch3" data-chapter="ch3"><div class="lock-panel" data-lock-panel="ch3"></div><div class="chapter-admin" data-admin-controls="ch3"><button data-lock="ch3">ロック</button><button data-unlock="ch3">解除</button><input type="datetime-local" data-time="ch3"><button data-timed="ch3">時間ロック</button></div><div class="content-protected"><h1>3: プリフロップレンジ</h1>
+<article class="chapter-card" id="ch3" data-chapter="ch3"><div class="lock-panel" data-lock-panel="ch3"></div><div class="chapter-admin" data-admin-controls="ch3"><button data-lock="ch3">ロック</button><button data-unlock="ch3">解除</button><input type="datetime-local" data-time="ch3"><button data-timed="ch3">時間ロック</button></div><div class="content-protected"><h1>3: プリフロップ＆レンジ完全攻略</h1>
+<blockquote>⚠️ この章は、いただいたHTML記事「ポーカー・プリフロップ＆レンジ完全攻略ガイド」の内容を主軸に再構成しています。既存の3-1〜3-3の重複部分は削除し、必要な内容だけ補足として各セクションに統合しました。</blockquote>
 <hr>
-<h2>3-1 プリフロップレンジとは</h2>
-<h3>レンジで考えることの重要性</h3>
-<p>ポーカーでは「相手の手は何か」ではなく「相手のハンドはどんな<strong>グループ（レンジ）</strong>か」を考えます。</p>
-<p>プリフロップのアクションによって、相手のレンジが決まります：</p>
+<h2>3-1 なぜプリフロップがポーカーで最も重要なのか</h2>
+<div class="pf-hero">
+<h3>毎ハンド必ず発生する、最もEV差が出るストリート</h3>
+<p>テキサスホールデムでは、チップが動く場面はプリフロップ、フロップ、ターン、リバーに分かれます。この中で、プレイヤーが100%参加するストリートはプリフロップだけです。つまり、ここでの小さなミスは発生頻度が高く、長期的には大きな損失になります。</p>
+<p>多くの初心者はフロップ以降のブラフやリバーのヒーローコールに目を向けますが、強いプレイヤーほどプリフロップレンジを研究し、参加するハンドと降りるハンドの境界を明確にしています。</p>
+</div>
+<div class="pf-kpi-grid">
+<div class="pf-kpi"><strong>01 頻度の最大性</strong><p>ハンドが配られるたびに必ず発生するため、わずかなエラーでも長期では大きなEVロスになります。</p></div>
+<div class="pf-kpi"><strong>02 ドミノ効果</strong><p>弱いハンドで参加すると、フロップ以降でキッカー負けや難しいコールに巻き込まれます。</p></div>
+<div class="pf-kpi"><strong>03 情報の制御</strong><p>正しいレンジを持つことで、相手に対してレンジ全体の強さで優位を作れます。</p></div>
+</div>
+<h3>すべてのミスはプリフロップに端を発する</h3>
+<p>例えば、UTGからKJoでオープンするとします。一見強そうに見えますが、UTGの標準レンジでは基本的にフォールド候補です。タイトな相手にコールされた場合、相手にはAKやKQのようなドミネイトハンドが多く含まれます。フロップでKが落ちても、トップペアで大きく負ける状況を自分で作ってしまいます。</p>
+<blockquote>💡 <strong>補足:</strong> 「ポストフロップで難しい」と感じる局面の多くは、実はプリフロップで入るべきではないハンドを持ち込んだことが原因です。</blockquote>
+<hr>
+<h2>3-2 ポジション別の基本戦略</h2>
+<p>ポーカーは情報のゲームです。最後に行動できるプレイヤーほど、相手のチェック、ベット、サイズを見てから判断できるため、レンジを広くできます。</p>
+<div class="pf-position-grid">
+<div class="pf-position-card pf-pos-ep"><strong>アーリーポジション: UTG / UTG+1</strong><p>最も不利。後ろに多くのプレイヤーが残るため、上位の強いハンドに絞ります。</p></div>
+<div class="pf-position-card pf-pos-mp"><strong>ミドルポジション: LJ / HJ</strong><p>EPより少し広げられますが、まだ後ろの強いレンジを警戒します。</p></div>
+<div class="pf-position-card pf-pos-lp"><strong>レイトポジション: CO / BTN</strong><p>特にBTNは最強のポジション。ブラインドスチールも含めて広く攻められます。</p></div>
+<div class="pf-position-card pf-pos-blind"><strong>ブラインド: SB / BB</strong><p>ポストフロップでOOPになりやすいため、参加後の実現勝率まで考えます。</p></div>
+</div>
+<h3>BTNが強い理由</h3>
 <ul>
-<li>オープンレイズ → 相手のレンジを絞れる</li>
-<li>コール → ある程度広いレンジ</li>
-<li>3ベット → 強いバリューかブラフ</li>
+<li><strong>情報の優位性:</strong> 相手の行動を見てから判断できる</li>
+<li><strong>ポットコントロール:</strong> 大きくしたい時と安く済ませたい時を選びやすい</li>
+<li><strong>ブラフ成功率:</strong> 相手がチェックで弱さを示した後にベットできる</li>
 </ul>
-<p><strong>プリフロップで正しいレンジ選択をすることで、フロップ以降の判断精度が上がります。</strong></p>
-<h3>レイズ額を一定に保つ重要性</h3>
-<p>プリフロップのレイズ額は<strong>一定にすること</strong>が重要です。</p>
-<ul>
-<li>✅ 強い手でも弱い手でも同じサイズでオープン</li>
-<li>❌ AAだから大きくレイズ → 相手に読まれる</li>
-</ul>
-<p>一定サイズにすることで、相手は手の強さを推測しにくくなります（バランス）。</p>
-<p><strong>標準的なオープンサイズ:</strong></p>
-<div class="table-wrap"><table><thead><tr>
-<th>ポジション</th>
-<th>推奨サイズ</th>
-</tr></thead><tbody>
-<tr>
-<td>BTN, CO</td>
-<td>2〜2.5BB</td>
-</tr>
-<tr>
-<td>MP, UTG</td>
-<td>2.5〜3BB</td>
-</tr>
-<tr>
-<td>vs リンパー</td>
-<td>リンプ額 + 3〜4BB程度</td>
-</tr>
+<div class="callout callout-success"><strong>既存3-1からの補足:</strong> IP（インポジション）は自分が後から行動できる状況、OOP（アウトオブポジション）は先に行動しなければならない状況です。OOPでは情報が少ないため、同じハンドでも慎重に扱います。</div>
+<hr>
+<h2>3-3 プリフロップの主要アクションとサイズ</h2>
+<p>プリフロップで取れる主なアクションは、フォールド、リンプ/コール、オープンレイズ、3ベットです。ここでは、行動の意味とサイズの基準を整理します。</p>
+<div class="pf-action-list">
+<div class="pf-action"><h4>① オープンレイズ: 主導権を握る</h4><p>誰もポットに参加していない状態で、最初にレイズして入ることです。基本は「参加するならレイズ」。ブラインドにプレッシャーを与え、フォールドエクイティを作ります。</p></div>
+<div class="pf-action danger"><h4>② リンプイン: 原則避ける</h4><p>BBと同額だけを支払って参加する行為です。「弱いハンドで安くフロップを見たい」という情報を相手に与えやすく、後ろのプレイヤーからアイソレートされやすくなります。</p></div>
+<div class="pf-action warn"><h4>③ コールドコールとギャップコンセプト</h4><p>誰かのオープンに対してコールするには、オープンに必要なハンドより強い根拠が必要です。後ろからスクイーズされるリスクも考えます。</p></div>
+<div class="pf-action info"><h4>④ 3ベット: バリューとブラフの圧力</h4><p>オープンレイズに対して再レイズすることです。AA、KK、QQ、AKのようなバリューだけでなく、A5sやKJsのようなプレイアビリティのあるハンドを一部ブラフに混ぜます。</p></div>
+</div>
+<h3>標準的なオープンサイズ</h3>
+<div class="table-wrap"><table><thead><tr><th>状況</th><th>推奨サイズ</th><th>意図</th></tr></thead><tbody>
+<tr><td>BTN, CO</td><td>2〜2.5BB</td><td>広いレンジでスチールしやすく、リスクを抑えられる</td></tr>
+<tr><td>MP, UTG</td><td>2.5〜3BB</td><td>強めのレンジでバリューを取り、後ろにプレッシャーをかける</td></tr>
+<tr><td>vs リンパー</td><td>リンプ額 + 3〜4BB程度</td><td>リンパーを孤立させ、ヘッズアップに近い形を作る</td></tr>
 </tbody></table></div>
-<h3>IP（インポジション）の有利性</h3>
-<p><strong>IP（In Position）</strong>= 自分が後から行動できる状況</p>
-<ul>
-<li>相手の行動を見てから決断できる → 情報有利</li>
-<li>ポストフロップで主導権を握りやすい</li>
-<li>BTN（ボタン）が最も有利なポジション</li>
-</ul>
 <h3>IP・OOPの3Betサイズ</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>状況</th>
-<th>推奨3Betサイズ</th>
-</tr></thead><tbody>
-<tr>
-<td>IP（BTNから等）</td>
-<td>相手のレイズ額の約3〜3.5倍</td>
-</tr>
-<tr>
-<td>OOP（BB、SBから等）</td>
-<td>相手のレイズ額の約4〜5倍</td>
-</tr>
+<div class="table-wrap"><table><thead><tr><th>状況</th><th>推奨3Betサイズ</th><th>考え方</th></tr></thead><tbody>
+<tr><td>IP（BTNから等）</td><td>相手のレイズ額の約3〜3.5倍</td><td>ポジション有利があるため、過度に大きくしなくても戦いやすい</td></tr>
+<tr><td>OOP（BB、SBから等）</td><td>相手のレイズ額の約4〜5倍</td><td>ポジション不利を補うため、相手に高い価格を要求する</td></tr>
 </tbody></table></div>
-<p>OOPでは大きめにサイズアップすることで、IPアドバンテージを部分的に補います。</p>
+<blockquote>💡 <strong>補足:</strong> 強い手だから大きく、弱い手だから小さく、というサイズの使い分けは相手に読まれます。同じスポットでは、バリューとブラフで同じサイズを使うのが基本です。</blockquote>
 <hr>
-<h2>3-2 代表的なオープンレンジ</h2>
-<h3>UTG オープンレンジ（6MAX、約13%）</h3>
-<pre><code>プレミアム: AA KK QQ JJ AKs AKo
+<h2>3-4 GTOプリフロップ・レンジビューア</h2>
+<p class="section-lead">9-Maxにおける標準的なファーストイン・オープン（RFI）レンジを13×13のハンドマトリクスで可視化します。ポジションを切り替えて、レンジの広がり方を確認してください。</p>
+<div class="pf-range-tool" id="pfRangeTool"><div class="pf-tool-layout"><div><div class="pf-position-buttons" id="pfPositionButtons"><button type="button" data-pf-pos="UTG" class="active">UTG</button><button type="button" data-pf-pos="HJ">HJ</button><button type="button" data-pf-pos="CO">CO</button><button type="button" data-pf-pos="BTN">BTN</button><button type="button" data-pf-pos="SB">SB</button></div><div class="pf-stat-box"><div class="pf-stat-row"><span>ポジション</span><strong id="pfStatPos">UTG</strong></div><div class="pf-stat-row"><span>RFI頻度</span><strong id="pfStatPct">約 12.5%</strong></div><div class="pf-stat-row"><span>ハンド数</span><strong id="pfStatCombos">166 / 1326</strong></div><p id="pfPosDescription">UTGは最初にアクションするため、後ろの全員に強いハンドが潜むリスクを考えて、かなりタイトなレンジで参加します。</p></div></div><div><div class="pf-matrix-wrap"><div class="pf-matrix" id="pfPokerMatrix"></div></div><div class="pf-matrix-note"><span>右上: スーテッド</span><span>対角線: ペア</span><span>左下: オフスート</span></div></div></div></div>
+<h3>代表的なレンジの目安</h3>
+<div class="advice-grid"><div class="concept-card good"><h4>UTG: タイトな骨格</h4><pre><code>プレミアム: AA KK QQ JJ AKs AKo
 強いハンド: TT 99 AQs AJs AQo KQs
 中程度:    88 77 ATs KJs QJs JTs
-           AJo KQo
-スーテッド: A9s A8s KTs QTs J9s T9s 98s</code></pre>
-<p><strong>特徴:</strong></p>
-<ul>
-<li>最もアーリーポジション。全員が後から行動できる</li>
-<li>タイトにプレイすることが基本</li>
-<li>コールドコールが多く来るボードでは特に注意</li>
-</ul>
-<hr>
-<h3>BTN オープンレンジ（6MAX、約40%）</h3>
-<pre><code>プレミアム: AA〜22, AKo〜A2s
+スーテッド: A9s A8s KTs QTs J9s T9s 98s</code></pre><p>後ろに多くのプレイヤーが残るため、オフスートの弱いブロードウェイは避けます。</p></div><div class="concept-card good"><h4>BTN: 最も広い攻撃レンジ</h4><pre><code>プレミアム: AA〜22, AKo〜A2s
 強いハンド: KJo以上, QTo以上
-中程度:    J9o, T9o, 98o（スーテッドも含む）
-スーテッド: ほぼ全スーテッドコネクター
-投機的:    K5s〜K2s, Q7s〜Q2s, J7s以上</code></pre>
-<p><strong>特徴:</strong></p>
-<ul>
-<li>最も広いオープンレンジ</li>
-<li>SBとBBのみを相手にすればよい</li>
-<li>バリューとブラフのバランスを取りながら積極的に</li>
-</ul>
+中程度:    J9o, T9o, 98o
+投機的:    K5s〜K2s, Q7s〜Q2s, J7s以上</code></pre><p>SBとBBだけを相手にすればよいため、スチールを含めて大きく広げられます。</p></div></div>
+<div class="callout"><strong>既存3-2からの補足:</strong> BBディフェンスでは、すでに1BBを投資しているためポットオッズは良くなります。ただし、UTGのレンジは強いので、3ベットはAA〜JJ、AKsなどのバリュー寄りにし、A5s/A4sのような一部ブラフを混ぜる程度に抑えます。</div>
 <hr>
-<h3>BB ディフェンスレンジ（vs UTG オープン）</h3>
-<pre><code>3ベット:  AA, KK, QQ, JJ, AKs（バリュー）
-          A5s, A4s（ブラフ3ベット）
-コール:   TT〜22, AQo, AJs, KQs, QJs,
-          JTs, T9s, 98s 等
-フォールド: 弱いオフスートハンド</code></pre>
-<p><strong>BBのディフェンス原則:</strong></p>
-<ul>
-<li>すでに1BB投資済みのためポットオッズが有利</li>
-<li>広めにディフェンスすることでスチールを防ぐ</li>
-<li>UTGのレンジは強いので3ベットはタイトに</li>
-</ul>
+<h2>3-5 レンジを構築する2大要素：Equity と Playability</h2>
+<p>GTOツールが算出するレンジは、単なる「強いハンドランキング」ではありません。プリフロップレンジは、ショーダウン勝率であるEquityと、フロップ以降の扱いやすさであるPlayabilityの両方で構築されます。</p>
+<div class="table-wrap"><table><thead><tr><th>ハンド種別</th><th>代表例</th><th>Equityの特徴</th><th>Playability</th><th>戦術的役割</th></tr></thead><tbody><tr><td>プレミアム・ポケットペア</td><td>AA, KK, QQ, JJ</td><td>圧倒的</td><td>オーバーペアになりやすい</td><td>主なバリュー源。3ベット/4ベットに最適</td></tr><tr><td>スーテッド・ブロードウェイ</td><td>AKs, AQs, KQs, QJs</td><td>高い</td><td>ナッツフラッシュやストレートを作りやすい</td><td>レンジの骨格。複数ストリートで戦える</td></tr><tr><td>スーテッド・コネクター</td><td>JTs, T9s, 98s, 87s</td><td>単体では低め</td><td>深いスタックで強いドローを作れる</td><td>インプライドオッズ狙い、コールやブラフ3ベット</td></tr><tr><td>オフスート・ブロードウェイ</td><td>AQo, AJo, KQo</td><td>中程度</td><td>ドローが作りにくく、ドミネイトされやすい</td><td>LPからは使えるが、EPでは慎重に扱う</td></tr></tbody></table></div>
+<h3>補足：ナッツアドバンテージ</h3>
+<p><strong>ナッツアドバンテージ</strong>とは、特定のボードでどちらのレンジに最強クラスのハンドが多いかの差です。これはプリフロップレンジとボード構造の組み合わせで決まります。</p>
+<div class="table-wrap"><table><thead><tr><th>ボード例</th><th>有利な側</th><th>理由</th><th>戦略</th></tr></thead><tbody><tr><td>A♠ K♥ 2♦</td><td>UTG</td><td>AA, KK, AKがUTGに豊富。BBは3ベットしていないためキャップされやすい</td><td>UTGは小さめ高頻度Cベットが有効</td></tr><tr><td>8♣ 7♦ 5♥</td><td>BB</td><td>BBのコールレンジにスーテッドコネクターやミドルペアが多い</td><td>BBはチェックレイズやドンクベットを検討</td></tr><tr><td>5♠ 4♥ 2♦</td><td>BB</td><td>低いコネクターはBBに多く、UTGは低いカードをほぼオープンしない</td><td>UTGはCベット頻度を下げる</td></tr></tbody></table></div>
+<blockquote>💡 <strong>キャップ/Capped:</strong> 相手のレンジに最強クラスのハンドがほぼ含まれない状態です。例えば、プリフロップでコールだけしたBBには通常AAやAKが少ないため、高いボードではオープンレイザーが有利になりやすいです。</blockquote>
 <hr>
-<h2>3-3 ポジション毎のナッツアドバンテージ</h2>
-<h3>ナッツアドバンテージとは</h3>
-<p><strong>ナッツアドバンテージ</strong>とは、特定のボードでどちらのレンジに<strong>ナッツ（最強手）が多く含まれるか</strong>の差です。</p>
-<p>ナッツアドバンテージがある側：</p>
-<ul>
-<li>大きなサイズでポラライズしたベットができる</li>
-<li>相手はコールしにくい</li>
-</ul>
-<h3>代表的なボード別のアドバンテージ</h3>
-<p>#### ① Aハイ・ブロードウェイボード（例: A♠ K♥ 2♦）</p>
-<p><strong>UTGにナッツアドバンテージ</strong></p>
-<ul>
-<li>UTGのレンジ：AA, KK, AK が豊富に含まれる</li>
-<li>BBのレンジ：3ベットしていないため、AA, KK, AK がほぼない（キャップされている）</li>
-<li><strong>BBのレンジはキャップされている（後述）</strong></li>
-</ul>
-<p>→ UTGはスモールサイズの高頻度Cベットが有効</p>
+<h2>3-6 実戦におけるレンジ調整と3ベット防衛</h2>
+<p>ここまでは標準的なレンジを前提にしましたが、実戦では相手が完璧にプレイすることはほとんどありません。そこで必要になるのが、相手の弱みを突くエクスプロイト調整です。</p>
+<div class="advice-grid"><div class="concept-card bad"><h4>相手がタイトすぎる場合</h4><p>ほとんどのハンドをフォールドする相手には、ブラインドスチールを増やします。一方で、相手がオープンした時はレンジが強いので、こちらのコール/3ベットは狭くします。</p></div><div class="concept-card good"><h4>相手がルースすぎる場合</h4><p>ブラフ3ベットを減らし、バリュー3ベットを広げます。相手が降りないなら、良いハンドでサイズを大きくして利益を最大化します。</p></div></div>
+<h3>3ベットされた時の防衛レンジ</h3>
+<ul><li><strong>フォールド（約50〜60%）:</strong> オープンしたハンドの半分以上は、3ベットに対して降りる候補になります。特にOOPのオフスートハンドは厳しくフォールドします。</li><li><strong>コール（約30〜40%）:</strong> スーテッドコネクター、ミドルペア、AQs/AJsなど、ポストフロップで戦いやすいハンドを残します。</li><li><strong>4ベット（約10%）:</strong> AA、KK、QQ、AKsのバリューに加え、A5s/A4sのような一部ブラフを混ぜます。</li></ul>
+<h3>実戦シミュレーション</h3>
+<div class="pf-quiz-card"><strong>第1問: 9-MaxのUTGで Q♦J♦。まだ誰も参加していません。どうしますか？</strong><div class="pf-quiz-options"><button type="button" data-pf-quiz="1" data-pf-choice="A">A. フォールド</button><button type="button" data-pf-quiz="1" data-pf-choice="B">B. リンプ</button><button type="button" data-pf-quiz="1" data-pf-choice="C">C. オープンレイズ</button></div><div id="pfAns1" class="pf-quiz-answer"></div></div>
+<div class="pf-quiz-card"><strong>第2問: タイトなMPが2.5BBオープン。BTNで A♦T♠。どうしますか？</strong><div class="pf-quiz-options"><button type="button" data-pf-quiz="2" data-pf-choice="A">A. コール</button><button type="button" data-pf-quiz="2" data-pf-choice="B">B. 3ベット</button><button type="button" data-pf-quiz="2" data-pf-choice="C">C. フォールド</button></div><div id="pfAns2" class="pf-quiz-answer"></div></div>
+<h3>プリフロップFAQ</h3>
+<div class="qa-answer-card"><p><strong>Q1: なぜスーテッドとオフスートで差があるのですか？</strong></p><p>A: スーテッドはフラッシュや強いバックドアを作りやすく、複数ストリートでベットを続けやすいからです。オフスートは勝率があってもドミネイトされやすく、プレイが難しくなります。</p></div>
+<div class="qa-answer-card"><p><strong>Q2: GTOレンジを暗記するコツは？</strong></p><p>A: すべてのセルを丸暗記するより、ポジションごとの広さ、ペアの下限、オフスートエースの下限、スーテッドハンドの広がりを先に覚えましょう。</p></div>
+<div class="qa-answer-card"><p><strong>Q3: トーナメントでも同じレンジですか？</strong></p><p>A: いいえ。アンティ、スタック深度、ICMの影響で大きく変わります。ここでのレンジは主に100BB前後のキャッシュゲームを想定した基礎です。</p></div>
 <hr>
-<p>#### ② ミドル・コネクテッドボード（例: 8♣ 7♦ 5♥）</p>
-<p><strong>BBにナッツアドバンテージ</strong></p>
-<ul>
-<li>BBのコールレンジ：スーテッドコネクター、ミドルペアが豊富</li>
-<li>UTGのレンジ：このようなボードに絡む強いコンボが少ない</li>
-</ul>
-<p>→ BBはチェックレイズやドンクベットが有効</p>
-<hr>
-<p>#### ③ ローボード（例: 5♠ 4♥ 2♦）</p>
-<p><strong>BBにナッツアドバンテージ</strong></p>
-<ul>
-<li>BBのディフェンスレンジには低いコネクターが多い</li>
-<li>UTGは低いカードをほぼオープンしない</li>
-</ul>
-<p>→ UTGはCベット頻度を下げ、チェックを多用する</p>
-<hr>
-<h3>レンジ表からわかること</h3>
-<ul>
-<li>レンジが強い側（アドバンテージ側）は大きなサイズでアグレッシブに打てる</li>
-<li>レンジが弱い側（キャップされている側）は強いベットに対して降りやすくなる</li>
-<li>ポジションとレンジの組み合わせでボード毎の戦略が決まる</li>
-</ul>
-<blockquote>💡 <strong>中級者以上のアドバイス（キャップ/Capped）:</strong> 「キャップされている」とは、相手のレンジに<strong>最強クラスのハンドがほぼ含まれない</strong>状態を指します。例えば、プリフロップでコールのみしたBBのレンジには、通常AAやAKが含まれません（3ベットするため）。このため、高いボードではBBは「キャップ」されており、UTGやオープンレイザーが有利になります。</blockquote>
-<blockquote>💡 <strong>中級者以上のアドバイス（想定外のハンドをショーされた時）:</strong> 相手がレンジ外のハンド（例：BBからコールした相手がAAを持っていた）を見せてくれた場合、それは次回以降のエクスプロイトのヒントです。相手のレンジ認識を更新し、次の機会に活かしましょう。相手のミスプレイは長期的にあなたの利益になります。</blockquote>
-<hr>
-<h2>3-4 ハンドとレンジ</h2>
+<h2>3-7 ハンドとレンジ</h2>
 <p class="section-lead">参考: <a href="https://note.com/goole/n/n39c55dd3e58f" target="_blank" rel="noopener">ハンドとレンジ｜Amu</a></p>
 <h3>レンジで考える段階</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>考え方</th>
-<th>特徴</th>
-<th>注意点</th>
-</tr></thead><tbody>
-<tr>
-<td>ハンド vs ハンド</td>
-<td>相手の手を特定の1ハンドに決め打ちし、自分の手が勝っているかで判断する</td>
-<td>相手はバリューとブラフを混ぜて行動するため、決め打ちは大きなミスになりやすい</td>
-</tr>
-<tr>
-<td>ハンド vs レンジ</td>
-<td>自分の手が相手のレンジ全体にどれくらい戦えるかを考える</td>
-<td>相手のレンジだけを見ると、自分のレンジ全体のバランスを見落としやすい</td>
-</tr>
-<tr>
-<td>レンジ vs レンジ</td>
-<td>自分と相手のレンジ全体がボード上でどうぶつかるかを先に考え、戦略を作る</td>
-<td>個別ハンドの損得だけでなく、将来のカードで搾取されない構成が必要</td>
-</tr>
-</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>考え方</th><th>特徴</th><th>注意点</th></tr></thead><tbody><tr><td>ハンド vs ハンド</td><td>相手の手を特定の1ハンドに決め打ちし、自分の手が勝っているかで判断する</td><td>相手はバリューとブラフを混ぜて行動するため、決め打ちは大きなミスになりやすい</td></tr><tr><td>ハンド vs レンジ</td><td>自分の手が相手のレンジ全体にどれくらい戦えるかを考える</td><td>相手のレンジだけを見ると、自分のレンジ全体のバランスを見落としやすい</td></tr><tr><td>レンジ vs レンジ</td><td>自分と相手のレンジ全体がボード上でどうぶつかるかを先に考え、戦略を作る</td><td>個別ハンドの損得だけでなく、将来のカードで搾取されない構成が必要</td></tr></tbody></table></div>
 <h3>レンジ vs レンジの実戦イメージ</h3>
 <p>相手のアクションを見たとき、まず「相手がこのラインを取るハンドの集合」を考えます。強いハンドだけでなく、ドロー、バックドア、薄いバリュー、ブラフも含まれるため、単一のハンドに絞って判断しないことが重要です。</p>
-<p>さらに中級者以上では、自分のハンドを見る前に「自分のレンジのどこをベットし、どこをチェックするか」を設計します。例えば強いハンドだけをベットに回すと、特定のターンカードで自分のレンジが弱くなり、相手に一方的に攻められやすくなります。</p>
-<ul>
-<li>Kヒットや4ヒットなど、一部の中程度ハンドも頻度でベットに混ぜる</li>
-<li>強すぎるハンドを一部チェックに残し、チェックレンジを守る</li>
-<li>フラッシュやストレートに発展するハンドを、ベットとチェックに分散する</li>
-<li>最後に自分の実際のハンドを見て、そのレンジ戦略に沿って頻度を決める</li>
-</ul>
+<p>さらに中級者以上では、自分のハンドを見る前に「自分のレンジのどこをベットし、どこをチェックするか」を設計します。強いハンドだけをベットに回すと、特定のターンカードで自分のチェックレンジが弱くなり、相手に攻められやすくなります。</p>
+<ul><li>Kヒットや4ヒットなど、一部の中程度ハンドも頻度でベットに混ぜる</li><li>強すぎるハンドを一部チェックに残し、チェックレンジを守る</li><li>フラッシュやストレートに発展するハンドを、ベットとチェックに分散する</li><li>最後に自分の実際のハンドを見て、そのレンジ戦略に沿って頻度を決める</li></ul>
 <blockquote>💡 <strong>要点:</strong> 「レンジで考える」とは、相手のレンジを読むだけではありません。自分にもレンジが配られていると考え、ボードと両者のレンジ関係から戦略を作り、最後に個別ハンドへ落とし込みます。</blockquote>
 <h3>エクスプロイトとの関係</h3>
 <p>相手が固定的でこちらの戦略に反応してこないなら、個別ハンド単位の判断でも大きく損しない場面があります。しかし、相手がこちらの偏りに気づいて調整してくる場合、レンジ全体のバランスが崩れていると搾取されます。</p>
 <p>逆に、相手が「ハンド vs レンジ」止まりで考えていると読めるなら、その思考の偏りがリークになります。GTO的なレンジ構成を理解したうえで、相手が過剰に降りる・過剰にコールする・特定のハンドを守りすぎる場面を積極的に突きましょう。</p>
 <hr>
-<h2>3-5 プリフロップ完全攻略：重要性・ポジション・アクション</h2>
-<div class="pf-hero">
-<h3>プリフロップは、毎ハンド必ず発生する最重要ストリート</h3>
-<p>フロップ以降の派手なブラフやコールダウンに目が行きがちですが、長期収支を最も安定させる土台はプリフロップです。ここで弱いハンドを持ち込むと、ポストフロップで「トップペアなのにキッカー負け」「ドローが薄いのに降りられない」といった難しい状況を自分で作ってしまいます。</p>
-</div>
-<div class="pf-kpi-grid">
-<div class="pf-kpi"><strong>01 頻度が最大</strong><p>全ハンドで発生するため、小さなミスでも長期的には大きなEVロスになります。</p></div>
-<div class="pf-kpi"><strong>02 エラーが連鎖する</strong><p>参加すべきでないハンドは、フロップ以降でさらに大きな判断ミスを誘発します。</p></div>
-<div class="pf-kpi"><strong>03 レンジ優位を作る</strong><p>正しい参加レンジは、以降のストリートで主導権と情報優位を生みます。</p></div>
-</div>
-<blockquote>💡 <strong>重要:</strong> ポストフロップで難しい状況に入った原因は、フロップの判断ではなく「プリフロップで参加したこと」そのものにある場合が多いです。</blockquote>
-<h3>ポジション別の基本戦略</h3>
-<p>ポーカーは情報のゲームです。後から行動できるほど、相手のチェック・ベット・サイズを見てから決断できるため、プレイできるハンドを広げられます。</p>
-<div class="pf-position-grid">
-<div class="pf-position-card pf-pos-ep"><strong>EP: UTG / UTG+1</strong><p>最も不利。後ろに多くのプレイヤーが残るため、かなりタイトに参加します。</p></div>
-<div class="pf-position-card pf-pos-mp"><strong>MP: LJ / HJ</strong><p>EPより少し広げられますが、まだ慎重なレンジ選択が必要です。</p></div>
-<div class="pf-position-card pf-pos-lp"><strong>LP: CO / BTN</strong><p>特にBTNは最強のポジション。ブラインドスチールも含めて広く攻めます。</p></div>
-<div class="pf-position-card pf-pos-blind"><strong>Blinds: SB / BB</strong><p>ポストフロップでOOPになりやすく、レンジ選択とサイズ管理が重要です。</p></div>
-</div>
-<h3>主要アクションと意思決定</h3>
-<div class="pf-action-list">
-<div class="pf-action">
-<h4>① オープンレイズ: 主導権を握る</h4>
-<p>誰も参加していない状態で最初にレイズするアクションです。基本は「参加するならレイズ」。ブラインドへプレッシャーをかけ、フォールドエクイティを作ります。</p>
-</div>
-<div class="pf-action danger">
-<h4>② オープンリンプ: 原則避ける</h4>
-<p>BBと同額だけをコールして入る行為は、弱さを示しやすく、後ろのプレイヤーからアイソレートされる原因になります。例外を除き、初心者ほどリンプを減らしましょう。</p>
-</div>
-<div class="pf-action warn">
-<h4>③ コールドコールとギャップコンセプト</h4>
-<p>オープンに対してコールするには、オープンに必要なハンドより強い根拠が必要です。後ろからスクイーズされるリスク、ドミネイトされるリスクを必ず考えます。</p>
-</div>
-<div class="pf-action info">
-<h4>④ 3ベット: バリューとブラフを混ぜる</h4>
-<p>AA・KK・QQ・AKのようなバリューだけでなく、A5sやKJsのようなプレイアビリティのあるハンドを一部ブラフ3ベットに回すことで、レンジの圧力を高めます。</p>
-</div>
-</div>
-<hr>
-<h2>3-6 レンジ構築・調整・実戦チェック</h2>
-<h3>レンジを決める2大要素: Equity と Playability</h3>
-<p><strong>Equity</strong> はショーダウンまで行った場合の純粋な勝率、<strong>Playability</strong> はフロップ以降で強い役や強いドローを作り、ベットを続けやすい性質です。レンジは単なる強い順ランキングではなく、この2つのバランスで決まります。</p>
-<div class="table-wrap"><table><thead><tr>
-<th>ハンド種別</th>
-<th>代表例</th>
-<th>特徴</th>
-<th>役割</th>
-</tr></thead><tbody>
-<tr>
-<td>プレミアムペア</td>
-<td>AA, KK, QQ, JJ</td>
-<td>勝率が高く、オーバーペアになりやすい</td>
-<td>主なバリュー源。3ベット/4ベットに適する</td>
-</tr>
-<tr>
-<td>スーテッドブロードウェイ</td>
-<td>AKs, AQs, KQs, QJs</td>
-<td>高い勝率とナッツ級ドローを両立</td>
-<td>レンジの骨格。複数ストリートで戦いやすい</td>
-</tr>
-<tr>
-<td>スーテッドコネクター</td>
-<td>JTs, T9s, 98s, 87s</td>
-<td>単体勝率は低めだが、強いドローを作りやすい</td>
-<td>インプライドオッズ狙い、コールやブラフ3ベット</td>
-</tr>
-<tr>
-<td>オフスートブロードウェイ</td>
-<td>AQo, AJo, KQo</td>
-<td>勝率はあるが、ドミネイトとリバースインプライドオッズに注意</td>
-<td>ポジションと相手レンジ次第。EPでは絞る</td>
-</tr>
-</tbody></table></div>
-<h3>インタラクティブ・レンジビューア</h3>
-<p class="section-lead">9-Maxの標準的なRFIレンジを簡易表示します。ポジションを切り替えて、UTGからBTNに近づくほどレンジが広がる感覚を確認しましょう。</p>
-<div class="pf-range-tool" id="pfRangeTool">
-<div class="pf-tool-layout">
-<div>
-<div class="pf-position-buttons" id="pfPositionButtons">
-<button type="button" data-pf-pos="UTG" class="active">UTG</button>
-<button type="button" data-pf-pos="HJ">HJ</button>
-<button type="button" data-pf-pos="CO">CO</button>
-<button type="button" data-pf-pos="BTN">BTN</button>
-<button type="button" data-pf-pos="SB">SB</button>
-</div>
-<div class="pf-stat-box">
-<div class="pf-stat-row"><span>ポジション</span><strong id="pfStatPos">UTG</strong></div>
-<div class="pf-stat-row"><span>RFI頻度</span><strong id="pfStatPct">約 12.5%</strong></div>
-<div class="pf-stat-row"><span>ハンド数</span><strong id="pfStatCombos">166 / 1326</strong></div>
-<p id="pfPosDescription">UTGは最初にアクションするため、後ろの全員に強いハンドが潜むリスクを考えて、かなりタイトなレンジで参加します。</p>
-</div>
-</div>
-<div>
-<div class="pf-matrix-wrap"><div class="pf-matrix" id="pfPokerMatrix"></div></div>
-<div class="pf-matrix-note"><span>右上: スーテッド</span><span>対角線: ペア</span><span>左下: オフスート</span></div>
-</div>
-</div>
-</div>
-<h3>実戦におけるレンジ調整</h3>
-<div class="advice-grid">
-<div class="concept-card bad">
-<h4>相手がタイトすぎる場合</h4>
-<p>ブラインドを積極的にスチールします。一方で、相手がオープンしてきた時は、こちらのコール/3ベットレンジをかなり絞ります。</p>
-</div>
-<div class="concept-card good">
-<h4>相手がルースすぎる場合</h4>
-<p>ブラフ3ベットを減らし、バリュー3ベットを広げます。相手がコールし続けるなら、良いハンドでサイズを大きくして利益を取ります。</p>
-</div>
-</div>
-<h3>3ベットされた時の防衛レンジ</h3>
-<ul>
-<li><strong>フォールド:</strong> オープンしたハンドの半分以上は、3ベットに対して降りる候補になります。</li>
-<li><strong>コール:</strong> スーテッドコネクター、ミドルペア、AQs/AJsなど、ポストフロップで戦いやすいハンドを残します。</li>
-<li><strong>4ベット:</strong> AA, KK, QQ, AKsのバリューに加え、A5s/A4sのような一部ブラフを混ぜます。</li>
-</ul>
-<h3>プリフロップ実践クイズ</h3>
-<div class="pf-quiz-card">
-<strong>第1問: 9-MaxのUTGで Q♦J♦。まだ誰も参加していません。どうしますか？</strong>
-<div class="pf-quiz-options">
-<button type="button" data-pf-quiz="1" data-pf-choice="A">A. フォールド</button>
-<button type="button" data-pf-quiz="1" data-pf-choice="B">B. リンプ</button>
-<button type="button" data-pf-quiz="1" data-pf-choice="C">C. オープンレイズ</button>
-</div>
-<div id="pfAns1" class="pf-quiz-answer"></div>
-</div>
-<div class="pf-quiz-card">
-<strong>第2問: タイトなMPが2.5BBオープン。BTNで A♦T♠。どうしますか？</strong>
-<div class="pf-quiz-options">
-<button type="button" data-pf-quiz="2" data-pf-choice="A">A. コール</button>
-<button type="button" data-pf-quiz="2" data-pf-choice="B">B. 3ベット</button>
-<button type="button" data-pf-quiz="2" data-pf-choice="C">C. フォールド</button>
-</div>
-<div id="pfAns2" class="pf-quiz-answer"></div>
-</div>
-<hr>
-<div class="summary-card">
-<h2>この章のまとめ</h2>
-<p><strong>内容の要約</strong></p>
-<ul>
-<li>プリフロップレンジはポジションに応じて調整する</li>
-<li>BTNが最も広く、UTGが最も狭い</li>
-<li>オープンサイズは一定に保ち、手の強さを隠す</li>
-<li>ナッツアドバンテージで有利なレンジ側が積極的に打てる</li>
-<li>レンジ vs レンジでは、自分のレンジ全体のバランスから戦略を作る</li>
-<li>EquityとPlayabilityを分けて考えると、プリフロップレンジの理由が理解しやすい</li>
-</ul>
-<p><strong>応用</strong></p>
-<ul>
-<li>GTO Wizardで各ポジションのレンジを確認・暗記する</li>
-<li>ライブでは大まかなカテゴリ（プレミアム/強い/投機的）で判断する</li>
-</ul>
-<p><strong>注意点</strong></p>
-<ul>
-<li>レンジはGTOの理想値。実際のプレイヤーに応じてエクスプロイト調整が必要</li>
-<li>ポジションがない（OOP）場合、特に慎重なレンジ選択が重要</li>
-</ul>
-</div>
-</div></article>
-<article class="chapter-card" id="ch4" data-chapter="ch4"><div class="lock-panel" data-lock-panel="ch4"></div><div class="chapter-admin" data-admin-controls="ch4"><button data-lock="ch4">ロック</button><button data-unlock="ch4">解除</button><input type="datetime-local" data-time="ch4"><button data-timed="ch4">時間ロック</button></div><div class="content-protected"><h1>4: アクションの意図 ベット戦略と戦術</h1>
+<div class="summary-card"><h2>この章のまとめ</h2><p><strong>内容の要約</strong></p><ul><li>プリフロップは全ハンドで発生するため、小さなミスが長期収支に大きく響く</li><li>ポジションが後ろになるほど情報が増え、参加レンジを広げられる</li><li>参加する時は基本的にレイズで入り、リンプは原則避ける</li><li>オープンサイズと3Betサイズはスポットごとに一定化し、手の強さを読まれないようにする</li><li>レンジはEquityだけでなくPlayabilityも含めて構築する</li><li>相手の傾向に応じて、GTOベースからエクスプロイト調整を行う</li><li>ハンド単体ではなく、自分と相手のレンジ全体のぶつかり方から戦略を作る</li></ul><p><strong>応用</strong></p><ul><li>レンジビューアでポジションごとのRFI頻度とハンド境界を確認する</li><li>ライブでは「プレミアム / 強い / 投機的 / フォールド」の大枠で素早く判断する</li><li>相手がタイトならスチールを増やし、ルースならバリューサイズを上げる</li></ul><p><strong>注意点</strong></p><ul><li>レンジ表は基準であり、相手・スタック・ゲーム形式によって調整が必要</li><li>OOPでは実現勝率が下がるため、見た目より弱いハンドをフォールドできることが重要</li><li>「レンジで考える」は相手だけでなく、自分のレンジ全体を守る考え方でもある</li></ul></div>
+</div></article><article class="chapter-card" id="ch4" data-chapter="ch4"><div class="lock-panel" data-lock-panel="ch4"></div><div class="chapter-admin" data-admin-controls="ch4"><button data-lock="ch4">ロック</button><button data-unlock="ch4">解除</button><input type="datetime-local" data-time="ch4"><button data-timed="ch4">時間ロック</button></div><div class="content-protected"><h1>4: アクションの意図 ベット戦略と戦術</h1>
 <hr>
 <h2>4-1 ベット戦略</h2>
 <h3>ベット戦略でアグレッションを確保する</h3>
@@ -2377,7 +2141,7 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 <div class="admin-row"><span>♠ 0: 脱初心者</span><button class="admin-btn btn-lock" data-lock="ch0">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch0">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch0"><button class="admin-btn btn-timed" data-timed="ch0">時間ロック</button></div>
 <div class="admin-row"><span>♣ 1: プレイヤー分析</span><button class="admin-btn btn-lock" data-lock="ch1">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch1">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch1"><button class="admin-btn btn-timed" data-timed="ch1">時間ロック</button></div>
 <div class="admin-row"><span>♦ 2: オッズ計算</span><button class="admin-btn btn-lock" data-lock="ch2">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch2">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch2"><button class="admin-btn btn-timed" data-timed="ch2">時間ロック</button></div>
-<div class="admin-row"><span>♥ 3: プリフロップレンジ</span><button class="admin-btn btn-lock" data-lock="ch3">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch3">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch3"><button class="admin-btn btn-timed" data-timed="ch3">時間ロック</button></div>
+<div class="admin-row"><span>♥ 3: プリフロップ＆レンジ</span><button class="admin-btn btn-lock" data-lock="ch3">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch3">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch3"><button class="admin-btn btn-timed" data-timed="ch3">時間ロック</button></div>
 <div class="admin-row"><span>♠ 4: ベット戦略</span><button class="admin-btn btn-lock" data-lock="ch4">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch4">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch4"><button class="admin-btn btn-timed" data-timed="ch4">時間ロック</button></div>
 <div class="admin-row"><span>♣ 5: GTO/EXPLOIT</span><button class="admin-btn btn-lock" data-lock="ch5">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch5">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch5"><button class="admin-btn btn-timed" data-timed="ch5">時間ロック</button></div>
 <div class="admin-row"><span>♦ 6: ブロッカー</span><button class="admin-btn btn-lock" data-lock="ch6">ロック</button><button class="admin-btn btn-unlock" data-unlock="ch6">解除</button><input class="admin-time-input" type="datetime-local" data-time="ch6"><button class="admin-btn btn-timed" data-timed="ch6">時間ロック</button></div>
@@ -2582,3 +2346,4 @@ fetchAndApplyServerLocks();setInterval(fetchAndApplyServerLocks,30000);makeChart
 </script>
 </body>
 </html>
+
