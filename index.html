@@ -1182,7 +1182,20 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 #ch4 th{background:rgba(201,168,76,.18);color:#e8c76a;padding:11px 14px;text-align:left;border:1px solid rgba(201,168,76,.25);font-weight:800}
 #ch4 td{border:1px solid rgba(201,168,76,.2);padding:11px 14px;vertical-align:top;color:#ddd}
 #ch4 tr:nth-child(even) td{background:rgba(255,255,255,.03)}
-</style>
+/* ===== 第5章 新コンテンツ用スタイル ===== */
+.highlight-box{background:#fffbeb;border-left:4px solid #c9a84c;padding:18px 20px;margin:20px 0;border-radius:0 8px 8px 0}
+.warning-box{background:#fff5f5;border-left:4px solid #e53e3e;padding:18px 20px;margin:20px 0;border-radius:0 8px 8px 0}
+.example-box{background:#f0fdf4;border-left:4px solid #48bb78;padding:18px 20px;margin:20px 0;border-radius:0 8px 8px 0}
+.example-box h3,.example-box h4{margin-top:0;color:#276749 !important}
+.highlight-box h3{margin-top:0;color:#7a5200 !important}
+.warning-box h3{margin-top:0;color:#c53030 !important}
+.toc{background:#fffbeb;border:1px solid rgba(201,168,76,.4);padding:20px 24px;border-radius:8px;margin-bottom:32px}
+.toc ul{list-style:none;padding-left:0;margin:0}
+.toc li{margin-bottom:8px}
+.toc a{text-decoration:none;color:#7a5200}
+.toc a:hover{text-decoration:underline}
+.code-style{background:#f1f2f6;padding:2px 6px;border-radius:4px;font-family:'Courier New',monospace !important;font-size:.93em;color:#1a6b1a !important;border:1px solid rgba(201,168,76,.3)}
+.strong-red{color:#e53e3e !important;font-weight:bold}</style>
 <h1>ポーカー戦略ノート：アクションの意図 ベット戦略と戦術（完全版）</h1>
 <div class="summary-card">
 <h2 style="margin-top:0">目次</h2>
@@ -1461,246 +1474,408 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
 </blockquote>
 </div></article>
 
-<article class="chapter-card" id="ch5" data-chapter="ch5"><div class="lock-panel" data-lock-panel="ch5"></div><div class="chapter-admin" data-admin-controls="ch5"><button data-lock="ch5">ロック</button><button data-unlock="ch5">解除</button><input type="datetime-local" data-time="ch5"><button data-timed="ch5">時間ロック</button></div><div class="content-protected"><h1>5: GTOとEXPLOIT、集合分析とは</h1>
-<hr>
-<h2>4-1 GTOとは（Game Theory Optimal）</h2>
-<h3>GTOの説明</h3>
-<p><strong>GTO（ゲーム理論上の最適解）</strong>とは、「相手がどんな戦略をとっても、自分が長期的に損失を出さない（搾取されない）完璧な防御戦略」です。</p>
-<h3>均衡戦略の説明</h3>
-<p><strong>均衡戦略（ナッシュ均衡）</strong>とは、双方がGTOプレイをした場合、どちらも一方的に戦略を変えても得しない状態のことです。</p>
-<p><strong>じゃんけんの均衡解の例:</strong></p>
-<div class="table-wrap"><table><thead><tr>
-<th>自分の戦略</th>
-<th>相手の最適反応</th>
-</tr></thead><tbody>
-<tr>
-<td>グーを多く出す</td>
-<td>チョキを減らしてパーを増やす</td>
-</tr>
-<tr>
-<td>パーを多く出す</td>
-<td>グーを減らしてチョキを増やす</td>
-</tr>
-<tr>
-<td>1/3ずつランダム</td>
-<td>どれを出しても勝率50%（均衡）</td>
-</tr>
-</tbody></table></div>
-<p>→ グー・チョキ・パーを<strong>1/3ずつランダムに出し続ける</strong>ことが均衡戦略（GTO）</p>
-<p>ポーカーでも同様に、バリューとブラフを<strong>最適な比率でランダムに混ぜる</strong>ことがGTOです。</p>
-<hr>
-<h2>4-2 AKQゲームの説明</h2>
-<h3>AKQゲームとは</h3>
-<p>ポーカーの本質を理解するためのシンプルな簡略化ゲームです。</p>
-<p><strong>ルール:</strong></p>
-<ul>
-<li>カードはA（最強）、K（中間）、Q（最弱）の3枚のみ</li>
-<li>各プレイヤー1枚ずつ配り、ベットかチェックを選ぶ</li>
-<li>ショーダウンでは数字が大きい方が勝つ</li>
-</ul>
-<p><strong>プレイヤー1の最適戦略:</strong></p>
-<ul>
-<li>A（強いハンド）→ バリューベット</li>
-<li>Q（弱いハンド）→ ブラフベット</li>
-<li>K（中間ハンド）→ チェック（マージナル）</li>
-</ul>
-<p><strong>重要な洞察:</strong></p>
-<ul>
-<li>プレイヤー1がAのみでベットすると → プレイヤー2はいつでもフォールドして+EV</li>
-<li>プレイヤー1がQでもベットすると（ブラフ）→ プレイヤー2はコールが必要になる</li>
-<li><strong>バリューとブラフを混ぜることで相手を均衡させる（どちらも同じEVにする）</strong></li>
-</ul>
-<h3>AKQ64ゲームへの発展</h3>
-<p>AKQゲームをより現実的にしたモデル。ブラフの割合、コールすべき頻度の計算など、実際のポーカーのポット比計算と連動します。</p>
-<p>例：ポットベット（100%）の場合：</p>
-<ul>
-<li>ブラフの割合 = 1/3（バリュー2：ブラフ1）</li>
-<li>コール頻度 = 1/2（コールされたとき収支ゼロになる閾値）</li>
-</ul>
-<hr>
-<h2>4-3 Exploitとは</h2>
-<h3>Exploit戦略の説明</h3>
-<p><strong>Exploit（搾取）戦略</strong>とは、GTOから意図的に逸脱し、相手のミスや傾向を最大限に活用する戦略です。</p>
-<h3>Exploit戦略の例</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>相手の傾向</th>
-<th>Exploit戦略</th>
-</tr></thead><tbody>
-<tr>
-<td>フォールドしすぎ（Fold%高）</td>
-<td>ブラフ頻度を上げる</td>
-</tr>
-<tr>
-<td>コールしすぎ（Calling Station）</td>
-<td>ブラフを減らし、バリューを厚くする</td>
-</tr>
-<tr>
-<td>3ベットしすぎ</td>
-<td>4ベットかワイドコールで対応</td>
-</tr>
-<tr>
-<td>3ベット後フォールドしすぎ</td>
-<td>ライトな4ベットブラフ</td>
-</tr>
-</tbody></table></div>
-<h3>Exploit戦略のメリット・デメリット</h3>
-<div class="table-wrap"><table><thead><tr>
-<th></th>
-<th>メリット</th>
-<th>デメリット</th>
-</tr></thead><tbody>
-<tr>
-<td><strong>Exploit</strong></td>
-<td>利益最大化が可能</td>
-<td>逆にExploitされるリスク</td>
-</tr>
-<tr>
-<td><strong>GTO</strong></td>
-<td>搾取されない安定性</td>
-<td>相手が正しくプレイする前提</td>
-</tr>
-</tbody></table></div>
-<blockquote>💡 <strong>使い分け:</strong> 相手が明らかにミスをしているならExploit。相手が強い場合はGTOベースにする。実際には「GTO + 一部Exploit調整」が現実的。</blockquote>
-<hr>
-<h2>4-4 Exploit戦略（ノード編）</h2>
-<h3>ノード戦略の説明</h3>
-<p><strong>ノード（Node）</strong>とは、ゲームツリーにおける意思決定の分岐点です。</p>
-<p>PioSolverやGTO Wizardなどのソルバーでは、通常「お互いがGTOでプレイする」前提で計算しますが、<strong>ノードロック（NodeLock）</strong>機能を使うと特定の分岐での相手の行動を固定（ロック）できます。</p>
-<h3>ノード機能を使ったGTO上の理解</h3>
-<p><strong>例:</strong> 「このターンで相手は絶対フォールドしない（コール率100%）」とノードロックして計算</p>
-<p>→ ソルバーは「その条件での最大Exploit戦略」を導き出す</p>
-<p><strong>使い方のプロセス:</strong></p>
-<p>1. GTOの均衡戦略を理解する</p>
-<p>2. 実際のプレイヤーの傾向（偏り）を観察する</p>
-<p>3. その傾向をノードロックで設定して最大Exploitを調べる</p>
-<p>4. 実戦に適用する</p>
-<blockquote>💡 GTOを基準として理解することで、「どこからExploitするか」が明確になります。GTOを知らないExploitは根拠のない勘に過ぎません。</blockquote>
-<hr>
-<h2>5-1 集合分析とは</h2>
-<h3>集合分析の説明</h3>
-<p><strong>集合分析（Aggregated Analysis）</strong>とは、特定の1つのボード（フロップ）を分析するのではなく、<strong>あり得る全てのフロップ（1,755種類）を統計的にまとめて傾向を把握する手法</strong>です。</p>
-<h3>3つのアドバンテージ指標</h3>
-<p>#### エクイティアドバンテージ</p>
-<p>レンジ全体の平均勝率（エクイティ）が高い側が有利。</p>
-<p>#### ナッツアドバンテージ</p>
-<p>ナッツ（最強手のコンボ）を多く持つ側が有利。ナッツが多いほど、大きなベットが正当化される。</p>
-<p>#### レンジアドバンテージ</p>
-<p>エクイティアドバンテージとナッツアドバンテージを総合した概念。</p>
-<h3>集合分析の使い方</h3>
-<p>1. ポジションマッチアップを決める（例：BTN vs BB）</p>
-<p>2. そのマッチアップで統計的に有利なボードテクスチャを把握する</p>
-<p>3. 特定のフロップをそのカテゴリに当てはめて戦略を決める</p>
-<h3>集合分析を理解することでのExploit・ノード</h3>
-<ul>
-<li>レンジアドバンテージがある側 → 高頻度・スモールサイズCBET</li>
-<li>レンジアドバンテージがない側 → 低頻度・ポラライズサイズCBET</li>
-<li>相手がこのルールを理解していないなら、有利側でより積極的にExploit可能</li>
-</ul>
-<hr>
-<h2>5-2 代表的集合分析スポット</h2>
-<h3>UTG vs BTN（SRP: シングルレイズドポット）</h3>
-<p><strong>状況:</strong> UTGオープン → BTNコール</p>
-<p>#### ① Aハイ・ブロードウェイボード（例: A♠ K♦ 7♣）</p>
-<p><strong>UTGに有利</strong></p>
-<ul>
-<li>理由：UTGのレンジにはAA, KK, AK等が豊富。BTNのコールレンジにはこれらが少ない</li>
-<li>UTGの戦略：スモールサイズ（25〜33%）の高頻度Cベット</li>
-</ul>
-<p>#### ② ミドル・コネクテッドボード（例: 9♣ 8♦ 6♥）</p>
-<p><strong>BTNに有利</strong></p>
-<ul>
-<li>理由：BTNのコールレンジにスーテッドコネクターが多く含まれる</li>
-<li>UTGの戦略：Cベット頻度を下げ、打つ場合は大きなサイズ（67%+）</li>
-</ul>
-<p>#### ③ ローボード（例: 4♠ 3♦ 2♣）</p>
-<p><strong>BTNにやや有利</strong></p>
-<ul>
-<li>理由：UTGはこのようなボードに絡むハンドが少ない</li>
-<li>UTGの戦略：チェック多用、バリューは大きくベット</li>
-</ul>
-<hr>
-<h3>UTG vs BB（SRP）</h3>
-<p><strong>状況:</strong> UTGオープン → BBコール</p>
-<p>#### ① Kハイ・ペアボード（例: K♠ K♦ 5♥）</p>
-<p><strong>UTGに有利</strong></p>
-<ul>
-<li>理由：UTGのレンジにKKが含まれる。BBは3ベットしていないためほぼKKなし</li>
-<li>UTGの戦略：高頻度スモールCBET</li>
-</ul>
-<p>#### ② ローウェットボード（例: 7♣ 6♦ 5♥）</p>
-<p><strong>BBに有利</strong></p>
-<ul>
-<li>理由：BBのディフェンスレンジには低いコネクターが豊富</li>
-<li>UTGの戦略：チェックを多く使い、強いハンドのみポラライズベット</li>
-</ul>
-<p>#### ③ フラッシュドローボード（例: A♥ J♥ 5♥）</p>
-<p><strong>UTGに有利（ナッツフラッシュアドバンテージ）</strong></p>
-<ul>
-<li>理由：UTGのレンジにはナッツフラッシュに絡むA♥ハンドが多い</li>
-<li>UTGの戦略：ラージサイズでポラライズ</li>
-</ul>
-<hr>
-<h3>BTN vs BB（SRP）</h3>
-<p><strong>状況:</strong> BTNオープン → BBコール</p>
-<p>#### ① Aハイ・ドライボード（例: A♣ 7♦ 2♠）</p>
-<p><strong>BTNに有利</strong></p>
-<ul>
-<li>理由：BTNのオープンレンジにはAが豊富。BBのレンジはAAなしのキャップ状態</li>
-<li>BTNの戦略：スモールサイズ高頻度Cベット（ほぼレンジCBET）</li>
-</ul>
-<p>#### ② ミドルペアボード（例: 8♣ 7♠ 6♦）</p>
-<p><strong>BBにやや有利</strong></p>
-<ul>
-<li>理由：BBのコールレンジにミドルコネクターが多く、このボードに絡む</li>
-<li>BTNの戦略：低〜中頻度のCベット、ポラライズしたサイズで打つ</li>
-</ul>
-<p>#### ③ ハイカードドライボード（例: K♠ Q♦ 3♣）</p>
-<p><strong>BTNに有利</strong></p>
-<ul>
-<li>理由：BTNのレンジにKQ等のブロードウェイが豊富</li>
-<li>BTNの戦略：スモールサイズ高頻度Cベット</li>
-</ul>
-<hr>
-<h2>5-3 レンジ全体での把握とハンド単体でのアクションの考え</h2>
-<h3>マクロ（レンジ全体）からミクロ（ハンド単体）へ</h3>
-<p>集合分析はレンジ全体の傾向を示しますが、実際のプレイはハンド単体での判断です。</p>
-<p><strong>プロセス:</strong></p>
-<pre><code>① 集合分析でレンジ全体の有利・不利を把握（マクロ）
-    ↓
-② 自分の具体的なハンドがそのレンジのどの位置にあるか確認
-    ↓
-③ バリュー・ブラフ・マージナルに分類
-    ↓
-④ アクションを決定（ベット/チェック/コール等）</code></pre>
-<p><strong>例：BTN vs BB、A♣ 7♦ 2♠ ボード</strong></p>
-<ul>
-<li>レンジ全体：BTNに有利 → 高頻度スモールCBET</li>
-<li>自分のハンドがAJ（トップペア）→ バリューとしてCBET</li>
-<li>自分のハンドが9♣ 8♣ → ドロー。Cベットかチェックか判断</li>
-<li>自分のハンドがK♦ Q♦ → オーバーカード。低頻度でブラフCBET or チェック</li>
-</ul>
-<hr>
-<div class="summary-card">
-<h2>この章のまとめ</h2>
-<p><strong>内容の要約</strong></p>
-<ul>
-<li>GTOは搾取されない均衡戦略（じゃんけんの1/3ずつが例）</li>
-<li>AKQゲームでバリューとブラフのバランスの重要性を理解できる</li>
-<li>Exploitは相手のミスを最大化する戦略（メリット・デメリットあり）</li>
-<li>集合分析はレンジ全体の傾向を把握するマクロ分析</li>
-</ul>
-<p><strong>応用</strong></p>
-<ul>
-<li>GTO Wizardで各スポットのレンジアドバンテージを確認する習慣をつける</li>
-<li>実戦でポジションとボードテクスチャから「どちらが有利か」を即座に判断できるように練習する</li>
-</ul>
-<p><strong>注意点</strong></p>
-<ul>
-<li>GTOはゴールではなくベースライン。相手に応じてExploitに移行する</li>
-<li>集合分析の傾向は統計的なもの。特定のハンドでは逆になる場合がある</li>
-</ul>
-</div>
-<div class="viz-card narrow-viz"><h2>GTO / Exploit バランス</h2><canvas id="gtoDoughnut"></canvas></div></div></article>
+<article class="chapter-card" id="ch5" data-chapter="ch5"><div class="lock-panel" data-lock-panel="ch5"></div><div class="chapter-admin" data-admin-controls="ch5"><button data-lock="ch5">ロック</button><button data-unlock="ch5">解除</button><input type="datetime-local" data-time="ch5"><button data-timed="ch5">時間ロック</button></div><div class="content-protected">
+    <h1>ポーカー近現代戦略論<br><small style="font-size: 0.6em; color: #7f8c8d;">GTO・エクスプロイト・集合分析の三位一体アプローチ</small></h1>
+
+    <div class="toc">
+        <h3>目次</h3>
+        <ul>
+            <li><a href="#chap1">第1章：GTO（Game Theory Optimal）の正体と本質</a></li>
+            <li><a href="#chap2">第2章：トイゲームによるGTOの視覚化（AKQゲーム＆AKQ64ゲーム）</a></li>
+            <li><a href="#chap3">第3章：なぜGTOを学んでも勝てないのか？〜負けない戦略から勝つ戦略へ〜</a></li>
+            <li><a href="#chap4">第4章：エクスプロイト（EXPLOIT）戦略の極意〜「勘」を排除するデータ駆動アプローチ〜</a></li>
+            <li><a href="#chap5">第5章：GTO回答 vs エクスプロイト選択（実戦ケーススタディ2選）</a></li>
+            <li><a href="#chap6">第6章：集合分析（Mass Data Analysis / Aggregate Analysis）の革命</a></li>
+            <li><a href="#chap7">第7章：1755フロップに見るSRP・3BP・4BPのvs45ポジション（6MAX）体系的攻略</a></li>
+            <li><a href="#chap8">第8章：GTO Wizard JAPANに学ぶ、正しいハンドレビューと集合分析の活用法</a></li>
+        </ul>
+    </div>
+
+    <div id="chap1">
+        <h2>第1章：GTO（Game Theory Optimal）の正体と本質</h2>
+        <p>
+            現代ポーカーにおいて、「GTO」という言葉を聞かない日はありません。GTOとは<strong>Game Theory Optimal（ゲーム理論最適戦略）</strong>の略であり、数学的な「ナッシュ均衡」に基づいたポーカーのプレイラインを指します。
+        </p>
+        <p>
+            ナッシュ均衡とは、簡単に言えば<strong>「お互いがこれ以上自分の戦略を変更しても、追加の利益を得られない状態」</strong>のことです。もしあなたが完全なGTO戦略を採用し、対戦相手も完全なGTO戦略を採用した場合、ゲームの期待値（EV）は完全に固定され、どちらも相手を出し抜くことはできません。
+        </p>
+        <div class="highlight-box">
+            <h3>GTOの最大の誤解：「相手をハメる最強の攻撃的戦略」ではない</h3>
+            <p>
+                多くのプレイヤーが、GTOを「どんな相手のチップも毟り取れる最強の必殺技」のように勘違いしています。しかし、GTOの本質は<strong>「完全無欠の防御壁」</strong>です。
+            </p>
+            <p>
+                GTO戦略は、相手がどのような戦略（どれほどトリッキーなブラフや、極端なタイトプレイ）を仕掛けてこようとも、<strong>自分の期待値が絶対にマイナスにならないように自身のハンドレンジを精緻にバランス調整した戦略</strong>なのです。相手のミスを咎めて大勝ちするための戦略ではなく、自分がミスを一切しないことで、相手が勝手に自滅していくのを待つためのベースラインであると理解してください。
+            </p>
+        </div>
+        <p>
+            ポーカーというゲームは、不完全情報ゲームです。相手のハンドが見えない中で、私たちは自分の「レンジ（持ち札の可能性全体）」と相手の「レンジ」のぶつかり合いを計算しなければなりません。GTOソルバー（PioSolverやGTO Wizardなど）は、この莫大なレンジの組み合わせを何兆回もの反復計算によって紐解き、数学的な最適解を導き出しているのです。
+        </p>
+    </div>
+
+    <div id="chap2">
+        <h2>第2章：トイゲームによるGTOの視覚化（AKQゲーム＆AKQ64ゲーム）</h2>
+        <p>
+            複雑なテキサスホールデムのレンジをいきなり理解するのは不可能です。ゲーム理論の基礎を学ぶために、まずは極限まで簡略化された「トイゲーム」を用いて、GTOの構造を視覚化しましょう。
+        </p>
+
+        <h3>1. 基礎中の基礎：AKQゲーム</h3>
+        <p>
+            3枚のカード（A、K、Q）しか使わないゲームを想定します。強さは A ＞ K ＞ Q です。
+            プレイヤー1（P1）とプレイヤー2（P2）に1枚ずつカードが配られ、アンティとして$1ずつをポットに入れます。手札が配られた後、P1は「チェック」か「$1のベット」を選択できます。P1がベットした場合、P2は「コール」か「フォールド」を選択します。
+        </p>
+        <p>
+            このゲームにおける各ハンドの性質は以下の通りです。
+        </p>
+        <ul>
+            <li><strong>A（ナッツ）：</strong> 絶対に勝っているハンド。</li>
+            <li><strong>K（マージナル・ショーダウンバリュー）：</strong> Aには負けているが、Qには勝っている。チェックしてショーダウンしたい。</li>
+            <li><strong>Q（エアー・純粋なブラフ候補）：</strong> 絶対に負けているハンド。</li>
+        </ul>
+        <p>
+            もし、P1が「Aの時にだけベットする」という戦略を取ったらどうなるでしょうか？ P2は、P1がベットしてきた瞬間に自分のKやQを100%フォールドすれば良くなり、P1のAは1円も余分なチップを稼げなくなります。
+        </p>
+        <p>
+            逆に、P1が「AでもQでもいつでもベットする」という戦略を取れば、P2はKで100%コールするようになり、P1のQによるブラフはすべてキャッチされて大赤字になります。
+        </p>
+        <p>
+            ここでGTO（ナッシュ均衡）の計算が登場します。P1は、P2が「コールしてもフォールドしても期待値が同じ（インディファレント）」になるように、<strong>バリュー（A）とブラフ（Q）の比率を調整</strong>しなければなりません。
+        </p>
+        <div class="example-box">
+            <h4>AKQゲームのGTO解</h4>
+            <ul>
+                <li><strong>P1（攻撃側）の戦略：</strong> Aは100%ベットする。Kは100%チェックする。Qは<strong>3分の1（33.3%）の頻度でブラフベット</strong>し、残りの3分の2はチェックフォールドする。</li>
+                <li><strong>P2（防御側）の戦略：</strong> Kを保持している時、P1のベットに対して<strong>3分の1（33.3%）の頻度でコール</strong>し、3分の2はフォールドする（Qは100%フォールド、Aは存在しない）。</li>
+            </ul>
+        </div>
+        <p>
+            この「バリュー3：ブラフ1」という比率は、ポットサイズとベットサイズから導かれます（$1をベットして$2のポットを奪いに行くため、ブラフの成功率は33.3%必要）。これが、ポーカーにおける<strong>「レンジのバランス調整」</strong>の原点です。
+        </p>
+
+        <h3>2. 発展形：AKQ64ゲーム</h3>
+        <p>
+            AKQゲームは非常にシンプルでしたが、実際のポーカーには「ドロー（役の発展可能性）」や「ストリート（複数回のベッティングラウンド）」が存在します。それを模したのが「AKQ64ゲーム」です。
+        </p>
+        <p>
+            カードのランクが A ＞ K ＞ Q ＞ 6 ＞ 4 の5枚に増え、さらに「ターン」と「リバー」の2つのベッティングラウンドが存在する状況をシミュレートします。
+            このゲームになると、単に「勝っているか・負けているか」だけでなく、<strong>「ターン時点では負けているが、リバーで逆転する（エクリティの実現・リドロー）」</strong>という概念や、<strong>「ターンで打ったブラフを、リバーでもう一度打つべきか（マルチバレル・ポラライズ）」</strong>という現代ポーカーの真髄が数字として現れます。
+        </p>
+        <p>
+            AKQ64ゲームにおけるGTOソルバーの回答は、ターン時点で「リバーでAに化ける可能性のある4」をブラフに使い、リバーでそのドローが外れた時に、どれだけの頻度でダブルバレル（2発目のブラフ）を撃ち込むかを厳密に指定します。
+            私たちが普段GTO Wizard等で目にする「ターンCB頻度65%」「リバーのトリプルバレル頻度40%」といったモザイク状の戦略は、このトイゲームの延長線上に存在しているのです。
+        </p>
+    </div>
+
+    <div id="chap3">
+        <h2>第3章：なぜGTOを学んでも勝てないのか？〜負けない戦略から勝つ戦略へ〜</h2>
+        <p>
+            多くの初中級者が陥る深い罠があります。それは<strong>「GTOを完璧に暗記して、その通りにプレイしているのに、マイクロレートやアミューズメントポーカーで全く勝てない」</strong>という現象です。
+        </p>
+        <p>
+            なぜでしょうか？理由は明確です。<strong>GTOは「相手を叩きのめして利益を最大化する戦略」ではなく、「相手から搾取されないための戦略」だからです。</strong>
+        </p>
+        <div class="warning-box">
+            <h3>GTOの限界：相手のミスを自動的には咎めない</h3>
+            <p>
+                例えば、あなたの対戦相手が「ブラフを地球上で一回もしたことがない、超絶おじいちゃんタイトプレイヤー」だったとします。そのおじいちゃんがリバーでポットの2倍の特大オールインをしてきました。
+            </p>
+            <p>
+                あなたの手札は、GTO上では「このレンジの強さなら50%はコールしなければ、相手のブラフに搾取されてしまう（MDF：最低防衛頻度）」とされているミドルペアです。
+            </p>
+            <p>
+                ここでGTOの指示通りに50%の確率でコールしたらどうなるでしょうか？当然、100%の確率で相手のナッツ（最強役）に捕まり、あなたのチップは溶けてなくなります。GTOを盲信した結果、<strong>「相手が絶対にブラフをしてこない」という重大なミス（偏り）があるにもかかわらず、勝手に自滅した</strong>のです。
+            </p>
+        </div>
+        <p>
+            完全なGTO戦略が最高の利益（最大EV）を生み出すのは、<strong>相手もまた完璧なGTOをプレイしてくる時のみ</strong>です。現実の人間、特に一般的なライブポーカーやオンラインの低〜中レートのプレイヤーは、GTOからかけ離れた「ミス（偏り）」を大量に犯しています。
+        </p>
+        <ul>
+            <li>本来フォールドすべき弱いハンドで、ルースにコールしすぎる（オーバーコール）</li>
+            <li>本来打つべきブラフを、怖がってチェックしてしまう（アンダーブラフ）</li>
+            <li>フロップでCB（コンティニュエーションベット）を100%打ってくる（オーバーCB）</li>
+        </ul>
+        <p>
+            このような「偏り」を持った相手に対してGTOのまま戦うのは、岩（相手）に対してずっとパー（GTO）を出し続けて引き分けか微小な得を得ているようなものです。相手がチョキを多発しているなら、こちらはグーを出し続けなければなりません。
+        </p>
+
+        <div class="highlight-box">
+            <h3>それでも、なぜGTOを絶対に勉強しなければならないのか？</h3>
+            <p>
+                「じゃあGTOなんて学ばなくていいじゃん」と思うのは大間違いです。なぜなら、<strong>「相手のプレイがどれくらい歪んでいるか（ミスしているか）」を認識するためには、その基準点（ものさし）となるGTO（正しい基準）を知らなければならないから</strong>です。
+            </p>
+            <p>
+                基準となるGTOを知らないプレイヤーの戦略は、ただの「勘」や「オカルト」です。GTOという絶対的な北極星があるからこそ、「この相手はGTOよりもコールしすぎている」「このボードはGTO上チェックが多いのに、相手は打ちすぎている」という<strong>歪み（エクスプロイトの対象）</strong>を発見できるのです。
+            </p>
+            <p>
+                GTOの勉強は、それ自体で勝つためではなく、<strong>次に繋がる「エクスプロイト（搾取戦略）」の強固な根幹・土台を作るために不可欠</strong>なのです。
+            </p>
+        </div>
+    </div>
+
+    <div id="chap4">
+        <h2>第4章：エクスプロイト（EXPLOIT）戦略の極意〜「勘」を排除するデータ駆動アプローチ〜</h2>
+        <p>
+            相手のレンジの歪みやミスの傾向に付け込み、こちらの戦略を意図的にGTOから逸脱させて利益を最大化する手法を<strong>エクスプロイト（搾取戦略）</strong>と呼びます。ポーカーで爆発的な利益（ウィンレート）を叩き出しているトッププロは、全員が例外なくこのエクスプロイトの達人です。
+        </p>
+        <p>
+            しかし、ここで最も強調しなければならないのは、<strong>「エクスプロイトを、プレイヤーの見た目やその場の雰囲気、直感といった『勘』で行ってはならない」</strong>ということです。
+        </p>
+
+        <h3>1. 勘によるエクスプロイトの危険性</h3>
+        <p>
+            「なんとなくこの人はブラフが多そうだから、今回はサードペアだけど根性コールしよう」<br>
+            「さっきこの人にレイズされてムカついたから、今回は強めにブラフし返そう」
+        </p>
+        <p>
+            これらはエクスプロイトではなく、単なる<strong>バッドプレイ（あるいはティルト）</strong>です。人間の脳は認知バイアスに満ちており、直近数ハンドの印象的な出来事に引っ張られやすい性質があります。根拠のない「勘」によるエクスプロイトは、高確率で自分が逆に搾取される原因になります。
+        </p>
+
+        <h3>2. データ駆動（データドリブン）エクスプロイトの3大要素</h3>
+        <p>
+            真のエクスプロイトは、以下の客観的な事実と統計データに基づいてロジカルに構築されます。
+        </p>
+        <div class="table-wrap"><table>
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>具体的な判断基準・データ</th>
+                    <th>対応策（エクスプロイト）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>HUDスタッツの数値</strong></td>
+                    <td>オンラインポーカーにおけるVPIP、PFR、3-Bet%、Fold to CB%、Aggression Factorなどの統計データ。</td>
+                    <td>例：Fold to CBが65%以上の相手には、フロップでエアー（中身のないハンド）でも100%CBを打つ。</td>
+                </tr>
+                <tr>
+                    <td><strong>明確なショーダウンの証拠</strong></td>
+                    <td>過去のハンドで、相手がどのようなマージナルハンドやブラフハンドを、どのストリートでどうプレイしたか。</td>
+                    <td>例：ターンでマージナルなフラッシュドローをチェックバックした履歴から、「ドローをパッシブに引く傾向」を見抜く。</td>
+                </tr>
+                <tr>
+                    <td><strong>人口統計的（ポピュレーション）傾向</strong></td>
+                    <td>「海外カジノローステークスでは、3ベットに対する4ベットレンジがGTOより著しくタイトである」「一般的なアミューズメントの環境では、リバーのレイズにブラフがほとんど混ざらない」といった特定のフィールド全体の偏り。</td>
+                    <td>例：一般的にリバーの大きなチェックレイズはバリュー100%に近いため、GTO上のキャッチャーをすべて綺麗にフォールドする。</td>
+                </tr>
+            </tbody>
+        </table></div>
+        <p>
+            このように、<strong>「相手のレンジのこの部分が、数学的適正値（GTO）よりもこれだけズレている」という確固たるファクト</strong>を掴んで初めて、私たちは戦略を歪める（＝エクスプロイトする）権利を得るのです。
+        </p>
+    </div>
+
+    <div id="chap5">
+        <h2>第5章：GTO回答 vs エクスプロイト選択（実戦ケーススタディ2選）</h2>
+        <p>
+            抽象的な議論を離れ、実際のシチュエーションでGTOの回答と、エクスプロイトの観点での選択がどう変化するか、分かりやすい例題で検証しましょう。
+        </p>
+
+        <div class="example-box">
+            <h3>【例題1】リバーのブラフキャッチ（vs アンダーブラフのプレイヤー）</h3>
+            <p>
+                <strong>シチュエーション：</strong><br>
+                100BBディープのオンラインキャッシュゲーム。あなたはBBから <span class="code-style">A♣ J♥</span> を保持。
+                ボタン（BTN）が2.5BBにオープン、あなた（BB）がコール。
+            </p>
+            <p>
+                <strong>ボード：</strong> <span class="code-style">J♠ 8♦ 4♣ 2♥ K♣</span><br>
+                フロップ・ターンとBTNが連続してハーフポットのベットを繰り出し、あなたはいずれもコールしました。リバーで <span class="code-style">K♣</span> が落ち、ポットは21.5BB。
+                ここでBTNが16BB（約75%ポット）のサードバレル（3発目のベット）を打ってきました。
+            </p>
+            <hr>
+            <h4>▼ GTO上の回答</h4>
+            <p>
+                GTOソルバーの結論では、あなたの <span class="code-style">AJ</span>（Jのトップペア・ミドルキッカーがリバーでセカンドペアに降格したハンド）は、<strong>「約40%の頻度でコール、60%はフォールド」というインディファレント（混合戦略）</strong>になります。
+                相手のベットレンジには、当然 <span class="code-style">AK</span> や <span class="code-style">KQ</span> などのバリューが含まれますが、同時に <span class="code-style">QTs</span> や <span class="code-style">T9s</span>、あるいはフロップで拾ったバックドアのブラフ（<span class="code-style">65s</span>など）が最適な比率で含まれているため、コールしてもフォールドしても期待値（EV）は<span class="strong-red">±0</span>になります。
+            </p>
+            <h4>▼ エクスプロイトの観点</h4>
+            <p>
+                もし、このBTNプレイヤーのHUDデータや過去の傾向から、<strong>「リバーの3発目のブラフ頻度が著しく低い（アンダーブラフ傾向、典型的なパッシブプレイヤー）」</strong>という事実が分かっていたらどうすべきでしょうか？
+            </p>
+            <p>
+                答えは、<strong>【100%フォールド】</strong>です。相手のベッティングレンジにブラフがGTOの半分以下しか含まれていないのであれば、GTOが指定する「40%のコール」は、ただ単に相手のバリューハンドにチップを献上するだけの自殺行為になります。GTOの頻度を完全に無視し、ノータイムでフォールドすることが最大の利益（最大EV）を生み出します。
+            </p>
+        </div>
+
+        <div class="example-box">
+            <h3>【例題2】フロップのCBに対するディフェンス（vs オーバーCBのプレイヤー）</h3>
+            <p>
+                <strong>シチュエーション：</strong><br>
+                アミューズメントのライブポーカー。あなたはBTNから <span class="code-style">7♠ 6♠</span> を保持。
+                UTGがオープン、あなた（BTN）がコール、他のプレイヤーはフォールド。
+            </p>
+            <p>
+                <strong>ボード：</strong> <span class="code-style">A♦ 9♣ 3♥</span>（レインボー）<br>
+                ポットは6.5BB。UTGが2.5BB（約38%）のコンティニュエーションベット（CB）を打ってきました。
+            </p>
+            <hr>
+            <h4>▼ GTO上の回答</h4>
+            <p>
+                Aハイの超ドライなボードです。UTGのレンジ（AK, AQ, AJ, AT, A9s, 各種ポケットペアなど）に対して、あなたの <span class="code-style">76s</span> は完全にエアー（何も当たっていない、かつバックドアフラッシュドローもない状態）です。
+                GTO上、このハンドは<strong>「100%フォールド」</strong>です。いくらBTNでポジションがあろうとも、レンジ全体の強さ（エクリティ）で圧倒的に負けているため、抵抗する余地はありません。
+            </p>
+            <h4>▼ エクスプロイトの観点</h4>
+            <p>
+                しかし、このUTGプレイヤーが<strong>「フロップを見たら、自分の手札が何であろうと100%CBを打つ（オーバーCB）」</strong>という致命的な偏りを持っていることが分かっている場合はどうでしょうか？
+            </p>
+            <p>
+                相手のレンジには <span class="code-style">KQ</span>, <span class="code-style">KJ</span>, <span class="code-style">87s</span>, <span class="code-style">55</span> など、Aハイボードに全く絡んでいないハンドが大量に含まれています。つまり、相手のレンジは極限まで薄まっています（ワイドレンジ）。
+            </p>
+            <p>
+                ここで「GTOでフォールドだから」と諦めるのはエクスプロイトの機会損失です。あなたの <span class="code-style">76s</span> は、<strong>【100%レイズ（約7BB〜8BB）に回す】</strong>、あるいは<strong>【コールして、ターンで相手がチェックした瞬間に高額のベットを打ってポットを強奪する】</strong>というエクスプロイトが劇的に刺さります。相手はあまりにも中身のないハンドで打ちすぎているため、こちらからの反撃（レイズ）に対してGTO通りにディフェンスすることができず、大量のハンドをフォールドせざるを得なくなるからです。
+            </p>
+        </div>
+    </div>
+
+    <div id="chap6">
+        <h2>第6章：集合分析（Mass Data Analysis / Aggregate Analysis）の革命</h2>
+        <p>
+            ポーカーの座学において、GTOソルバーを使って1ハンドずつ「このハンドの時は…」とレビューしていく方法（個別ハンドレビュー）には、一つの大きな限界があります。それは<strong>「時間がかかりすぎること」</strong>、誠に<strong>「木を見て森を見ず」</strong>になりやすいことです。テキサスホールデムのフロップの組み合わせは、カードの重複を除いても<strong>1,755通り</strong>存在します。これらを1つずつ暗記することなど、人間の脳には不可能です。
+        </p>
+        <p>
+            この限界を打ち破るために生まれた現代ポーカー最高のイノベーションが<strong>「集合分析（Aggregate Analysis）」</strong>です。
+        </p>
+
+        <h3>1. 集合分析とは何か？</h3>
+        <p>
+            集合分析とは、特定のプリフロップシチュエーション（例：UTG vs BB）において、<strong>存在する1,755通り（あるいは代表的なサブセットである184通りなど）のすべてのフロップボードに対するソルバーの計算結果を一斉に出力し、マクロな視点から統計的にデータ分析する手法</strong>のことです。
+        </p>
+        <p>
+            個別のハンドではなく、「ボード全体の傾向」をExcelや専用のツール（GTO Wizardのレポート機能など）にプロットすることで、以下のような<strong>「普遍的なゲームの法則（パターン）」</strong>を脳内にインストールすることができます。
+        </p>
+        <ul>
+            <li>「Aハイのドライなボードでは、攻撃側のレンジ全体のEVが最も高くなり、高頻度のスモールベット（33%サイズ）が肯定される」</li>
+            <li>「ミドルカードがコネクトしたボード（例：9-8-7や8-7-6）では、防御側（BB）にストレートの組み合わせが多くなるため、攻撃側はチェック頻度を大幅に増やさなければならない」</li>
+            <li>「モノトーン（同スートが3枚）のボードでは、サイズを大きく打つメリットが消失するため、ソルバーはほぼすべてのバリューとブラフを33%以下のサイズに統一する」</li>
+        </ul>
+
+        <h3>2. 集合分析がもたらす座学の効率化</h3>
+        <p>
+            集合分析を学ぶことで、私たちは1,755通りのボードを暗記する必要がなくなります。ボードをいくつかの「テクスチャ（性質）」に分類し、<strong>「このテクスチャのグループに対しては、レンジ全体でこういう戦略（マクロ戦略）を取る」</strong>という大局的な理解が可能になるからです。これこそが、初心者が最短最速で中上級者に駆け上がるためのチートシート（虎の巻）なのです。
+        </p>
+    </div>
+
+    <div id="chap7">
+        <h2>第7章：1755フロップに見るSRP・3BP・4BPのvs45ポジション（6MAX）体系的攻略</h2>
+        <p>
+            6人掛け（6MAX）のオンラインポーカーやライブキャッシュゲームにおいて、最も頻出し、かつ最もプレイヤースキルの差が顕著に出るのが、<strong>「vs45ポジション（例：BTN vs BB、あるいはSB vs BBなどのブラインド対決周辺）」</strong>の攻防です。
+        </p>
+        <p>
+            ここでは、1,755通りのフロップ全体を網羅する集合分析の視点を用いて、<strong>SRP（シングルレイズドポット）、3BP（3ベットポット）、4BP（4ベットポット）</strong>における戦い方を体系的に分類・解説します。
+        </p>
+        <p>
+            1755フロップすべてのシミュレーション結果を通底することで、SRP、3BP、4BPという主要な3つのポット形態におけるvs45ポジションの最適なレンジの絡み合いを、ブレることなく体系的・立体的に学習することができます。
+        </p>
+
+        <h3>1. SRP（Single Raised Pot）：レンジの広さと「極端な二極化」</h3>
+        <p>
+            SRP、特に BTN vs BB のスポットでは、お互いのプリフロップレンジが最も広くなります（BTNのオープンレンジは約40%〜50%、BBのディフェンスレンジはそれ以上に及びます）。
+        </p>
+        <ul>
+            <li><strong>攻撃側（BTN）の基本スタッツ：</strong> 平均CB頻度 55%〜65%、主なサイズ：33%ポット。</li>
+            <li><strong>ボードテクスチャ別の挙動：</strong>
+                <br>・<strong>ハイカードボード（A-x-x, K-x-x）：</strong> BTNのレンジに高ランクのペアやキッカーが圧倒的に多いため、BTNはレンジの70%以上で33%の「レンジベット（広く薄く打つCB）」を仕掛けます。
+                <br>・<strong>ウェット・ミドルボード（9-8-7, 8-6-5など）：</strong> BB側のコールレンジにこれらのミドルカード、ペア、ドローが完璧に突き刺さります。BTNのレンジ優位性（エクリティ・アドバンテージ）は完全に消失するため、BTNはCB頻度を30%以下に落とし、多くのハンド（マージナルなトップペアすらも）をチェックバックに回す必要があります。
+            </li>
+        </ul>
+
+        <h3>2. 3BP（3-Bet Pot）：浅くなるSPRとナッツ優位性の逆転</h3>
+        <p>
+            3ベットポットになると、フロップが始まる時点でポットが大きくなっているため、<strong>SPR（ポットに対する有効スタックの比率）</strong>が約3〜4倍と非常に浅くなります。これは「3回のベッティングラウンドを待たずに、リバーまでに簡単にオールインになる」ことを意味します。
+        </p>
+        <ul>
+            <li><strong>攻撃側（3ベッター、例：BB vs BTNオープンに対するBBの3倍）の基本スタッツ：</strong> 平均CB頻度 45%〜55%、主なサイズ：25%〜33%の極小サイズ、または75%以上の大型サイズ。</li>
+            <li><strong>体系的攻略の本質：</strong>
+                3BPの集合分析において最も重要なのは<strong>「プリフロップで4ベットを返さずにコールした側のレンジには、AA, KK, AK などの超強豪ハンド（キャップされたレンジ）がほぼ存在しない」</strong>という点です。
+                そのため、フロップが <span class="code-style">A-K-Q</span> や <span class="code-style">K-J-T</span> のようなハイランクボードの場合、3ベッター（攻撃側）は圧倒的なナッツ優位性を盾に、非常にアグレッシブに（時に大きなサイズで）プレッシャーをかけることができます。
+                逆に、ローボード（<span class="code-style">7-4-2</span>など）では、コールした側（BTNなど）のポケットペア（TT-88など）が相対的に強くなるため、攻撃側は慎重なチェックレンジを構築しなければなりません。
+            </li>
+        </ul>
+
+        <h3>3. 4BP（4-Bet Pot）：コミットメントラインと純粋なエクリティ勝負</h3>
+        <p>
+            4ベットポット（例：BTNのオープン → SBの3ベット → BTNの4ベット → SBがコール）では、SPRは1〜1.5程度まで極限に低下します。フロップで1発ベットを打てば、ターンでは自動的にオールインを要求される「コミットメント（後戻りできない状態）」が発生します。
+        </p>
+        <ul>
+            <li><strong>攻撃側（4ベッター）の基本スタッツ：</strong> 平均CB頻度 60%〜70%、主なサイズ：20%〜25%ポット。</li>
+            <li><strong>体系的攻略の本質：</strong>
+                4BPの集合分析データを引くと、驚くべきことに<strong>「ほとんどのボードで、ソルバーは25%未満の超極小サイズベットしか使わない」</strong>という傾向が顕著に現れます。スタックが浅すぎるため、大きく打つ必要が全くないからです。
+                4BPでは、ブラフを巧妙に仕掛けるスペースがほとんどありません。自分のハンドが相手のレンジ（主にQQ-TT、AQs、AKの残骸など）に対してどれだけの純粋な勝率（エクリティ）を持っているかという、数学的なゴリ押し勝負になります。ローボードであっても、4ベッターは <span class="code-style">AA</span> や <span class="code-style">KK</span> のオーバーペアを保持しているため、高頻度で極小のCBを打ち続け、ターンでのオールインの導線を引くのがGTOの体系的な最適解となります。
+            </li>
+        </ul>
+    </div>
+
+    <div id="chap8">
+        <h2>第8章：GTO Wizard JAPANに学ぶ、正しいハンドレビューと集合分析の活用法</h2>
+        <p>
+            世界最高峰のポーカー学習ツール「GTO Wizard」の日本公式チャンネルである<strong>GTO Wizard JAPAN</strong>の解説動画では、私たちが日々行うべき「正しい座学のステップ」が非常に分かりやすく、かつ実践的に網羅されています。動画内の重要な知見を抽出し、集合分析やレポート機能の具体的な操作・思考法に落とし込んで解説します。
+        </p>
+
+        <h3>1. 個別ハンドの検証から「仮説」を立てるステップ</h3>
+        <p>
+            動画内では、具体的な実戦スポットを例にレビューが進められます。
+        </p>
+        <div class="highlight-box">
+            <p>
+                <strong>【実戦例】</strong> UTGが2BBオープン、BBがコールしたSRP。あなたはUTGで <span class="code-style">K♠ J♠</span> を保持。<br>
+                フロップ：<span class="code-style">K♦ 9♥ 3♣</span> で、あなたは「キングハイボードだからレンジベット（100%CB）だ」と考え、33%のサイズをベットし、BBにコールされた。
+            </p>
+        </div>
+        <p>
+            このハンドをGTO Wizardに入力した際、単に「<span class="code-style">KJ</span> で33%ベットはGTOの選択肢にあった、よし合格！」で終わらせてはいけません。ソルバーの出力画面を詳細に見ると、33%サイズだけでなく、50%や75%といった<strong>大きなサイズも高頻度で混ざっている（混合戦略）</strong>ことに気づきます。
+        </p>
+        <p>
+            ここでプレイヤーは、<strong>「なぜ、キングハイボードなのに33%の固定レンジベットにならないのだろう？ ソルバーが大きなサイズを打ちたがる条件（ボードの性質）は何なのだろう？」</strong>という強烈な【仮説・疑問】を持つことが重要です。
+        </p>
+
+        <h3>2. レポート機能（集合分析）を用いた条件の絞り込み</h3>
+        <p>
+            この疑問（仮説）を解消するために、動画ではGTO Wizardの<strong>「レポート機能（集合分析画面）」</strong>へと移行します。1755通りのフロップデータから、フィルター機能を用いて条件を削ぎ落としていくアプローチは、集合分析の教科書そのものです。
+        </p>
+        <ol>
+            <li><strong>ペアボードの除外：</strong> <span class="code-style">K-K-x</span> や <span class="code-style">9-9-x</span> のような特殊なボードを条件から除外してみる。
+                <br>→ 結果：ペアボードを除外すると、キングハイボードにおける33%レンジベットの傾向はさらに低下した。
+            </li>
+            <li><strong>モノトーンボードの除外：</strong> すべてのスートが同じボードを除外する。
+                <br>→ 結果：安いベットのみが使われる特殊環境を排除したことで、より本質的な傾向が見えてくる。
+            </li>
+            <li><strong>コネクティッドネス（連結度）の分析：</strong> ボードのカードがどれくらい繋がっているかを比較する。
+                <br>→ 結果：カードが大きく離れている（例：<span class="code-style">K-8-2</span> など、ミドルカードが8以下のローランク）ボードでは、33%ベットの頻度が顕著に高くなることが判明。
+            </li>
+        </ol>
+
+        <div class="highlight-box">
+            <h3>★ 集合分析から得られた普遍的結論（言語化）</h3>
+            <p>
+                実戦のボード <span class="code-style">K-9-3</span> は、ミドルカード（9）のランクがやや高く、上側にストレートドロー（QTなど）が絡む余地があるため、ソルバーは「相手のドローから重くバリューを取るため、あるいは自分の強いハンドを保護（プロテクション）するため」に、75%などの大きなサイズを好んで使っていたのです。
+            </p>
+            <p>
+                「キングハイ＝33%」という単純な暗記（勘違い）が、集合分析によって<strong>「ミドルカードが8以下のドライボードなら33%で広く打つが、9以上の場合はサイズを大きくしてポラライズさせる」</strong>という、応用可能な本質的知識へと昇華された瞬間です。
+            </p>
+        </div>
+
+        <h3>3. ターン・リバーのカードを動かす「ショートカット技」</h3>
+        <p>
+            さらに動画では、ターンで <span class="code-style">J</span> が落ちてストレートドローが完成した際、BB側が約7%の頻度で<strong>「ドンクベット（チェックせずに先制して打つベット）」</strong>を行ってくる現象に触れています。これもまた、「ストレートやフラッシュ、トリップスが完成するボードでは、BB側にドンク頻度が発生する」という集合分析的なルールを覚える契機になります。
+        </p>
+        <p>
+            リバーの戦略を学ぶ際、現状のGTOソルバーにはリバー単体の集合分析レポートが搭載されていないことが多いため、動画内では非常に実戦的なテクニックとして<strong>「ショートカットキー（Shift ＋ 矢印キー）を使い、リバーのカードのランクやスートをパチパチと切り替えながら、レンジ全体の戦略変化を定点観測する手法」</strong>が紹介されています。
+        </p>
+        <ul>
+            <li>リバーがまったく関係のない「ラグ（無風のカード）」の場合 → ソルバーは500%（ポットの5倍）といった超巨大なオーバーベットオールインを多用する。</li>
+            <li>リバーがカードランクの重なる「ペアボード」や「1枚ストレートボード」に変化した場合 → オールインサイズが消失し、300%や83%などのサイズダウンが起きる。</li>
+        </ul>
+        <p>
+            このように、<strong>「自分で条件（変数）を動かし、その結果としてレンジのスタッツ（サイズ・頻度）がどう動くかを観察する」</strong>ことこそが、GTO Wizard JAPANが推奨する最も効率的で強力なポーカーの学習法なのです。
+        </p>
+    </div>
+
+    <hr style="margin-top: 50px; border: 0; border-top: 1px solid #bdc3c7;">
+    <p style="text-align: center; color: #7f8c8d; font-size: 0.9em;">
+        ポーカー戦略ノート — GTO, EXPLOIT, &amp; Mass Data Analysis Complete Edition
+    </p>
+</div></article>
 <article class="chapter-card" id="ch6" data-chapter="ch6"><div class="lock-panel" data-lock-panel="ch6"></div><div class="chapter-admin" data-admin-controls="ch6"><button data-lock="ch6">ロック</button><button data-unlock="ch6">解除</button><input type="datetime-local" data-time="ch6"><button data-timed="ch6">時間ロック</button></div><div class="content-protected"><h1>6: ブロッカー</h1>
 <hr>
 <h2>6-1 ブロッカーとは</h2>
@@ -2523,7 +2698,7 @@ function loadQa(){const list=document.getElementById('qaList');if(!list)return;c
 function loadQaAdmin(){const list=document.getElementById('qaAnswerList');if(!list)return;const items=readQa();list.innerHTML=items.length?items.map((x,i)=>`<div class="qa-answer-card"><time>${new Date(x.at).toLocaleString('ja-JP')}</time><p><strong>Q:</strong> ${escapeHtml(x.q)}${x.a?'<span class="qa-status">回答済</span>':''}</p><textarea data-answer-index="${i}" placeholder="回答を入力">${escapeHtml(x.a)}</textarea><div class="qa-answer-actions"><button class="admin-btn btn-timed" data-save-answer="${i}">回答を保存</button><button class="admin-btn btn-unlock" data-clear-answer="${i}">回答を空にする</button><button class="admin-btn btn-lock" data-delqa="${i}">削除</button></div></div>`).join(''):'<p>回答待ちの質問はありません。</p>';}
 const saveQa=document.getElementById('saveQa');if(saveQa){saveQa.addEventListener('click',()=>{const q=document.getElementById('questionText');if(!q.value.trim())return;const items=readQa();items.unshift({q:q.value.trim(),a:'',at:new Date().toISOString()});writeQa(items);q.value='';loadQa();loadQaAdmin();showChapter('qa-list');});document.addEventListener('click',e=>{const save=e.target.closest('[data-save-answer]');if(save&&admin){const items=readQa(),i=Number(save.dataset.saveAnswer),field=document.querySelector(`[data-answer-index="${i}"]`);if(items[i]&&field){items[i].a=field.value.trim();writeQa(items);loadQa();loadQaAdmin();}}const clear=e.target.closest('[data-clear-answer]');if(clear&&admin){const items=readQa(),i=Number(clear.dataset.clearAnswer);if(items[i]){items[i].a='';writeQa(items);loadQa();loadQaAdmin();}}const d=e.target.closest('[data-delqa]');if(d&&admin){const items=readQa();items.splice(Number(d.dataset.delqa),1);writeQa(items);loadQa();loadQaAdmin();}});loadQa();loadQaAdmin();}
 function chartDefaults(){Chart.defaults.color='#1a1a1a';Chart.defaults.borderColor='rgba(201,168,76,.22)';Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif";}
-function makeCharts(){if(!window.Chart)return;chartDefaults();const radar=document.getElementById('statsRadar');if(radar)new Chart(radar,{type:'radar',data:{labels:['VPIP','PFR','3Bet','WTSD','Aggression'],datasets:[{label:'ルーズパッシブ',data:[45,8,2,38,18],borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,.16)'},{label:'タイトパッシブ',data:[14,6,2,21,16],borderColor:'#e8c76a',backgroundColor:'rgba(232,199,106,.12)'},{label:'LAG',data:[34,28,12,29,72],borderColor:'#e53e3e',backgroundColor:'rgba(229,62,62,.12)'},{label:'TAG',data:[23,19,8,25,55],borderColor:'#48bb78',backgroundColor:'rgba(72,187,120,.12)'},{label:'マニアック',data:[62,44,20,42,90],borderColor:'#4299e1',backgroundColor:'rgba(66,153,225,.12)'}]},options:{responsive:true,scales:{r:{grid:{color:'rgba(201,168,76,.18)'},angleLines:{color:'rgba(201,168,76,.2)'},pointLabels:{color:'#e8c76a'},ticks:{display:false,max:100}}}}});const outs=document.getElementById('outsBar');if(outs)new Chart(outs,{type:'bar',data:{labels:['4 outs','6 outs','8 outs','9 outs','15 outs'],datasets:[{label:'フロップ 約%',data:[16,24,32,36,60],backgroundColor:'#c9a84c'},{label:'ターン 約%',data:[8,12,16,18,30],backgroundColor:'#4299e1'}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:70,ticks:{callback:v=>v+'%'}}}}});const gto=document.getElementById('gtoDoughnut');if(gto)new Chart(gto,{type:'doughnut',data:{labels:['GTOベース','Exploit調整','観察・更新'],datasets:[{data:[55,30,15],backgroundColor:['#c9a84c','#2d5a27','#e53e3e'],borderColor:'#f8f9fa'}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});const bluff=document.getElementById('bluffBar');if(bluff)new Chart(bluff,{type:'bar',data:{labels:['25% pot','33% pot','50% pot','75% pot','100% pot','200% pot'],datasets:[{label:'理論上のブラフ比率',data:[20,25,33,43,50,67],backgroundColor:['#e8c76a','#c9a84c','#a07830','#48bb78','#4299e1','#e53e3e']} ]},options:{responsive:true,scales:{y:{beginAtZero:true,max:75,ticks:{callback:v=>v+'%'}}}}});}
+function makeCharts(){if(!window.Chart)return;chartDefaults();const radar=document.getElementById('statsRadar');if(radar)new Chart(radar,{type:'radar',data:{labels:['VPIP','PFR','3Bet','WTSD','Aggression'],datasets:[{label:'ルーズパッシブ',data:[45,8,2,38,18],borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,.16)'},{label:'タイトパッシブ',data:[14,6,2,21,16],borderColor:'#e8c76a',backgroundColor:'rgba(232,199,106,.12)'},{label:'LAG',data:[34,28,12,29,72],borderColor:'#e53e3e',backgroundColor:'rgba(229,62,62,.12)'},{label:'TAG',data:[23,19,8,25,55],borderColor:'#48bb78',backgroundColor:'rgba(72,187,120,.12)'},{label:'マニアック',data:[62,44,20,42,90],borderColor:'#4299e1',backgroundColor:'rgba(66,153,225,.12)'}]},options:{responsive:true,scales:{r:{grid:{color:'rgba(201,168,76,.18)'},angleLines:{color:'rgba(201,168,76,.2)'},pointLabels:{color:'#e8c76a'},ticks:{display:false,max:100}}}}});const outs=document.getElementById('outsBar');if(outs)new Chart(outs,{type:'bar',data:{labels:['4 outs','6 outs','8 outs','9 outs','15 outs'],datasets:[{label:'フロップ 約%',data:[16,24,32,36,60],backgroundColor:'#c9a84c'},{label:'ターン 約%',data:[8,12,16,18,30],backgroundColor:'#4299e1'}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:70,ticks:{callback:v=>v+'%'}}}}});const bluff=document.getElementById('bluffBar');if(bluff)new Chart(bluff,{type:'bar',data:{labels:['25% pot','33% pot','50% pot','75% pot','100% pot','200% pot'],datasets:[{label:'理論上のブラフ比率',data:[20,25,33,43,50,67],backgroundColor:['#e8c76a','#c9a84c','#a07830','#48bb78','#4299e1','#e53e3e']} ]},options:{responsive:true,scales:{y:{beginAtZero:true,max:75,ticks:{callback:v=>v+'%'}}}}});}
 function evCalc(){const p=document.getElementById('potSlider');if(!p)return;const c=document.getElementById('callSlider'),eq=document.getElementById('eqSlider'),res=document.getElementById('evResult');function upd(){potOut.textContent=p.value;callOut.textContent=c.value;eqOut.textContent=eq.value;const pot=+p.value,call=+c.value,e=+eq.value/100;const ev=e*(pot+call)-(1-e)*call;res.textContent=(ev>=0?'+':'')+ev.toFixed(2)+'BB';res.style.color=ev>=0?'#48bb78':'#e53e3e';}['input','change'].forEach(evt=>[p,c,eq].forEach(x=>x.addEventListener(evt,upd)));upd();}
 function initPreflopRangeTool(){
   const matrix=document.getElementById('pfPokerMatrix');
