@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Poker Mastery Roadmap</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script>
+window.MathJax = {
+    tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/dist/tex-chtml.js"></script>
 <style>
 :root{--bg-primary:#ffffff;--bg-secondary:#f8f9fa;--bg-card:#ffffff;--bg-sidebar:#f1f5f1;--accent-gold:#c9a84c;--accent-gold-light:#e8c76a;--accent-green:#2d5a27;--text-primary:#1a1a1a;--text-secondary:#555555;--border-gold:#c9a84c40;--spade:#e8e8e8;--heart:#e53e3e;--club:#48bb78;--diamond:#4299e1;--shadow:0 20px 50px rgba(0,0,0,.35)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 30% 0%,#182416 0,#ffffff 42%,#050805 100%);color:var(--text-primary);font-family:-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;line-height:1.75}body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(30deg,rgba(201,168,76,.04) 12%,transparent 12.5%,transparent 87%,rgba(201,168,76,.04) 87.5%,rgba(201,168,76,.04)),linear-gradient(150deg,rgba(201,168,76,.03) 12%,transparent 12.5%,transparent 87%,rgba(201,168,76,.03) 87.5%,rgba(201,168,76,.03));background-size:56px 98px;opacity:.55}.site-header{position:sticky;top:0;z-index:20;padding:22px clamp(16px,3vw,40px);background:linear-gradient(135deg,rgba(13,21,16,.96),rgba(26,35,24,.92)),radial-gradient(circle at 15% 30%,rgba(201,168,76,.22),transparent 34%);border-bottom:1px solid var(--border-gold);box-shadow:var(--shadow)}.header-inner{max-width:1280px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.site-title{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.55rem,4vw,3.2rem);line-height:1.08;background:linear-gradient(90deg,var(--accent-gold-light),var(--accent-gold),#fff4b8);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px rgba(201,168,76,.18);letter-spacing:0}.admin-lock,.mobile-toggle,.chapter-admin button,.qa-panel button{border:1px solid var(--border-gold);background:#121b12;color:var(--accent-gold-light);border-radius:8px;padding:10px 13px;cursor:pointer;font-weight:700}.mobile-toggle{display:none;width:100%;margin:12px 0 0}.layout{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(230px,1fr) minmax(0,3fr);gap:24px;padding:24px clamp(14px,3vw,32px) 70px}.sidebar{position:sticky;top:116px;align-self:start;background:linear-gradient(180deg,var(--bg-sidebar),#091008);border:1px solid rgba(201,168,76,.22);border-radius:8px;padding:12px;box-shadow:var(--shadow)}.chapter-tab{width:100%;display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:11px 10px;border:1px solid transparent;border-radius:8px;background:rgba(255,255,255,.02);color:var(--text-secondary);text-align:left;cursor:pointer}.chapter-tab.active{border-color:var(--accent-gold);color:var(--accent-gold-light);background:rgba(201,168,76,.1)}.chapter-icon{font-family:Georgia,'Times New Roman',serif;font-size:1.35rem;min-width:34px;text-align:center}.spade{color:var(--spade)}.heart{color:var(--heart)}.club{color:var(--club)}.diamond{color:var(--diamond)}.multi{background:linear-gradient(90deg,var(--spade),var(--heart),var(--diamond),var(--club));-webkit-background-clip:text;background-clip:text;color:transparent}.gold{color:var(--accent-gold-light)}.lock-dot{margin-left:auto;width:8px;height:8px;border-radius:50%;background:transparent}.lock-dot.locked{background:var(--heart);box-shadow:0 0 12px var(--heart)}.chapter-card{position:relative;background:linear-gradient(180deg,rgba(26,35,24,.97),rgba(13,21,16,.98));border:1px solid rgba(201,168,76,.24);border-radius:8px;margin-bottom:28px;padding:clamp(18px,3vw,36px);box-shadow:var(--shadow);overflow:hidden}.content-protected{user-select:none}.chapter-card h1,.chapter-card h2,.chapter-card h3{font-family:Georgia,'Times New Roman',serif;letter-spacing:0;color:var(--text-primary);line-height:1.35}.chapter-card h1{font-size:clamp(1.65rem,3vw,2.55rem);margin:0 0 18px}.chapter-card h2{font-size:clamp(1.35rem,2.2vw,2rem);margin:34px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--accent-gold)}.chapter-card h3{font-size:1.13rem;margin:24px 0 10px;color:var(--accent-gold-light)}p{margin:0 0 14px;color:var(--text-primary)}strong{color:#fff6d8}hr{border:0;border-top:1px solid var(--border-gold);margin:24px 0}blockquote{margin:18px 0;padding:14px 18px;border-left:4px solid var(--accent-gold);background:rgba(201,168,76,.08);color:#fff5d1;border-radius:0 8px 8px 0}ul{padding-left:1.3em;margin:10px 0 18px}li{margin:6px 0}.table-wrap{overflow:auto;margin:18px 0;border:1px solid var(--border-gold);border-radius:8px}table{width:100%;border-collapse:collapse;background:#0f170f;min-width:520px}th,td{border:1px solid rgba(201,168,76,.22);padding:10px 12px;vertical-align:top}th{background:rgba(201,168,76,.14);color:var(--accent-gold-light);font-weight:800}td{color:var(--text-primary)}pre{overflow:auto;background:#081008;color:#7ee787;border:1px solid rgba(72,187,120,.35);border-radius:8px;padding:16px;margin:18px 0;line-height:1.55}code{font-family:'Courier New',monospace}.summary-card{margin:34px 0 0;padding:18px;border:1px solid var(--accent-gold);border-radius:8px;background:linear-gradient(135deg,rgba(201,168,76,.16),rgba(45,90,39,.18));box-shadow:inset 0 0 30px rgba(201,168,76,.06)}.summary-card h2{margin-top:0}.viz-card,.qa-panel{margin:28px 0 0;padding:18px;border:1px solid var(--border-gold);border-radius:8px;background:rgba(10,14,10,.62)}.viz-card canvas{max-height:380px}.narrow-viz{max-width:620px}.ev-tool{display:grid;gap:14px}.slider-row{display:grid;gap:8px}.slider-row label{color:var(--accent-gold-light);font-weight:700}.slider-row input{accent-color:var(--accent-gold)}.ev-result{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(201,168,76,.3);background:#0b120b;border-radius:8px;padding:14px}.ev-result strong{font-family:'Courier New',monospace;color:var(--club);font-size:1.35rem}.qa-panel textarea{width:100%;margin:0 0 10px;background:#091109;color:var(--text-primary);border:1px solid var(--border-gold);border-radius:8px;padding:12px;font:inherit;resize:vertical}.qa-entry{border:1px solid rgba(201,168,76,.24);border-radius:8px;padding:12px;margin-top:12px;background:#0b120b}.qa-entry time{color:var(--text-secondary);font-size:.85rem}.chapter-admin{display:none;gap:8px;flex-wrap:wrap;margin:0 0 18px;padding:10px;border:1px dashed var(--border-gold);border-radius:8px;background:rgba(201,168,76,.06)}.chapter-admin.show{display:flex}.admin-row.saving{opacity:.5;pointer-events:none;transition:opacity .2s}.chapter-admin input{background:#071007;color:var(--text-primary);border:1px solid var(--border-gold);border-radius:8px;padding:9px}.lock-panel{display:none;position:absolute;inset:0;z-index:10;align-items:center;justify-content:center;text-align:center;padding:24px;background:rgba(5,8,5,.93);backdrop-filter:blur(2px);font-family:Georgia,'Times New Roman',serif;color:var(--accent-gold-light);font-size:clamp(1.2rem,2.5vw,2rem)}.chapter-card.locked .lock-panel{display:flex}.chapter-card.locked .content-protected{filter:blur(5px);pointer-events:none}.chapter-card.locked .chapter-admin{position:relative;z-index:11}.chapter-card.locked.admin-open .chapter-admin{display:flex}.chapter-card.locked.admin-open .lock-panel{pointer-events:none}.content{min-width:0}@media (max-width:767px){.mobile-toggle{display:block}.layout{display:block;padding-top:14px}.sidebar{position:static;display:none;margin-bottom:18px}.sidebar.open{display:block}.chapter-tab{font-size:.95rem}.chapter-card{padding:18px 14px}.site-header{position:relative}.header-inner{align-items:flex-start}.admin-lock{white-space:nowrap}}@media (min-width:1024px){.layout{grid-template-columns:minmax(250px,1fr) minmax(0,3fr)}}
@@ -112,6 +119,15 @@ pre{background:#f4f4f4 !important;color:#1a6b1a !important;border-color:rgba(72,
 .answer-box[open] summary:after{content:"－"}
 .answer-body{padding:13px 14px;color:#333;background:#fff}
 .chapter-admin{background:rgba(201,168,76,.05) !important}
+/* suit colors */
+.suit-h{color:#ef4444}.suit-d{color:#3b82f6}.suit-c{color:#10b981}.suit-s{color:#1f2937}
+/* ch6 new content style reset */
+#ch6 .ch6-new h1,#ch6 .ch6-new h2,#ch6 .ch6-new h3{border-bottom:none!important;margin:0!important;padding-bottom:0!important;font-size:inherit!important;color:inherit!important;line-height:inherit!important;letter-spacing:inherit!important}
+#ch6 .ch6-new p{color:inherit!important;margin:0!important}
+#ch6 .ch6-new strong{color:inherit!important}
+#ch6 .ch6-new a{color:inherit!important;text-decoration:none}
+#ch6 .ch6-new ul,#ch6 .ch6-new li{margin:0!important}
+#ch6 .ch6-new hr{border:none!important;margin:0!important}
 .chapter-admin input{background:#ffffff !important;color:#1a1a1a !important;border-color:rgba(201,168,76,.4) !important}
 /* ===== 第1章: プレイヤータイプカード ===== */
 .player-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
@@ -1876,222 +1892,448 @@ RFI（Raise First In）はリンプやオープン前に誰もレイズしてい
         ポーカー戦略ノート — GTO, EXPLOIT, &amp; Mass Data Analysis Complete Edition
     </p>
 </div></article>
-<article class="chapter-card" id="ch6" data-chapter="ch6"><div class="lock-panel" data-lock-panel="ch6"></div><div class="chapter-admin" data-admin-controls="ch6"><button data-lock="ch6">ロック</button><button data-unlock="ch6">解除</button><input type="datetime-local" data-time="ch6"><button data-timed="ch6">時間ロック</button></div><div class="content-protected"><h1>6: ブロッカー</h1>
-<hr>
-<h2>6-1 ブロッカーとは</h2>
-<h3>ブロッカーの概念と説明</h3>
-<p><strong>ブロッカー</strong>とは、自分の手札にあるカードが相手のハンドの可能性を制限する効果のことです。</p>
-<p>自分がそのカードを持っている = 相手がそのカードを持てない</p>
-<p><strong>代表的なブロッカーの例:</strong></p>
-<div class="table-wrap"><table><thead><tr>
-<th>持っているカード</th>
-<th>ブロックされるハンド</th>
-</tr></thead><tbody>
-<tr>
-<td>A</td>
-<td>相手のAA、AK、A♥ フラッシュ</td>
-</tr>
-<tr>
-<td>K</td>
-<td>相手のKK、KQs</td>
-</tr>
-<tr>
-<td>ナッツフラッシュカード（例：A♥）</td>
-<td>相手のナッツフラッシュ</td>
-</tr>
-<tr>
-<td>ストレートの構成カード</td>
-<td>相手のナッツストレート</td>
-</tr>
-</tbody></table></div>
-<hr>
-<h3>中級者以上のアドバイス：コンボ数の計算方法</h3>
-<p><strong>コンボ（Combo）</strong>とは、特定のハンドが構成される組み合わせの数です。</p>
-<div class="table-wrap"><table><thead><tr>
-<th>ハンドタイプ</th>
-<th>コンボ数</th>
-<th>計算方法</th>
-</tr></thead><tbody>
-<tr>
-<td>ポケットペア（例：AA）</td>
-<td>6コンボ</td>
-<td>C(4,2) = 4&#215;3&#247;2 = 6</td>
-</tr>
-<tr>
-<td>スーテッドハンド（例：AKs）</td>
-<td>4コンボ</td>
-<td>同じスートの組み合わせ4通り</td>
-</tr>
-<tr>
-<td>オフスートハンド（例：AKo）</td>
-<td>12コンボ</td>
-<td>4&#215;4 - 4（スーテッド分）= 12</td>
-</tr>
-</tbody></table></div>
-<p><strong>ブロッカー効果:</strong></p>
-<ul>
-<li>自分がAを1枚持っている場合、相手のAAは <strong>6→3コンボ</strong> に半減</li>
-<li>自分がA♥を持っている場合、相手のナッツフラッシュ（A♥X♥）は <strong>0コンボ</strong></li>
-</ul>
-<p>コンボ数を意識することで、相手のレンジの強さをより正確に把握できます。</p>
-<hr>
-<h2>6-2 ブロッカーの重要性と非重要性</h2>
-<h3>ブロッカーが重要な状況</h3>
-<p>1. <strong>ブラフ選択時</strong></p>
-<ul>
-<li>ナッツブロッカーを持つハンドでブラフ → 相手のナッツが少ない → フォールドを誘いやすい</li>
-<li>例：A♥ を持つ手でナッツフラッシュボードにブラフ</li>
-</ul>
-<p>2. <strong>コール判断時</strong></p>
-<ul>
-<li>相手のバリューをブロックしているハンド → 相手がバリューを持っている確率が下がる → コールしやすい</li>
-</ul>
-<p>3. <strong>タイトなスポット（ショートスタック・バブル等）</strong></p>
-<ul>
-<li>コンボ数が少ない状況ではブロッカー効果が際立つ</li>
-</ul>
-<h3>ブロッカーが重要でない（過大評価に注意）状況</h3>
-<p>1. <strong>相手のレンジが広すぎる場合</strong></p>
-<ul>
-<li>レンジが広いと、ブロックしても残りのコンボが多く効果が薄い</li>
-</ul>
-<p>2. <strong>エクイティが圧倒的に低い場合</strong></p>
-<ul>
-<li>ブロッカーがあっても自分のハンドが弱すぎれば意味がない</li>
-</ul>
-<p>3. <strong>ボードとの相性が悪い場合</strong></p>
-<ul>
-<li>ブロッカーはあるがエクイティがなければブラフは成立しない</li>
-</ul>
-<hr>
-<h2>6-3 ブラフキャッチをする上でのブロッカーの使用方法</h2>
-<h3>ブラフキャッチとブロッカー</h3>
-<p>相手のベットがバリューかブラフか判断する際にブロッカーを活用します。</p>
-<p><strong>コールしやすいハンドの条件:</strong></p>
-<p>1. 相手のバリューハンドをブロックしている（バリューが少ない）</p>
-<p>2. 相手のブラフハンドをアンブロック（ブラフが多い）</p>
-<p><strong>例：リバーでAハイボードに相手がポットベット</strong></p>
-<ul>
-<li>自分がA♠ を持っている → 相手のAA、AK をブロック → 相手のバリューが減る → コール有利</li>
-</ul>
-<p><strong>コールしにくいハンドの条件:</strong></p>
-<ul>
-<li>相手のバリューをアンブロックしている</li>
-<li>相手のブラフをブロックしている</li>
-</ul>
-<hr>
-<h2>6-4 ブロッカーの考え方</h2>
-<h3>ブラフするハンドの選定にブロッカーを使う</h3>
-<p><strong>良いブラフハンドの条件:</strong></p>
-<p>1. ナッツをブロックしている（相手がコールしにくい）</p>
-<p>2. 自分のブラフハンドが相手のフォールドレンジをアンブロックしている</p>
-<p>3. ショーダウンバリューが低い（ベットしても失うものが少ない）</p>
-<p><strong>悪いブラフハンドの選定:</strong></p>
-<ul>
-<li>ナッツをアンブロックしている（相手がコールしやすい）</li>
-<li>自分がレンジをブロックしてしまっている</li>
-</ul>
-<blockquote>💡 ブロッカーは「相手のレンジ構成を変える道具」です。単純に「Aを持っているからブラフ」ではなく、ボードとの関係を考えて判断しましょう。</blockquote>
-<hr>
-<h2>6-5 ブロッカー機能例（例題）</h2>
-<h3>例題①：ブラフキャッチハンドとしてブロッカーが機能する場面</h3>
-<p><strong>状況:</strong></p>
-<ul>
-<li>ボード：A♥ K♥ 9♦ / 7♠ / 2♣（リバー）</li>
-<li>相手がポットベット（100%ポット）</li>
-<li>自分のハンド：A♠ 6♣</li>
-</ul>
-<p><strong>分析:</strong></p>
-<ul>
-<li>A♠ を持つことで、相手のAA（6→3コンボ）、AK（16→8コンボ）を半減させる</li>
-<li>相手のバリューレンジが薄くなっている</li>
-<li>相手のブラフレンジ（ハートのフラッシュドロー等）はアンブロック</li>
-</ul>
-<p>→ <strong>コール有利</strong> と判断できる</p>
-<hr>
-<h3>例題②：悪手のブロッカーの考え方</h3>
-<p><strong>状況:</strong></p>
-<ul>
-<li>ボード：K♥ Q♠ J♦ / T♣ / 3♠（リバー）</li>
-<li>相手がオーバーベット</li>
-<li>自分のハンド：A♣ K♦ でブラフしようとしている</li>
-</ul>
-<p><strong>分析:</strong></p>
-<ul>
-<li>A♣ を持つことでナッツストレート（A-K-Q-J-T）をアンブロックしている</li>
-<li>K♦ でKKをブロックするが、ボードはすでにKが2枚使用されているため影響小</li>
-<li>このボードでは相手は多くのナッツを持てる</li>
-</ul>
-<p>→ <strong>ブラフは悪手</strong>。相手はナッツをコール/レイズしてくる確率が高い</p>
-<hr>
-<h2>6-6 MDF（最小防衛頻度）</h2>
-<h3>MDFとは</h3>
-<p><strong>MDF（Minimum Defense Frequency）</strong>とは、相手のベットに対してどれだけ「降りずに守る（コール or レイズ）」べきかの<strong>最小頻度</strong>です。</p>
-<p>MDFを下回る頻度でしか守らないと、相手は自動的にブラフで利益を得られます。</p>
-<h3>MDFの計算式</h3>
-<pre><code>MDF = ポット &#247; (ポット + ベット額) &#215; 100</code></pre>
-<div class="table-wrap"><table><thead><tr>
-<th>ベットサイズ（ポット比）</th>
-<th>MDF</th>
-</tr></thead><tbody>
-<tr>
-<td>25%（1/4ポット）</td>
-<td>80%</td>
-</tr>
-<tr>
-<td>33%（1/3ポット）</td>
-<td>75%</td>
-</tr>
-<tr>
-<td>50%（1/2ポット）</td>
-<td>67%</td>
-</tr>
-<tr>
-<td>75%（3/4ポット）</td>
-<td>57%</td>
-</tr>
-<tr>
-<td>100%（ポットベット）</td>
-<td>50%</td>
-</tr>
-<tr>
-<td>200%（オーバーベット&#215;2）</td>
-<td>33%</td>
-</tr>
-</tbody></table></div>
-<h3>MDFの例</h3>
-<p><strong>状況:</strong> ポット = 100BB、相手が50BB（50%ポット）をベット</p>
-<pre><code>MDF = 100 &#247; (100 + 50) &#215; 100 = 66.7%</code></pre>
-<p>→ このベットに対して少なくとも <strong>67%</strong> の頻度でコールorレイズしないと、相手のブラフが自動的に利益を得る。</p>
-<h3>MDFの考え方</h3>
-<ul>
-<li>MDFは「コールの下限」を示す理論値</li>
-<li>実際にはハンドレンジで計算するため、すべてのハンドで67%コールするわけではない</li>
-<li>レンジ全体でMDF以上を守ることが重要</li>
-</ul>
-<h3>MDFとブロッカーの関係</h3>
-<p>ブロッカーを持つハンドは相手のバリューをブロックするため、コールした際の勝率が上がる = MDFを満たすのに貢献できる良いコールハンドになります。</p>
-<hr>
-<div class="summary-card">
-<h2>この章のまとめ</h2>
-<p><strong>内容の要約</strong></p>
-<ul>
-<li>ブロッカーは相手のレンジのコンボ数を減らす効果</li>
-<li>コンボ数を理解することでブロッカー効果の大きさを定量的に把握できる</li>
-<li>ブラフするハンドの選択にブロッカーを活用（ナッツをブロック）</li>
-<li>MDFは相手のブラフに対して守るべき最小頻度</li>
-</ul>
-<p><strong>応用</strong></p>
-<ul>
-<li>リバーでのブラフ選択時に「相手のナッツをブロックしているか」を確認する習慣をつける</li>
-<li>MDFを知ることで、相手のベットに対するコール頻度の基準を持つ</li>
-</ul>
-<p><strong>注意点</strong></p>
-<ul>
-<li>ブロッカーは一つの要素であり、エクイティなしのブラフは成立しない</li>
-<li>MDFは理論上の値。実際には相手のエクスプロイト調整が必要</li>
-</ul>
+<article class="chapter-card" id="ch6" data-chapter="ch6"><div class="lock-panel" data-lock-panel="ch6"></div><div class="chapter-admin" data-admin-controls="ch6"><button data-lock="ch6">ロック</button><button data-unlock="ch6">解除</button><input type="datetime-local" data-time="ch6"><button data-timed="ch6">時間ロック</button></div><div class="content-protected">
+<div class="ch6-new">
+
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-12">
+            <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                本講義の目次
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-slate-600">
+                <a href="#sec-1" class="hover:text-amber-600 transition font-medium">第1章：ブロッカーの基本数理とコンボ計算の基礎</a>
+                <a href="#sec-2" class="hover:text-amber-600 transition font-medium">第2章：ブロッカーが「死ぬ」場面：シングルレイズドポット（SRP）の罠</a>
+                <a href="#sec-3" class="hover:text-amber-600 transition font-medium">第3章：ブロッカーが「支配する」場面：3Bet/4Betポット＆リバーの極性レンジ</a>
+                <a href="#sec-4" class="hover:text-amber-600 transition font-medium">第4章：良いブロッカー vs 悪いブロッカー（アンチブロッカーの恐怖）</a>
+                <a href="#sec-5" class="hover:text-amber-600 transition font-medium">第5章：最重要の注意点：ブロッカーは「最後の後押し（タイブレーカー）」である</a>
+                <a href="#sec-6" class="hover:text-amber-600 transition font-medium">第6章：【動的ツール】インタラクティブ・ブロッカーコンボ計算機</a>
+                <a href="#sec-7" class="hover:text-amber-600 transition font-medium">第7章：【動的クイズ】実践ブロッカー応用テスト（全5問）</a>
+            </div>
+        </section>
+
+        <section id="sec-1" class="mb-16 scroll-mt-6">
+            <h2 class="text-2xl font-bold text-slate-950 border-b-2 border-amber-500 pb-2 mb-6">
+                第1章：ブロッカーの基本数理とコンボ計算の基礎
+            </h2>
+            <div class="text-slate-700 leading-relaxed space-y-4">
+                <p class="text-slate-700">
+                    ポーカーにおける<strong class="text-slate-900">ブロッカー（Blockers）</strong>とは、「自分が特定のカードを持っているため、相手がそのカードを含む組み合わせ（コンボ）を持っている物理的確率が低下する」という絶対的な排除効果を指します。
+                </p>
+                <p class="text-slate-700">
+                    テキサスホールデムの数学において、全52枚のデッキからプレイヤーにハンドが配られた瞬間、レンジ全体のコンボ数に歪みが生じます。この歪みを正確に把握することが、期待値（EV）を極大化する前提となります。
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-900 mt-6 mb-2">コンボ数学の基本定義</h3>
+                <p class="text-slate-700">
+                    相手のレンジを計算する際、各ハンドタイプが持つ初期コンボ数は以下のように決定されます。
+                </p>
+                <div class="bg-slate-100 p-4 rounded-xl my-4 text-sm space-y-2">
+                    <p class="text-slate-700"><strong class="text-slate-900">ポケットペア（例：AA, KK）：</strong> 各ランク4枚から2枚を選ぶ組み合わせのため、<span class="font-mono font-bold">₄C₂ = 6 コンボ</span></p>
+                    <p class="text-slate-700"><strong class="text-slate-900">スーテッドハンド（例：AKs, QJs）：</strong> 4つのスートごとに1コンボ存在するため、合計 <strong class="text-slate-900">4コンボ</strong></p>
+                    <p class="text-slate-700"><strong class="text-slate-900">オフスートハンド（例：AKo, JTo）：</strong> 4つのスート × 残り3つのスート ＝ 合計 <strong class="text-slate-900">12コンボ</strong></p>
+                </div>
+                <p class="text-slate-700">
+                    自分が <strong class="text-slate-900">A♠</strong> を1枚持っているだけで、相手の「AA」のコンボ数は6から3へと<strong class="text-slate-900">50%減少</strong>し、「AKo」のコンボ数は12から9へと<strong class="text-slate-900">25%減少</strong>します。この数学的事実がブラフやバリューの判断材料として利用されます。
+                </p>
+            </div>
+        </section>
+
+        <section id="sec-2" class="mb-16 scroll-mt-6">
+            <h2 class="text-2xl font-bold text-slate-950 border-b-2 border-amber-500 pb-2 mb-6">
+                第2章：ブロッカーが「死ぬ」場面：シングルレイズドポット（SRP）の罠
+            </h2>
+            <div class="text-slate-700 leading-relaxed space-y-4">
+                <p class="text-slate-700">
+                    多くのプレイヤーが犯す最大のミスは、<strong class="text-slate-900">「あらゆるシチュエーションでブロッカーを均等に重視してしまうこと」</strong>です。結論から言えば、<strong class="text-slate-900">シングルレイズドポット（SRP）のフロップやターンにおいては、ブロッカー効果はほとんど気にする必要がありません。</strong>
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-900 mt-6 mb-2">なぜSRPではブロッカーが機能しないのか？</h3>
+                <p class="text-slate-700">
+                    SRP（1回のオープンレイズに誰かがコールして始まったポット）の特徴は、<strong class="text-slate-900">「お互いのレンジが極めて広く、コンボの絶対数が膨大である」</strong>という点です。
+                </p>
+                <p class="text-slate-700">
+                    例えば、BB（ビッグブラインド）のディフェンスレンジには、スーテッドコネクター、すべてのポケットペア、多くのA高ハンド、各種オフスートブロードウェイなど、<strong class="text-slate-900">250〜350コンボ以上</strong>のハンドが含まれています。
+                </p>
+                <p class="text-slate-700">
+                    この広大なレンジに対して、あなたがAを1枚持っていることで相手の特定のハンド（例：AJ）を12コンボから9コンボへ3コンボ減らしたところで、相手のレンジ全体に対する影響度（コンボの削減割合）は<strong class="text-slate-900">わずか1%未満</strong>です。相手のレンジ全体が「薄く広く」分布しているため、1枚や2枚のブロッカーで相手のアクション頻度（フォールド率やコール率）を動かすことは数学的に不可能です。
+                </p>
+
+                <div class="bg-rose-50 border-l-4 border-rose-500 p-4 my-4">
+                    <p class="font-bold text-rose-900 text-sm">【鉄則】SRPのフロップ・ターンで見るべきもの</p>
+                    <p class="text-xs text-slate-700 mt-1">
+                        SRPではブロッカーを探すのではなく、<strong class="text-slate-900">「レンジアドバンテージ（どちらのレンジに強い手が多く含まれているか）」</strong>および<strong class="text-slate-900">「ボードテクスチャ（どちらのレンジに噛み合っているか）」</strong>という「面」の思考を100%優先してください。Aを持っているからという理由で無謀なC-Bet（コンティニュエーション・ベット）を打つのは、典型的なリーク（弱点）です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-3" class="mb-16 scroll-mt-6">
+            <h2 class="text-2xl font-bold text-slate-950 border-b-2 border-amber-500 pb-2 mb-6">
+                第3章：ブロッカーが「支配する」場面：3Bet/4Betポット＆リバーの極性レンジ
+            </h2>
+            <div class="text-slate-700 leading-relaxed space-y-4">
+                <p class="text-slate-700">
+                    逆に、ブロッカーが戦術の決定打としてゲームを完全に支配する場面が2つあります。それは<strong class="text-slate-900">「プリフロップの3Bet/4Bet/5Bet合戦」</strong>と<strong class="text-slate-900">「リバーの極性化されたレンジ同士の対決」</strong>です。
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-900 mt-6 mb-2">① 3Bet / 4Bet 以上の高額ポット</h3>
+                <p class="text-slate-700">
+                    ポットが大きくなるにつれ、プレイヤーが参加できるレンジは極限まで狭まります。4Betレンジや5Betオールインレンジに存在するハンドは、「AA, KK, QQ, AK」といった<strong class="text-slate-900">ごく一部のトップハンド（数十コンボ程度）</strong>に限定されます。
+                </p>
+                <p class="text-slate-700">
+                    レンジが狭い（＝全体のコンボ数が少ない）状況だからこそ、あなたの手札による排除効果が相対的に牙を剥きます。あなたが <strong class="text-slate-900">A♣ 5♣</strong> を持っているとき、相手の「AA」のコンボ数は6から3へ（50%減少）、「AK」のコンボ数は16から12へ（25%減少）と、相手の<strong class="text-slate-900">最強レンジの大部分を直接消去</strong>することになります。これにより、相手がフォールドする確率（フォールドエクイティ）が劇的に跳ね上がります。
+                </p>
+
+                <h3 class="text-xl font-bold text-slate-900 mt-6 mb-2">② リバーにおける「極性レンジ（Polarized Range）」の対峙</h3>
+                <p class="text-slate-700">
+                    リバーでは、ベットする側のレンジが「超強力なバリューハンド」か「純粋な空気（ブラフ）」の2つに完全に二極化（極性化）します。中間のマージナルなハンドはチェックに回るためです。
+                </p>
+                <p class="text-slate-700">
+                    この極限状態では、相手のバリューコンボの絶対数が非常に少なくなっているため、<strong class="text-slate-900">「相手のバリューハンドの核心をブロックしているか、あるいは相手のフォールドするドローをブロックしていないか」</strong>が、ブラフやキャッチの期待値をプラスにするかマイナスにするかの分岐点となります。
+                </p>
+            </div>
+        </section>
+
+        <section id="sec-4" class="mb-16 scroll-mt-6">
+            <h2 class="text-2xl font-bold text-slate-950 border-b-2 border-amber-500 pb-2 mb-6">
+                第4章：良いブロッカー vs 悪いブロッカー（アンチブロッカーの恐怖）
+            </h2>
+            <div class="text-slate-700 leading-relaxed space-y-6">
+                <p class="text-slate-700">
+                    実戦で最も注意すべきは、良かれと思って選んだブラフハンドが、実は自分の首を絞める<strong class="text-slate-900">「アンチブロッカー（逆排除効果）」</strong>になっている現象です。
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6">
+                        <h4 class="text-md font-bold text-emerald-900 flex items-center mb-2">
+                            <span class="bg-emerald-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 text-xs">〇</span>
+                            良いブラフブロッカーの条件
+                        </h4>
+                        <p class="text-xs text-slate-600 mb-3"><strong class="text-slate-900">ボード：</strong> K♦ J♣ 4♠ 3♥ 2♦ (リバー)</p>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            手札に <strong class="text-slate-900">A♠ Q♥</strong> を保持してブラフ。<br>
+                            相手がコールしたい「AA」や「AQ」、「QT（ストレート）」を的確にブロックしつつ、相手がフォールドしてくれる「滑ったフラッシュドロー（例：T♦9♦）」を一切邪魔していません。相手のレンジにフォールド要素が綺麗に残ります。
+                        </p>
+                    </div>
+                    <div class="bg-rose-50 border border-rose-200 rounded-2xl p-6">
+                        <h4 class="text-md font-bold text-rose-900 flex items-center mb-2">
+                            <span class="bg-rose-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 text-xs">×</span>
+                            悪いブラフブロッカー（アンチ）
+                        </h4>
+                        <p class="text-xs text-slate-600 mb-3"><strong class="text-slate-900">ボード：</strong> Q♠ T♦ 7♣ 3♥ 2♠ (リバーでドロー不成立)</p>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            手札に <strong class="text-slate-900">J♠ 9♣</strong> を保持してブラフ。<br>
+                            Jや9は、相手がフロップ・ターンで追いかけ、リバーで失敗した「J9」「KJ」「T9」などの<strong class="text-slate-900">「フォールドしてくれるはずのスカハンド」そのもの</strong>です。それを自分が持っているため、相手のレンジには「Qのペア」や「セット」といった<strong class="text-slate-900">コールする強い手ばかりが残る</strong>ことになります。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-5" class="mb-16 scroll-mt-6">
+            <h2 class="text-2xl font-bold text-slate-950 border-b-2 border-amber-500 pb-2 mb-6">
+                第5章：最重要の注意点：ブロッカーは「最後の後押し（タイブレーカー）」である
+            </h2>
+            <div class="text-slate-700 leading-relaxed space-y-4">
+                <p class="text-lg font-bold text-slate-900">
+                    本講義で最も強調したい、GTOソルバーの本質にしてトッププロの鉄則がこれです。
+                </p>
+                <div class="bg-amber-50 border-2 border-amber-400 text-slate-900 p-6 rounded-2xl shadow-md font-bold text-md leading-relaxed">
+                    「ブロッカーは、戦略の主役ではない。すべての条件（レンジ・サイズ・オッズ）が並んだときに、どちらのアクションに踏み切るかを決める『最後の後押し（タイブレーカー）』に過ぎない。」
+                </div>
+
+                <h3 class="text-xl font-bold text-slate-900 mt-6 mb-2">思考の優先順位（ピラミッド構造）</h3>
+                <p class="text-slate-700">
+                    ポーカーの意思決定において、ブロッカーはピラミッドの最上階（最後に確認する要素）です。以下の順序を絶対に崩してはなりません。
+                </p>
+
+                <div class="bg-white border border-slate-300 rounded-xl p-6 space-y-4 shadow-sm text-sm">
+                    <div class="flex items-start">
+                        <span class="bg-slate-800 text-white font-mono px-2 py-0.5 rounded mr-3 text-xs flex-shrink-0">Lv.1</span>
+                        <div>
+                            <strong class="text-slate-900">レンジ全体の優位性（Range Advantage）の確認</strong><br>
+                            <span class="text-slate-600">このボードテクスチャは、自分と相手のどちらのレンジに有利か？基本のベット頻度は？</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-slate-800 text-white font-mono px-2 py-0.5 rounded mr-3 text-xs flex-shrink-0">Lv.2</span>
+                        <div>
+                            <strong class="text-slate-900">数学的オッズとMDF（最低防御頻度）の計算</strong><br>
+                            <span class="text-slate-600">ポットサイズに対するベット額の比率は？必要なフォールド頻度（Alpha）は満たされているか？</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-amber-500 text-slate-950 font-mono px-2 py-0.5 rounded mr-3 text-xs flex-shrink-0">Lv.3</span>
+                        <div class="text-amber-700 font-semibold">
+                            <strong class="text-amber-700">【ここで登場】ブロッカーによるハンドの選別（タイブレーカー）</strong><br>
+                            <span class="text-slate-700 font-normal">「よし、レンジとオッズ的に、自分のレンジの底から10%のハンドでブラフを打つ必要がある。では、どのハンドを選ぶか？……よし、AやQをブロックしていて、相手のフォールドレンジを邪魔していないこのハンドを選ぼう。」</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="mt-4 text-slate-700">
+                    どれほど完璧なナッツブロッカーを持っていようとも、<strong class="text-slate-900">自分のレンジ全体が圧倒的に不利なボードでブラフを打てば、それは単なる無謀な大泥棒</strong>になります。ブロッカーは単体で機能する魔法のカードではなく、基礎理論という頑丈な土台があって初めて、コンボ数を数パーセント有利に傾ける「最後の微調整の道具」であることを肝に銘じてください。
+                </p>
+            </div>
+        </section>
+
+        <section id="sec-6" class="mb-16 scroll-mt-6">
+            <h2 class="text-2xl font-bold text-slate-950 border-b-2 border-amber-500 pb-2 mb-6">
+                第6章：【動的ツール】インタラクティブ・ブロッカーコンボ計算機
+            </h2>
+            <p class="text-sm text-slate-600 mb-6">
+                あなたの手札を選択してください。相手の4Bet/5Betコールレンジに存在する主要強ハンドの残存コンボ数がリアルタイムに計算されます。AやKを選ぶことで、相手の最強コンボがどれほど激減するかを体感してください。
+            </p>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-1 space-y-4">
+                    <h4 class="font-bold text-sm text-slate-900 uppercase tracking-wide">あなたの手札を選択</h4>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">カード 1</label>
+                        <select id="card1-rank" onchange="ch6CalcCombos()" style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;background:#f8fafc;color:#1e293b;cursor:pointer">
+                            <option value="A">A (Ace)</option>
+                            <option value="K" selected>K (King)</option>
+                            <option value="Q">Q (Queen)</option>
+                            <option value="J">J (Jack)</option>
+                            <option value="other">その他 (2-10)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 mb-1">カード 2</label>
+                        <select id="card2-rank" onchange="ch6CalcCombos()" style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;background:#f8fafc;color:#1e293b;cursor:pointer">
+                            <option value="A">A (Ace)</option>
+                            <option value="K">K (King)</option>
+                            <option value="Q" selected>Q (Queen)</option>
+                            <option value="J">J (Jack)</option>
+                            <option value="other">その他 (2-10)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 rounded-xl p-6 flex flex-col justify-between" style="background:#0f172a">
+                    <h4 class="font-bold text-sm mb-4 flex items-center" style="color:#fbbf24">
+                        <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 11-2 0v-1a1 1 0 112 0v1zM5.05 6.464a1 1 0 10-1.414-1.414l-.707.707a1 1 0 101.414 1.414l.707-.707zM5 10a1 1 0 11-2 0v-1a1 1 0 112 0v1zM8 16v-1a1 1 0 10-2 0v1a1 1 0 102 0zM13.657 16.243a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414l.707.707z"></path></svg>
+                        相手の残存コンボ数（カード排除効果適用後）
+                    </h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-3 rounded-lg" style="background:#1e293b;border:1px solid #334155">
+                            <span class="text-xs block mb-1" style="color:#94a3b8">AA (ポケットペア)</span>
+                            <span id="output-aa" class="font-black" style="font-size:1.8rem;color:#ffffff">6</span> <span class="text-xs" style="color:#64748b">/ 6 Max</span>
+                        </div>
+                        <div class="p-3 rounded-lg" style="background:#1e293b;border:1px solid #334155">
+                            <span class="text-xs block mb-1" style="color:#94a3b8">KK (ポケットペア)</span>
+                            <span id="output-kk" class="font-black" style="font-size:1.8rem;color:#ffffff">6</span> <span class="text-xs" style="color:#64748b">/ 6 Max</span>
+                        </div>
+                        <div class="p-3 rounded-lg" style="background:#1e293b;border:1px solid #334155">
+                            <span class="text-xs block mb-1" style="color:#94a3b8">AKs (スーテッド)</span>
+                            <span id="output-aks" class="font-black" style="font-size:1.8rem;color:#ffffff">4</span> <span class="text-xs" style="color:#64748b">/ 4 Max</span>
+                        </div>
+                        <div class="p-3 rounded-lg" style="background:#1e293b;border:1px solid #334155">
+                            <span class="text-xs block mb-1" style="color:#94a3b8">AKo (オフスート)</span>
+                            <span id="output-ako" class="font-black" style="font-size:1.8rem;color:#ffffff">12</span> <span class="text-xs" style="color:#64748b">/ 12 Max</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-7" class="mb-16 scroll-mt-6">
+            <h2 class="text-2xl font-bold text-slate-950 border-b-2 border-amber-500 pb-2 mb-6">
+                第7章：【動的クイズ】実践ブロッカー応用テスト（全5問）
+            </h2>
+
+            <div class="space-y-12">
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs px-2.5 py-1 rounded font-bold tracking-wider uppercase" style="background:#0f172a;color:#fbbf24">第 1 問</span>
+                    </div>
+                    <p class="text-slate-900 font-semibold mb-4 leading-relaxed">
+                        リバーのボード： <strong class="text-slate-900">A♦ 10♣ 7♥ 3♦ 2♠</strong> <br>
+                        あなたはチェックに対して、強力なポットサイズベット（ブラフ）を仕掛けようとしています。相手のフォールドを最も勝ち取りやすい（＝相手の強いフォールドレンジを邪魔せず、バリューコールレンジを一部ブロックしている）<strong class="text-slate-900">「最高のブラフハンド」</strong>は次のうちどれでしょう？
+                    </p>
+                    <div class="space-y-2">
+                        <button onclick="ch6CheckQuiz(1, 'A')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>A:</strong> K♦ Q♦ （フラッシュドロー崩れ）
+                        </button>
+                        <button onclick="ch6CheckQuiz(1, 'B')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>B:</strong> K♣ J♣ （バックドアストレート・トップペアの一部をブロック）
+                        </button>
+                        <button onclick="ch6CheckQuiz(1, 'C')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>C:</strong> J♥ 9♥ （ストレートが未完成に終わった滑りハンド）
+                        </button>
+                    </div>
+                    <div id="q1-result" class="mt-4 p-4 rounded-xl text-sm" style="display:none;border:1px solid"></div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs px-2.5 py-1 rounded font-bold tracking-wider uppercase" style="background:#0f172a;color:#fbbf24">第 2 問</span>
+                    </div>
+                    <p class="text-slate-900 font-semibold mb-4 leading-relaxed">
+                        プリフロップにおいて、UTG（アンダーザガン）のオープンレイズに対して、あなたがBTN（ボタン）から4Betブラフを仕掛ける状況です。GTOソルバーが「KJo」や「A9o」ではなく、<strong class="text-slate-900">「A5s」を高頻度で4Betブラフに選ぶ数学的かつ戦略的な最大の理由</strong>は何でしょうか？
+                    </p>
+                    <div class="space-y-2">
+                        <button onclick="ch6CheckQuiz(2, 'A')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>A:</strong> Aを1枚押さえることで、相手の最強レンジである「AA」のコンボ数を50%、「AK」を25%カットし、かつコールされた際のプレイアビリティ（ストレートやフラッシュの可能性）が残るため。
+                        </button>
+                        <button onclick="ch6CheckQuiz(2, 'B')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>B:</strong> KJoの方がKとJの2枚で相手の「KK」や「JJ」を同時にブロックできるため、フォールド確率はKJoの方が常に高いから。
+                        </button>
+                        <button onclick="ch6CheckQuiz(2, 'C')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>C:</strong> 5のカードを持っていることで、相手のミドルポケットペア（55〜99）のセットコンボを完全にブロックできるから。
+                        </button>
+                    </div>
+                    <div id="q2-result" class="mt-4 p-4 rounded-xl text-sm" style="display:none;border:1px solid"></div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs px-2.5 py-1 rounded font-bold tracking-wider uppercase" style="background:#0f172a;color:#fbbf24">第 3 問</span>
+                    </div>
+                    <p class="text-slate-900 font-semibold mb-4 leading-relaxed">
+                        リバーのボード： <strong class="text-slate-900">9♥ 8♥ 4♦ 3♠ 2♥</strong> （ハートのフラッシュが完成し得るシチュエーション）。<br>
+                        相手から大きなオールインを要求されました。あなたの手札は <strong class="text-slate-900">A♥ K♣</strong> （ワンペアもなしのAハイ）です。このハンドのブロッカーとしてのリバーにおける価値をどう評価すべきでしょうか？
+                    </p>
+                    <div class="space-y-2">
+                        <button onclick="ch6CheckQuiz(3, 'A')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>A:</strong> 最高のブラフキャッチャー（コール用の手）。自分がA♥を持っているので相手のブラフフラッシュドローコンボをすべてブロックしており、相手のベットが100%バリューだと見抜けるためフォールド一択となる。
+                        </button>
+                        <button onclick="ch6CheckQuiz(3, 'B')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>B:</strong> K♣を持っていることで相手の「KQo」などのオフスートのブラフコンボを完全に邪魔しているため、ブラフとしてもコールとしても完全に価値を失ったマージナルハンドである。
+                        </button>
+                        <button onclick="ch6CheckQuiz(3, 'C')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>C:</strong> 最高のブラフ候補。自分がA♥を持っているため相手は絶対に「ナッツフラッシュ」を持てず、自分がオールインに対してさらにレイズブラフ（あるいはベットを主導する際）を仕掛ける強力な盾（矛）となる。
+                        </button>
+                    </div>
+                    <div id="q3-result" class="mt-4 p-4 rounded-xl text-sm" style="display:none;border:1px solid"></div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs px-2.5 py-1 rounded font-bold tracking-wider uppercase" style="background:#0f172a;color:#fbbf24">第 4 問</span>
+                    </div>
+                    <p class="text-slate-900 font-semibold mb-4 leading-relaxed">
+                        リバーのボード： <strong class="text-slate-900">Q♠ T♦ 7♣ 3♥ 2♠</strong> （フロップ・ターンのストレート/フラッシュドローがすべて不成立）。<br>
+                        相手から大きなリバーのブラフ高頻度ボードでベットされました。あなたはマージナルなワンペアで<strong class="text-slate-900">「ブラフキャッチ（コール）」</strong>を検討しています。相手のブラフレンジを呼び込む（＝相手のブラフを邪魔しない）観点から、コールに最も適した（アンチブロッカーになっていない）ハンドはどれでしょう？
+                    </p>
+                    <div class="space-y-2">
+                        <button onclick="ch6CheckQuiz(4, 'A')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>A:</strong> A♣ Q♣ （相手の滑ったストレートドローであるJや9、および♠を1枚も持っていない）
+                        </button>
+                        <button onclick="ch6CheckQuiz(4, 'B')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>B:</strong> Q♥ J♥ （Jを持っているため、相手のQJトップペアのバリューをブロックしているが、同時に相手の滑ったJ9やKJブラフもブロックしている）
+                        </button>
+                        <button onclick="ch6CheckQuiz(4, 'C')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>C:</strong> Q♦ 9♦ （9を持っているため、相手の滑ったストレートドローであるJ9やT9、98などのブラフコンボの大部分を消去している）
+                        </button>
+                    </div>
+                    <div id="q4-result" class="mt-4 p-4 rounded-xl text-sm" style="display:none;border:1px solid"></div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs px-2.5 py-1 rounded font-bold tracking-wider uppercase" style="background:#0f172a;color:#fbbf24">第 5 問</span>
+                    </div>
+                    <p class="text-slate-900 font-semibold mb-4 leading-relaxed">
+                        ポーカーの意思決定における鉄則として、「ブロッカーは最後の後押し（タイブレーカー）」であると解説しました。これを実戦に適用した以下のシチュエーションのうち、<strong class="text-slate-900">最も誤った（GTOから大きく逸脱した）ブロッカーの過剰評価リーク</strong>はどれでしょうか？
+                    </p>
+                    <div class="space-y-2">
+                        <button onclick="ch6CheckQuiz(5, 'A')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>A:</strong> リバーでマージナルな役を持っているが、ポットオッズとMDFを計算した結果フォールド寄りの数値となり、さらに相手のブラフを自己ブロックしていたためフォールドした。
+                        </button>
+                        <button onclick="ch6CheckQuiz(5, 'B')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>B:</strong> 3Betポットのリバーにおいて、レンジとオッズ計算では完全にフォールドすべき局面だが、手札に「ナッツフラッシュのブロッカー（A♥）」があるという理由だけで、土台を無視して無謀な巨大オールインブラフを仕掛けた。
+                        </button>
+                        <button onclick="ch6CheckQuiz(5, 'C')" class="ch6-quiz-btn w-full text-left p-3 rounded-xl border border-slate-200 text-sm" style="background:#f8fafc;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">
+                            <strong>C:</strong> SRPのフロップにおいて、お互いのコンボ数が数百通りと広すぎるため、個人の手札のAによる排除効果をほぼ無視してボード全体のレンジアドバンテージを優先してアクションを決めた。
+                        </button>
+                    </div>
+                    <div id="q5-result" class="mt-4 p-4 rounded-xl text-sm" style="display:none;border:1px solid"></div>
+                </div>
+
+            </div>
+        </section>
+
 </div>
+<script>
+(function() {
+    function ch6CalcCombos() {
+        var r1 = document.getElementById('card1-rank').value;
+        var r2 = document.getElementById('card2-rank').value;
+        var aCount = 0, kCount = 0;
+        if (r1 === 'A') aCount++;
+        if (r2 === 'A') aCount++;
+        if (r1 === 'K') kCount++;
+        if (r2 === 'K') kCount++;
+        var remA = 4 - aCount;
+        var aaCombos = Math.floor((remA * (remA - 1)) / 2);
+        var remK = 4 - kCount;
+        var kkCombos = Math.floor((remK * (remK - 1)) / 2);
+        var aksCombos = 4, akoCombos = 12;
+        if (aCount >= 1 && kCount >= 1) { aksCombos = 3; akoCombos = 9; }
+        else if (aCount >= 2) { aksCombos = 2; akoCombos = 8; }
+        else if (kCount >= 2) { aksCombos = 2; akoCombos = 8; }
+        else if (aCount === 1) { aksCombos = 3; akoCombos = 9; }
+        else if (kCount === 1) { aksCombos = 3; akoCombos = 9; }
+        document.getElementById('output-aa').textContent = aaCombos;
+        document.getElementById('output-kk').textContent = kkCombos;
+        document.getElementById('output-aks').textContent = aksCombos;
+        document.getElementById('output-ako').textContent = akoCombos;
+    }
+
+    function ch6CheckQuiz(questionNum, answer) {
+        var resultDiv = document.getElementById('q' + questionNum + '-result');
+        resultDiv.style.display = 'block';
+        var correct = false;
+        var html = '';
+        if (questionNum === 1) {
+            correct = (answer === 'B');
+            if (correct) {
+                html = '<strong>🎉 正解：B (K♣ J♣)</strong><br><br><strong>解説：</strong>KやJは相手のトップペア（AK, AJ）やツーペア（AT）のコンボを一部ブロックしつつ、相手がリバーで100%フォールドしてくれるはずの「J9やQJといった滑ったストレートドロー」を自分の手札で塞いでいません。一方、AのK♦Q♦はフォールドを奪いたい♦フラッシュドロー崩れを自己ブロックしており、CのJ9は最悪のアンチブロッカーとなります。';
+            } else {
+                html = '<strong>❌ 不正解（選択 ' + answer + '）</strong><br><br><strong>解説：</strong>A（K♦Q♦）は相手のフォールドレンジである♦ドローをブロックしており、C（J♥9♥）は相手の滑ったストレートドローを自分で抑えてしまうため、相手のレンジに強い手（コールレンジ）ばかりを残す結果になります。正解はBです。';
+            }
+        } else if (questionNum === 2) {
+            correct = (answer === 'A');
+            if (correct) {
+                html = '<strong>🎉 正解：A</strong><br><br><strong>解説：</strong>A5sは相手の4Betコール・5Betジャムレンジの核心（AA, AK）を強力にブロックし（AAを6→3コンボ、AKを16→12コンボ）、フォールド確率を最大化させます。さらにコールされた際もストレートやフラッシュを作る高いプレイアビリティ（equity）の保険があるため、最高のブラフ適性を持ちます。';
+            } else {
+                html = '<strong>❌ 不正解（選択 ' + answer + '）</strong><br><br><strong>解説：</strong>UTGの非常に狭い4Bet/5Betレンジに対して、KやJの排除効果はAに比べて格段に低く、KJoはコールされた際に相手の上位ハンドに支配（ドミネイト）されやすいためブラフとしては不適格です。正解はAです。';
+            }
+        } else if (questionNum === 3) {
+            correct = (answer === 'C');
+            if (correct) {
+                html = '<strong>🎉 正解：C</strong><br><br><strong>解説：</strong>自分がA♥をピンポイントで押さえているため、相手は絶対に最高位の「ナッツフラッシュ」を主張できません。この最強の盾を矛に変えて、リバーで強力なブラフを突きつけることで、相手のキングハイ以下のフラッシュを恐怖によってフォールドへ追い込む権利を得ます（ナッツブロッカーブラフ）。';
+            } else {
+                html = '<strong>❌ 不正解（選択 ' + answer + '）</strong><br><br><strong>解説：</strong>自分はノーペア（Aハイ）であるため、相手の安価なブラフにさえ勝てず、コール（ブラフキャッチ）の手としては成立しません。このハンドの真価は、相手のナッツフラッシュを地球上から消去している点を利用した「純粋なブラフへの活用」にあります。正解はCです。';
+            }
+        } else if (questionNum === 4) {
+            correct = (answer === 'A');
+            if (correct) {
+                html = '<strong>🎉 正解：A</strong><br><br><strong>解説：</strong>ブラフキャッチをする側の最大の目的は、<strong>「相手のレンジにブラフ（滑ったドロー）が多く残っている状態を作ること」</strong>です。A♣Q♣は、相手がブラフに変えてくるはずの滑ったストレートドロー（KJ, J9, T9）や♠のフラッシュドローの構成カードを1枚も邪魔していません。そのため、相手のブラフコンボを最大限に呼び込むことができる、最高品質のブラフキャッチャーとなります。';
+            } else {
+                html = '<strong>❌ 不正解（選択 ' + answer + '）</strong><br><br><strong>解説：</strong>BのJやCの9を自分で持っている状態は、相手のレンジから「J9」や「KJ」「T9」といった<strong>『相手がリバーでブラフに回すはずだったミスハンド』を自分で物理的に消去（アンチブロッカー）</strong>してしまっています。相手のレンジにコールすべきブラフが残らなくなるため、キャッチとしては大赤字になります。正解はAです。';
+            }
+        } else if (questionNum === 5) {
+            correct = (answer === 'B');
+            if (correct) {
+                html = '<strong>🎉 正解：B</strong><br><br><strong>解説：</strong>これがまさに講義で最も警告した<strong>「ブロッカーの過剰評価による致命的なリーク」</strong>です。第5章のピラミッド構造の通り、レンジの優位性や数学的オッズ（Lv.1＆Lv.2）が崩壊している局面では、どれほど美しいブロッカー（A♥）を持っていようとも、ブラフを打つジャスティフィケーション（正当性）は存在しません。ブロッカーはあくまで同等条件のハンド群から選別するための「タイブレーカー」です。';
+            } else {
+                html = '<strong>❌ 不正解（選択 ' + answer + '）</strong><br><br><strong>解説：</strong>AやCのアプローチはGTO的にも極めて合理的です。特にCの通り、コンボが膨大なSRPのフロップ段階ではブロッカー効果は1%未満に埋もれるため、無視して全体のレンジ優位性を優先するのが100%正しい思考です。正解はBです。';
+            }
+        }
+        resultDiv.style.background = correct ? '#f0fdf4' : '#fff1f2';
+        resultDiv.style.color = correct ? '#14532d' : '#9f1239';
+        resultDiv.style.borderColor = correct ? '#86efac' : '#fda4af';
+        resultDiv.innerHTML = html;
+    }
+
+    window.ch6CalcCombos = ch6CalcCombos;
+    window.ch6CheckQuiz = ch6CheckQuiz;
+    ch6CalcCombos();
+})();
+</script>
 </div></article>
 <article class="chapter-card" id="ch7" data-chapter="ch7"><div class="lock-panel" data-lock-panel="ch7"></div><div class="chapter-admin" data-admin-controls="ch7"><button data-lock="ch7">ロック</button><button data-unlock="ch7">解除</button><input type="datetime-local" data-time="ch7"><button data-timed="ch7">時間ロック</button></div><div class="content-protected"><h1>7: EVとEQ</h1>
 <hr>
